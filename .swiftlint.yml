@@ -1,0 +1,46 @@
+warning_threshold: 15
+
+disabled_rules:
+   - trailing_whitespace
+   - opening_brace
+   - type_name
+   - statement_position
+   - todo
+   - identifier_name
+
+opt_in_rules:
+  - empty_count
+  - force_unwrapping
+  - private_outlet
+
+file_length:
+  - 700
+  - 1000
+
+line_length:
+  ignores_comments: true
+  ignores_function_declarations: true
+  ignores_urls: true
+  warning: 150
+  error: 300
+
+function_body_length:
+  - 150 # warning
+  - 200 # error
+type_body_length:
+  - 300 # warning
+  - 400 # error
+variable_name_max_length:
+  - 30 # warning
+  - 40 # error
+variable_name_min_length:
+  - 2 # warning
+  - 1 # error
+
+identifier_name:
+  excluded:
+    - sb #storyboard
+    - vc #viewController
+    - vm #viewModel
+
+reporter: "xcode"

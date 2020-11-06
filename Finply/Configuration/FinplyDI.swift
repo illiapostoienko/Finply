@@ -11,9 +11,18 @@ import Dip
 final class FinplyDI {
  
     static func registerViewModels(container: DependencyContainer) {
-        container.register{ HomeScreenViewModel(accountService: $0) }.implements(HomeScreenViewModelType.self)
+
+        //Main Pages
+        container.register{ AccountDetailsViewModel() }.implements(AccountDetailsViewModelType.self)
+        container.register{ BudgetsListViewModel() }.implements(BudgetsListViewModelType.self)
+        container.register{ PlanningListViewModel() }.implements(PlanningListViewModel.self)
+        
+        //Main Branches
         container.register{ AddEditOperationViewModel(operationService: $0) }.implements(AddEditOperationViewModelType.self)
         container.register{ AccountsListViewModel() }.implements(AccountsListViewModelType.self)
+        
+        //Secondary Modules
+        
     }
     
     static func registerCoreServices(container: DependencyContainer) {

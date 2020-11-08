@@ -80,6 +80,9 @@
 		EAD68A64255580B40083B30D /* AccountOperationCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD68A63255580B40083B30D /* AccountOperationCellViewModel.swift */; };
 		EAD68A67255582B20083B30D /* AccountHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD68A66255582B20083B30D /* AccountHeaderViewModel.swift */; };
 		EAD68A6A255582EF0083B30D /* AccountMonthDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD68A69255582EF0083B30D /* AccountMonthDetailsViewModel.swift */; };
+		EAD68A6E25558AC80083B30D /* AccountOperationsSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAD68A6D25558AC80083B30D /* AccountOperationsSectionHeader.xib */; };
+		EAD68A7125558AD10083B30D /* AccountOperationsSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD68A7025558AD10083B30D /* AccountOperationsSectionHeader.swift */; };
+		EAD68A74255591030083B30D /* Foundation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD68A73255591030083B30D /* Foundation+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -150,6 +153,9 @@
 		EAD68A63255580B40083B30D /* AccountOperationCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountOperationCellViewModel.swift; sourceTree = "<group>"; };
 		EAD68A66255582B20083B30D /* AccountHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountHeaderViewModel.swift; sourceTree = "<group>"; };
 		EAD68A69255582EF0083B30D /* AccountMonthDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountMonthDetailsViewModel.swift; sourceTree = "<group>"; };
+		EAD68A6D25558AC80083B30D /* AccountOperationsSectionHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountOperationsSectionHeader.xib; sourceTree = "<group>"; };
+		EAD68A7025558AD10083B30D /* AccountOperationsSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountOperationsSectionHeader.swift; sourceTree = "<group>"; };
+		EAD68A73255591030083B30D /* Foundation+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Foundation+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -368,6 +374,7 @@
 			isa = PBXGroup;
 			children = (
 				EA930CE02524865A00E12805 /* Sequence+Extensions.swift */,
+				EAD68A73255591030083B30D /* Foundation+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -409,6 +416,7 @@
 			children = (
 				EAD68A2E2554F7F40083B30D /* AccountHeaderView */,
 				EAD68A4D255505750083B30D /* AccountMonthDetailsView */,
+				EAD68A6C25558AA20083B30D /* AccountOperationsSectionHeader */,
 				EAD68A5B255580800083B30D /* AccountOperationCell */,
 				EAD68A3A2554F8810083B30D /* AccountDetailsViewController.storyboard */,
 				EAD68A3C2554F8810083B30D /* AccountDetailsViewController.swift */,
@@ -436,6 +444,15 @@
 				EAD68A63255580B40083B30D /* AccountOperationCellViewModel.swift */,
 			);
 			path = AccountOperationCell;
+			sourceTree = "<group>";
+		};
+		EAD68A6C25558AA20083B30D /* AccountOperationsSectionHeader */ = {
+			isa = PBXGroup;
+			children = (
+				EAD68A6D25558AC80083B30D /* AccountOperationsSectionHeader.xib */,
+				EAD68A7025558AD10083B30D /* AccountOperationsSectionHeader.swift */,
+			);
+			path = AccountOperationsSectionHeader;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -527,6 +544,7 @@
 				EA1D9E712524B07100E2027F /* AddEditOperationViewController.storyboard in Resources */,
 				EA9F662E2554E44000441ED0 /* PlanningListViewController.storyboard in Resources */,
 				EAD68A302554F8150083B30D /* AccountHeaderView.xib in Resources */,
+				EAD68A6E25558AC80083B30D /* AccountOperationsSectionHeader.xib in Resources */,
 				EA1D9E9E2524D9C000E2027F /* File in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -580,6 +598,7 @@
 				EAD68A412554F8810083B30D /* AccountDetailsCoordinator.swift in Sources */,
 				EA9BCAA125434434003DE283 /* AccountsListViewModel.swift in Sources */,
 				EA9F66322554E44000441ED0 /* BudgetsListCoordinator.swift in Sources */,
+				EAD68A7125558AD10083B30D /* AccountOperationsSectionHeader.swift in Sources */,
 				EA009481252641F900746222 /* RMAccount.swift in Sources */,
 				EA930CC82524851000E12805 /* StoryboardBased.swift in Sources */,
 				EA1D9E692524A80A00E2027F /* AddEditOperationCoordinator.swift in Sources */,
@@ -602,6 +621,7 @@
 				EA930CCC2524854600E12805 /* NibBased.swift in Sources */,
 				EA1D9E942524D2E500E2027F /* DomainEntityConvertible.swift in Sources */,
 				EA930D032524943C00E12805 /* FinplyDI.swift in Sources */,
+				EAD68A74255591030083B30D /* Foundation+Extensions.swift in Sources */,
 				EA930CE7252486DB00E12805 /* FPOperation.swift in Sources */,
 				EA930CF125248AB800E12805 /* FPAccount.swift in Sources */,
 				EA9F66332554E44000441ED0 /* BudgetsListViewModel.swift in Sources */,

@@ -16,6 +16,7 @@ protocol AccountDetailsViewModelType {
     var accountMonthDetailsViewModel: AccountMonthDetailsViewModelType { get }
     
     var dataSource: Observable<[AccountOperationsTableSection]> { get }
+    var currentOperationSections: BehaviorRelay<[OperationsSection]> { get }
 }
 
 enum AccountOperationsTableSection {
@@ -32,8 +33,8 @@ final class AccountDetailsViewModel: AccountDetailsViewModelType {
     var accountMonthDetailsViewModel: AccountMonthDetailsViewModelType
     
     let dataSource: Observable<[AccountOperationsTableSection]>
+    let currentOperationSections: BehaviorRelay<[OperationsSection]>
     
-    private let currentOperationSections: BehaviorRelay<[OperationsSection]>
     private let bag = DisposeBag()
     
     init() {
@@ -48,18 +49,39 @@ final class AccountDetailsViewModel: AccountDetailsViewModelType {
     
     private static var mockData: [OperationsSection] {
         return [
-            OperationsSection(date: Date(timeIntervalSince1970: 1604620800), cells: [AccountOperationCellViewModel(), AccountOperationCellViewModel()]),
-            OperationsSection(date: Date(timeIntervalSince1970: 1604534400), cells: [AccountOperationCellViewModel(), AccountOperationCellViewModel()]),
-            OperationsSection(date: Date(timeIntervalSince1970: 1604448000), cells: [AccountOperationCellViewModel(), AccountOperationCellViewModel()]),
-            OperationsSection(date: Date(timeIntervalSince1970: 1604361600), cells: [AccountOperationCellViewModel(), AccountOperationCellViewModel()]),
-            OperationsSection(date: Date(timeIntervalSince1970: 1604275200), cells: [AccountOperationCellViewModel(), AccountOperationCellViewModel()]),
-            OperationsSection(date: Date(timeIntervalSince1970: 1604188800), cells: [AccountOperationCellViewModel(), AccountOperationCellViewModel()]),
-            OperationsSection(date: Date(timeIntervalSince1970: 1604102400), cells: [AccountOperationCellViewModel(), AccountOperationCellViewModel()])
+            OperationsSection(date: Date(timeIntervalSince1970: 1604620800), cells: [
+                                AccountOperationCellViewModel(),
+                                AccountOperationCellViewModel()
+            ]),
+            OperationsSection(date: Date(timeIntervalSince1970: 1604534400), cells: [
+                                AccountOperationCellViewModel(),
+                                AccountOperationCellViewModel()
+            ]),
+            OperationsSection(date: Date(timeIntervalSince1970: 1604448000), cells: [
+                                AccountOperationCellViewModel(),
+                                AccountOperationCellViewModel()
+            ]),
+            OperationsSection(date: Date(timeIntervalSince1970: 1604361600), cells: [
+                                AccountOperationCellViewModel(),
+                                AccountOperationCellViewModel()
+            ]),
+            OperationsSection(date: Date(timeIntervalSince1970: 1604275200), cells: [
+                                AccountOperationCellViewModel(),
+                                AccountOperationCellViewModel()
+            ]),
+            OperationsSection(date: Date(timeIntervalSince1970: 1604188800), cells: [
+                                AccountOperationCellViewModel(),
+                                AccountOperationCellViewModel()
+            ]),
+            OperationsSection(date: Date(timeIntervalSince1970: 1604102400), cells: [
+                                AccountOperationCellViewModel(),
+                                AccountOperationCellViewModel()
+            ])
         ]
     }
 }
 
-fileprivate struct OperationsSection {
+struct OperationsSection {
     let date: Date
     let cells: [AccountOperationCellViewModelType]
 }

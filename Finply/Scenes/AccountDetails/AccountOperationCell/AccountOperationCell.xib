@@ -54,6 +54,8 @@
                     <constraint firstItem="jwN-h8-Zg1" firstAttribute="centerY" secondItem="CNb-9i-v99" secondAttribute="centerY" id="xKB-Wp-afD"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <point key="canvasLocation" x="-265.21739130434787" y="123.88392857142857"/>
         </tableViewCell>
     </objects>

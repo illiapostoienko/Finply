@@ -24,7 +24,6 @@ final class AccountDetailsCoordinator: BaseCoordinator<Void> {
 
         viewController.bind(to: viewModel)
         
-
         return Observable.never()
     }
 }

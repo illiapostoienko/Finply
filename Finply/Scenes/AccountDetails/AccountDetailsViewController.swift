@@ -53,23 +53,28 @@ extension AccountDetailsViewController: BindableType {
             .dataSource
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: bag)
+        
+        tableView.rx.itemSelected.subscribe(onNext: { indexPath in
+            print("itemselected: \(indexPath)")
+        }).disposed(by: bag)
     }
 }
 
 // MARK: - Table View
-extension AccountDetailsViewController: UIScrollViewDelegate {
+extension AccountDetailsViewController: UITableViewDelegate {
     
     private func setupTableView() {
         tableView.dataSource = nil
+        //tableView.delegate = nil // needed due to internal logic of RxDatasources
+        tableView.delegate = self
+        
         tableView.register(cellType: AccountOperationCell.self)
+        tableView.register(headerFooterViewType: AccountOperationsSectionHeader.self)
+        
         tableView.estimatedRowHeight = UITableView.automaticDimension
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.sectionHeaderHeight = 20
+        tableView.sectionHeaderHeight = 32
         tableView.tableFooterView = UIView()
-
-        tableView.rx
-            .setDelegate(self)
-            .disposed(by: bag)
         
         dataSource = RxTableViewSectionedAnimatedDataSource(
             animationConfiguration: AnimationConfiguration(insertAnimation: .fade,
@@ -83,11 +88,14 @@ extension AccountDetailsViewController: UIScrollViewDelegate {
                     cell.bind(to: viewModel)
                     return cell
                 }
-        },
-        titleForHeaderInSection: { dataSource, indexPath in
-            let section = dataSource[indexPath]
-            return section.titleDate.map{ self.sectionDateFormatter.string(from: $0) }
         })
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = tableView.dequeueReusableHeaderFooterView() as AccountOperationsSectionHeader
+        guard let section = viewModel.currentOperationSections.value[safe: section] else { return nil }
+        headerView.setupDate(sectionDateFormatter.string(from: section.date))
+        return headerView
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -138,4 +146,3 @@ extension AccountDetailsViewController: UIScrollViewDelegate {
         detailsStackView.frame.height - tableViewTopMinConstant
     }
 }
-

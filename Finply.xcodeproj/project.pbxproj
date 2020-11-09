@@ -83,6 +83,9 @@
 		EAD68A6E25558AC80083B30D /* AccountOperationsSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAD68A6D25558AC80083B30D /* AccountOperationsSectionHeader.xib */; };
 		EAD68A7125558AD10083B30D /* AccountOperationsSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD68A7025558AD10083B30D /* AccountOperationsSectionHeader.swift */; };
 		EAD68A74255591030083B30D /* Foundation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD68A73255591030083B30D /* Foundation+Extensions.swift */; };
+		EAD68AD7255953A30083B30D /* Rx+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD68AD6255953A30083B30D /* Rx+Extensions.swift */; };
+		EAD68ADB25595AB80083B30D /* PieChartView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD68ADA25595AB80083B30D /* PieChartView+Rx.swift */; };
+		EAD68ADF25595AE00083B30D /* PieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD68ADE25595AE00083B30D /* PieChartView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -156,6 +159,9 @@
 		EAD68A6D25558AC80083B30D /* AccountOperationsSectionHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountOperationsSectionHeader.xib; sourceTree = "<group>"; };
 		EAD68A7025558AD10083B30D /* AccountOperationsSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountOperationsSectionHeader.swift; sourceTree = "<group>"; };
 		EAD68A73255591030083B30D /* Foundation+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Foundation+Extensions.swift"; sourceTree = "<group>"; };
+		EAD68AD6255953A30083B30D /* Rx+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rx+Extensions.swift"; sourceTree = "<group>"; };
+		EAD68ADA25595AB80083B30D /* PieChartView+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PieChartView+Rx.swift"; sourceTree = "<group>"; };
+		EAD68ADE25595AE00083B30D /* PieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -275,6 +281,7 @@
 				EA1D9E672524A7EC00E2027F /* AddEditOperation */,
 				EA88F77325372F7B005F9EC0 /* AccountsList */,
 				EA930C9F25246E4300E12805 /* HomeScreen(Donor) */,
+				EAD68A98255804530083B30D /* CommonComponents */,
 				EAD68A462554F9C80083B30D /* AppCoordinator.swift */,
 				EAD68A472554F9C80083B30D /* BaseCoordinator.swift */,
 			);
@@ -375,6 +382,7 @@
 			children = (
 				EA930CE02524865A00E12805 /* Sequence+Extensions.swift */,
 				EAD68A73255591030083B30D /* Foundation+Extensions.swift */,
+				EAD68AD6255953A30083B30D /* Rx+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -453,6 +461,23 @@
 				EAD68A7025558AD10083B30D /* AccountOperationsSectionHeader.swift */,
 			);
 			path = AccountOperationsSectionHeader;
+			sourceTree = "<group>";
+		};
+		EAD68A98255804530083B30D /* CommonComponents */ = {
+			isa = PBXGroup;
+			children = (
+				EAD68AD925595AA40083B30D /* PieChartView */,
+			);
+			path = CommonComponents;
+			sourceTree = "<group>";
+		};
+		EAD68AD925595AA40083B30D /* PieChartView */ = {
+			isa = PBXGroup;
+			children = (
+				EAD68ADE25595AE00083B30D /* PieChartView.swift */,
+				EAD68ADA25595AB80083B30D /* PieChartView+Rx.swift */,
+			);
+			path = PieChartView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -577,6 +602,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EAD68ADF25595AE00083B30D /* PieChartView.swift in Sources */,
 				EAD68A482554F9C80083B30D /* AppCoordinator.swift in Sources */,
 				EA0094912527264E00746222 /* RMAccountGroup.swift in Sources */,
 				EA9F66312554E44000441ED0 /* PlanningListViewModel.swift in Sources */,
@@ -598,6 +624,7 @@
 				EAD68A412554F8810083B30D /* AccountDetailsCoordinator.swift in Sources */,
 				EA9BCAA125434434003DE283 /* AccountsListViewModel.swift in Sources */,
 				EA9F66322554E44000441ED0 /* BudgetsListCoordinator.swift in Sources */,
+				EAD68AD7255953A30083B30D /* Rx+Extensions.swift in Sources */,
 				EAD68A7125558AD10083B30D /* AccountOperationsSectionHeader.swift in Sources */,
 				EA009481252641F900746222 /* RMAccount.swift in Sources */,
 				EA930CC82524851000E12805 /* StoryboardBased.swift in Sources */,
@@ -620,6 +647,7 @@
 				EA9BCA9E25434421003DE283 /* AccountsListViewController.swift in Sources */,
 				EA930CCC2524854600E12805 /* NibBased.swift in Sources */,
 				EA1D9E942524D2E500E2027F /* DomainEntityConvertible.swift in Sources */,
+				EAD68ADB25595AB80083B30D /* PieChartView+Rx.swift in Sources */,
 				EA930D032524943C00E12805 /* FinplyDI.swift in Sources */,
 				EAD68A74255591030083B30D /* Foundation+Extensions.swift in Sources */,
 				EA930CE7252486DB00E12805 /* FPOperation.swift in Sources */,

@@ -30,7 +30,6 @@
                     <constraint firstItem="xhy-xa-tbY" firstAttribute="centerY" secondItem="owC-B8-PSM" secondAttribute="centerY" id="giG-kw-Cpd"/>
                 </constraints>
             </tableViewCellContentView>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="dateLabel" destination="xhy-xa-tbY" id="o9h-PH-dVp"/>

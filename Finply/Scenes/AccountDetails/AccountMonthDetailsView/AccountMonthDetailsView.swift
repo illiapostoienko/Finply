@@ -14,36 +14,27 @@ final class AccountMonthDetailsView: NibLoadable, BindableType {
     @IBOutlet private var pieChartView: PieChartView!
     
     var viewModel: AccountMonthDetailsViewModelType!
-    
+
     private let bag = DisposeBag()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        initialSetup()
-    }
-    
-    public required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        initialSetup()
-    }
-    
-    private func initialSetup() {
-        pieChartView.setup(outerRadius: 78, innerRadius: 50, selectedItemOffset: 15)
+    override func setupNib() {
+        super.setupNib()
+        pieChartView.setup(innerRadiusMultiplier: 0.64)
     }
     
     override func didMoveToSuperview() {
         super.didMoveToSuperview()
         pieChartView.set(items: [
-            PieChartItem(value: 10, color: .black),
-            PieChartItem(value: 10, color: .clear),
-            PieChartItem(value: 10, color: .blue),
-            PieChartItem(value: 10, color: .clear),
-            PieChartItem(value: 10, color: .red),
-            PieChartItem(value: 10, color: .clear),
-            PieChartItem(value: 10, color: .orange),
-            PieChartItem(value: 10, color: .clear),
-            PieChartItem(value: 10, color: .cyan),
-            PieChartItem(value: 10, color: .clear)
+            PieChartItem(value: 19.5, color: .black),
+            PieChartItem(value: 0.5, color: .clear),
+            PieChartItem(value: 19.5, color: .blue),
+            PieChartItem(value: 0.5, color: .clear),
+            PieChartItem(value: 19.5, color: .red),
+            PieChartItem(value: 0.5, color: .clear),
+            PieChartItem(value: 19.5, color: .orange),
+            PieChartItem(value: 0.5, color: .clear),
+            PieChartItem(value: 19.5, color: .cyan),
+            PieChartItem(value: 0.5, color: .clear)
         ])
     }
     

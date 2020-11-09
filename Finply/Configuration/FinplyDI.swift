@@ -15,7 +15,7 @@ final class FinplyDI {
         //Main Pages
         container.register{ AccountDetailsViewModel() }.implements(AccountDetailsViewModelType.self)
         container.register{ BudgetsListViewModel() }.implements(BudgetsListViewModelType.self)
-        container.register{ PlanningListViewModel() }.implements(PlanningListViewModel.self)
+        container.register{ PlanningListViewModel() }.implements(PlanningListViewModelType.self)
         
         //Main Branches
         container.register{ AddEditOperationViewModel(operationService: $0) }.implements(AddEditOperationViewModelType.self)

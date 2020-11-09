@@ -25,20 +25,22 @@ final class PieChartView: UIView {
     
     private(set) var items: [PieChartItem] = []
     
-    private(set) var outerRadius: CGFloat = 0.0
-    private(set) var innerRadius: CGFloat = 0.0
+    private(set) var outerRadius: CGFloat = 0
+    private(set) var innerRadius: CGFloat = 0
+    private(set) var innerRadiusMultiplier: CGFloat = 0.5
     private(set) var selectedPieOffset: CGFloat = 0.0
     private(set) var animationDuration: Double = 1.0
     private(set) var isPieInteractionEnabled: Bool = false
     private(set) var selectedItemIndex: Int?
+    private(set) var pieCenter: CGPoint = CGPoint()
     
     let startAngle: CGFloat = CGFloat(-Double.pi / 2)
-    
-    var pieCenter: CGPoint { CGPoint(x: contentView.bounds.midX, y: contentView.bounds.midY) }
     var endAngle: CGFloat { CGFloat(M_PI * 2) + startAngle }
     var strokeWidth: CGFloat { outerRadius - innerRadius }
     var strokeRadius: CGFloat { (outerRadius + innerRadius) / 2 }
     var total: CGFloat { items.reduce(0, { $0 + $1.value }) }
+    
+    private var currentFrame: CGRect = CGRect()
     
     override public init(frame: CGRect) {
         super.init(frame: frame)
@@ -52,12 +54,24 @@ final class PieChartView: UIView {
     
     public override func layoutSubviews() {
         super.layoutSubviews()
-        contentView.frame = self.bounds
+        let newFrame = self.bounds
+        guard contentView.frame != newFrame else { return }
+        
+        contentView.frame = newFrame
+        outerRadius = newFrame.width / 2
+        innerRadius = outerRadius * innerRadiusMultiplier
+        pieCenter = CGPoint(x: newFrame.midX, y: newFrame.midY)
+        reloadData(animated: false)
     }
     
-    func setup(outerRadius: CGFloat, innerRadius: CGFloat, selectedItemOffset: CGFloat, animationDuration: Double = 1.0, isPieInteractionEnabled: Bool = true) {
-        self.outerRadius = outerRadius
-        self.innerRadius = innerRadius
+    func setup(innerRadiusMultiplier: CGFloat = 0.5,
+               selectedItemOffset: CGFloat = 0,
+               animationDuration: Double = 1.0,
+               isPieInteractionEnabled: Bool = false)
+    {
+        if innerRadiusMultiplier <= 1, innerRadiusMultiplier >= 0 {
+            self.innerRadiusMultiplier = innerRadiusMultiplier
+        }
         self.selectedPieOffset = selectedItemOffset
         self.animationDuration = animationDuration
         self.isPieInteractionEnabled = isPieInteractionEnabled
@@ -65,7 +79,7 @@ final class PieChartView: UIView {
     
     func set(items: [PieChartItem]) {
         self.items = items
-        reloadData()
+        reloadData(animated: true)
     }
     
     private func initialSetup() {
@@ -85,13 +99,13 @@ final class PieChartView: UIView {
 // MARK: - Layers Math
 extension PieChartView {
 
-    private func reloadData() {
+    private func reloadData(animated: Bool) {
         let baseLayer: CALayer = contentView.layer
         selectedItemIndex = nil
         
         contentView.isUserInteractionEnabled = false
         CATransaction.begin()
-        CATransaction.setAnimationDuration(animationDuration)
+        CATransaction.setAnimationDuration(animated ? animationDuration : 0.0)
         CATransaction.setCompletionBlock { [weak self] in
             self?.contentView.isUserInteractionEnabled = true
         }

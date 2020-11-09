@@ -15,12 +15,12 @@ final class AccountDetailsViewController: UIViewController {
     @IBOutlet private var detailsStackView: UIStackView!
     @IBOutlet private var accountHeaderView: AccountHeaderView!
     @IBOutlet private var monthDetailsView: AccountMonthDetailsView!
+    @IBOutlet private var tableViewBackgroundView: UIView!
     @IBOutlet private var tableView: UITableView!
     @IBOutlet private var addOperationButton: UIButton!
     
     @IBOutlet private var tableViewContainerTopConstraint: NSLayoutConstraint!
     @IBOutlet private var tableViewBackgroundViewTopConstraint: NSLayoutConstraint!
-    @IBOutlet private var addOperationButtonTopConstraint: NSLayoutConstraint!
     
     var viewModel: AccountDetailsViewModelType!
     
@@ -39,6 +39,14 @@ final class AccountDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
+
+        let height = tableViewBackgroundView.frame.height
+        let width = tableViewBackgroundView.frame.width
+
+        tableViewBackgroundView.layer.shadowPath = UIBezierPath(rect: CGRect(x: 0, y: 0, width: width, height: 20)).cgPath
+        tableViewBackgroundView.layer.shadowRadius = 5
+        tableViewBackgroundView.layer.shadowOpacity = 0.2
+        tableViewBackgroundView.layer.shadowColor = #colorLiteral(red: 0.4588235294, green: 0.4705882353, blue: 0.5450980392, alpha: 1).cgColor
     }
 }
 

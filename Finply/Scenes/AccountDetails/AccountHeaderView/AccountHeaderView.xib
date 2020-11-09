@@ -31,9 +31,6 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Ft-Ki-bYL" userLabel="CardBaseView">
                     <rect key="frame" x="40" y="90" width="295" height="186"/>
                     <subviews>
-                        <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blue_card" translatesAutoresizingMaskIntoConstraints="NO" id="tbg-6w-3CV">
-                            <rect key="frame" x="0.0" y="0.0" width="295" height="186"/>
-                        </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$12,345" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kz6-Qq-v5y">
                             <rect key="frame" x="24" y="16" width="133" height="43"/>
                             <fontDescription key="fontDescription" type="system" pointSize="36"/>
@@ -43,11 +40,7 @@
                     </subviews>
                     <color key="backgroundColor" systemColor="systemYellowColor"/>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="tbg-6w-3CV" secondAttribute="trailing" id="ArQ-nf-COy"/>
                         <constraint firstAttribute="height" constant="186" id="Mbp-M3-lST"/>
-                        <constraint firstItem="tbg-6w-3CV" firstAttribute="leading" secondItem="2Ft-Ki-bYL" secondAttribute="leading" id="YJO-hy-PvM"/>
-                        <constraint firstItem="tbg-6w-3CV" firstAttribute="top" secondItem="2Ft-Ki-bYL" secondAttribute="top" id="bGZ-Wr-Xvn"/>
-                        <constraint firstAttribute="bottom" secondItem="tbg-6w-3CV" secondAttribute="bottom" id="nB3-eX-xHJ"/>
                         <constraint firstItem="kz6-Qq-v5y" firstAttribute="leading" secondItem="2Ft-Ki-bYL" secondAttribute="leading" constant="24" id="ume-D1-9mS"/>
                         <constraint firstItem="kz6-Qq-v5y" firstAttribute="top" secondItem="2Ft-Ki-bYL" secondAttribute="top" constant="16" id="zj5-0n-Nek"/>
                     </constraints>
@@ -67,11 +60,11 @@
             <viewLayoutGuide key="safeArea" id="f1D-Qu-OIo"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="tbg-6w-3CV" firstAttribute="top" secondItem="f1D-Qu-OIo" secondAttribute="top" constant="90" id="1Lf-8R-tzl"/>
                 <constraint firstItem="fcH-mD-pa6" firstAttribute="leading" secondItem="f1D-Qu-OIo" secondAttribute="leading" constant="16" id="ENh-55-ra9"/>
                 <constraint firstItem="f1D-Qu-OIo" firstAttribute="trailing" secondItem="g0E-z3-vc7" secondAttribute="trailing" constant="16" id="Ew0-Ax-nqU"/>
                 <constraint firstItem="bdO-VO-nk9" firstAttribute="leading" secondItem="f1D-Qu-OIo" secondAttribute="leading" constant="16" id="Ljs-1u-gv8"/>
                 <constraint firstItem="g0E-z3-vc7" firstAttribute="top" secondItem="f1D-Qu-OIo" secondAttribute="top" constant="16" id="YhA-6V-KbO"/>
+                <constraint firstItem="2Ft-Ki-bYL" firstAttribute="top" secondItem="bdO-VO-nk9" secondAttribute="bottom" constant="18" id="eJc-oF-rhU"/>
                 <constraint firstItem="2Ft-Ki-bYL" firstAttribute="leading" secondItem="f1D-Qu-OIo" secondAttribute="leading" constant="40" id="fXg-sy-c9L"/>
                 <constraint firstItem="bdO-VO-nk9" firstAttribute="top" secondItem="fcH-mD-pa6" secondAttribute="bottom" constant="4" id="h9m-FY-3gT"/>
                 <constraint firstItem="f1D-Qu-OIo" firstAttribute="trailing" secondItem="2Ft-Ki-bYL" secondAttribute="trailing" constant="40" id="js0-St-LuE"/>
@@ -82,7 +75,6 @@
         </view>
     </objects>
     <resources>
-        <image name="blue_card" width="325" height="204"/>
         <image name="photo1" width="36" height="36"/>
         <systemColor name="systemYellowColor">
             <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

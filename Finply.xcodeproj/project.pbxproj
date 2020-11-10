@@ -86,6 +86,8 @@
 		EAD68AD7255953A30083B30D /* Rx+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD68AD6255953A30083B30D /* Rx+Extensions.swift */; };
 		EAD68ADB25595AB80083B30D /* PieChartView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD68ADA25595AB80083B30D /* PieChartView+Rx.swift */; };
 		EAD68ADF25595AE00083B30D /* PieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD68ADE25595AE00083B30D /* PieChartView.swift */; };
+		EAD68AEB2559D5110083B30D /* HighCategoryContainerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAD68AEA2559D5110083B30D /* HighCategoryContainerView.xib */; };
+		EAD68AEE2559D52D0083B30D /* HighCategoryContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD68AED2559D52D0083B30D /* HighCategoryContainerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -162,6 +164,8 @@
 		EAD68AD6255953A30083B30D /* Rx+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rx+Extensions.swift"; sourceTree = "<group>"; };
 		EAD68ADA25595AB80083B30D /* PieChartView+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PieChartView+Rx.swift"; sourceTree = "<group>"; };
 		EAD68ADE25595AE00083B30D /* PieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartView.swift; sourceTree = "<group>"; };
+		EAD68AEA2559D5110083B30D /* HighCategoryContainerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HighCategoryContainerView.xib; sourceTree = "<group>"; };
+		EAD68AED2559D52D0083B30D /* HighCategoryContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighCategoryContainerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -437,6 +441,7 @@
 		EAD68A4D255505750083B30D /* AccountMonthDetailsView */ = {
 			isa = PBXGroup;
 			children = (
+				EAD68AE92559D4F10083B30D /* HighCategoryContainerView */,
 				EAD68A4E255505B80083B30D /* AccountMonthDetailsView.xib */,
 				EAD68A512555064F0083B30D /* AccountMonthDetailsView.swift */,
 				EAD68A69255582EF0083B30D /* AccountMonthDetailsViewModel.swift */,
@@ -478,6 +483,15 @@
 				EAD68ADA25595AB80083B30D /* PieChartView+Rx.swift */,
 			);
 			path = PieChartView;
+			sourceTree = "<group>";
+		};
+		EAD68AE92559D4F10083B30D /* HighCategoryContainerView */ = {
+			isa = PBXGroup;
+			children = (
+				EAD68AEA2559D5110083B30D /* HighCategoryContainerView.xib */,
+				EAD68AED2559D52D0083B30D /* HighCategoryContainerView.swift */,
+			);
+			path = HighCategoryContainerView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -562,6 +576,7 @@
 				EA9F66342554E44000441ED0 /* BudgetsListViewController.storyboard in Resources */,
 				EA9BCAA8254345AA003DE283 /* AccountsListViewController.storyboard in Resources */,
 				EA7F616D252B2D13008CA432 /* .swiftlint.yml in Resources */,
+				EAD68AEB2559D5110083B30D /* HighCategoryContainerView.xib in Resources */,
 				EA930C3F2523D54F00E12805 /* LaunchScreen.storyboard in Resources */,
 				EAD68A3E2554F8810083B30D /* AccountDetailsViewController.storyboard in Resources */,
 				EA930CB3252476D200E12805 /* HomeScreenViewController.storyboard in Resources */,
@@ -616,6 +631,7 @@
 				EAD68A67255582B20083B30D /* AccountHeaderViewModel.swift in Sources */,
 				EA930CC2252484CD00E12805 /* UITableView+Reusable.swift in Sources */,
 				EAD68A492554F9C80083B30D /* BaseCoordinator.swift in Sources */,
+				EAD68AEE2559D52D0083B30D /* HighCategoryContainerView.swift in Sources */,
 				EA9BCAA42543443F003DE283 /* AccountsListCoordinator.swift in Sources */,
 				EA930CD02524857900E12805 /* Reusable.swift in Sources */,
 				EA930CE12524865A00E12805 /* Sequence+Extensions.swift in Sources */,

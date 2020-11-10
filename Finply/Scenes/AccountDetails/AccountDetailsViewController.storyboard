@@ -17,17 +17,17 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="EfC-J3-Zyq">
-                                <rect key="frame" x="0.0" y="44" width="390" height="551.33333333333337"/>
+                                <rect key="frame" x="0.0" y="44" width="390" height="531.66666666666663"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PkL-B2-dSI" customClass="AccountHeaderView" customModule="Finply" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="390" height="312"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="390" height="292.33333333333331"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" secondItem="PkL-B2-dSI" secondAttribute="height" multiplier="1.25:1" id="RY9-KP-47P"/>
+                                            <constraint firstAttribute="width" secondItem="PkL-B2-dSI" secondAttribute="height" multiplier="1.3345:1" id="RY9-KP-47P"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Elg-2W-dAy" customClass="AccountMonthDetailsView" customModule="Finply" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="312" width="390" height="239.33333333333337"/>
+                                        <rect key="frame" x="0.0" y="292.33333333333331" width="390" height="239.33333333333331"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="Elg-2W-dAy" secondAttribute="height" multiplier="1.63:1" id="wxK-6K-6dW"/>
@@ -38,10 +38,10 @@
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mvw-ok-11y" userLabel="TableViewContainer">
-                                <rect key="frame" x="0.0" y="595.33333333333337" width="390" height="248.66666666666663"/>
+                                <rect key="frame" x="0.0" y="575.66666666666663" width="390" height="268.33333333333337"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HKC-Hy-t3T" userLabel="TableViewBackgroundView">
-                                        <rect key="frame" x="0.0" y="31.999999999999986" width="390" height="216.66666666666663"/>
+                                        <rect key="frame" x="0.0" y="32.000000000000014" width="390" height="236.33333333333337"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -50,7 +50,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bDo-oT-drj">
-                                        <rect key="frame" x="0.0" y="0.0" width="390" height="248.66666666666666"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="390" height="268.33333333333331"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PX7-Ry-4Cx" userLabel="PlusButtonContainer">

@@ -45,7 +45,7 @@ final class AccountDetailsViewController: UIViewController {
 
         tableViewBackgroundView.layer.shadowPath = UIBezierPath(rect: CGRect(x: 0, y: 0, width: width, height: 20)).cgPath
         tableViewBackgroundView.layer.shadowRadius = 5
-        tableViewBackgroundView.layer.shadowOpacity = 0.2
+        tableViewBackgroundView.layer.shadowOpacity = 0.1
         tableViewBackgroundView.layer.shadowColor = #colorLiteral(red: 0.4588235294, green: 0.4705882353, blue: 0.5450980392, alpha: 1).cgColor
     }
 }

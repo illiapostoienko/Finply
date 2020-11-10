@@ -12,9 +12,15 @@ import RxCocoa
 final class AccountMonthDetailsView: NibLoadable, BindableType {
     
     @IBOutlet private var pieChartView: PieChartView!
+    @IBOutlet private var highCategoriesContainer: UIStackView!
+    @IBOutlet private var incomesLabel: UILabel!
+    @IBOutlet private var expensesLabel: UILabel!
+    @IBOutlet private var monthLabel: UILabel!
+    @IBOutlet private var yearLabel: UILabel!
+    @IBOutlet private var overlapButton: UIButton!
     
     var viewModel: AccountMonthDetailsViewModelType!
-
+    
     private let bag = DisposeBag()
     
     override func setupNib() {

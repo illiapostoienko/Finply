@@ -88,6 +88,7 @@
 		EAD68ADF25595AE00083B30D /* PieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD68ADE25595AE00083B30D /* PieChartView.swift */; };
 		EAD68AEB2559D5110083B30D /* HighCategoryContainerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAD68AEA2559D5110083B30D /* HighCategoryContainerView.xib */; };
 		EAD68AEE2559D52D0083B30D /* HighCategoryContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD68AED2559D52D0083B30D /* HighCategoryContainerView.swift */; };
+		EAD68AF2255ADEA00083B30D /* HighCategoriesContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD68AF1255ADE9F0083B30D /* HighCategoriesContainerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -166,6 +167,7 @@
 		EAD68ADE25595AE00083B30D /* PieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartView.swift; sourceTree = "<group>"; };
 		EAD68AEA2559D5110083B30D /* HighCategoryContainerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HighCategoryContainerView.xib; sourceTree = "<group>"; };
 		EAD68AED2559D52D0083B30D /* HighCategoryContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighCategoryContainerView.swift; sourceTree = "<group>"; };
+		EAD68AF1255ADE9F0083B30D /* HighCategoriesContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighCategoriesContainerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -441,7 +443,7 @@
 		EAD68A4D255505750083B30D /* AccountMonthDetailsView */ = {
 			isa = PBXGroup;
 			children = (
-				EAD68AE92559D4F10083B30D /* HighCategoryContainerView */,
+				EAD68AE92559D4F10083B30D /* HighCategoriesContainerView */,
 				EAD68A4E255505B80083B30D /* AccountMonthDetailsView.xib */,
 				EAD68A512555064F0083B30D /* AccountMonthDetailsView.swift */,
 				EAD68A69255582EF0083B30D /* AccountMonthDetailsViewModel.swift */,
@@ -485,13 +487,14 @@
 			path = PieChartView;
 			sourceTree = "<group>";
 		};
-		EAD68AE92559D4F10083B30D /* HighCategoryContainerView */ = {
+		EAD68AE92559D4F10083B30D /* HighCategoriesContainerView */ = {
 			isa = PBXGroup;
 			children = (
 				EAD68AEA2559D5110083B30D /* HighCategoryContainerView.xib */,
 				EAD68AED2559D52D0083B30D /* HighCategoryContainerView.swift */,
+				EAD68AF1255ADE9F0083B30D /* HighCategoriesContainerView.swift */,
 			);
-			path = HighCategoryContainerView;
+			path = HighCategoriesContainerView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -649,6 +652,7 @@
 				EA930CF525248BA400E12805 /* FPAccountGroup.swift in Sources */,
 				EAD68A332554F8220083B30D /* AccountHeaderView.swift in Sources */,
 				EA930C352523D54D00E12805 /* SceneDelegate.swift in Sources */,
+				EAD68AF2255ADEA00083B30D /* HighCategoriesContainerView.swift in Sources */,
 				EA9F662F2554E44000441ED0 /* PlanningListCoordinator.swift in Sources */,
 				EAD68A402554F8810083B30D /* AccountDetailsViewController.swift in Sources */,
 				EA1D9E982524D2E500E2027F /* RMOperation.swift in Sources */,

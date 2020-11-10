@@ -6,32 +6,31 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
-struct HighCategoryContainerModel: Equatable {
+struct HighCategoryContainerItem: Equatable {
     let color: UIColor
     let categoryName: String
     let value: String
 }
 
-final class HighCategoryContainerView: NibLoadable {
+final class HighCategoryContainerView: UIView, NibBased {
     
     @IBOutlet private var colorCircleView: UIView!
     @IBOutlet private var categoryNameLabel: UILabel!
     @IBOutlet private var valueLabel: UILabel!
     
-    private var currentModel: HighCategoryContainerModel? = nil
+    private var currentItem: HighCategoryContainerItem?
     
-    override func setupNib() {
-        super.setupNib()
-        setElementsVisibility(false)
-    }
-    
-    func setup(with model: HighCategoryContainerModel) {
-        guard model != currentModel else { return }
+    func set(item: HighCategoryContainerItem) {
+        guard item != currentItem else { return }
         
-        colorCircleView.backgroundColor = model.color
-        categoryNameLabel.text = model.categoryName
-        valueLabel.text = model.value
+        currentItem = item
+        
+        colorCircleView.backgroundColor = item.color
+        categoryNameLabel.text = item.categoryName
+        valueLabel.text = item.value
         
         setElementsVisibility(true)
     }

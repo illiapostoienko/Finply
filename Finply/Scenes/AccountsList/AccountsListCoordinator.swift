@@ -10,13 +10,17 @@ import RxSwift
 import Dip
 
 enum AccountsListCoordinationResult {
-
+    case cancel
+    case accountSelected
+    case accountsGroupSelected
 }
 
 final class AccountsListCoordinator: BaseCoordinator<AccountsListCoordinationResult> {
     
     let presentingViewController: UIViewController
     let dependencyContainer: DependencyContainer
+    
+    private let selfDismissStream = PublishSubject<Void>()
     
     init(presentingViewController: UIViewController, dependencyContainer: DependencyContainer) {
         self.presentingViewController = presentingViewController

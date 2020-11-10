@@ -13,6 +13,13 @@ final class AccountOperationCell: UITableViewCell, BindableType, NibReusable {
     
     var viewModel: AccountOperationCellViewModelType!
     
+    private var bag = DisposeBag()
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        bag = DisposeBag()
+    }
+    
     func bindViewModel() {
         
     }

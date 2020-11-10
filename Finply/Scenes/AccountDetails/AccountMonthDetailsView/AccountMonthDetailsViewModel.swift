@@ -10,20 +10,16 @@ import RxSwift
 import RxCocoa
 
 protocol AccountMonthDetailsViewModelType {
-    var itemSelected: PublishSubject<Int> { get }
+    var reportDetailsTap: PublishSubject<Void> { get }
 }
 
 final class AccountMonthDetailsViewModel: AccountMonthDetailsViewModelType {
     
-    let itemSelected = PublishSubject<Int>()
+    let reportDetailsTap = PublishSubject<Void>()
     
     let bag = DisposeBag()
     
     init() {
-        itemSelected
-            .subscribe(onNext: {
-                let hb = $0
-            })
-            .disposed(by: bag)
+        
     }
 }

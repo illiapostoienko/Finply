@@ -12,7 +12,7 @@ import RxCocoa
 final class AccountMonthDetailsView: NibLoadable, BindableType {
     
     @IBOutlet private var pieChartView: PieChartView!
-    @IBOutlet private var highCategoriesContainer: UIStackView!
+    @IBOutlet private var highCategoriesContainer: HighCategoriesContainerView!
     @IBOutlet private var incomesLabel: UILabel!
     @IBOutlet private var expensesLabel: UILabel!
     @IBOutlet private var monthLabel: UILabel!
@@ -42,12 +42,20 @@ final class AccountMonthDetailsView: NibLoadable, BindableType {
             PieChartItem(value: 19.5, color: .cyan),
             PieChartItem(value: 0.5, color: .clear)
         ])
+        
+        highCategoriesContainer.setup(with: [
+            HighCategoryContainerItem(color: .blue, categoryName: "Shops", value: "- $1950"),
+            HighCategoryContainerItem(color: .green, categoryName: "Housing", value: "- $1270"),
+            HighCategoryContainerItem(color: .purple, categoryName: "Transfers", value: "- $950"),
+            HighCategoryContainerItem(color: .systemIndigo, categoryName: "Fuel", value: "- $550"),
+            HighCategoryContainerItem(color: .yellow, categoryName: "Other", value: "- $350")
+        ])
     }
     
     func bindViewModel() {
-        pieChartView.rx
-            .didSelectItemAt
-            .bind(to: viewModel.itemSelected)
+        overlapButton.rx
+            .tap
+            .bind(to: viewModel.reportDetailsTap)
             .disposed(by: bag)
     }
 }

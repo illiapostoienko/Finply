@@ -11,7 +11,8 @@ import RxCocoa
 protocol AccountHeaderViewModelType {
     //Inputs
     var profileTap: PublishSubject<Void> { get }
-    var cardTap: PublishSubject<Void> { get }
+    var accountTap: PublishSubject<Void> { get }
+    var editAccountTap: PublishSubject<Void> { get }
     
     //Outputs
     var ballanceDriver: Driver<String> { get }
@@ -21,7 +22,8 @@ final class AccountHeaderViewModel: AccountHeaderViewModelType {
     
     //Inputs
     let profileTap = PublishSubject<Void>()
-    let cardTap = PublishSubject<Void>()
+    let accountTap = PublishSubject<Void>()
+    let editAccountTap = PublishSubject<Void>()
     
     //Outputs
     var ballanceDriver: Driver<String>

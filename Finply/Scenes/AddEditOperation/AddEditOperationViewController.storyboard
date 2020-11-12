@@ -22,12 +22,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OSw-Pc-iau">
-                                <rect key="frame" x="171" y="489" width="73" height="41"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <state key="normal" title="Cancel"/>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="w7o-m8-1y0"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -36,9 +30,6 @@
                             <constraint firstItem="L2j-sj-oG9" firstAttribute="centerY" secondItem="6cL-Hc-ddU" secondAttribute="centerY" id="liP-cA-Bxo"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="cancelButton" destination="OSw-Pc-iau" id="jf0-1O-BGZ"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="evs-s5-kIM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

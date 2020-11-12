@@ -14,21 +14,16 @@ final class AccountHeaderView: NibLoadable, BindableType {
     @IBOutlet private var greetingLabel: UILabel!
     @IBOutlet private var nameLabel: UILabel!
     @IBOutlet private var profileButton: UIButton!
-    @IBOutlet private var cardButton: UIButton!
+    @IBOutlet private var accountButton: UIButton!
+    @IBOutlet private var editAccountButton: UIButton!
     
     var viewModel: AccountHeaderViewModelType!
     
     let bag = DisposeBag()
     
     func bindViewModel() {
-        profileButton.rx
-            .tap
-            .bind(to: viewModel.profileTap)
-            .disposed(by: bag)
-        
-        cardButton.rx
-            .tap
-            .bind(to: viewModel.cardTap)
-            .disposed(by: bag)
+        profileButton.rx.tap.bind(to: viewModel.profileTap).disposed(by: bag)
+        accountButton.rx.tap.bind(to: viewModel.accountTap).disposed(by: bag)
+        editAccountButton.rx.tap.bind(to: viewModel.editAccountTap).disposed(by: bag)
     }
 }

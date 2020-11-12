@@ -32,7 +32,7 @@ final class AccountDetailsViewController: UIViewController {
     lazy var sectionDateFormatter: DateFormatter =  {
         let dateFormatter = DateFormatter()
         dateFormatter.timeStyle = .none
-        dateFormatter.dateStyle = .medium
+        dateFormatter.dateStyle = .full
         return dateFormatter
     }()
     
@@ -57,14 +57,14 @@ extension AccountDetailsViewController: BindableType {
         accountHeaderView.bind(to: viewModel.accountHeaderViewModel)
         monthDetailsView.bind(to: viewModel.accountMonthDetailsViewModel)
         
-        viewModel
-            .dataSource
-            .bind(to: tableView.rx.items(dataSource: dataSource))
-            .disposed(by: bag)
+        //Output
+        viewModel.dataSource.bind(to: tableView.rx.items(dataSource: dataSource)).disposed(by: bag)
         
-        tableView.rx.itemSelected.subscribe(onNext: { indexPath in
-            print("itemselected: \(indexPath)")
-        }).disposed(by: bag)
+        //Input
+        addOperationButton.rx.tap.bind(to: viewModel.addOperationTap).disposed(by: bag)
+        tableView.rx.itemSelected
+            .do(onNext: { [weak self] in self?.tableView.deselectRow(at: $0, animated: true) })
+            .bind(to: viewModel.cellSelected).disposed(by: bag)
     }
 }
 
@@ -73,7 +73,6 @@ extension AccountDetailsViewController: UITableViewDelegate {
     
     private func setupTableView() {
         tableView.dataSource = nil
-        //tableView.delegate = nil // needed due to internal logic of RxDatasources
         tableView.delegate = self
         
         tableView.register(cellType: AccountOperationCell.self)
@@ -124,7 +123,6 @@ extension AccountDetailsViewController: UITableViewDelegate {
         tableView.contentOffset = .zero
         
         let percent = currentValue / maxValue
-        //walletHeaderView.adjustView(by: abs(percent))
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
@@ -138,7 +136,6 @@ extension AccountDetailsViewController: UITableViewDelegate {
         tableViewContainerTopConstraint.constant = (-0.5...0) ~= percent ? 0 : -calculateMaxValue()
         
         let headerViewAdjustment: CGFloat = (-0.5...0) ~= percent ? 0 : 1
-        //walletHeaderView.adjustView(by: headerViewAdjustment)
         
         UIView.animate(withDuration: 0.15, delay: .zero,
                        options: [.curveEaseInOut, .allowUserInteraction, .preferredFramesPerSecond60],

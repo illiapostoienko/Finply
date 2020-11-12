@@ -9,10 +9,10 @@ import Foundation
 
 protocol AccountOperationCellViewModelType {
     
-    var operationId: UUID { get }
+    var operation: FPOperation { get }
 }
 
 final class AccountOperationCellViewModel: AccountOperationCellViewModelType {
     
-    let operationId: UUID = UUID()
+    let operation = FPOperation(id: UUID(), accountId: UUID(), flow: .noneIncome, value: 23.94, creationDate: Date(), comment: "Some comment", photoPath: nil, tagIds: [])
 }

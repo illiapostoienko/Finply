@@ -11,16 +11,14 @@ import RxCocoa
 
 final class AddEditOperationViewController: UIViewController, BindableType {
     
-    @IBOutlet private var cancelButton: UIButton!
-    
     var viewModel: AddEditOperationViewModelType!
     
     private let bag = DisposeBag()
     
     func bindViewModel() {
-        cancelButton.rx
-            .tap
-            .bind(to: viewModel.cancelTapped)
-            .disposed(by: bag)
+//        cancelButton.rx
+//            .tap
+//            .bind(to: viewModel.cancelTapped)
+//            .disposed(by: bag)
     }
 }

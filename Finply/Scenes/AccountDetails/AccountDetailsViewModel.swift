@@ -15,12 +15,21 @@ protocol AccountDetailsViewModelType {
     var accountHeaderViewModel: AccountHeaderViewModelType { get }
     var accountMonthDetailsViewModel: AccountMonthDetailsViewModelType { get }
     
+    //Input
+    var addOperationTap: AnyObserver<Void> { get }
+    var cellSelected: AnyObserver<IndexPath> { get }
+    
+    //Output
     var dataSource: Observable<[AccountOperationsTableSection]> { get }
     var currentOperationSections: BehaviorRelay<[OperationsSection]> { get }
     
-    var coordinationReportDetails: Observable<Void> { get }
+    // Coordination
     var coordinationAddOperation: Observable<Void> { get }
+    var coordinationEditOperation: Observable<FPOperation> { get }
+    var coordinationReportDetails: Observable<Void> { get }
     var coordinationAccountsList: Observable<Void> { get }
+    var coordinationEditAccount: Observable<Void> { get }
+    var coordinationProfile: Observable<Void> { get }
 }
 
 final class AccountDetailsViewModel: AccountDetailsViewModelType {
@@ -28,33 +37,44 @@ final class AccountDetailsViewModel: AccountDetailsViewModelType {
     var accountHeaderViewModel: AccountHeaderViewModelType
     var accountMonthDetailsViewModel: AccountMonthDetailsViewModelType
     
+    //Input
+    var addOperationTap: AnyObserver<Void> { addOperationStream.asObserver() }
+    var cellSelected: AnyObserver<IndexPath> { cellSelectionStream.asObserver() }
+    
+    //Output
     let dataSource: Observable<[AccountOperationsTableSection]>
     let currentOperationSections: BehaviorRelay<[OperationsSection]>
     
-    var coordinationReportDetails: Observable<Void> { _coordinationReportDetails }
-    private let _coordinationReportDetails = PublishSubject<Void>()
+    //Coordination
+    var coordinationAddOperation: Observable<Void> { addOperationStream }
+    var coordinationEditOperation: Observable<FPOperation>
+    var coordinationReportDetails: Observable<Void> { accountMonthDetailsViewModel.reportDetailsTap }
+    var coordinationAccountsList: Observable<Void> { accountHeaderViewModel.accountTap }
+    var coordinationEditAccount: Observable<Void> { accountHeaderViewModel.editAccountTap }
+    var coordinationProfile: Observable<Void> { accountHeaderViewModel.profileTap }
     
-    var coordinationAddOperation: Observable<Void> { _coordinationAddOperation }
-    private let _coordinationAddOperation = PublishSubject<Void>()
-    
-    var coordinationAccountsList: Observable<Void> { _coordinationAccountsList }
-    private let _coordinationAccountsList = PublishSubject<Void>()
-    
+    //Locals
+    private let addOperationStream = PublishSubject<Void>()
+    private let cellSelectionStream = PublishSubject<IndexPath>()
     private let bag = DisposeBag()
     
-    init(accountHeaderViewModel: AccountHeaderViewModelType = AccountHeaderViewModel(),
-         accountMonthDetailsViewModel: AccountMonthDetailsViewModelType = AccountMonthDetailsViewModel()) {
+    init(accountHeaderViewModel: AccountHeaderViewModelType,
+         accountMonthDetailsViewModel: AccountMonthDetailsViewModelType) {
         self.accountHeaderViewModel = accountHeaderViewModel
         self.accountMonthDetailsViewModel = accountMonthDetailsViewModel
-        
-        accountMonthDetailsViewModel.reportDetailsTap
-            .bind(to: _coordinationReportDetails)
-            .disposed(by: bag)
         
         currentOperationSections = BehaviorRelay<[OperationsSection]>(value: mockData)
     
         dataSource = currentOperationSections
             .map{ $0.map{ section in .operations(date: section.date, items: section.cells.map{ .operation(viewModel: $0) }) } }
+        
+        coordinationEditOperation = cellSelectionStream
+            .withLatestFrom(currentOperationSections) { indexPath, sections in
+                sections[safe: indexPath.section]
+                    .flatMap{ section in section.cells[safe: indexPath.item] }
+                    .flatMap{ cell in cell.operation }
+            }
+            .unwrap()
     }
 }
 
@@ -65,7 +85,7 @@ struct OperationsSection {
     let cells: [AccountOperationCellViewModelType]
 }
 
-fileprivate var mockData: [OperationsSection] = {
+private var mockData: [OperationsSection] = {
     return [
         OperationsSection(date: Date(timeIntervalSince1970: 1604620800), cells: [
                             AccountOperationCellViewModel(),
@@ -137,7 +157,7 @@ extension AccountOperationsTableSection: IdentifiableType, AnimatableSectionMode
 extension AccountOperationsTableItem: IdentifiableType, Equatable {
     var identity: String {
         switch self {
-        case .operation(let vm): return vm.operationId.uuidString
+        case .operation(let vm): return vm.operation.id.uuidString
         }
     }
     
@@ -146,6 +166,6 @@ extension AccountOperationsTableItem: IdentifiableType, Equatable {
             return lhs.identity == rhs.identity
         }
 
-        return lhsVM.operationId == rhsVM.operationId
+        return lhsVM.operation.id == rhsVM.operation.id
     }
 }

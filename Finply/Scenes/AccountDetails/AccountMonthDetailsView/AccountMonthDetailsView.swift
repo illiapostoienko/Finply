@@ -31,24 +31,24 @@ final class AccountMonthDetailsView: NibLoadable, BindableType {
     override func didMoveToSuperview() {
         super.didMoveToSuperview()
         pieChartView.set(items: [
-            PieChartItem(value: 19.5, color: .black),
+            PieChartItem(value: 19.5, color: #colorLiteral(red: 0.6235294118, green: 0.8588235294, blue: 0.9843137255, alpha: 1)),
             PieChartItem(value: 0.5, color: .clear),
-            PieChartItem(value: 19.5, color: .blue),
+            PieChartItem(value: 19.5, color: #colorLiteral(red: 0.7137254902, green: 0.7764705882, blue: 0.8392156863, alpha: 1)),
             PieChartItem(value: 0.5, color: .clear),
-            PieChartItem(value: 19.5, color: .red),
+            PieChartItem(value: 19.5, color: #colorLiteral(red: 0.9294117647, green: 0.3960784314, blue: 0.3725490196, alpha: 1)),
             PieChartItem(value: 0.5, color: .clear),
-            PieChartItem(value: 19.5, color: .orange),
+            PieChartItem(value: 19.5, color: #colorLiteral(red: 0.2901960784, green: 0.3647058824, blue: 0.9058823529, alpha: 1)),
             PieChartItem(value: 0.5, color: .clear),
-            PieChartItem(value: 19.5, color: .cyan),
+            PieChartItem(value: 19.5, color: #colorLiteral(red: 0.9764705882, green: 0.8196078431, blue: 0.5960784314, alpha: 1)),
             PieChartItem(value: 0.5, color: .clear)
         ])
         
         highCategoriesContainer.setup(with: [
-            HighCategoryContainerItem(color: .blue, categoryName: "Shops", value: "- $1950"),
-            HighCategoryContainerItem(color: .green, categoryName: "Housing", value: "- $1270"),
-            HighCategoryContainerItem(color: .purple, categoryName: "Transfers", value: "- $950"),
-            HighCategoryContainerItem(color: .systemIndigo, categoryName: "Fuel", value: "- $550"),
-            HighCategoryContainerItem(color: .yellow, categoryName: "Other", value: "- $350")
+            HighCategoryContainerItem(color: #colorLiteral(red: 0.6235294118, green: 0.8588235294, blue: 0.9843137255, alpha: 1), categoryName: "Shops", value: "- $1950"),
+            HighCategoryContainerItem(color: #colorLiteral(red: 0.7137254902, green: 0.7764705882, blue: 0.8392156863, alpha: 1), categoryName: "Housing", value: "- $1270"),
+            HighCategoryContainerItem(color: #colorLiteral(red: 0.9294117647, green: 0.3960784314, blue: 0.3725490196, alpha: 1), categoryName: "Transfers", value: "- $950"),
+            HighCategoryContainerItem(color: #colorLiteral(red: 0.2901960784, green: 0.3647058824, blue: 0.9058823529, alpha: 1), categoryName: "Fuel", value: "- $550"),
+            HighCategoryContainerItem(color: #colorLiteral(red: 0.9764705882, green: 0.8196078431, blue: 0.5960784314, alpha: 1), categoryName: "Other", value: "- $350")
         ])
     }
     

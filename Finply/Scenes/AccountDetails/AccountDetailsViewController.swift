@@ -12,6 +12,12 @@ import RxDataSources
 
 final class AccountDetailsViewController: UIViewController {
     
+    enum TableState {
+        case expanded
+        case collapsed
+        case between
+    }
+    
     @IBOutlet private var detailsStackView: UIStackView!
     @IBOutlet private var accountHeaderView: AccountHeaderView!
     @IBOutlet private var monthDetailsView: AccountMonthDetailsView!
@@ -19,7 +25,8 @@ final class AccountDetailsViewController: UIViewController {
     @IBOutlet private var tableView: UITableView!
     @IBOutlet private var addOperationButton: UIButton!
     
-    @IBOutlet private var tableViewContainerTopConstraint: NSLayoutConstraint!
+    @IBOutlet private var tableViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet private var plusButtonTopConstraint: NSLayoutConstraint!
     @IBOutlet private var tableViewBackgroundViewTopConstraint: NSLayoutConstraint!
     
     var viewModel: AccountDetailsViewModelType!
@@ -27,8 +34,19 @@ final class AccountDetailsViewController: UIViewController {
     private var dataSource: RxTableViewSectionedAnimatedDataSource<AccountOperationsTableSection>!
     private let bag = DisposeBag()
     
-    private let tableViewTopMinConstant: CGFloat = 70
-    
+    private var tableViewState: TableState = .collapsed { didSet { if tableViewState != .between { previousTableViewState = tableViewState }}}
+    private var previousTableViewState: TableState = .collapsed
+    private var shouldStopDecelerating: Bool = false
+    private var expandedStateMaxValue: CGFloat { detailsStackView.frame.height - 92 }
+    private var areSectionHeadersBackgroundClear: Bool = true {
+        didSet {
+            tableView.visibleSectionHeaders.forEach{
+                guard let header = $0 as? AccountOperationsSectionHeader else { return }
+                header.setBackgroundClear(areSectionHeadersBackgroundClear)
+            }
+        }
+    }
+        
     lazy var sectionDateFormatter: DateFormatter =  {
         let dateFormatter = DateFormatter()
         dateFormatter.timeStyle = .none
@@ -39,11 +57,11 @@ final class AccountDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
-
-        let height = tableViewBackgroundView.frame.height
-        let width = tableViewBackgroundView.frame.width
-
-        tableViewBackgroundView.layer.shadowPath = UIBezierPath(rect: CGRect(x: 0, y: 0, width: width, height: 20)).cgPath
+        setupShadows()
+    }
+    
+    private func setupShadows() {
+        tableViewBackgroundView.layer.shadowPath = UIBezierPath(rect: CGRect(x: 0, y: 0, width: tableViewBackgroundView.frame.width, height: 20)).cgPath
         tableViewBackgroundView.layer.shadowRadius = 5
         tableViewBackgroundView.layer.shadowOpacity = 0.1
         tableViewBackgroundView.layer.shadowColor = #colorLiteral(red: 0.4588235294, green: 0.4705882353, blue: 0.5450980392, alpha: 1).cgColor
@@ -82,6 +100,7 @@ extension AccountDetailsViewController: UITableViewDelegate {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderHeight = 32
         tableView.tableFooterView = UIView()
+        tableView.showsVerticalScrollIndicator = false
         
         dataSource = RxTableViewSectionedAnimatedDataSource(
             animationConfiguration: AnimationConfiguration(insertAnimation: .fade,
@@ -89,7 +108,6 @@ extension AccountDetailsViewController: UITableViewDelegate {
                                                            deleteAnimation: .fade),
             configureCell: { dataSource, tableView, indexPath, _ in
                 switch dataSource[indexPath] {
-                    
                 case .operation(let viewModel):
                     var cell = tableView.dequeueReusableCell(for: indexPath) as AccountOperationCell
                     cell.bind(to: viewModel)
@@ -102,52 +120,98 @@ extension AccountDetailsViewController: UITableViewDelegate {
         let headerView = tableView.dequeueReusableHeaderFooterView() as AccountOperationsSectionHeader
         guard let section = viewModel.currentOperationSections.value[safe: section] else { return nil }
         headerView.setupDate(sectionDateFormatter.string(from: section.date))
+        headerView.setBackgroundClear(areSectionHeadersBackgroundClear)
         return headerView
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let currentValue = calculateCurrentValue(contentOffsetY: scrollView.contentOffset.y)
-        let maxValue = calculateMaxValue()
+        
+        //disable scroll down in collapsed state
+        if tableViewState == .collapsed, scrollView.contentOffset.y <= 0 {
+            scrollView.contentOffset = .zero
+        }
+        
+        let currentValue = tableViewTopConstraint.constant - scrollView.contentOffset.y
         
         guard currentValue < 0 else {
-            tableViewContainerTopConstraint.constant = 0
+            if tableViewTopConstraint.constant != 0 { tableViewTopConstraint.constant = 0 }
+            tableViewState = .collapsed
             return
         }
         
-        guard currentValue > -maxValue else {
-            tableViewContainerTopConstraint.constant = -maxValue
+        guard currentValue > -expandedStateMaxValue, !scrollView.isDecelerating else {
+            if tableViewTopConstraint.constant != -expandedStateMaxValue { tableViewTopConstraint.constant = -expandedStateMaxValue }
+            areSectionHeadersBackgroundClear = false
+            tableViewState = .expanded
             return
         }
         
-        tableViewContainerTopConstraint.constant = currentValue
+        tableViewState = .between
+        if !areSectionHeadersBackgroundClear { areSectionHeadersBackgroundClear = true }
+        
+        tableViewTopConstraint.constant = currentValue
         tableView.contentOffset = .zero
         
-        let percent = currentValue / maxValue
+        let percent = abs(currentValue / expandedStateMaxValue)
+        adjustLocalLayout(by: percent)
+        adjustOtherViewsLayout(by: percent)
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        let currentValue = calculateCurrentValue(contentOffsetY: scrollView.contentOffset.y)
-        let maxValue = calculateMaxValue()
+        guard tableViewState == .between else { return }
+        let currentValue = tableViewTopConstraint.constant - scrollView.contentOffset.y
+        let percent = abs(currentValue / expandedStateMaxValue)
+        guard (0...1) ~= percent else { return }
         
-        let percent = currentValue / maxValue
+        let shouldExpand: Bool
         
-        guard (-1...0) ~= percent else { return }
+        if decelerate {
+            let isScrollingDown = scrollView.panGestureRecognizer.translation(in: scrollView.superview).y > 0
+            shouldExpand = !isScrollingDown
+            shouldStopDecelerating = true
+        } else {
+            let isScrollingDown = scrollView.panGestureRecognizer.translation(in: scrollView.superview).y > 0
+            if isScrollingDown, previousTableViewState == .expanded {
+                shouldExpand = (0.9...1) ~= percent
+            } else {
+                shouldExpand = (0.5...1) ~= percent
+            }
+        }
         
-        tableViewContainerTopConstraint.constant = (-0.5...0) ~= percent ? 0 : -calculateMaxValue()
-        
-        let headerViewAdjustment: CGFloat = (-0.5...0) ~= percent ? 0 : 1
+        tableViewState = shouldExpand ? .expanded : .collapsed
+        tableViewTopConstraint.constant = shouldExpand ? -expandedStateMaxValue : 0
+        if !shouldExpand { areSectionHeadersBackgroundClear = true }
         
         UIView.animate(withDuration: 0.15, delay: .zero,
                        options: [.curveEaseInOut, .allowUserInteraction, .preferredFramesPerSecond60],
-                       animations: { self.view.layoutIfNeeded() },
-                       completion: nil)
+                       animations: { [weak self] in
+                            self?.view.layoutIfNeeded()
+                            self?.adjustOtherViewsLayout(by: shouldExpand ? 1 : 0)
+                       },
+                       completion: { [weak self] _ in
+                            if shouldExpand { self?.areSectionHeadersBackgroundClear = false }
+                       })
+        
+        adjustLocalLayout(by: shouldExpand ? 1 : 0)
     }
     
-    private func calculateCurrentValue(contentOffsetY: CGFloat) -> CGFloat {
-        tableViewContainerTopConstraint.constant - contentOffsetY
+    func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
+        if tableViewState == .expanded, shouldStopDecelerating {
+            scrollView.setContentOffset(.zero, animated: true)
+            shouldStopDecelerating = false
+        }
     }
     
-    private func calculateMaxValue() -> CGFloat {
-        detailsStackView.frame.height - tableViewTopMinConstant
+    private func adjustLocalLayout(by percent: CGFloat) {
+        // expanded(percent = 0) 32, collapsed(percent = 1) -20
+        tableViewBackgroundViewTopConstraint.constant = 32 - (52 * percent)
+        
+        // expanded(percent = 0) 0, collapsed(percent = 1) -52
+        plusButtonTopConstraint.constant = 0 - (52 * percent)
+    }
+    
+    private func adjustOtherViewsLayout(by percent: CGFloat) {
+        accountHeaderView.adjustLayout(by: percent)
+        monthDetailsView.adjustLayout(by: percent)
     }
 }

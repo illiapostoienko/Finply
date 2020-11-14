@@ -97,6 +97,7 @@
 		EAD68B1C255B07110083B30D /* AddEditAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD68B18255B07110083B30D /* AddEditAccountViewController.swift */; };
 		EAD68B1D255B07110083B30D /* AddEditAccountViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EAD68B19255B07110083B30D /* AddEditAccountViewController.storyboard */; };
 		EAD68B1E255B07110083B30D /* AddEditAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD68B1A255B07110083B30D /* AddEditAccountViewModel.swift */; };
+		EAD68B23255EA9490083B30D /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD68B22255EA9490083B30D /* UITableView+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -184,6 +185,7 @@
 		EAD68B18255B07110083B30D /* AddEditAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEditAccountViewController.swift; sourceTree = "<group>"; };
 		EAD68B19255B07110083B30D /* AddEditAccountViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AddEditAccountViewController.storyboard; sourceTree = "<group>"; };
 		EAD68B1A255B07110083B30D /* AddEditAccountViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEditAccountViewModel.swift; sourceTree = "<group>"; };
+		EAD68B22255EA9490083B30D /* UITableView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -396,6 +398,7 @@
 				EA930CE02524865A00E12805 /* Sequence+Extensions.swift */,
 				EAD68A73255591030083B30D /* Foundation+Extensions.swift */,
 				EAD68AD6255953A30083B30D /* Rx+Extensions.swift */,
+				EAD68B22255EA9490083B30D /* UITableView+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -713,6 +716,7 @@
 				EA9BCA9E25434421003DE283 /* AccountsListViewController.swift in Sources */,
 				EA930CCC2524854600E12805 /* NibBased.swift in Sources */,
 				EA1D9E942524D2E500E2027F /* DomainEntityConvertible.swift in Sources */,
+				EAD68B23255EA9490083B30D /* UITableView+Extensions.swift in Sources */,
 				EAD68B1E255B07110083B30D /* AddEditAccountViewModel.swift in Sources */,
 				EAD68ADB25595AB80083B30D /* PieChartView+Rx.swift in Sources */,
 				EA930D032524943C00E12805 /* FinplyDI.swift in Sources */,

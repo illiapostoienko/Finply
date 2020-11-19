@@ -11,23 +11,22 @@ import RxSwift
 import RxSwiftExt
 
 enum FinplyContainerPage {
-    case budgets
+    case budgetsList
     case accountDetails
-    case planning
+    case planningList
 }
 
 final class AppCoordinator: BaseCoordinator<Void> {
 
     let window: UIWindow
     let dependencyContainer: DependencyContainer
-    let bag = DisposeBag()
+    private let bag = DisposeBag()
     
-    private var containerViewController: UIViewController!
-    
-    private var pageViewController: UIPageViewController!
-    private var accountDetailsViewController: AccountDetailsViewController!
-    private var budgetsViewController: BudgetsListViewController!
-    private var planningViewController: PlanningListViewController!
+    private let containerViewController: UIViewController = UIViewController()
+    private let pageViewController: UIPageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+    private let accountDetailsVc: AccountDetailsViewController = AccountDetailsViewController.instantiate()
+    private let budgetsListVc: BudgetsListViewController = BudgetsListViewController.instantiate()
+    private let planningListVc: PlanningListViewController = PlanningListViewController.instantiate()
     
     init(window: UIWindow, dependencyContainer: DependencyContainer) {
         self.window = window
@@ -35,27 +34,24 @@ final class AppCoordinator: BaseCoordinator<Void> {
         
         super.init()
     }
-
+    
     override func start() -> Observable<Void> {
-        
-        let accountDetailsCoordinator = AccountDetailsCoordinator(dependencyContainer: dependencyContainer)
-        let planningCoordinator = PlanningListCoordinator(dependencyContainer: dependencyContainer)
-        let budgetsCoordinator = BudgetsListCoordinator(dependencyContainer: dependencyContainer)
-        
-        accountDetailsViewController = accountDetailsCoordinator.viewController
-        budgetsViewController = budgetsCoordinator.viewController
-        planningViewController = planningCoordinator.viewController
-        
-        pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+
+        let accountDetailsCoordinator = AccountDetailsCoordinator(accountDetailsVc: accountDetailsVc, dependencyContainer: dependencyContainer)
+        let budgetsCoordinator = BudgetsListCoordinator(budgetsListVc: budgetsListVc, dependencyContainer: dependencyContainer)
+        let planningCoordinator = PlanningListCoordinator(planningListVc: planningListVc, dependencyContainer: dependencyContainer)
         
         pageViewController.dataSource = self
-        pageViewController.setViewControllers([accountDetailsViewController], direction: .forward, animated: false, completion: nil)
+        pageViewController.setViewControllers([accountDetailsVc], direction: .forward, animated: false, completion: nil)
+
+        containerViewController.view.backgroundColor = #colorLiteral(red: 0.9803921569, green: 0.9921568627, blue: 1, alpha: 1)
         
-        containerViewController = UIViewController()
         containerViewController.addChild(pageViewController)
-        pageViewController.view.frame = containerViewController.view.frame
         containerViewController.view.addSubview(pageViewController.view)
         pageViewController.didMove(toParent: containerViewController)
+        
+        containerViewController.view.translatesAutoresizingMaskIntoConstraints = false
+        containerViewController.view.addFilledSubview(pageViewController.view)
         
         window.rootViewController = containerViewController
         window.makeKeyAndVisible()
@@ -63,6 +59,17 @@ final class AppCoordinator: BaseCoordinator<Void> {
         return Observable.merge(coordinate(to: accountDetailsCoordinator),
                                 coordinate(to: planningCoordinator),
                                 coordinate(to: budgetsCoordinator))
+    }
+}
+
+extension AppCoordinator: UIPageViewControllerDataSource {
+
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+        return self.viewController(before: viewController)
+    }
+    
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+        return self.viewController(after: viewController)
     }
     
     private func viewController(before viewController: UIViewController) -> UIViewController? {
@@ -81,47 +88,36 @@ final class AppCoordinator: BaseCoordinator<Void> {
     
     private func viewController(for page: FinplyContainerPage) -> UIViewController {
         switch page {
-        case .budgets: return budgetsViewController
-        case .accountDetails: return accountDetailsViewController
-        case .planning: return planningViewController
+        case .budgetsList: return budgetsListVc
+        case .accountDetails: return accountDetailsVc
+        case .planningList: return planningListVc
         }
     }
     
     private func page(for viewController: UIViewController) -> FinplyContainerPage? {
         switch viewController {
-        case is BudgetsListViewController: return .budgets
+        case is BudgetsListViewController: return .budgetsList
         case is AccountDetailsViewController: return .accountDetails
-        case is PlanningListViewController: return .planning
+        case is PlanningListViewController: return .planningList
         default: return nil
         }
-    }
-}
-
-extension AppCoordinator: UIPageViewControllerDataSource {
-
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        return self.viewController(before: viewController)
-    }
-    
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        return self.viewController(after: viewController)
     }
 }
 
 extension FinplyContainerPage {
     func pageBefore() -> FinplyContainerPage? {
         switch self {
-        case .budgets: return nil
-        case .accountDetails: return .budgets
-        case .planning: return .accountDetails
+        case .budgetsList: return nil
+        case .accountDetails: return .budgetsList
+        case .planningList: return .accountDetails
         }
     }
     
     func pageAfter() -> FinplyContainerPage? {
         switch self {
-        case .budgets: return .accountDetails
-        case .accountDetails: return .planning
-        case .planning: return nil
+        case .budgetsList: return .accountDetails
+        case .accountDetails: return .planningList
+        case .planningList: return nil
         }
     }
 }

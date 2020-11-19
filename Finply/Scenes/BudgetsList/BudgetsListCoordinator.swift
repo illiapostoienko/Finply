@@ -12,17 +12,18 @@ import Dip
 final class BudgetsListCoordinator: BaseCoordinator<Void> {
     
     let dependencyContainer: DependencyContainer
-    private(set) var viewController = BudgetsListViewController.instantiate()
-    
-    init(dependencyContainer: DependencyContainer) {
+    private var budgetsListVc: BudgetsListViewController
+
+    init(budgetsListVc: BudgetsListViewController, dependencyContainer: DependencyContainer) {
+        self.budgetsListVc = budgetsListVc
         self.dependencyContainer = dependencyContainer
     }
-    
+
     override func start() -> Observable<Void> {
         
         guard let viewModel = try? dependencyContainer.resolve() as BudgetsListViewModelType else { return Observable.never() }
 
-        viewController.bind(to: viewModel)
+        budgetsListVc.bind(to: viewModel)
         
         // TODO: All returnings from VM converted to coordination result
         

@@ -12,20 +12,23 @@ import Dip
 final class AccountDetailsCoordinator: BaseCoordinator<Void> {
     
     let dependencyContainer: DependencyContainer
-    private(set) var viewController = AccountDetailsViewController.instantiate()
+    private var accountDetailsVc: AccountDetailsViewController
     
     private let bag = DisposeBag()
     
-    init(dependencyContainer: DependencyContainer) {
+    init(accountDetailsVc: AccountDetailsViewController, dependencyContainer: DependencyContainer) {
+        self.accountDetailsVc = accountDetailsVc
         self.dependencyContainer = dependencyContainer
     }
+    
+    private(set) var viewController = AccountDetailsViewController.instantiate()
     
     //swiftlint:disable cyclomatic_complexity
     override func start() -> Observable<Void> {
         
         guard let viewModel = try? dependencyContainer.resolve() as AccountDetailsViewModelType else { return Observable.never() }
 
-        viewController.bind(to: viewModel)
+        accountDetailsVc.bind(to: viewModel)
         
         viewModel.coordinationAddOperation
             .flatMap{ [unowned self] _ in self.coordinateToAddEditOperation() }
@@ -90,32 +93,32 @@ final class AccountDetailsCoordinator: BaseCoordinator<Void> {
     
     // MARK: - Coordination
     private func coordinateToAddEditOperation(operationToEdit: FPOperation? = nil) -> Observable<AddEditOperationCoordinationResult> {
-        let coordinator = AddEditOperationCoordinator(presentingViewController: viewController,
+        let coordinator = AddEditOperationCoordinator(presentingViewController: accountDetailsVc,
                                                       dependencyContainer: dependencyContainer,
                                                       operationToEdit: operationToEdit)
         return coordinate(to: coordinator)
     }
     
     private func coordinateToReportDetails() -> Observable<ReportDetailsCoordinationResult> {
-        let coordinator = ReportDetailsCoordinator(presentingViewController: viewController,
+        let coordinator = ReportDetailsCoordinator(presentingViewController: accountDetailsVc,
                                                    dependencyContainer: dependencyContainer)
         return coordinate(to: coordinator)
     }
 
     private func coordinateToAccountsList() -> Observable<AccountsListCoordinationResult> {
-        let coordinator = AccountsListCoordinator(presentingViewController: viewController,
+        let coordinator = AccountsListCoordinator(presentingViewController: accountDetailsVc,
                                                   dependencyContainer: dependencyContainer)
         return coordinate(to: coordinator)
     }
     
     private func coordinateToEditAccount() -> Observable<AddEditAccountCoordinationResult> {
-        let coordinator = AddEditAccountCoordinator(presentingViewController: viewController,
+        let coordinator = AddEditAccountCoordinator(presentingViewController: accountDetailsVc,
                                                     dependencyContainer: dependencyContainer)
         return coordinate(to: coordinator)
     }
     
     private func coordinateToProfileDetails() -> Observable<ProfileDetailsCoordinationResult> {
-        let coordinator = ProfileDetailsCoordinator(presentingViewController: viewController,
+        let coordinator = ProfileDetailsCoordinator(presentingViewController: accountDetailsVc,
                                                     dependencyContainer: dependencyContainer)
         return coordinate(to: coordinator)
     }

@@ -46,7 +46,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bDo-oT-drj">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bDo-oT-drj">
                                 <rect key="frame" x="0.0" y="575.66666666666663" width="390" height="268.33333333333337"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
@@ -85,7 +85,8 @@
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="LLQ-Ez-j1d"/>
-                        <color key="backgroundColor" red="0.98039215686274506" green="0.99215686274509807" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="PX7-Ry-4Cx" firstAttribute="top" secondItem="bDo-oT-drj" secondAttribute="top" id="A3F-lW-fBr"/>
                             <constraint firstAttribute="bottom" secondItem="bDo-oT-drj" secondAttribute="bottom" id="BzD-Tj-Leg"/>

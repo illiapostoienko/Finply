@@ -20,6 +20,9 @@
 		EA1D9E982524D2E500E2027F /* RMOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1D9E8A2524D2E500E2027F /* RMOperation.swift */; };
 		EA1D9E9A2524D2E500E2027F /* RMCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1D9E8C2524D2E500E2027F /* RMCategory.swift */; };
 		EA1D9E9E2524D9C000E2027F /* File in Resources */ = {isa = PBXBuildFile; fileRef = EA1D9E9D2524D9C000E2027F /* File */; };
+		EA48F3612566083B007FE1BA /* ClearTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA48F3602566083B007FE1BA /* ClearTableViewCell.xib */; };
+		EA48F3642566084E007FE1BA /* ClearTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F3632566084E007FE1BA /* ClearTableViewCell.swift */; };
+		EA48F367256681B5007FE1BA /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F366256681B5007FE1BA /* UIView+Extensions.swift */; };
 		EA7F6163252B2C2C008CA432 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = EA7F6162252B2C2C008CA432 /* RxSwift */; };
 		EA7F6165252B2C2C008CA432 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = EA7F6164252B2C2C008CA432 /* RxRelay */; };
 		EA7F6167252B2C2C008CA432 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = EA7F6166252B2C2C008CA432 /* RxCocoa */; };
@@ -114,6 +117,9 @@
 		EA1D9E8A2524D2E500E2027F /* RMOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RMOperation.swift; sourceTree = "<group>"; };
 		EA1D9E8C2524D2E500E2027F /* RMCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RMCategory.swift; sourceTree = "<group>"; };
 		EA1D9E9D2524D9C000E2027F /* File */ = {isa = PBXFileReference; lastKnownFileType = text; path = File; sourceTree = "<group>"; };
+		EA48F3602566083B007FE1BA /* ClearTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ClearTableViewCell.xib; sourceTree = "<group>"; };
+		EA48F3632566084E007FE1BA /* ClearTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearTableViewCell.swift; sourceTree = "<group>"; };
+		EA48F366256681B5007FE1BA /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		EA7F616C252B2D13008CA432 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
 		EA88F7702536F6E6005F9EC0 /* FPOperationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPOperationService.swift; sourceTree = "<group>"; };
 		EA930C2F2523D54D00E12805 /* Finply.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Finply.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -249,6 +255,15 @@
 			path = RealmModels;
 			sourceTree = "<group>";
 		};
+		EA48F35F2566081D007FE1BA /* ClearTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				EA48F3602566083B007FE1BA /* ClearTableViewCell.xib */,
+				EA48F3632566084E007FE1BA /* ClearTableViewCell.swift */,
+			);
+			path = ClearTableViewCell;
+			sourceTree = "<group>";
+		};
 		EA88F77325372F7B005F9EC0 /* AccountsList */ = {
 			isa = PBXGroup;
 			children = (
@@ -308,8 +323,8 @@
 				EAD68AF9255B00870083B30D /* ReportDetails */,
 				EAD68B08255B012C0083B30D /* ProfileDetails */,
 				EAD68A98255804530083B30D /* CommonComponents */,
-				EAD68A462554F9C80083B30D /* AppCoordinator.swift */,
 				EAD68A472554F9C80083B30D /* BaseCoordinator.swift */,
+				EAD68A462554F9C80083B30D /* AppCoordinator.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -399,6 +414,7 @@
 				EAD68A73255591030083B30D /* Foundation+Extensions.swift */,
 				EAD68AD6255953A30083B30D /* Rx+Extensions.swift */,
 				EAD68B22255EA9490083B30D /* UITableView+Extensions.swift */,
+				EA48F366256681B5007FE1BA /* UIView+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -483,6 +499,7 @@
 		EAD68A98255804530083B30D /* CommonComponents */ = {
 			isa = PBXGroup;
 			children = (
+				EA48F35F2566081D007FE1BA /* ClearTableViewCell */,
 				EAD68AD925595AA40083B30D /* PieChartView */,
 			);
 			path = CommonComponents;
@@ -626,6 +643,7 @@
 				EAD68AEB2559D5110083B30D /* HighCategoryContainerView.xib in Resources */,
 				EAD68AFF255B00870083B30D /* ReportDetailsViewController.storyboard in Resources */,
 				EA930C3F2523D54F00E12805 /* LaunchScreen.storyboard in Resources */,
+				EA48F3612566083B007FE1BA /* ClearTableViewCell.xib in Resources */,
 				EAD68A3E2554F8810083B30D /* AccountDetailsViewController.storyboard in Resources */,
 				EAD68B1D255B07110083B30D /* AddEditAccountViewController.storyboard in Resources */,
 				EA930C3C2523D54F00E12805 /* Assets.xcassets in Resources */,
@@ -691,6 +709,7 @@
 				EAD68AD7255953A30083B30D /* Rx+Extensions.swift in Sources */,
 				EAD68A7125558AD10083B30D /* AccountOperationsSectionHeader.swift in Sources */,
 				EA009481252641F900746222 /* RMAccount.swift in Sources */,
+				EA48F3642566084E007FE1BA /* ClearTableViewCell.swift in Sources */,
 				EA930CC82524851000E12805 /* StoryboardBased.swift in Sources */,
 				EA1D9E692524A80A00E2027F /* AddEditOperationCoordinator.swift in Sources */,
 				EAD68A6A255582EF0083B30D /* AccountMonthDetailsViewModel.swift in Sources */,
@@ -718,6 +737,7 @@
 				EA1D9E942524D2E500E2027F /* DomainEntityConvertible.swift in Sources */,
 				EAD68B23255EA9490083B30D /* UITableView+Extensions.swift in Sources */,
 				EAD68B1E255B07110083B30D /* AddEditAccountViewModel.swift in Sources */,
+				EA48F367256681B5007FE1BA /* UIView+Extensions.swift in Sources */,
 				EAD68ADB25595AB80083B30D /* PieChartView+Rx.swift in Sources */,
 				EA930D032524943C00E12805 /* FinplyDI.swift in Sources */,
 				EAD68A74255591030083B30D /* Foundation+Extensions.swift in Sources */,
@@ -869,17 +889,21 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 36993D57Z5;
 				INFOPLIST_FILE = Finply/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.illiapostoienko.Finply;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -888,17 +912,21 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 36993D57Z5;
 				INFOPLIST_FILE = Finply/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.illiapostoienko.Finply;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

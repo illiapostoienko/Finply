@@ -66,7 +66,13 @@ final class AccountDetailsViewModel: AccountDetailsViewModelType {
         currentOperationSections = BehaviorRelay<[OperationsSection]>(value: mockData)
     
         dataSource = currentOperationSections
-            .map{ $0.map{ section in .operations(date: section.date, items: section.cells.map{ .operation(viewModel: $0) }) } }
+            .map{
+                $0.enumerated().map{ index, section in
+                    var items: [AccountOperationsTableItem] = section.cells.map{ .operation(viewModel: $0) }
+                    if index == 0 { items.insert(.clear, at: 0) }
+                    return .operations(date: section.date, items: items)
+                }
+            }
         
         coordinationEditOperation = cellSelectionStream
             .withLatestFrom(currentOperationSections) { indexPath, sections in
@@ -124,6 +130,7 @@ enum AccountOperationsTableSection {
 
 enum AccountOperationsTableItem {
     case operation(viewModel: AccountOperationCellViewModelType)
+    case clear
 }
 
 extension AccountOperationsTableSection: IdentifiableType, AnimatableSectionModelType {
@@ -158,6 +165,7 @@ extension AccountOperationsTableItem: IdentifiableType, Equatable {
     var identity: String {
         switch self {
         case .operation(let vm): return vm.operation.id.uuidString
+        case .clear: return "clear"
         }
     }
     

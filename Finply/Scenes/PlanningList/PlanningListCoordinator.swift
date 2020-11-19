@@ -12,9 +12,10 @@ import Dip
 final class PlanningListCoordinator: BaseCoordinator<Void> {
     
     let dependencyContainer: DependencyContainer
-    private(set) var viewController = PlanningListViewController.instantiate()
-    
-    init(dependencyContainer: DependencyContainer) {
+    private var planningListVc: PlanningListViewController
+
+    init(planningListVc: PlanningListViewController, dependencyContainer: DependencyContainer) {
+        self.planningListVc = planningListVc
         self.dependencyContainer = dependencyContainer
     }
     
@@ -22,7 +23,7 @@ final class PlanningListCoordinator: BaseCoordinator<Void> {
         
         guard let viewModel = try? dependencyContainer.resolve() as PlanningListViewModelType else { return Observable.never() }
 
-        viewController.bind(to: viewModel)
+        planningListVc.bind(to: viewModel)
         
         // TODO: All returnings from VM converted to coordination result
         

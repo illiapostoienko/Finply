@@ -62,6 +62,8 @@
 		EA9F66332554E44000441ED0 /* BudgetsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9F662B2554E44000441ED0 /* BudgetsListViewModel.swift */; };
 		EA9F66342554E44000441ED0 /* BudgetsListViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA9F662C2554E44000441ED0 /* BudgetsListViewController.storyboard */; };
 		EA9F66352554E44000441ED0 /* BudgetsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9F662D2554E44000441ED0 /* BudgetsListViewController.swift */; };
+		EAAE9BF4256ED7F400790931 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAE9BF3256ED7F400790931 /* GradientView.swift */; };
+		EAAE9C12256F090700790931 /* UIVIewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAE9C11256F090700790931 /* UIVIewController+Extensions.swift */; };
 		EAD68A302554F8150083B30D /* AccountHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAD68A2F2554F8150083B30D /* AccountHeaderView.xib */; };
 		EAD68A332554F8220083B30D /* AccountHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD68A322554F8220083B30D /* AccountHeaderView.swift */; };
 		EAD68A3E2554F8810083B30D /* AccountDetailsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EAD68A3A2554F8810083B30D /* AccountDetailsViewController.storyboard */; };
@@ -155,6 +157,8 @@
 		EA9F662B2554E44000441ED0 /* BudgetsListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BudgetsListViewModel.swift; sourceTree = "<group>"; };
 		EA9F662C2554E44000441ED0 /* BudgetsListViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = BudgetsListViewController.storyboard; sourceTree = "<group>"; };
 		EA9F662D2554E44000441ED0 /* BudgetsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BudgetsListViewController.swift; sourceTree = "<group>"; };
+		EAAE9BF3256ED7F400790931 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		EAAE9C11256F090700790931 /* UIVIewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIVIewController+Extensions.swift"; sourceTree = "<group>"; };
 		EAD68A2F2554F8150083B30D /* AccountHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountHeaderView.xib; sourceTree = "<group>"; };
 		EAD68A322554F8220083B30D /* AccountHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountHeaderView.swift; sourceTree = "<group>"; };
 		EAD68A3A2554F8810083B30D /* AccountDetailsViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AccountDetailsViewController.storyboard; sourceTree = "<group>"; };
@@ -415,6 +419,7 @@
 				EAD68AD6255953A30083B30D /* Rx+Extensions.swift */,
 				EAD68B22255EA9490083B30D /* UITableView+Extensions.swift */,
 				EA48F366256681B5007FE1BA /* UIView+Extensions.swift */,
+				EAAE9C11256F090700790931 /* UIVIewController+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -499,6 +504,7 @@
 		EAD68A98255804530083B30D /* CommonComponents */ = {
 			isa = PBXGroup;
 			children = (
+				EAAE9BF3256ED7F400790931 /* GradientView.swift */,
 				EA48F35F2566081D007FE1BA /* ClearTableViewCell */,
 				EAD68AD925595AA40083B30D /* PieChartView */,
 			);
@@ -690,6 +696,7 @@
 				EA930CDC252485C500E12805 /* NibLoadable.swift in Sources */,
 				EA930CFD2524940600E12805 /* FPAccountService.swift in Sources */,
 				EAD68A3F2554F8810083B30D /* AccountDetailsViewModel.swift in Sources */,
+				EAAE9BF4256ED7F400790931 /* GradientView.swift in Sources */,
 				EAD68A64255580B40083B30D /* AccountOperationCellViewModel.swift in Sources */,
 				EA930C332523D54D00E12805 /* AppDelegate.swift in Sources */,
 				EAD68A67255582B20083B30D /* AccountHeaderViewModel.swift in Sources */,
@@ -742,6 +749,7 @@
 				EA930D032524943C00E12805 /* FinplyDI.swift in Sources */,
 				EAD68A74255591030083B30D /* Foundation+Extensions.swift in Sources */,
 				EA930CE7252486DB00E12805 /* FPOperation.swift in Sources */,
+				EAAE9C12256F090700790931 /* UIVIewController+Extensions.swift in Sources */,
 				EAD68B0D255B012C0083B30D /* ProfileDetailsViewModel.swift in Sources */,
 				EA930CF125248AB800E12805 /* FPAccount.swift in Sources */,
 				EA9F66332554E44000441ED0 /* BudgetsListViewModel.swift in Sources */,

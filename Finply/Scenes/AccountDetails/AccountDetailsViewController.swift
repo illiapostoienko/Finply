@@ -18,10 +18,8 @@ final class AccountDetailsViewController: UIViewController {
     @IBOutlet private var tableViewBackgroundView: UIView!
     @IBOutlet private var tableView: UITableView!
     @IBOutlet private var addOperationButton: UIButton!
-    
+    @IBOutlet private var clearSeparatorView: UIView!
     @IBOutlet private var tableViewTopConstraint: NSLayoutConstraint!
-    @IBOutlet private var plusButtonTopConstraint: NSLayoutConstraint!
-    @IBOutlet private var tableViewBackgroundViewTopConstraint: NSLayoutConstraint!
     
     var viewModel: AccountDetailsViewModelType!
     
@@ -32,16 +30,7 @@ final class AccountDetailsViewController: UIViewController {
     private var previousTableViewState: TableState = .collapsed
     private var shouldStopDecelerating: Bool = false
     private var isEndDraggingUpdatesInProgress: Bool = false
-    private var clearTableViewCell: ClearTableViewCell?
-    private var expandedStateMaxValue: CGFloat { detailsStackView.frame.height - 92 }
-    private var areSectionHeadersBackgroundClear: Bool = true {
-        didSet {
-            tableView.visibleSectionHeaders.forEach{
-                guard let header = $0 as? AccountOperationsSectionHeader else { return }
-                header.setBackgroundClear(areSectionHeadersBackgroundClear)
-            }
-        }
-    }
+    private var expandedStateMaxValue: CGFloat { clearSeparatorView.frame.height + detailsStackView.frame.height - 92 }
         
     lazy var sectionDateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
@@ -97,7 +86,6 @@ extension AccountDetailsViewController: UITableViewDelegate {
         tableView.delegate = self
         
         tableView.register(cellType: AccountOperationCell.self)
-        tableView.register(cellType: ClearTableViewCell.self)
         tableView.register(headerFooterViewType: AccountOperationsSectionHeader.self)
         
         tableView.estimatedRowHeight = UITableView.automaticDimension
@@ -111,17 +99,11 @@ extension AccountDetailsViewController: UITableViewDelegate {
             animationConfiguration: AnimationConfiguration(insertAnimation: .fade,
                                                            reloadAnimation: .fade,
                                                            deleteAnimation: .fade),
-            configureCell: { [weak self] dataSource, tableView, indexPath, _ in
+            configureCell: { dataSource, tableView, indexPath, _ in
                 switch dataSource[indexPath] {
                 case .operation(let viewModel):
                     var cell = tableView.dequeueReusableCell(for: indexPath) as AccountOperationCell
                     cell.bind(to: viewModel)
-                    return cell
-                
-                case .clear:
-                    var cell = tableView.dequeueReusableCell(for: indexPath) as ClearTableViewCell
-                    self?.clearTableViewCell = cell
-                    cell.update(height: 14)
                     return cell
                 }
         })
@@ -131,7 +113,6 @@ extension AccountDetailsViewController: UITableViewDelegate {
         let headerView = tableView.dequeueReusableHeaderFooterView() as AccountOperationsSectionHeader
         guard let section = viewModel.currentOperationSections.value[safe: section] else { return nil }
         headerView.setupDate(sectionDateFormatter.string(from: section.date))
-        headerView.setBackgroundClear(areSectionHeadersBackgroundClear)
         return headerView
     }
     
@@ -153,7 +134,6 @@ extension AccountDetailsViewController: UITableViewDelegate {
         
         guard currentValue > -expandedStateMaxValue, !scrollView.isDecelerating else {
             if tableViewTopConstraint.constant != -expandedStateMaxValue { tableViewTopConstraint.constant = -expandedStateMaxValue }
-            areSectionHeadersBackgroundClear = false
             tableViewState = .expanded
             return
         }
@@ -161,13 +141,12 @@ extension AccountDetailsViewController: UITableViewDelegate {
         let percent = abs(currentValue / expandedStateMaxValue)
         
         tableViewState = .between(percent: percent)
-        if !areSectionHeadersBackgroundClear { areSectionHeadersBackgroundClear = true }
         
         tableViewTopConstraint.constant = currentValue
         tableView.contentOffset = .zero
         
-        adjustLocalLayout(by: percent)
         adjustOtherViewsLayout(by: percent)
+        UIApplication.shared.setStatusBarHidden(percent > 0.7, with: UIStatusBarAnimation.fade)
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
@@ -194,20 +173,18 @@ extension AccountDetailsViewController: UITableViewDelegate {
         
         tableViewState = shouldExpand ? .expanded : .collapsed
         tableViewTopConstraint.constant = shouldExpand ? -expandedStateMaxValue : 0
-        if !shouldExpand { areSectionHeadersBackgroundClear = true }
         
         UIView.animate(withDuration: 0.15, delay: .zero,
                        options: [.curveEaseInOut, .allowUserInteraction, .preferredFramesPerSecond60],
                        animations: { [weak self] in
-                            self?.view.layoutIfNeeded()
                             self?.adjustOtherViewsLayout(by: shouldExpand ? 1 : 0)
+                            self?.view.layoutIfNeeded()
                        },
                        completion: { [weak self] _ in
-                            if shouldExpand { self?.areSectionHeadersBackgroundClear = false }
                             self?.isEndDraggingUpdatesInProgress = false
                        })
         
-        adjustLocalLayout(by: shouldExpand ? 1 : 0)
+        UIApplication.shared.setStatusBarHidden(shouldExpand, with: .fade)
     }
     
     func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
@@ -215,17 +192,6 @@ extension AccountDetailsViewController: UITableViewDelegate {
             scrollView.setContentOffset(.zero, animated: true)
             shouldStopDecelerating = false
         }
-    }
-    
-    private func adjustLocalLayout(by percent: CGFloat) {
-        // collapsed(percent = 0) 32, expanded(percent = 1) -20
-        tableViewBackgroundViewTopConstraint.constant = 32 - (52 * percent)
-        
-        // collapsed(percent = 0) 0, expanded(percent = 1) -52
-        plusButtonTopConstraint.constant = 0 - (52 * percent)
-        
-        // collapsed(percent = 0) 14, expanded(percent = 1) 0
-        clearTableViewCell?.update(height: 14 - percent * 14)
     }
     
     private func adjustOtherViewsLayout(by percent: CGFloat) {

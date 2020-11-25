@@ -20,8 +20,6 @@ final class AccountsListCoordinator: BaseCoordinator<AccountsListCoordinationRes
     let presentingViewController: UIViewController
     let dependencyContainer: DependencyContainer
     
-    private let selfDismissStream = PublishSubject<Void>()
-    
     init(presentingViewController: UIViewController, dependencyContainer: DependencyContainer) {
         self.presentingViewController = presentingViewController
         self.dependencyContainer = dependencyContainer
@@ -33,6 +31,7 @@ final class AccountsListCoordinator: BaseCoordinator<AccountsListCoordinationRes
         var vc = AccountsListViewController.instantiate()
         vc.bind(to: viewModel)
         
+        vc.modalPresentationStyle = .overFullScreen
         presentingViewController.present(vc, animated: true)
         
         // TODO: All returnings from VM converted to coordination result

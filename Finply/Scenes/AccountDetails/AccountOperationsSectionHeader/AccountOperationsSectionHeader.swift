@@ -14,8 +14,4 @@ final class AccountOperationsSectionHeader: UITableViewHeaderFooterView, NibReus
     func setupDate(_ date: String) {
         dateLabel.text = date
     }
-    
-    func setBackgroundClear(_ state: Bool) {
-        contentView.backgroundColor = state ? .clear : .white
-    }
 }

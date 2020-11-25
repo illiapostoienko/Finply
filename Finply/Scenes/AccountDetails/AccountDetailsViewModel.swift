@@ -67,10 +67,8 @@ final class AccountDetailsViewModel: AccountDetailsViewModelType {
     
         dataSource = currentOperationSections
             .map{
-                $0.enumerated().map{ index, section in
-                    var items: [AccountOperationsTableItem] = section.cells.map{ .operation(viewModel: $0) }
-                    if index == 0 { items.insert(.clear, at: 0) }
-                    return .operations(date: section.date, items: items)
+                $0.map{
+                    .operations(date: $0.date, items: $0.cells.map{ .operation(viewModel: $0) })
                 }
             }
         
@@ -130,7 +128,6 @@ enum AccountOperationsTableSection {
 
 enum AccountOperationsTableItem {
     case operation(viewModel: AccountOperationCellViewModelType)
-    case clear
 }
 
 extension AccountOperationsTableSection: IdentifiableType, AnimatableSectionModelType {
@@ -165,7 +162,6 @@ extension AccountOperationsTableItem: IdentifiableType, Equatable {
     var identity: String {
         switch self {
         case .operation(let vm): return vm.operation.id.uuidString
-        case .clear: return "clear"
         }
     }
     

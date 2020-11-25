@@ -16,8 +16,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xQl-Kz-UUn" userLabel="Clear Separator">
+                                <rect key="frame" x="0.0" y="558.66666666666663" width="390" height="38"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="38" id="5KR-rN-JDd"/>
+                                </constraints>
+                            </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="EfC-J3-Zyq">
-                                <rect key="frame" x="0.0" y="44" width="390" height="531.66666666666663"/>
+                                <rect key="frame" x="0.0" y="44" width="390" height="514.66666666666663"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PkL-B2-dSI" customClass="AccountHeaderView" customModule="Finply" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="390" height="292.33333333333331"/>
@@ -27,10 +34,10 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Elg-2W-dAy" customClass="AccountMonthDetailsView" customModule="Finply" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="292.33333333333331" width="390" height="239.33333333333331"/>
+                                        <rect key="frame" x="0.0" y="292.33333333333331" width="390" height="222.33333333333331"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" secondItem="Elg-2W-dAy" secondAttribute="height" multiplier="1.63:1" id="wxK-6K-6dW"/>
+                                            <constraint firstAttribute="width" secondItem="Elg-2W-dAy" secondAttribute="height" multiplier="1.75234:1" id="wxK-6K-6dW"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -38,7 +45,7 @@
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gHG-Yk-Ysb" userLabel="TableViewBackgroundView">
-                                <rect key="frame" x="0.0" y="607.66666666666663" width="390" height="236.33333333333337"/>
+                                <rect key="frame" x="0.0" y="584.66666666666663" width="390" height="259.33333333333337"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -47,11 +54,11 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bDo-oT-drj">
-                                <rect key="frame" x="0.0" y="575.66666666666663" width="390" height="268.33333333333337"/>
+                                <rect key="frame" x="0.0" y="596.66666666666663" width="390" height="247.33333333333337"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PX7-Ry-4Cx" userLabel="PlusButtonContainer">
-                                <rect key="frame" x="314" y="575.66666666666663" width="64" height="64"/>
+                                <rect key="frame" x="314" y="552.66666666666663" width="64" height="64"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="+" translatesAutoresizingMaskIntoConstraints="NO" id="mXa-Ib-YWb">
                                         <rect key="frame" x="0.0" y="0.0" width="64" height="64"/>
@@ -73,10 +80,10 @@
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="rm9-fB-3ng" secondAttribute="bottom" id="1n8-aX-dum"/>
                                     <constraint firstAttribute="trailing" secondItem="rm9-fB-3ng" secondAttribute="trailing" id="8aE-XV-aiU"/>
+                                    <constraint firstItem="rm9-fB-3ng" firstAttribute="top" secondItem="PX7-Ry-4Cx" secondAttribute="top" id="Eh5-Sc-ju0"/>
                                     <constraint firstItem="rm9-fB-3ng" firstAttribute="leading" secondItem="PX7-Ry-4Cx" secondAttribute="leading" id="VZp-UL-DVE"/>
                                     <constraint firstAttribute="height" constant="64" id="hfW-xP-FTV"/>
                                     <constraint firstItem="mXa-Ib-YWb" firstAttribute="leading" secondItem="PX7-Ry-4Cx" secondAttribute="leading" id="hoX-0y-eAm"/>
-                                    <constraint firstItem="rm9-fB-3ng" firstAttribute="top" secondItem="PX7-Ry-4Cx" secondAttribute="top" id="kWp-Om-91P"/>
                                     <constraint firstAttribute="trailing" secondItem="mXa-Ib-YWb" secondAttribute="trailing" id="kgs-0T-VKN"/>
                                     <constraint firstAttribute="bottom" secondItem="mXa-Ib-YWb" secondAttribute="bottom" id="yJy-x2-g7W"/>
                                     <constraint firstItem="mXa-Ib-YWb" firstAttribute="top" secondItem="PX7-Ry-4Cx" secondAttribute="top" id="z4d-Fd-buo"/>
@@ -88,17 +95,20 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="PX7-Ry-4Cx" firstAttribute="top" secondItem="bDo-oT-drj" secondAttribute="top" id="A3F-lW-fBr"/>
+                            <constraint firstItem="PX7-Ry-4Cx" firstAttribute="centerY" secondItem="gHG-Yk-Ysb" secondAttribute="top" id="4gA-Dz-6Yr"/>
                             <constraint firstAttribute="bottom" secondItem="bDo-oT-drj" secondAttribute="bottom" id="BzD-Tj-Leg"/>
                             <constraint firstItem="bDo-oT-drj" firstAttribute="leading" secondItem="LLQ-Ez-j1d" secondAttribute="leading" id="Ghf-rh-JNB"/>
                             <constraint firstItem="LLQ-Ez-j1d" firstAttribute="trailing" secondItem="gHG-Yk-Ysb" secondAttribute="trailing" id="Wew-jm-rxi"/>
                             <constraint firstItem="EfC-J3-Zyq" firstAttribute="leading" secondItem="LLQ-Ez-j1d" secondAttribute="leading" id="XfI-f6-NMo"/>
                             <constraint firstItem="bDo-oT-drj" firstAttribute="trailing" secondItem="LLQ-Ez-j1d" secondAttribute="trailing" id="YaQ-cv-13X"/>
-                            <constraint firstItem="bDo-oT-drj" firstAttribute="top" secondItem="EfC-J3-Zyq" secondAttribute="bottom" id="You-3k-gfM"/>
+                            <constraint firstItem="bDo-oT-drj" firstAttribute="top" secondItem="xQl-Kz-UUn" secondAttribute="bottom" id="bfL-Rw-jiW"/>
                             <constraint firstAttribute="bottom" secondItem="gHG-Yk-Ysb" secondAttribute="bottom" id="djt-7B-UtR"/>
+                            <constraint firstItem="LLQ-Ez-j1d" firstAttribute="trailing" secondItem="xQl-Kz-UUn" secondAttribute="trailing" id="g7H-GD-SY1"/>
+                            <constraint firstItem="xQl-Kz-UUn" firstAttribute="top" secondItem="Elg-2W-dAy" secondAttribute="bottom" id="gj8-V1-zsr"/>
                             <constraint firstItem="LLQ-Ez-j1d" firstAttribute="trailing" secondItem="EfC-J3-Zyq" secondAttribute="trailing" id="kZN-Cs-uYp"/>
-                            <constraint firstItem="gHG-Yk-Ysb" firstAttribute="top" secondItem="bDo-oT-drj" secondAttribute="top" constant="32" id="nf0-4j-AX9"/>
                             <constraint firstItem="LLQ-Ez-j1d" firstAttribute="trailing" secondItem="PX7-Ry-4Cx" secondAttribute="trailing" constant="12" id="qbw-sn-bBl"/>
+                            <constraint firstItem="gHG-Yk-Ysb" firstAttribute="top" secondItem="bDo-oT-drj" secondAttribute="top" constant="-12" id="rHb-jf-eq9"/>
+                            <constraint firstItem="xQl-Kz-UUn" firstAttribute="leading" secondItem="LLQ-Ez-j1d" secondAttribute="leading" id="v28-jC-QN4"/>
                             <constraint firstItem="EfC-J3-Zyq" firstAttribute="top" secondItem="LLQ-Ez-j1d" secondAttribute="top" id="vch-AI-pC4"/>
                             <constraint firstItem="gHG-Yk-Ysb" firstAttribute="leading" secondItem="LLQ-Ez-j1d" secondAttribute="leading" id="wXw-K9-DUR"/>
                         </constraints>
@@ -106,13 +116,12 @@
                     <connections>
                         <outlet property="accountHeaderView" destination="PkL-B2-dSI" id="kOD-Wy-XaE"/>
                         <outlet property="addOperationButton" destination="rm9-fB-3ng" id="1a1-OQ-8e2"/>
+                        <outlet property="clearSeparatorView" destination="xQl-Kz-UUn" id="9Ug-9w-zOk"/>
                         <outlet property="detailsStackView" destination="EfC-J3-Zyq" id="A8t-iy-0vS"/>
                         <outlet property="monthDetailsView" destination="Elg-2W-dAy" id="KTc-wF-2eM"/>
-                        <outlet property="plusButtonTopConstraint" destination="A3F-lW-fBr" id="mue-HV-vJP"/>
                         <outlet property="tableView" destination="bDo-oT-drj" id="5gB-Ta-Tb9"/>
                         <outlet property="tableViewBackgroundView" destination="gHG-Yk-Ysb" id="ndm-4s-gtQ"/>
-                        <outlet property="tableViewBackgroundViewTopConstraint" destination="nf0-4j-AX9" id="clY-E7-o9H"/>
-                        <outlet property="tableViewTopConstraint" destination="You-3k-gfM" id="fPC-at-ngT"/>
+                        <outlet property="tableViewTopConstraint" destination="bfL-Rw-jiW" id="mhu-O2-x3r"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dvs-g4-3uC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

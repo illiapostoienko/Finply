@@ -21,7 +21,7 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="Rkk-4C-Fcq">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="230"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="214"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y59-JU-iKT" customClass="PieChartView" customModule="Finply" customModuleProvider="target">
@@ -72,13 +72,13 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="- $3780" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nDZ-Nh-1Sa">
-                    <rect key="frame" x="303" y="45.666666666666664" width="56" height="18"/>
+                    <rect key="frame" x="303" y="41.666666666666664" width="56" height="18"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+ $8750" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z9Y-qF-M11">
-                    <rect key="frame" x="190.66666666666666" y="45.666666666666664" width="58.333333333333343" height="18"/>
+                    <rect key="frame" x="190.66666666666666" y="41.666666666666664" width="58.333333333333343" height="18"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -86,11 +86,11 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="42d-dt-cCC" customClass="HighCategoriesContainerView" customModule="Finply" customModuleProvider="target">
-                    <rect key="frame" x="190.66666666666663" y="82" width="168.33333333333337" height="128"/>
+                    <rect key="frame" x="190.66666666666663" y="72" width="168.33333333333337" height="122"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ir9-P8-UbO">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="230"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="214"/>
                     <state key="normal" title="Button"/>
                 </button>
             </subviews>
@@ -113,15 +113,15 @@
                 <constraint firstItem="IMR-cS-bzi" firstAttribute="leading" secondItem="AmA-9z-UE0" secondAttribute="leading" constant="16" id="XkY-ch-QF4"/>
                 <constraint firstItem="Ir9-P8-UbO" firstAttribute="bottom" secondItem="AmA-9z-UE0" secondAttribute="bottom" id="afa-BC-6ek"/>
                 <constraint firstItem="okg-KC-q9L" firstAttribute="leading" secondItem="AmA-9z-UE0" secondAttribute="centerX" multiplier="1.016" id="id5-My-csA"/>
-                <constraint firstItem="z9Y-qF-M11" firstAttribute="top" secondItem="okg-KC-q9L" secondAttribute="bottom" constant="12" id="mNx-z2-Ugk"/>
-                <constraint firstItem="nDZ-Nh-1Sa" firstAttribute="top" secondItem="Ztq-Uq-aGq" secondAttribute="bottom" constant="12" id="pBL-bk-xTK"/>
-                <constraint firstItem="42d-dt-cCC" firstAttribute="top" secondItem="AmA-9z-UE0" secondAttribute="top" constant="82" id="piQ-Ob-zBk"/>
+                <constraint firstItem="z9Y-qF-M11" firstAttribute="top" secondItem="okg-KC-q9L" secondAttribute="bottom" constant="8" id="mNx-z2-Ugk"/>
+                <constraint firstItem="nDZ-Nh-1Sa" firstAttribute="top" secondItem="Ztq-Uq-aGq" secondAttribute="bottom" constant="8" id="pBL-bk-xTK"/>
+                <constraint firstItem="42d-dt-cCC" firstAttribute="top" secondItem="AmA-9z-UE0" secondAttribute="top" constant="72" id="piQ-Ob-zBk"/>
                 <constraint firstItem="y59-JU-iKT" firstAttribute="width" secondItem="Rkk-4C-Fcq" secondAttribute="width" multiplier="0.42" id="vyj-rg-PAk"/>
                 <constraint firstItem="Ir9-P8-UbO" firstAttribute="leading" secondItem="AmA-9z-UE0" secondAttribute="leading" id="wKr-UX-vuz"/>
                 <constraint firstItem="nDZ-Nh-1Sa" firstAttribute="leading" secondItem="Ztq-Uq-aGq" secondAttribute="leading" id="yvf-mT-0WY"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="90.579710144927546" y="-202.17391304347828"/>
+            <point key="canvasLocation" x="90.579710144927546" y="-208.28804347826087"/>
         </view>
     </objects>
     <resources>

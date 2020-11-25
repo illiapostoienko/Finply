@@ -16,6 +16,10 @@
                 <rect key="frame" x="0.0" y="0.0" width="414" height="32"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hid-zc-FwN">
+                        <rect key="frame" x="20" y="0.0" width="394" height="32"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Today, October 13" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xhy-xa-tbY">
                         <rect key="frame" x="20" y="0.0" width="110" height="32"/>
                         <constraints>
@@ -31,7 +35,11 @@
                 <constraints>
                     <constraint firstItem="xhy-xa-tbY" firstAttribute="top" secondItem="owC-B8-PSM" secondAttribute="top" id="0JI-2U-ktB"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="xhy-xa-tbY" secondAttribute="bottom" priority="999" id="1Lc-ez-U9I"/>
+                    <constraint firstItem="Hid-zc-FwN" firstAttribute="leading" secondItem="owC-B8-PSM" secondAttribute="leading" constant="20" id="26D-tr-BaV"/>
+                    <constraint firstAttribute="bottom" secondItem="Hid-zc-FwN" secondAttribute="bottom" id="QrE-wr-Swr"/>
+                    <constraint firstAttribute="trailing" secondItem="Hid-zc-FwN" secondAttribute="trailing" id="UDQ-b3-9LV"/>
                     <constraint firstItem="xhy-xa-tbY" firstAttribute="leading" secondItem="owC-B8-PSM" secondAttribute="leadingMargin" id="XfG-07-5jn"/>
+                    <constraint firstItem="Hid-zc-FwN" firstAttribute="top" secondItem="owC-B8-PSM" secondAttribute="top" id="wss-Dp-6hI"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

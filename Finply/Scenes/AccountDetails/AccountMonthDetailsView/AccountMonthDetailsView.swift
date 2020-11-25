@@ -60,6 +60,6 @@ final class AccountMonthDetailsView: NibLoadable, BindableType {
     }
     
     func adjustLayout(by percent: CGFloat) {
-        alpha = 1 - percent
+        
     }
 }

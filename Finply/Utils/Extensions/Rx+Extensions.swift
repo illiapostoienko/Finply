@@ -15,3 +15,14 @@ func castOrThrow<T>(_ resultType: T.Type, _ object: Any) throws -> T {
 
     return returnValue
 }
+
+extension Observable where Element == Bool {
+    
+    func toggle() -> Observable<Bool> {
+        return map { boolean in
+            var _local = boolean
+            _local.toggle()
+            return _local
+        }
+    }
+}

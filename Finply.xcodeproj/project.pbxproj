@@ -22,6 +22,12 @@
 		EA1D9E9E2524D9C000E2027F /* File in Resources */ = {isa = PBXBuildFile; fileRef = EA1D9E9D2524D9C000E2027F /* File */; };
 		EA48F367256681B5007FE1BA /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F366256681B5007FE1BA /* UIView+Extensions.swift */; };
 		EA7EE723257161C600A82386 /* PushTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7EE722257161C600A82386 /* PushTransition.swift */; };
+		EA7EE7292571838E00A82386 /* AccountsListAccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7EE7282571838E00A82386 /* AccountsListAccountCell.swift */; };
+		EA7EE72E257183C700A82386 /* AccountsListAccountCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7EE72D257183C700A82386 /* AccountsListAccountCellViewModel.swift */; };
+		EA7EE7312571857000A82386 /* AccountsListAccountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA7EE7302571857000A82386 /* AccountsListAccountCell.xib */; };
+		EA7EE736257186FE00A82386 /* AccountsListGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7EE735257186FE00A82386 /* AccountsListGroupCell.swift */; };
+		EA7EE7392571872B00A82386 /* AccountsListGroupCellViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7EE7382571872B00A82386 /* AccountsListGroupCellViewModelType.swift */; };
+		EA7EE73C2571875300A82386 /* AccountsListGroupCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA7EE73B2571875300A82386 /* AccountsListGroupCell.xib */; };
 		EA7F6163252B2C2C008CA432 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = EA7F6162252B2C2C008CA432 /* RxSwift */; };
 		EA7F6165252B2C2C008CA432 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = EA7F6164252B2C2C008CA432 /* RxRelay */; };
 		EA7F6167252B2C2C008CA432 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = EA7F6166252B2C2C008CA432 /* RxCocoa */; };
@@ -121,6 +127,12 @@
 		EA1D9E9D2524D9C000E2027F /* File */ = {isa = PBXFileReference; lastKnownFileType = text; path = File; sourceTree = "<group>"; };
 		EA48F366256681B5007FE1BA /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		EA7EE722257161C600A82386 /* PushTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushTransition.swift; sourceTree = "<group>"; };
+		EA7EE7282571838E00A82386 /* AccountsListAccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsListAccountCell.swift; sourceTree = "<group>"; };
+		EA7EE72D257183C700A82386 /* AccountsListAccountCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsListAccountCellViewModel.swift; sourceTree = "<group>"; };
+		EA7EE7302571857000A82386 /* AccountsListAccountCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountsListAccountCell.xib; sourceTree = "<group>"; };
+		EA7EE735257186FE00A82386 /* AccountsListGroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsListGroupCell.swift; sourceTree = "<group>"; };
+		EA7EE7382571872B00A82386 /* AccountsListGroupCellViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsListGroupCellViewModelType.swift; sourceTree = "<group>"; };
+		EA7EE73B2571875300A82386 /* AccountsListGroupCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountsListGroupCell.xib; sourceTree = "<group>"; };
 		EA7F616C252B2D13008CA432 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
 		EA88F7702536F6E6005F9EC0 /* FPOperationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPOperationService.swift; sourceTree = "<group>"; };
 		EA930C2F2523D54D00E12805 /* Finply.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Finply.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -267,9 +279,31 @@
 			path = CustomTransitions;
 			sourceTree = "<group>";
 		};
+		EA7EE7272571837200A82386 /* AccountsListAccountCell */ = {
+			isa = PBXGroup;
+			children = (
+				EA7EE7302571857000A82386 /* AccountsListAccountCell.xib */,
+				EA7EE7282571838E00A82386 /* AccountsListAccountCell.swift */,
+				EA7EE72D257183C700A82386 /* AccountsListAccountCellViewModel.swift */,
+			);
+			path = AccountsListAccountCell;
+			sourceTree = "<group>";
+		};
+		EA7EE7332571859500A82386 /* AccountsListGroupCell */ = {
+			isa = PBXGroup;
+			children = (
+				EA7EE73B2571875300A82386 /* AccountsListGroupCell.xib */,
+				EA7EE735257186FE00A82386 /* AccountsListGroupCell.swift */,
+				EA7EE7382571872B00A82386 /* AccountsListGroupCellViewModelType.swift */,
+			);
+			path = AccountsListGroupCell;
+			sourceTree = "<group>";
+		};
 		EA88F77325372F7B005F9EC0 /* AccountsList */ = {
 			isa = PBXGroup;
 			children = (
+				EA7EE7272571837200A82386 /* AccountsListAccountCell */,
+				EA7EE7332571859500A82386 /* AccountsListGroupCell */,
 				EA9BCAA7254345AA003DE283 /* AccountsListViewController.storyboard */,
 				EA9BCA9D25434421003DE283 /* AccountsListViewController.swift */,
 				EA9BCAA025434434003DE283 /* AccountsListViewModel.swift */,
@@ -641,6 +675,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EAD68A5D2555809D0083B30D /* AccountOperationCell.xib in Resources */,
+				EA7EE7312571857000A82386 /* AccountsListAccountCell.xib in Resources */,
 				EAD68A4F255505B80083B30D /* AccountMonthDetailsView.xib in Resources */,
 				EA9F66342554E44000441ED0 /* BudgetsListViewController.storyboard in Resources */,
 				EA9BCAA8254345AA003DE283 /* AccountsListViewController.storyboard in Resources */,
@@ -656,6 +691,7 @@
 				EA9F662E2554E44000441ED0 /* PlanningListViewController.storyboard in Resources */,
 				EAD68A302554F8150083B30D /* AccountHeaderView.xib in Resources */,
 				EAD68A6E25558AC80083B30D /* AccountOperationsSectionHeader.xib in Resources */,
+				EA7EE73C2571875300A82386 /* AccountsListGroupCell.xib in Resources */,
 				EA1D9E9E2524D9C000E2027F /* File in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -719,7 +755,10 @@
 				EA930CC82524851000E12805 /* StoryboardBased.swift in Sources */,
 				EA1D9E692524A80A00E2027F /* AddEditOperationCoordinator.swift in Sources */,
 				EAD68A6A255582EF0083B30D /* AccountMonthDetailsViewModel.swift in Sources */,
+				EA7EE736257186FE00A82386 /* AccountsListGroupCell.swift in Sources */,
+				EA7EE7292571838E00A82386 /* AccountsListAccountCell.swift in Sources */,
 				EAAE9C1525701F8200790931 /* UIPageViewController+Extensions.swift in Sources */,
+				EA7EE7392571872B00A82386 /* AccountsListGroupCellViewModelType.swift in Sources */,
 				EA930CF525248BA400E12805 /* FPAccountGroup.swift in Sources */,
 				EAD68B00255B00870083B30D /* ReportDetailsViewModel.swift in Sources */,
 				EAD68A332554F8220083B30D /* AccountHeaderView.swift in Sources */,
@@ -747,6 +786,7 @@
 				EA48F367256681B5007FE1BA /* UIView+Extensions.swift in Sources */,
 				EAD68ADB25595AB80083B30D /* PieChartView+Rx.swift in Sources */,
 				EA930D032524943C00E12805 /* FinplyDI.swift in Sources */,
+				EA7EE72E257183C700A82386 /* AccountsListAccountCellViewModel.swift in Sources */,
 				EAD68A74255591030083B30D /* Foundation+Extensions.swift in Sources */,
 				EA930CE7252486DB00E12805 /* FPOperation.swift in Sources */,
 				EAAE9C12256F090700790931 /* UIVIewController+Extensions.swift in Sources */,

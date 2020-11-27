@@ -37,7 +37,7 @@ final class AppCoordinator: BaseCoordinator<Void> {
     
     override func start() -> Observable<Void> {
 
-        let accountDetailsCoordinator = AccountDetailsCoordinator(accountDetailsVc: accountDetailsVc, dependencyContainer: dependencyContainer)
+        let accountDetailsCoordinator = AccountDetailsCoordinator(accountDetailsVc: accountDetailsVc, basePageViewController: pageViewController, dependencyContainer: dependencyContainer)
         let budgetsCoordinator = BudgetsListCoordinator(budgetsListVc: budgetsListVc, dependencyContainer: dependencyContainer)
         let planningCoordinator = PlanningListCoordinator(planningListVc: planningListVc, dependencyContainer: dependencyContainer)
         

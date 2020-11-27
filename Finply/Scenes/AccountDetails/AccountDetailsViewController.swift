@@ -10,6 +10,10 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
+protocol AccountDetailsViewControllerDelegate: class {
+    func tableViewStateChanged(to state: AccountDetailsViewController.TableState)
+}
+
 final class AccountDetailsViewController: UIViewController {
     
     @IBOutlet private var detailsStackView: UIStackView!
@@ -21,12 +25,19 @@ final class AccountDetailsViewController: UIViewController {
     @IBOutlet private var clearSeparatorView: UIView!
     @IBOutlet private var tableViewTopConstraint: NSLayoutConstraint!
     
+    weak var delegate: AccountDetailsViewControllerDelegate?
+    
     var viewModel: AccountDetailsViewModelType!
     
     private var dataSource: RxTableViewSectionedAnimatedDataSource<AccountOperationsTableSection>!
     private let bag = DisposeBag()
     
-    private var tableViewState: TableState = .collapsed { didSet { if !tableViewState.isBetween { previousTableViewState = tableViewState }}}
+    private var tableViewState: TableState = .collapsed {
+        didSet {
+            if !tableViewState.isBetween { previousTableViewState = tableViewState }
+            delegate?.tableViewStateChanged(to: tableViewState)
+        }
+    }
     private var previousTableViewState: TableState = .collapsed
     private var shouldStopDecelerating: Bool = false
     private var isEndDraggingUpdatesInProgress: Bool = false
@@ -205,30 +216,22 @@ extension AccountDetailsViewController: UITableViewDelegate {
         case between(percent: CGFloat)
         
         var isExpanded: Bool {
-            if case .expanded = self {
-                return true
-            }
+            if case .expanded = self { return true }
             return false
         }
         
         var isCollapsed: Bool {
-            if case .collapsed = self {
-                return true
-            }
+            if case .collapsed = self { return true }
             return false
         }
         
         var isBetween: Bool {
-            if case .between = self {
-                return true
-            }
+            if case .between = self { return true }
             return false
         }
         
         var betweenValue: CGFloat? {
-            if case .between(let value) = self {
-                return value
-            }
+            if case .between(let value) = self { return value }
             return nil
         }
     }

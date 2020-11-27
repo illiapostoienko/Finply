@@ -18,10 +18,12 @@ enum AccountsListCoordinationResult {
 final class AccountsListCoordinator: BaseCoordinator<AccountsListCoordinationResult> {
     
     let presentingViewController: UIViewController
+    let transitionDelegate: PushTransitionDelegate
     let dependencyContainer: DependencyContainer
     
-    init(presentingViewController: UIViewController, dependencyContainer: DependencyContainer) {
+    init(presentingViewController: UIViewController, transitionDelegate: PushTransitionDelegate, dependencyContainer: DependencyContainer) {
         self.presentingViewController = presentingViewController
+        self.transitionDelegate = transitionDelegate
         self.dependencyContainer = dependencyContainer
     }
     
@@ -31,11 +33,16 @@ final class AccountsListCoordinator: BaseCoordinator<AccountsListCoordinationRes
         var vc = AccountsListViewController.instantiate()
         vc.bind(to: viewModel)
         
-        vc.modalPresentationStyle = .overFullScreen
+        vc.modalPresentationStyle = .custom
+        vc.transitioningDelegate = transitionDelegate
         presentingViewController.present(vc, animated: true)
         
-        // TODO: All returnings from VM converted to coordination result
+        let cancel = viewModel.backButtonTap.map{ AccountsListCoordinationResult.cancel }
         
-        return Observable.never()
+        let viewModelReturnStream = Observable.merge(cancel /* other returnings*/)
+            .take(1)
+            .do(onNext: { [vc] _ in vc.dismiss(animated: true) })
+        
+        return Observable.merge(viewModelReturnStream).take(1)
     }
 }

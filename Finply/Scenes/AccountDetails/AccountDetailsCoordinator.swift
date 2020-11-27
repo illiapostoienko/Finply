@@ -11,14 +11,18 @@ import Dip
 
 final class AccountDetailsCoordinator: BaseCoordinator<Void> {
     
-    let dependencyContainer: DependencyContainer
+    private let dependencyContainer: DependencyContainer
     private var accountDetailsVc: AccountDetailsViewController
+    private let basePageViewController: UIPageViewController
+    private let accountDetailsPushTransitionDelegate: PushTransitionDelegate
     
     private let bag = DisposeBag()
     
-    init(accountDetailsVc: AccountDetailsViewController, dependencyContainer: DependencyContainer) {
+    init(accountDetailsVc: AccountDetailsViewController, basePageViewController: UIPageViewController, dependencyContainer: DependencyContainer) {
         self.accountDetailsVc = accountDetailsVc
+        self.basePageViewController = basePageViewController
         self.dependencyContainer = dependencyContainer
+        accountDetailsPushTransitionDelegate = PushTransitionDelegate(initialVc: accountDetailsVc)
     }
     
     private(set) var viewController = AccountDetailsViewController.instantiate()
@@ -29,6 +33,7 @@ final class AccountDetailsCoordinator: BaseCoordinator<Void> {
         guard let viewModel = try? dependencyContainer.resolve() as AccountDetailsViewModelType else { return Observable.never() }
 
         accountDetailsVc.bind(to: viewModel)
+        accountDetailsVc.delegate = self
         
         viewModel.coordinationAddOperation
             .flatMap{ [unowned self] _ in self.coordinateToAddEditOperation() }
@@ -107,6 +112,7 @@ final class AccountDetailsCoordinator: BaseCoordinator<Void> {
 
     private func coordinateToAccountsList() -> Observable<AccountsListCoordinationResult> {
         let coordinator = AccountsListCoordinator(presentingViewController: accountDetailsVc,
+                                                  transitionDelegate: accountDetailsPushTransitionDelegate,
                                                   dependencyContainer: dependencyContainer)
         return coordinate(to: coordinator)
     }
@@ -121,5 +127,15 @@ final class AccountDetailsCoordinator: BaseCoordinator<Void> {
         let coordinator = ProfileDetailsCoordinator(presentingViewController: accountDetailsVc,
                                                     dependencyContainer: dependencyContainer)
         return coordinate(to: coordinator)
+    }
+}
+
+extension AccountDetailsCoordinator: AccountDetailsViewControllerDelegate {
+    
+    func tableViewStateChanged(to state: AccountDetailsViewController.TableState) {
+        switch state {
+        case .collapsed: basePageViewController.setScrollEnabled(true)
+        default: basePageViewController.setScrollEnabled(false)
+        }
     }
 }

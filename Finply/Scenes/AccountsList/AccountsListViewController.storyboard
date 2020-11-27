@@ -131,6 +131,9 @@
                             <constraint firstItem="LLQ-Ez-j1d" firstAttribute="trailing" secondItem="1MU-yb-fok" secondAttribute="trailing" constant="12" id="zdj-Vv-Uy7"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="backButton" destination="55w-cK-miP" id="3Oo-vV-Ajw"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dvs-g4-3uC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

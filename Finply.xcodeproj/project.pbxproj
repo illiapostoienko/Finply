@@ -20,9 +20,8 @@
 		EA1D9E982524D2E500E2027F /* RMOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1D9E8A2524D2E500E2027F /* RMOperation.swift */; };
 		EA1D9E9A2524D2E500E2027F /* RMCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1D9E8C2524D2E500E2027F /* RMCategory.swift */; };
 		EA1D9E9E2524D9C000E2027F /* File in Resources */ = {isa = PBXBuildFile; fileRef = EA1D9E9D2524D9C000E2027F /* File */; };
-		EA48F3612566083B007FE1BA /* ClearTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA48F3602566083B007FE1BA /* ClearTableViewCell.xib */; };
-		EA48F3642566084E007FE1BA /* ClearTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F3632566084E007FE1BA /* ClearTableViewCell.swift */; };
 		EA48F367256681B5007FE1BA /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F366256681B5007FE1BA /* UIView+Extensions.swift */; };
+		EA7EE723257161C600A82386 /* PushTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7EE722257161C600A82386 /* PushTransition.swift */; };
 		EA7F6163252B2C2C008CA432 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = EA7F6162252B2C2C008CA432 /* RxSwift */; };
 		EA7F6165252B2C2C008CA432 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = EA7F6164252B2C2C008CA432 /* RxRelay */; };
 		EA7F6167252B2C2C008CA432 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = EA7F6166252B2C2C008CA432 /* RxCocoa */; };
@@ -64,6 +63,7 @@
 		EA9F66352554E44000441ED0 /* BudgetsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9F662D2554E44000441ED0 /* BudgetsListViewController.swift */; };
 		EAAE9BF4256ED7F400790931 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAE9BF3256ED7F400790931 /* GradientView.swift */; };
 		EAAE9C12256F090700790931 /* UIVIewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAE9C11256F090700790931 /* UIVIewController+Extensions.swift */; };
+		EAAE9C1525701F8200790931 /* UIPageViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAE9C1425701F8200790931 /* UIPageViewController+Extensions.swift */; };
 		EAD68A302554F8150083B30D /* AccountHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAD68A2F2554F8150083B30D /* AccountHeaderView.xib */; };
 		EAD68A332554F8220083B30D /* AccountHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD68A322554F8220083B30D /* AccountHeaderView.swift */; };
 		EAD68A3E2554F8810083B30D /* AccountDetailsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EAD68A3A2554F8810083B30D /* AccountDetailsViewController.storyboard */; };
@@ -119,9 +119,8 @@
 		EA1D9E8A2524D2E500E2027F /* RMOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RMOperation.swift; sourceTree = "<group>"; };
 		EA1D9E8C2524D2E500E2027F /* RMCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RMCategory.swift; sourceTree = "<group>"; };
 		EA1D9E9D2524D9C000E2027F /* File */ = {isa = PBXFileReference; lastKnownFileType = text; path = File; sourceTree = "<group>"; };
-		EA48F3602566083B007FE1BA /* ClearTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ClearTableViewCell.xib; sourceTree = "<group>"; };
-		EA48F3632566084E007FE1BA /* ClearTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearTableViewCell.swift; sourceTree = "<group>"; };
 		EA48F366256681B5007FE1BA /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
+		EA7EE722257161C600A82386 /* PushTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushTransition.swift; sourceTree = "<group>"; };
 		EA7F616C252B2D13008CA432 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
 		EA88F7702536F6E6005F9EC0 /* FPOperationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPOperationService.swift; sourceTree = "<group>"; };
 		EA930C2F2523D54D00E12805 /* Finply.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Finply.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -159,6 +158,7 @@
 		EA9F662D2554E44000441ED0 /* BudgetsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BudgetsListViewController.swift; sourceTree = "<group>"; };
 		EAAE9BF3256ED7F400790931 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		EAAE9C11256F090700790931 /* UIVIewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIVIewController+Extensions.swift"; sourceTree = "<group>"; };
+		EAAE9C1425701F8200790931 /* UIPageViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIPageViewController+Extensions.swift"; sourceTree = "<group>"; };
 		EAD68A2F2554F8150083B30D /* AccountHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountHeaderView.xib; sourceTree = "<group>"; };
 		EAD68A322554F8220083B30D /* AccountHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountHeaderView.swift; sourceTree = "<group>"; };
 		EAD68A3A2554F8810083B30D /* AccountDetailsViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AccountDetailsViewController.storyboard; sourceTree = "<group>"; };
@@ -259,13 +259,12 @@
 			path = RealmModels;
 			sourceTree = "<group>";
 		};
-		EA48F35F2566081D007FE1BA /* ClearTableViewCell */ = {
+		EA7EE7122571551B00A82386 /* CustomTransitions */ = {
 			isa = PBXGroup;
 			children = (
-				EA48F3602566083B007FE1BA /* ClearTableViewCell.xib */,
-				EA48F3632566084E007FE1BA /* ClearTableViewCell.swift */,
+				EA7EE722257161C600A82386 /* PushTransition.swift */,
 			);
-			path = ClearTableViewCell;
+			path = CustomTransitions;
 			sourceTree = "<group>";
 		};
 		EA88F77325372F7B005F9EC0 /* AccountsList */ = {
@@ -326,7 +325,7 @@
 				EAD68B16255B07110083B30D /* AddEditAccount */,
 				EAD68AF9255B00870083B30D /* ReportDetails */,
 				EAD68B08255B012C0083B30D /* ProfileDetails */,
-				EAD68A98255804530083B30D /* CommonComponents */,
+				EAD68A98255804530083B30D /* UIComponents */,
 				EAD68A472554F9C80083B30D /* BaseCoordinator.swift */,
 				EAD68A462554F9C80083B30D /* AppCoordinator.swift */,
 			);
@@ -420,6 +419,7 @@
 				EAD68B22255EA9490083B30D /* UITableView+Extensions.swift */,
 				EA48F366256681B5007FE1BA /* UIView+Extensions.swift */,
 				EAAE9C11256F090700790931 /* UIVIewController+Extensions.swift */,
+				EAAE9C1425701F8200790931 /* UIPageViewController+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -501,14 +501,14 @@
 			path = AccountOperationsSectionHeader;
 			sourceTree = "<group>";
 		};
-		EAD68A98255804530083B30D /* CommonComponents */ = {
+		EAD68A98255804530083B30D /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
-				EAAE9BF3256ED7F400790931 /* GradientView.swift */,
-				EA48F35F2566081D007FE1BA /* ClearTableViewCell */,
+				EA7EE7122571551B00A82386 /* CustomTransitions */,
 				EAD68AD925595AA40083B30D /* PieChartView */,
+				EAAE9BF3256ED7F400790931 /* GradientView.swift */,
 			);
-			path = CommonComponents;
+			path = UIComponents;
 			sourceTree = "<group>";
 		};
 		EAD68AD925595AA40083B30D /* PieChartView */ = {
@@ -649,7 +649,6 @@
 				EAD68AEB2559D5110083B30D /* HighCategoryContainerView.xib in Resources */,
 				EAD68AFF255B00870083B30D /* ReportDetailsViewController.storyboard in Resources */,
 				EA930C3F2523D54F00E12805 /* LaunchScreen.storyboard in Resources */,
-				EA48F3612566083B007FE1BA /* ClearTableViewCell.xib in Resources */,
 				EAD68A3E2554F8810083B30D /* AccountDetailsViewController.storyboard in Resources */,
 				EAD68B1D255B07110083B30D /* AddEditAccountViewController.storyboard in Resources */,
 				EA930C3C2523D54F00E12805 /* Assets.xcassets in Resources */,
@@ -713,13 +712,14 @@
 				EAD68A412554F8810083B30D /* AccountDetailsCoordinator.swift in Sources */,
 				EA9BCAA125434434003DE283 /* AccountsListViewModel.swift in Sources */,
 				EA9F66322554E44000441ED0 /* BudgetsListCoordinator.swift in Sources */,
+				EA7EE723257161C600A82386 /* PushTransition.swift in Sources */,
 				EAD68AD7255953A30083B30D /* Rx+Extensions.swift in Sources */,
 				EAD68A7125558AD10083B30D /* AccountOperationsSectionHeader.swift in Sources */,
 				EA009481252641F900746222 /* RMAccount.swift in Sources */,
-				EA48F3642566084E007FE1BA /* ClearTableViewCell.swift in Sources */,
 				EA930CC82524851000E12805 /* StoryboardBased.swift in Sources */,
 				EA1D9E692524A80A00E2027F /* AddEditOperationCoordinator.swift in Sources */,
 				EAD68A6A255582EF0083B30D /* AccountMonthDetailsViewModel.swift in Sources */,
+				EAAE9C1525701F8200790931 /* UIPageViewController+Extensions.swift in Sources */,
 				EA930CF525248BA400E12805 /* FPAccountGroup.swift in Sources */,
 				EAD68B00255B00870083B30D /* ReportDetailsViewModel.swift in Sources */,
 				EAD68A332554F8220083B30D /* AccountHeaderView.swift in Sources */,

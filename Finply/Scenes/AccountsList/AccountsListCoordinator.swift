@@ -10,16 +10,18 @@ import RxSwift
 import Dip
 
 enum AccountsListCoordinationResult {
-    case cancel
-    case accountSelected
-    case accountsGroupSelected
+    case back
+    case accountSelected(model: FPAccount)
+    case accountsGroupSelected(model: FPAccountGroup)
 }
 
 final class AccountsListCoordinator: BaseCoordinator<AccountsListCoordinationResult> {
     
-    let presentingViewController: UIViewController
-    let transitionDelegate: PushTransitionDelegate
-    let dependencyContainer: DependencyContainer
+    private let presentingViewController: UIViewController
+    private let transitionDelegate: PushTransitionDelegate
+    private let dependencyContainer: DependencyContainer
+    
+    private var viewController: AccountsListViewController!
     
     init(presentingViewController: UIViewController, transitionDelegate: PushTransitionDelegate, dependencyContainer: DependencyContainer) {
         self.presentingViewController = presentingViewController
@@ -30,19 +32,35 @@ final class AccountsListCoordinator: BaseCoordinator<AccountsListCoordinationRes
     override func start() -> Observable<AccountsListCoordinationResult> {
         
         guard let viewModel = try? dependencyContainer.resolve() as AccountsListViewModelType else { return Observable.never() }
-        var vc = AccountsListViewController.instantiate()
-        vc.bind(to: viewModel)
+        viewController = AccountsListViewController.instantiate()
+        viewController.bind(to: viewModel)
         
-        vc.modalPresentationStyle = .custom
-        vc.transitioningDelegate = transitionDelegate
-        presentingViewController.present(vc, animated: true)
+        viewController.modalPresentationStyle = .custom
+        viewController.transitioningDelegate = transitionDelegate
+        presentingViewController.present(viewController, animated: true)
         
-        let cancel = viewModel.backButtonTap.map{ AccountsListCoordinationResult.cancel }
+        viewModel.coordination.addAccount
+            .flatMap{ [unowned self] _ in self.coordinateToAddEditAccount() }
         
-        let viewModelReturnStream = Observable.merge(cancel /* other returnings*/)
+        
+        
+//        viewModel.coordination.addGroup -> coordinate
+        
+        return Observable.merge(
+            [
+                viewModel.coordination.back.map{ .back },
+                viewModel.coordination.accountSelected.map{ .accountSelected(model: $0) },
+                viewModel.coordination.accountGroupSelected.map{ .accountsGroupSelected(model: $0) }
+            ])
             .take(1)
-            .do(onNext: { [vc] _ in vc.dismiss(animated: true) })
-        
-        return Observable.merge(viewModelReturnStream).take(1)
+            .do(onNext: { [weak self] _ in self?.viewController.dismiss(animated: true) })
+    }
+    
+    // MARK: - Coordination
+    private func coordinateToAddEditAccount(accountToEdit: FPAccount? = nil) -> Observable<AddEditAccountCoordinationResult> {
+        let coordinator = AddEditAccountCoordinator(accountToEdit: accountToEdit,
+                                                    presentingViewController: viewController,
+                                                    dependencyContainer: dependencyContainer)
+        return coordinate(to: coordinator)
     }
 }

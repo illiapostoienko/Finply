@@ -16,7 +16,6 @@ final class AccountsListViewController: UIViewController, BindableType {
     @IBOutlet private var accountsLabel: UILabel!
     @IBOutlet private var editButton: UIButton!
     
-    @IBOutlet private var allTabButton: UIButton!
     @IBOutlet private var accountsTabButton: UIButton!
     @IBOutlet private var groupsTabButton: UIButton!
     @IBOutlet private var tabButtonsStack: UIStackView!
@@ -41,22 +40,19 @@ final class AccountsListViewController: UIViewController, BindableType {
     
     func bindViewModel() {
         
-        viewModel.dataSource
+        viewModel.output.dataSource
             .map{ [AnimatableSectionModel(model: "", items: $0)] }
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: bag)
         
-        Observable.combineLatest(viewModel.dataSource.map{ $0.isEmpty }.asObservable(),
-                                 viewModel.currentTab.asObservable())
-        // placeholder
-        
-        viewModel.currentTab
-            .drive(onNext: { [weak self] tab in
-                self?.updateSlider(by: tab)
+        viewModel.output.dataSource
+            .map{ $0.isEmpty }
+            .subscribe(onNext: { [weak self] state in
+                self?.setPlaceholder(state)
             })
             .disposed(by: bag)
         
-        viewModel.isEditModeEnabled
+        viewModel.output.isEditModeEnabled
             .drive(onNext: { [weak self] isEditModeEnabled in
                 self?.tableView.isEditing = isEditModeEnabled
                 // change picture of edit button for edit mode?
@@ -64,43 +60,45 @@ final class AccountsListViewController: UIViewController, BindableType {
             .disposed(by: bag)
         
         backButton.rx.tap
-            .bind(to: viewModel.backButtonTap)
+            .bind(to: viewModel.input.backButtonTap)
             .disposed(by: bag)
         
         editButton.rx.tap
-            .bind(to: viewModel.editButtonTap)
+            .bind(to: viewModel.input.editButtonTap)
             .disposed(by: bag)
         
         plusButton.rx.tap
-            .bind(to: viewModel.addButtonTap)
+            .bind(to: viewModel.input.addButtonTap)
             .disposed(by: bag)
         
-        Observable.merge(allTabButton.rx.tap.map{ .all },
-                         accountsTabButton.rx.tap.map{ .accounts },
-                         groupsTabButton.rx.tap.map{ .groups } )
-            .bind(to: viewModel.tabButtonTap)
+        Observable.merge(accountsTabButton.rx.tap.map{ .accounts },
+                         groupsTabButton.rx.tap.map{ .groups })
+            .do(onNext: { [weak self] tab in
+                self?.updateSlider(by: tab)
+            })
+            .bind(to: viewModel.input.tabButtonTap)
             .disposed(by: bag)
 
         tableView.rx.itemSelected
             .map{ $0.row }
-            .bind(to: viewModel.rowSelected)
+            .bind(to: viewModel.input.rowSelected)
             .disposed(by: bag)
         
         tableView.rx
             .itemDeleted
             .map{ $0.row }
-            .bind(to: viewModel.deleteRowIntent)
+            .bind(to: viewModel.input.deleteRowIntent)
             .disposed(by: bag)
         
         tableView.rx
             .itemMoved
             .map{ (fromIndex: $0.row, toIndex: $1.row) }
-            .bind(to: viewModel.changeOrderIntent)
+            .bind(to: viewModel.input.changeOrderIntent)
             .disposed(by: bag)
     }
     
     private func setupTableView() {
-        tableView.dataSource = nil
+        //tableView.dataSource = nil
         tableView.register(cellType: AccountsListAccountCell.self)
         tableView.register(cellType: AccountsListGroupCell.self)
         
@@ -135,7 +133,6 @@ final class AccountsListViewController: UIViewController, BindableType {
         let buttonToOperate: UIButton
         
         switch tab {
-        case .all: buttonToOperate = allTabButton
         case .accounts: buttonToOperate = accountsTabButton
         case .groups: buttonToOperate = groupsTabButton
         }
@@ -157,5 +154,9 @@ final class AccountsListViewController: UIViewController, BindableType {
         UIView.animate(withDuration: 0.2) {
             self.view.layoutIfNeeded()
         }
+    }
+    
+    private func setPlaceholder(_ state: Bool) {
+        // set placeholder for background of tableView
     }
 }

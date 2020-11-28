@@ -28,6 +28,12 @@
 		EA7EE736257186FE00A82386 /* AccountsListGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7EE735257186FE00A82386 /* AccountsListGroupCell.swift */; };
 		EA7EE7392571872B00A82386 /* AccountsListGroupCellViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7EE7382571872B00A82386 /* AccountsListGroupCellViewModelType.swift */; };
 		EA7EE73C2571875300A82386 /* AccountsListGroupCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA7EE73B2571875300A82386 /* AccountsListGroupCell.xib */; };
+		EA7EE7432572801E00A82386 /* BaseModalViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA7EE7422572801E00A82386 /* BaseModalViewController.storyboard */; };
+		EA7EE7462572807300A82386 /* BaseModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7EE7452572807300A82386 /* BaseModalViewController.swift */; };
+		EA7EE74A2572837400A82386 /* BaseModalViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7EE7492572837400A82386 /* BaseModalViewModelType.swift */; };
+		EA7EE7502572FE6C00A82386 /* TitleInputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7EE74F2572FE6C00A82386 /* TitleInputCell.swift */; };
+		EA7EE7532572FECB00A82386 /* TitleInputCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7EE7522572FECB00A82386 /* TitleInputCellViewModel.swift */; };
+		EA7EE7562572FF4300A82386 /* TitleInputCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA7EE7552572FF4300A82386 /* TitleInputCell.xib */; };
 		EA7F6163252B2C2C008CA432 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = EA7F6162252B2C2C008CA432 /* RxSwift */; };
 		EA7F6165252B2C2C008CA432 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = EA7F6164252B2C2C008CA432 /* RxRelay */; };
 		EA7F6167252B2C2C008CA432 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = EA7F6166252B2C2C008CA432 /* RxCocoa */; };
@@ -105,8 +111,6 @@
 		EAD68B0F255B012C0083B30D /* ProfileDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD68B0B255B012C0083B30D /* ProfileDetailsViewController.swift */; };
 		EAD68B10255B012C0083B30D /* ProfileDetailsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD68B0C255B012C0083B30D /* ProfileDetailsCoordinator.swift */; };
 		EAD68B1B255B07110083B30D /* AddEditAccountCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD68B17255B07110083B30D /* AddEditAccountCoordinator.swift */; };
-		EAD68B1C255B07110083B30D /* AddEditAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD68B18255B07110083B30D /* AddEditAccountViewController.swift */; };
-		EAD68B1D255B07110083B30D /* AddEditAccountViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EAD68B19255B07110083B30D /* AddEditAccountViewController.storyboard */; };
 		EAD68B1E255B07110083B30D /* AddEditAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD68B1A255B07110083B30D /* AddEditAccountViewModel.swift */; };
 		EAD68B23255EA9490083B30D /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD68B22255EA9490083B30D /* UITableView+Extensions.swift */; };
 /* End PBXBuildFile section */
@@ -133,6 +137,12 @@
 		EA7EE735257186FE00A82386 /* AccountsListGroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsListGroupCell.swift; sourceTree = "<group>"; };
 		EA7EE7382571872B00A82386 /* AccountsListGroupCellViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsListGroupCellViewModelType.swift; sourceTree = "<group>"; };
 		EA7EE73B2571875300A82386 /* AccountsListGroupCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountsListGroupCell.xib; sourceTree = "<group>"; };
+		EA7EE7422572801E00A82386 /* BaseModalViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BaseModalViewController.storyboard; sourceTree = "<group>"; };
+		EA7EE7452572807300A82386 /* BaseModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseModalViewController.swift; sourceTree = "<group>"; };
+		EA7EE7492572837400A82386 /* BaseModalViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseModalViewModelType.swift; sourceTree = "<group>"; };
+		EA7EE74F2572FE6C00A82386 /* TitleInputCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleInputCell.swift; sourceTree = "<group>"; };
+		EA7EE7522572FECB00A82386 /* TitleInputCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleInputCellViewModel.swift; sourceTree = "<group>"; };
+		EA7EE7552572FF4300A82386 /* TitleInputCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TitleInputCell.xib; sourceTree = "<group>"; };
 		EA7F616C252B2D13008CA432 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
 		EA88F7702536F6E6005F9EC0 /* FPOperationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPOperationService.swift; sourceTree = "<group>"; };
 		EA930C2F2523D54D00E12805 /* Finply.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Finply.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -204,8 +214,6 @@
 		EAD68B0B255B012C0083B30D /* ProfileDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileDetailsViewController.swift; sourceTree = "<group>"; };
 		EAD68B0C255B012C0083B30D /* ProfileDetailsCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileDetailsCoordinator.swift; sourceTree = "<group>"; };
 		EAD68B17255B07110083B30D /* AddEditAccountCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEditAccountCoordinator.swift; sourceTree = "<group>"; };
-		EAD68B18255B07110083B30D /* AddEditAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEditAccountViewController.swift; sourceTree = "<group>"; };
-		EAD68B19255B07110083B30D /* AddEditAccountViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AddEditAccountViewController.storyboard; sourceTree = "<group>"; };
 		EAD68B1A255B07110083B30D /* AddEditAccountViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEditAccountViewModel.swift; sourceTree = "<group>"; };
 		EAD68B22255EA9490083B30D /* UITableView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -297,6 +305,26 @@
 				EA7EE7382571872B00A82386 /* AccountsListGroupCellViewModelType.swift */,
 			);
 			path = AccountsListGroupCell;
+			sourceTree = "<group>";
+		};
+		EA7EE74125727FE900A82386 /* BaseModalViewController */ = {
+			isa = PBXGroup;
+			children = (
+				EA7EE7422572801E00A82386 /* BaseModalViewController.storyboard */,
+				EA7EE7452572807300A82386 /* BaseModalViewController.swift */,
+				EA7EE7492572837400A82386 /* BaseModalViewModelType.swift */,
+			);
+			path = BaseModalViewController;
+			sourceTree = "<group>";
+		};
+		EA7EE74E2572FE0F00A82386 /* TitleInputCell */ = {
+			isa = PBXGroup;
+			children = (
+				EA7EE7552572FF4300A82386 /* TitleInputCell.xib */,
+				EA7EE74F2572FE6C00A82386 /* TitleInputCell.swift */,
+				EA7EE7522572FECB00A82386 /* TitleInputCellViewModel.swift */,
+			);
+			path = TitleInputCell;
 			sourceTree = "<group>";
 		};
 		EA88F77325372F7B005F9EC0 /* AccountsList */ = {
@@ -538,6 +566,7 @@
 		EAD68A98255804530083B30D /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
+				EA7EE74125727FE900A82386 /* BaseModalViewController */,
 				EA7EE7122571551B00A82386 /* CustomTransitions */,
 				EAD68AD925595AA40083B30D /* PieChartView */,
 				EAAE9BF3256ED7F400790931 /* GradientView.swift */,
@@ -589,10 +618,9 @@
 		EAD68B16255B07110083B30D /* AddEditAccount */ = {
 			isa = PBXGroup;
 			children = (
-				EAD68B19255B07110083B30D /* AddEditAccountViewController.storyboard */,
-				EAD68B17255B07110083B30D /* AddEditAccountCoordinator.swift */,
-				EAD68B18255B07110083B30D /* AddEditAccountViewController.swift */,
+				EA7EE74E2572FE0F00A82386 /* TitleInputCell */,
 				EAD68B1A255B07110083B30D /* AddEditAccountViewModel.swift */,
+				EAD68B17255B07110083B30D /* AddEditAccountCoordinator.swift */,
 			);
 			path = AddEditAccount;
 			sourceTree = "<group>";
@@ -683,9 +711,10 @@
 				EA7F616D252B2D13008CA432 /* .swiftlint.yml in Resources */,
 				EAD68AEB2559D5110083B30D /* HighCategoryContainerView.xib in Resources */,
 				EAD68AFF255B00870083B30D /* ReportDetailsViewController.storyboard in Resources */,
+				EA7EE7562572FF4300A82386 /* TitleInputCell.xib in Resources */,
 				EA930C3F2523D54F00E12805 /* LaunchScreen.storyboard in Resources */,
 				EAD68A3E2554F8810083B30D /* AccountDetailsViewController.storyboard in Resources */,
-				EAD68B1D255B07110083B30D /* AddEditAccountViewController.storyboard in Resources */,
+				EA7EE7432572801E00A82386 /* BaseModalViewController.storyboard in Resources */,
 				EA930C3C2523D54F00E12805 /* Assets.xcassets in Resources */,
 				EA1D9E712524B07100E2027F /* AddEditOperationViewController.storyboard in Resources */,
 				EA9F662E2554E44000441ED0 /* PlanningListViewController.storyboard in Resources */,
@@ -737,6 +766,7 @@
 				EAD68A67255582B20083B30D /* AccountHeaderViewModel.swift in Sources */,
 				EA930CC2252484CD00E12805 /* UITableView+Reusable.swift in Sources */,
 				EAD68A492554F9C80083B30D /* BaseCoordinator.swift in Sources */,
+				EA7EE74A2572837400A82386 /* BaseModalViewModelType.swift in Sources */,
 				EAD68AEE2559D52D0083B30D /* HighCategoryContainerView.swift in Sources */,
 				EA9BCAA42543443F003DE283 /* AccountsListCoordinator.swift in Sources */,
 				EA930CD02524857900E12805 /* Reusable.swift in Sources */,
@@ -768,6 +798,8 @@
 				EAD68A402554F8810083B30D /* AccountDetailsViewController.swift in Sources */,
 				EA1D9E982524D2E500E2027F /* RMOperation.swift in Sources */,
 				EAD68B10255B012C0083B30D /* ProfileDetailsCoordinator.swift in Sources */,
+				EA7EE7502572FE6C00A82386 /* TitleInputCell.swift in Sources */,
+				EA7EE7532572FECB00A82386 /* TitleInputCellViewModel.swift in Sources */,
 				EAD68B1B255B07110083B30D /* AddEditAccountCoordinator.swift in Sources */,
 				EA1D9E932524D2E500E2027F /* RealmStorage.swift in Sources */,
 				EA1D9E922524D2E500E2027F /* RealmConvertible.swift in Sources */,
@@ -775,8 +807,8 @@
 				EA1D9E792524B08500E2027F /* AddEditOperationViewModel.swift in Sources */,
 				EA1D9E752524B07B00E2027F /* AddEditOperationViewController.swift in Sources */,
 				EA1D9E9A2524D2E500E2027F /* RMCategory.swift in Sources */,
+				EA7EE7462572807300A82386 /* BaseModalViewController.swift in Sources */,
 				EA930CD62524859E00E12805 /* BindableType.swift in Sources */,
-				EAD68B1C255B07110083B30D /* AddEditAccountViewController.swift in Sources */,
 				EAD68A522555064F0083B30D /* AccountMonthDetailsView.swift in Sources */,
 				EA9BCA9E25434421003DE283 /* AccountsListViewController.swift in Sources */,
 				EA930CCC2524854600E12805 /* NibBased.swift in Sources */,

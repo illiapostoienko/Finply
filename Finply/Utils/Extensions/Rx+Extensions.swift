@@ -26,3 +26,9 @@ extension Observable where Element == Bool {
         }
     }
 }
+
+extension Observable {
+    func ignoreContent() -> Observable<Void> {
+        return map { _ in }
+    }
+}

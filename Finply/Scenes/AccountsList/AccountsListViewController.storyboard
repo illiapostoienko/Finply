@@ -46,7 +46,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="36" translatesAutoresizingMaskIntoConstraints="NO" id="aTo-Sb-iGa" userLabel="ButtonsStack">
-                                        <rect key="frame" x="20" y="90" width="204" height="28"/>
+                                        <rect key="frame" x="20" y="90" width="138" height="28"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I7f-K9-ulJ">
                                                 <rect key="frame" x="0.0" y="0.0" width="57" height="28"/>
@@ -60,13 +60,6 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <state key="normal" title="Groups">
                                                     <color key="titleColor" red="0.68235294120000001" green="0.71764705880000002" blue="0.75686274509999996" alpha="1" colorSpace="calibratedRGB"/>
-                                                </state>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uDS-1O-UgN">
-                                                <rect key="frame" x="174" y="0.0" width="30" height="28"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                <state key="normal" title="All">
-                                                    <color key="titleColor" red="0.68235294117647061" green="0.71764705882352942" blue="0.75686274509803919" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                             </button>
                                         </subviews>
@@ -139,7 +132,6 @@
                     <connections>
                         <outlet property="accountsLabel" destination="KsH-PQ-ijL" id="EtW-3j-KqY"/>
                         <outlet property="accountsTabButton" destination="I7f-K9-ulJ" id="kOZ-AT-xQo"/>
-                        <outlet property="allTabButton" destination="uDS-1O-UgN" id="1Gi-3q-3e5"/>
                         <outlet property="backButton" destination="55w-cK-miP" id="3Oo-vV-Ajw"/>
                         <outlet property="editButton" destination="AGy-hi-qTr" id="CzR-tT-Kj7"/>
                         <outlet property="groupsTabButton" destination="AvS-gd-aXG" id="n6m-J8-vsd"/>

@@ -12,7 +12,7 @@ import Dip
 enum AddEditOperationCoordinationResult {
     case addedOperation(FPOperation)
     case editedOperation(FPOperation)
-    case cancel
+    case close
 }
 
 final class AddEditOperationCoordinator: BaseCoordinator<AddEditOperationCoordinationResult> {
@@ -32,29 +32,20 @@ final class AddEditOperationCoordinator: BaseCoordinator<AddEditOperationCoordin
     override func start() -> Observable<AddEditOperationCoordinationResult> {
         
         guard let viewModel = try? dependencyContainer.resolve() as AddEditOperationViewModelType else { return Observable.never() }
+        
         var vc = AddEditOperationViewController.instantiate()
         vc.bind(to: viewModel)
         
+        vc.modalPresentationStyle = .overFullScreen
         presentingViewController.present(vc, animated: true)
         
-        vc.presentationController?.delegate = self
-        
-        let selfDismiss = selfDismissStream.map{ AddEditOperationCoordinationResult.cancel }
-        
-        let cancel = viewModel.cancelTapped.map{ AddEditOperationCoordinationResult.cancel }
-        let operationAdded = viewModel.operationAdded.map{ AddEditOperationCoordinationResult.addedOperation($0) }
-        let operationEdited = viewModel.operationEdited.map{ AddEditOperationCoordinationResult.editedOperation($0) }
-        
-        let viewModelReturnStream = Observable.merge(cancel, operationAdded, operationEdited)
+        return Observable.merge(
+            [
+                viewModel.cancelTapped.map{ .close },
+                viewModel.operationAdded.map{ .addedOperation($0) },
+                viewModel.operationEdited.map{ .editedOperation($0) }
+            ])
             .take(1)
             .do(onNext: { [vc] _ in vc.dismiss(animated: true) })
-        
-        return Observable.merge(viewModelReturnStream, selfDismiss).take(1)
-    }
-}
-
-extension AddEditOperationCoordinator: UIAdaptivePresentationControllerDelegate {
-    public func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
-        selfDismissStream.onNext(())
     }
 }

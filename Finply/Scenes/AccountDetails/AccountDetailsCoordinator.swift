@@ -68,9 +68,9 @@ final class AccountDetailsCoordinator: BaseCoordinator<Void> {
             .flatMap{ [ unowned self] in self.coordinateToAccountsList() }
             .subscribe(onNext: {
                 switch $0 {
-                case .cancel: return
-                case .accountSelected: return // pass to vm
-                case .accountsGroupSelected: return // pass to vm
+                case .back: return
+                case .accountSelected(let account): return // pass to vm
+                case .accountsGroupSelected(let accountGroup): return // pass to vm
                 }
             })
             .disposed(by: bag)
@@ -79,7 +79,8 @@ final class AccountDetailsCoordinator: BaseCoordinator<Void> {
             .flatMap{ [ unowned self] in self.coordinateToEditAccount() }
             .subscribe(onNext: {
                 switch $0 {
-                case .cancel: return
+                case .accountEdited(let model): return // pass to vm
+                default: return
                 }
             })
             .disposed(by: bag)
@@ -117,8 +118,9 @@ final class AccountDetailsCoordinator: BaseCoordinator<Void> {
         return coordinate(to: coordinator)
     }
     
-    private func coordinateToEditAccount() -> Observable<AddEditAccountCoordinationResult> {
-        let coordinator = AddEditAccountCoordinator(presentingViewController: accountDetailsVc,
+    private func coordinateToEditAccount(accountToEdit: FPAccount) -> Observable<AddEditAccountCoordinationResult> {
+        let coordinator = AddEditAccountCoordinator(accountToEdit: accountToEdit,
+                                                    presentingViewController: accountDetailsVc,
                                                     dependencyContainer: dependencyContainer)
         return coordinate(to: coordinator)
     }

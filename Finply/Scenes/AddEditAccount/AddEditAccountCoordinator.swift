@@ -10,15 +10,19 @@ import RxSwift
 import Dip
 
 enum AddEditAccountCoordinationResult {
-    case cancel
+    case close
+    case accountCreated(model: FPAccount)
+    case accountEdited(model: FPAccount)
 }
 
 final class AddEditAccountCoordinator: BaseCoordinator<AddEditAccountCoordinationResult> {
     
+    let accountToEdit: FPAccount?
     let presentingViewController: UIViewController
     let dependencyContainer: DependencyContainer
     
-    init(presentingViewController: UIViewController, dependencyContainer: DependencyContainer) {
+    init(accountToEdit: FPAccount?, presentingViewController: UIViewController, dependencyContainer: DependencyContainer) {
+        self.accountToEdit = accountToEdit
         self.presentingViewController = presentingViewController
         self.dependencyContainer = dependencyContainer
     }
@@ -26,13 +30,22 @@ final class AddEditAccountCoordinator: BaseCoordinator<AddEditAccountCoordinatio
     override func start() -> Observable<AddEditAccountCoordinationResult> {
         
         guard let viewModel = try? dependencyContainer.resolve() as AddEditAccountViewModelType else { return Observable.never() }
-        var vc = AddEditAccountViewController.instantiate()
+        var vc = BaseModalViewController.instantiate()
         vc.bind(to: viewModel)
         
+        vc.modalPresentationStyle = .overFullScreen
         presentingViewController.present(vc, animated: true)
         
-        // TODO: All returnings from VM converted to coordination result
-        
-        return Observable.never()
+        return Observable.merge(
+            [
+                viewModel.coordination.close.map{ .close },
+                viewModel.coordination.accountComplete.map{ [accountToEdit] in
+                    accountToEdit == nil
+                        ? .accountCreated(model: $0)
+                        : .accountEdited(model: $0)
+                }
+            ])
+            .take(1)
+            .do(onNext: { [vc] _ in vc.dismiss(animated: true) })
     }
 }

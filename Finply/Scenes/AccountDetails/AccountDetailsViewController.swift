@@ -78,14 +78,17 @@ extension AccountDetailsViewController: BindableType {
         accountHeaderView.bind(to: viewModel.accountHeaderViewModel)
         monthDetailsView.bind(to: viewModel.accountMonthDetailsViewModel)
         
-        //Output
-        viewModel.dataSource.bind(to: tableView.rx.items(dataSource: dataSource)).disposed(by: bag)
+        viewModel.output.dataSource
+            .bind(to: tableView.rx.items(dataSource: dataSource))
+            .disposed(by: bag)
         
-        //Input
-        addOperationButton.rx.tap.bind(to: viewModel.addOperationTap).disposed(by: bag)
+        addOperationButton.rx.tap
+            .bind(to: viewModel.input.addButtonTap)
+            .disposed(by: bag)
+        
         tableView.rx.itemSelected
             .do(onNext: { [weak self] in self?.tableView.deselectRow(at: $0, animated: true) })
-            .bind(to: viewModel.cellSelected).disposed(by: bag)
+            .bind(to: viewModel.input.rowSelected).disposed(by: bag)
     }
 }
 
@@ -122,7 +125,7 @@ extension AccountDetailsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = tableView.dequeueReusableHeaderFooterView() as AccountOperationsSectionHeader
-        guard let section = viewModel.currentOperationSections.value[safe: section] else { return nil }
+        guard let section = viewModel.output.currentOperationSections.value[safe: section] else { return nil }
         headerView.setupDate(sectionDateFormatter.string(from: section.date))
         return headerView
     }

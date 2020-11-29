@@ -14,4 +14,3 @@ protocol TitleInputCellViewModelType {
 final class TitleInputCellViewModel: TitleInputCellViewModelType {
     
 }
-

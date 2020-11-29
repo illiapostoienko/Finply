@@ -12,10 +12,10 @@ import RxDataSources
 
 final class BaseModalViewController: UIViewController, BindableType {
     
-    @IBOutlet var closeButton: UIButton!
-    @IBOutlet var titleLabel: UILabel!
-    @IBOutlet var checkButton: UIButton!
-    @IBOutlet var tableView: UITableView!
+    @IBOutlet private var closeButton: UIButton!
+    @IBOutlet private var titleLabel: UILabel!
+    @IBOutlet private var checkButton: UIButton!
+    @IBOutlet private  var tableView: UITableView!
     
     var viewModel: BaseModalViewModelType!
     
@@ -29,9 +29,12 @@ final class BaseModalViewController: UIViewController, BindableType {
     }
     
     func bindViewModel() {
-        titleLabel.text = viewModel.output.title
         checkButton.isHidden = viewModel.output.isCheckButtonHidden
                 
+        viewModel.output.title
+            .drive(titleLabel.rx.text)
+            .disposed(by: bag)
+        
         closeButton.rx.tap
             .bind(to: viewModel.input.closeButtonTap)
             .disposed(by: bag)

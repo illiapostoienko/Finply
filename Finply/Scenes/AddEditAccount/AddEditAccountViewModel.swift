@@ -15,6 +15,8 @@ protocol AddEditAccountViewModelCoordination {
 
 protocol AddEditAccountViewModelType: BaseModalViewModelType {
     var coordination: AddEditAccountViewModelCoordination { get }
+    
+    func setupAccountToEdit(_ accountToEdit: FPAccount)
 }
 
 final class AddEditAccountViewModel: AddEditAccountViewModelType, AddEditAccountViewModelCoordination,
@@ -26,7 +28,7 @@ final class AddEditAccountViewModel: AddEditAccountViewModelType, AddEditAccount
     
     // Base Output
     var dataSource: Observable<[BaseModalTableViewItem]> { _dataSource.asObservable() }
-    var title: String
+    var title: Driver<String> { _currentTitle.asDriver() }
     var isCheckButtonHidden: Bool = false
     
     // Base Input
@@ -44,20 +46,21 @@ final class AddEditAccountViewModel: AddEditAccountViewModelType, AddEditAccount
     private let _itemSelectedStream = PublishSubject<Int>()
     private let _accountCompleteStream = PublishSubject<FPAccount>()
     
-    private let _existingAccount: BehaviorRelay<FPAccount?>
+    private let _currentTitle: BehaviorRelay<String>
+    private let _existingAccount = BehaviorRelay<FPAccount?>(value: nil)
     private let _dataSource = BehaviorRelay<[BaseModalTableViewItem]>(value: [])
     
-    init(accountToEdit: FPAccount? = nil) {
-        title = accountToEdit == nil ? "Add Account" : "Edit Account"
-        
-        _existingAccount = BehaviorRelay<FPAccount?>(value: accountToEdit)
-        // create childs and fill with accountToEdit's values
-        
-        let completedAccount = _checkButtonStream
-            .withLatestFrom(_existingAccount)
-            .unwrap()
+    init() {
+        _currentTitle = BehaviorRelay<String>(value: "Add Account")
+        // create childs
         
         // _checkButtonStream -> fill _completedAccount if everything is ok,
         // or show validation error if not
+    }
+    
+    func setupAccountToEdit(_ accountToEdit: FPAccount) {
+        _currentTitle.accept("Edit Account")
+        _existingAccount.accept(accountToEdit)
+        // fill childs with accountToEdit's values
     }
 }

@@ -17,7 +17,7 @@ protocol BaseModalViewModelInput {
 
 protocol BaseModalViewModelOutput {
     var dataSource: Observable<[BaseModalTableViewItem]> { get }
-    var title: String { get }
+    var title: Driver<String> { get }
     var isCheckButtonHidden: Bool { get }
 }
 
@@ -37,7 +37,6 @@ enum BaseModalTableViewItem: IdentifiableType, Equatable {
     case accountsSelect
     
     // add/edit Operation
-    
     
     var identity: String {
         switch self {

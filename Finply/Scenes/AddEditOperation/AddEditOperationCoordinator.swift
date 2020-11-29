@@ -10,8 +10,8 @@ import RxSwift
 import Dip
 
 enum AddEditOperationCoordinationResult {
-    case addedOperation(FPOperation)
-    case editedOperation(FPOperation)
+    case operationAdded(FPOperation)
+    case operationEdited(FPOperation)
     case close
 }
 
@@ -42,8 +42,8 @@ final class AddEditOperationCoordinator: BaseCoordinator<AddEditOperationCoordin
         return Observable.merge(
             [
                 viewModel.cancelTapped.map{ .close },
-                viewModel.operationAdded.map{ .addedOperation($0) },
-                viewModel.operationEdited.map{ .editedOperation($0) }
+                viewModel.operationAdded.map{ .operationAdded($0) },
+                viewModel.operationEdited.map{ .operationEdited($0) }
             ])
             .take(1)
             .do(onNext: { [vc] _ in vc.dismiss(animated: true) })

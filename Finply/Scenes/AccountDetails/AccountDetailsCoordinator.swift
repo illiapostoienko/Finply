@@ -35,27 +35,27 @@ final class AccountDetailsCoordinator: BaseCoordinator<Void> {
         accountDetailsVc.bind(to: viewModel)
         accountDetailsVc.delegate = self
         
-        viewModel.coordinationAddOperation
+        viewModel.coordination.addOperation
             .flatMap{ [unowned self] _ in self.coordinateToAddEditOperation() }
             .subscribe(onNext: {
                 switch $0 {
-                case .addedOperation: return // pass to vm
+                case .operationAdded(let model): return // pass to vm
                 default: return
                 }
             })
             .disposed(by: bag)
         
-        viewModel.coordinationEditOperation
+        viewModel.coordination.editOperation
             .flatMap{ [unowned self] in self.coordinateToAddEditOperation(operationToEdit: $0) }
             .subscribe(onNext: {
                 switch $0 {
-                case .editedOperation: return // pass to vm
+                case .operationEdited(let model): return // pass to vm
                 default: return
                 }
             })
             .disposed(by: bag)
         
-        viewModel.coordinationReportDetails
+        viewModel.coordination.reportDetails
             .flatMap{ [unowned self] in self.coordinateToReportDetails() }
             .subscribe(onNext: {
                 switch $0 {
@@ -64,7 +64,7 @@ final class AccountDetailsCoordinator: BaseCoordinator<Void> {
             })
             .disposed(by: bag)
 
-        viewModel.coordinationAccountsList
+        viewModel.coordination.accountsList
             .flatMap{ [ unowned self] in self.coordinateToAccountsList() }
             .subscribe(onNext: {
                 switch $0 {
@@ -75,8 +75,8 @@ final class AccountDetailsCoordinator: BaseCoordinator<Void> {
             })
             .disposed(by: bag)
         
-        viewModel.coordinationEditAccount
-            .flatMap{ [ unowned self] in self.coordinateToEditAccount() }
+        viewModel.coordination.editAccount
+            .flatMap{ [ unowned self] in self.coordinateToEditAccount(accountToEdit: $0) }
             .subscribe(onNext: {
                 switch $0 {
                 case .accountEdited(let model): return // pass to vm
@@ -85,7 +85,7 @@ final class AccountDetailsCoordinator: BaseCoordinator<Void> {
             })
             .disposed(by: bag)
         
-        viewModel.coordinationProfile
+        viewModel.coordination.profile
             .flatMap{ [ unowned self] in self.coordinateToProfileDetails() }
             .subscribe(onNext: {
                 switch $0 {

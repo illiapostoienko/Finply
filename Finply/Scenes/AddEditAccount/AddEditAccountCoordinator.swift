@@ -11,8 +11,8 @@ import Dip
 
 enum AddEditAccountCoordinationResult {
     case close
-    case accountCreated(model: FPAccount)
-    case accountEdited(model: FPAccount)
+    case accountAdded(FPAccount)
+    case accountEdited(FPAccount)
 }
 
 final class AddEditAccountCoordinator: BaseCoordinator<AddEditAccountCoordinationResult> {
@@ -33,6 +33,8 @@ final class AddEditAccountCoordinator: BaseCoordinator<AddEditAccountCoordinatio
         var vc = BaseModalViewController.instantiate()
         vc.bind(to: viewModel)
         
+        accountToEdit.map{ viewModel.setupAccountToEdit($0) }
+        
         vc.modalPresentationStyle = .overFullScreen
         presentingViewController.present(vc, animated: true)
         
@@ -41,8 +43,8 @@ final class AddEditAccountCoordinator: BaseCoordinator<AddEditAccountCoordinatio
                 viewModel.coordination.close.map{ .close },
                 viewModel.coordination.accountComplete.map{ [accountToEdit] in
                     accountToEdit == nil
-                        ? .accountCreated(model: $0)
-                        : .accountEdited(model: $0)
+                        ? .accountAdded($0)
+                        : .accountEdited($0)
                 }
             ])
             .take(1)

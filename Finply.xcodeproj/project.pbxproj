@@ -34,6 +34,7 @@
 		EA7EE7502572FE6C00A82386 /* TitleInputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7EE74F2572FE6C00A82386 /* TitleInputCell.swift */; };
 		EA7EE7532572FECB00A82386 /* TitleInputCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7EE7522572FECB00A82386 /* TitleInputCellViewModel.swift */; };
 		EA7EE7562572FF4300A82386 /* TitleInputCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA7EE7552572FF4300A82386 /* TitleInputCell.xib */; };
+		EA7EE75A2573175300A82386 /* UserStateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7EE7592573175300A82386 /* UserStateService.swift */; };
 		EA7F6163252B2C2C008CA432 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = EA7F6162252B2C2C008CA432 /* RxSwift */; };
 		EA7F6165252B2C2C008CA432 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = EA7F6164252B2C2C008CA432 /* RxRelay */; };
 		EA7F6167252B2C2C008CA432 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = EA7F6166252B2C2C008CA432 /* RxCocoa */; };
@@ -143,6 +144,7 @@
 		EA7EE74F2572FE6C00A82386 /* TitleInputCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleInputCell.swift; sourceTree = "<group>"; };
 		EA7EE7522572FECB00A82386 /* TitleInputCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleInputCellViewModel.swift; sourceTree = "<group>"; };
 		EA7EE7552572FF4300A82386 /* TitleInputCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TitleInputCell.xib; sourceTree = "<group>"; };
+		EA7EE7592573175300A82386 /* UserStateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStateService.swift; sourceTree = "<group>"; };
 		EA7F616C252B2D13008CA432 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
 		EA88F7702536F6E6005F9EC0 /* FPOperationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPOperationService.swift; sourceTree = "<group>"; };
 		EA930C2F2523D54D00E12805 /* Finply.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Finply.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -408,6 +410,7 @@
 			children = (
 				EA930CFC2524940600E12805 /* FPAccountService.swift */,
 				EA88F7702536F6E6005F9EC0 /* FPOperationService.swift */,
+				EA7EE7592573175300A82386 /* UserStateService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -757,6 +760,7 @@
 				EAD68A482554F9C80083B30D /* AppCoordinator.swift in Sources */,
 				EA0094912527264E00746222 /* RMAccountGroup.swift in Sources */,
 				EA9F66312554E44000441ED0 /* PlanningListViewModel.swift in Sources */,
+				EA7EE75A2573175300A82386 /* UserStateService.swift in Sources */,
 				EA930CDC252485C500E12805 /* NibLoadable.swift in Sources */,
 				EA930CFD2524940600E12805 /* FPAccountService.swift in Sources */,
 				EAD68A3F2554F8810083B30D /* AccountDetailsViewModel.swift in Sources */,

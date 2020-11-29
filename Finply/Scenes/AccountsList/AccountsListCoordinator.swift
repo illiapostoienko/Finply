@@ -23,6 +23,8 @@ final class AccountsListCoordinator: BaseCoordinator<AccountsListCoordinationRes
     
     private var viewController: AccountsListViewController!
     
+    private let bag = DisposeBag()
+    
     init(presentingViewController: UIViewController, transitionDelegate: PushTransitionDelegate, dependencyContainer: DependencyContainer) {
         self.presentingViewController = presentingViewController
         self.transitionDelegate = transitionDelegate
@@ -41,10 +43,27 @@ final class AccountsListCoordinator: BaseCoordinator<AccountsListCoordinationRes
         
         viewModel.coordination.addAccount
             .flatMap{ [unowned self] _ in self.coordinateToAddEditAccount() }
-        
-        
+            .subscribe(onNext: {
+                switch $0 {
+                case .accountAdded(let model): return // pass to vm
+                default: return
+                }
+            })
+            .disposed(by: bag)
         
 //        viewModel.coordination.addGroup -> coordinate
+        
+        viewModel.coordination.editAccount
+            .flatMap{ [unowned self] in self.coordinateToAddEditAccount(accountToEdit: $0) }
+            .subscribe(onNext: {
+                switch $0 {
+                case .accountEdited(let model): return // pass to vm
+                default: return
+                }
+            })
+            .disposed(by: bag)
+        
+//        viewModel.coordination.editAccountGroup
         
         return Observable.merge(
             [

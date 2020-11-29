@@ -36,8 +36,8 @@ protocol AccountsListViewModelCoordination {
     var addAccount: Observable<Void> { get }
     var addGroup: Observable<Void> { get }
     var editAccount: Observable<FPAccount> { get }
-    var editAccountGroup: Observable<FPAccountGroup> { get }
     var accountSelected: Observable<FPAccount> { get }
+    var editAccountGroup: Observable<FPAccountGroup> { get }
     var accountGroupSelected: Observable<FPAccountGroup> { get }
 }
 
@@ -81,8 +81,8 @@ final class AccountsListViewModel: AccountsListViewModelType, AccountsListViewMo
     var addAccount: Observable<Void> { _addTapStream.withLatestFrom(_currentTab).filter{ $0 == .accounts }.ignoreContent() }
     var addGroup: Observable<Void> { _addTapStream.withLatestFrom(_currentTab).filter{ $0 == .groups }.ignoreContent() }
     var editAccount: Observable<FPAccount>
-    var editAccountGroup: Observable<FPAccountGroup>
     var accountSelected: Observable<FPAccount>
+    var editAccountGroup: Observable<FPAccountGroup>
     var accountGroupSelected: Observable<FPAccountGroup>
 
     // Local Streams
@@ -93,7 +93,6 @@ final class AccountsListViewModel: AccountsListViewModelType, AccountsListViewMo
     private let _rowSelectedStream = PublishSubject<Int>()
     private let _deleteRowStream = PublishSubject<Int>()
     private let _changeOrderStream = PublishSubject<(fromIndex: Int, toIndex: Int)>()
-    
     private var _accountAddedStream = PublishSubject<FPAccount>()
     private var _accountEditedStream = PublishSubject<FPAccount>()
     private var _accountGroupAddedStream = PublishSubject<FPAccountGroup>()
@@ -102,9 +101,10 @@ final class AccountsListViewModel: AccountsListViewModelType, AccountsListViewMo
     private let _currentTab = BehaviorRelay<AccountsListTab>(value: .accounts)
     private let _dataSource = BehaviorRelay<[AccountsListTableItem]>(value: [])
     private let _isEditModeEnabled = BehaviorRelay<Bool>(value: false)
-    
     private let loadedAccounts = BehaviorRelay<[FPAccount]>(value: [])
     private let loadedGroups = BehaviorRelay<[FPAccountGroup]>(value: [])
+    
+    //Services
     
     private let bag = DisposeBag()
     
@@ -117,32 +117,28 @@ final class AccountsListViewModel: AccountsListViewModelType, AccountsListViewMo
             .bind(to: _isEditModeEnabled)
             .disposed(by: bag)
         
-        editAccount = _rowSelectedStream
-            .withLatestFrom(Observable.combineLatest(_isEditModeEnabled, _currentTab, loadedAccounts)) { selectedRow, dataSet -> FPAccount? in
-                guard dataSet.0, dataSet.1 == .accounts else { return nil }
-                return dataSet.2[safe: selectedRow]
-            }
+        let latestState = Observable.combineLatest(_isEditModeEnabled, _currentTab, loadedAccounts, loadedGroups).map{ (isEditMode: $0, tab: $1, accounts: $2, groups: $3) }
+        let selectedRowWithLatestData = _rowSelectedStream
+            .withLatestFrom(latestState) { ($0, $1) }
+        
+        editAccount = selectedRowWithLatestData
+            .filter{ _, latestState in latestState.isEditMode && latestState.tab == .accounts }
+            .map{ $1.accounts[safe: $0] }
             .unwrap()
         
-        editAccountGroup = _rowSelectedStream
-            .withLatestFrom(Observable.combineLatest(_isEditModeEnabled, _currentTab, loadedGroups)) { selectedRow, dataSet -> FPAccountGroup? in
-                guard dataSet.0, dataSet.1 == .groups else { return nil }
-                return dataSet.2[safe: selectedRow]
-            }
+        editAccountGroup = selectedRowWithLatestData
+            .filter{ _, latestState in latestState.isEditMode && latestState.tab == .groups }
+            .map{ $1.groups[safe: $0] }
             .unwrap()
-        
-        accountSelected = Observable.combineLatest(_currentTab, _rowSelectedStream, loadedAccounts)
-            .map{ tab, index, accounts -> FPAccount? in
-                guard tab == .accounts else { return nil }
-                return accounts[safe: index]
-            }
+
+        accountSelected = selectedRowWithLatestData
+            .filter{ _, latestState in !latestState.isEditMode && latestState.tab == .accounts }
+            .map{ $1.accounts[safe: $0] }
             .unwrap()
-            
-        accountGroupSelected = Observable.combineLatest(_currentTab, _rowSelectedStream, loadedGroups)
-            .map{ tab, index, groups -> FPAccountGroup? in
-                guard tab == .groups else { return nil }
-                return groups[safe: index]
-            }
+
+        accountGroupSelected = selectedRowWithLatestData
+            .filter{ _, latestState in !latestState.isEditMode && latestState.tab == .groups }
+            .map{ $1.groups[safe: $0] }
             .unwrap()
         
         // _accountAddedStream -> add to loadedAccounts

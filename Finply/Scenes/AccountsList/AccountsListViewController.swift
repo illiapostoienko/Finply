@@ -36,6 +36,7 @@ final class AccountsListViewController: UIViewController, BindableType {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
+        updateSlider(by: .accounts)
     }
     
     func bindViewModel() {
@@ -54,7 +55,7 @@ final class AccountsListViewController: UIViewController, BindableType {
         
         viewModel.output.isEditModeEnabled
             .drive(onNext: { [weak self] isEditModeEnabled in
-                self?.tableView.isEditing = isEditModeEnabled
+                self?.tableView.setEditing(isEditModeEnabled, animated: true)
                 // change picture of edit button for edit mode?
             })
             .disposed(by: bag)
@@ -127,6 +128,7 @@ final class AccountsListViewController: UIViewController, BindableType {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.tableFooterView = UIView()
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
+        tableView.allowsSelectionDuringEditing = true
     }
     
     private func updateSlider(by tab: AccountsListTab) {

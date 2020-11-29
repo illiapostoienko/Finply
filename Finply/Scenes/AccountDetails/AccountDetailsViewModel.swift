@@ -10,58 +10,83 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
+protocol AccountDetailsViewModelInput {
+    var addButtonTap: AnyObserver<Void> { get }
+    var rowSelected: AnyObserver<IndexPath> { get }
+}
+
+protocol AccountDetailsViewModelOutput {
+    var dataSource: Observable<[AccountOperationsTableSection]> { get }
+    var currentOperationSections: BehaviorRelay<[OperationsSection]> { get }
+}
+
+protocol AccountDetailsViewModelCoordination {
+    var addOperation: Observable<Void> { get }
+    var editOperation: Observable<FPOperation> { get }
+    var reportDetails: Observable<Void> { get }
+    var accountsList: Observable<Void> { get }
+    var editAccount: Observable<FPAccount> { get }
+    var profile: Observable<Void> { get }
+}
+
 protocol AccountDetailsViewModelType {
     
     var accountHeaderViewModel: AccountHeaderViewModelType { get }
     var accountMonthDetailsViewModel: AccountMonthDetailsViewModelType { get }
     
-    //Input
-    var addOperationTap: AnyObserver<Void> { get }
-    var cellSelected: AnyObserver<IndexPath> { get }
-    
-    //Output
-    var dataSource: Observable<[AccountOperationsTableSection]> { get }
-    var currentOperationSections: BehaviorRelay<[OperationsSection]> { get }
-    
-    // Coordination
-    var coordinationAddOperation: Observable<Void> { get }
-    var coordinationEditOperation: Observable<FPOperation> { get }
-    var coordinationReportDetails: Observable<Void> { get }
-    var coordinationAccountsList: Observable<Void> { get }
-    var coordinationEditAccount: Observable<Void> { get }
-    var coordinationProfile: Observable<Void> { get }
+    var input: AccountDetailsViewModelInput { get }
+    var output: AccountDetailsViewModelOutput { get }
+    var coordination: AccountDetailsViewModelCoordination { get }
 }
 
-final class AccountDetailsViewModel: AccountDetailsViewModelType {
+final class AccountDetailsViewModel: AccountDetailsViewModelType, AccountDetailsViewModelInput, AccountDetailsViewModelOutput, AccountDetailsViewModelCoordination {
     
     var accountHeaderViewModel: AccountHeaderViewModelType
     var accountMonthDetailsViewModel: AccountMonthDetailsViewModelType
     
-    //Input
-    var addOperationTap: AnyObserver<Void> { addOperationStream.asObserver() }
-    var cellSelected: AnyObserver<IndexPath> { cellSelectionStream.asObserver() }
+    var input: AccountDetailsViewModelInput { return self }
+    var output: AccountDetailsViewModelOutput { return self }
+    var coordination: AccountDetailsViewModelCoordination { return self }
     
-    //Output
+    // Input
+    var addButtonTap: AnyObserver<Void> { _addTapStream.asObserver() }
+    var rowSelected: AnyObserver<IndexPath> { _rowSelectedStream.asObserver() }
+    
+    // Output
     let dataSource: Observable<[AccountOperationsTableSection]>
     let currentOperationSections: BehaviorRelay<[OperationsSection]>
     
-    //Coordination
-    var coordinationAddOperation: Observable<Void> { addOperationStream }
-    var coordinationEditOperation: Observable<FPOperation>
-    var coordinationReportDetails: Observable<Void> { accountMonthDetailsViewModel.reportDetailsTap }
-    var coordinationAccountsList: Observable<Void> { accountHeaderViewModel.accountTap }
-    var coordinationEditAccount: Observable<Void> { accountHeaderViewModel.editAccountTap }
-    var coordinationProfile: Observable<Void> { accountHeaderViewModel.profileTap }
+    // Coordination
+    var addOperation: Observable<Void> { _addTapStream }
+    var editOperation: Observable<FPOperation>
+    var reportDetails: Observable<Void> { accountMonthDetailsViewModel.reportDetailsTap }
+    var accountsList: Observable<Void> { accountHeaderViewModel.accountTap }
+    var editAccount: Observable<FPAccount> { accountHeaderViewModel.editAccountTap.withLatestFrom(_currentAccount) }
+    var profile: Observable<Void> { accountHeaderViewModel.profileTap }
     
-    //Locals
-    private let addOperationStream = PublishSubject<Void>()
-    private let cellSelectionStream = PublishSubject<IndexPath>()
+    // Local Streams
+    private let _addTapStream = PublishSubject<Void>()
+    private let _rowSelectedStream = PublishSubject<IndexPath>()
+    private let _currentAccount: BehaviorRelay<FPAccount>
+    private let loadedOperations = BehaviorRelay<[FPAccount]>(value: [])
+    
+    //Services
+    private let userStateService: UserStateServiceType
+    
     private let bag = DisposeBag()
     
-    init(accountHeaderViewModel: AccountHeaderViewModelType,
-         accountMonthDetailsViewModel: AccountMonthDetailsViewModelType) {
+    init(accountHeaderViewModel: AccountHeaderViewModelType = AccountHeaderViewModel(),
+         accountMonthDetailsViewModel: AccountMonthDetailsViewModelType = AccountMonthDetailsViewModel(),
+         userStateService: UserStateServiceType)
+    {
+        self.userStateService = userStateService
         self.accountHeaderViewModel = accountHeaderViewModel
         self.accountMonthDetailsViewModel = accountMonthDetailsViewModel
+        
+        let account = userStateService.getCurrentOpenedAccount()
+        //setup viewModels with account
+        
+        self._currentAccount = BehaviorRelay<FPAccount>(value: account)
         
         currentOperationSections = BehaviorRelay<[OperationsSection]>(value: mockData)
     
@@ -72,7 +97,7 @@ final class AccountDetailsViewModel: AccountDetailsViewModelType {
                 }
             }
         
-        coordinationEditOperation = cellSelectionStream
+        editOperation = _rowSelectedStream
             .withLatestFrom(currentOperationSections) { indexPath, sections in
                 sections[safe: indexPath.section]
                     .flatMap{ section in section.cells[safe: indexPath.item] }
@@ -122,16 +147,10 @@ private var mockData: [OperationsSection] = {
     ]
 }()
 
-enum AccountOperationsTableSection {
+enum AccountOperationsTableSection: IdentifiableType, AnimatableSectionModelType {
+    
     case operations(date: Date, items: [AccountOperationsTableItem])
-}
-
-enum AccountOperationsTableItem {
-    case operation(viewModel: AccountOperationCellViewModelType)
-}
-
-extension AccountOperationsTableSection: IdentifiableType, AnimatableSectionModelType {
- 
+    
     var identity: String {
         switch self {
         case .operations: return "operations"
@@ -158,7 +177,10 @@ extension AccountOperationsTableSection: IdentifiableType, AnimatableSectionMode
     }
 }
 
-extension AccountOperationsTableItem: IdentifiableType, Equatable {
+enum AccountOperationsTableItem: IdentifiableType, Equatable {
+    
+    case operation(viewModel: AccountOperationCellViewModelType)
+    
     var identity: String {
         switch self {
         case .operation(let vm): return vm.operation.id.uuidString

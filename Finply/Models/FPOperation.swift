@@ -15,6 +15,7 @@ struct FPOperation {
     
     let value: Double
     let creationDate: Date
+    let setDate: Date
     let comment: String?
     let photoPath: String?
     let tagIds: [String]

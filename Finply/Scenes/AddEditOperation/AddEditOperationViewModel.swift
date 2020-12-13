@@ -17,13 +17,11 @@ protocol AddEditOperationViewModelType {
 
 final class AddEditOperationViewModel: AddEditOperationViewModelType {
         
-    let operationService: FPOperationServiceType
-    
     var cancelTapped = PublishSubject<Void>()
     var operationAdded: Observable<FPOperation> = PublishSubject<FPOperation>()
     var operationEdited: Observable<FPOperation> = PublishSubject<FPOperation>()
     
-    init(operationService: FPOperationServiceType) {
-        self.operationService = operationService
+    init() {
+        
     }
 }

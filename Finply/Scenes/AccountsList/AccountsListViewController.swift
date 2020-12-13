@@ -14,7 +14,7 @@ final class AccountsListViewController: UIViewController, BindableType {
     
     @IBOutlet private var backButton: UIButton!
     @IBOutlet private var accountsLabel: UILabel!
-    @IBOutlet private var editButton: UIButton!
+    @IBOutlet private var plusButton: UIButton!
     
     @IBOutlet private var accountsTabButton: UIButton!
     @IBOutlet private var groupsTabButton: UIButton!
@@ -24,7 +24,6 @@ final class AccountsListViewController: UIViewController, BindableType {
     @IBOutlet private var sliderTrailingConstraint: NSLayoutConstraint!
     
     @IBOutlet private var tableView: UITableView!
-    @IBOutlet private var plusButton: UIButton!
     
     private var dataSource: RxTableViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AccountsListTableItem>>!
     
@@ -53,22 +52,14 @@ final class AccountsListViewController: UIViewController, BindableType {
             })
             .disposed(by: bag)
         
-        viewModel.output.isEditModeEnabled
-            .drive(onNext: { [weak self] isEditModeEnabled in
-                self?.tableView.setEditing(isEditModeEnabled, animated: true)
-                // change picture of edit button for edit mode?
-            })
-            .disposed(by: bag)
-        
         backButton.rx.tap
             .bind(to: viewModel.input.backButtonTap)
             .disposed(by: bag)
         
-        editButton.rx.tap
-            .bind(to: viewModel.input.editButtonTap)
-            .disposed(by: bag)
-        
         plusButton.rx.tap
+            .do(onNext: { [weak self] in
+                self?.tableView.setEditing(false, animated: true)
+            })
             .bind(to: viewModel.input.addButtonTap)
             .disposed(by: bag)
         
@@ -76,6 +67,7 @@ final class AccountsListViewController: UIViewController, BindableType {
                          groupsTabButton.rx.tap.map{ .groups })
             .do(onNext: { [weak self] tab in
                 self?.updateSlider(by: tab)
+                self?.tableView.setEditing(false, animated: true)
             })
             .bind(to: viewModel.input.tabButtonTap)
             .disposed(by: bag)
@@ -99,10 +91,13 @@ final class AccountsListViewController: UIViewController, BindableType {
     }
     
     private func setupTableView() {
-        //tableView.dataSource = nil
         tableView.register(cellType: AccountsListAccountCell.self)
         tableView.register(cellType: AccountsListGroupCell.self)
-        
+        tableView.delegate = self
+        tableView.dragDelegate = self
+        tableView.dropDelegate = self
+        tableView.dragInteractionEnabled = true
+
         dataSource = RxTableViewSectionedAnimatedDataSource(
             configureCell: { dataSource, tableView, indexPath, _ in
                 switch dataSource[indexPath] {
@@ -127,8 +122,6 @@ final class AccountsListViewController: UIViewController, BindableType {
         tableView.estimatedRowHeight = UITableView.automaticDimension
         tableView.rowHeight = UITableView.automaticDimension
         tableView.tableFooterView = UIView()
-        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
-        tableView.allowsSelectionDuringEditing = true
     }
     
     private func updateSlider(by tab: AccountsListTab) {
@@ -160,5 +153,38 @@ final class AccountsListViewController: UIViewController, BindableType {
     
     private func setPlaceholder(_ state: Bool) {
         // set placeholder for background of tableView
+    }
+}
+
+extension AccountsListViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let edit = UIContextualAction(style: .normal, title: "Edit", handler: { [weak self] _, _, completion in
+            self?.viewModel.input.editRowIntent.onNext(indexPath.row)
+            completion(true)
+        })
+        edit.image = UIImage(named: "edit")
+        edit.backgroundColor = UIColor.init(red: 0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 0.0)
+        
+        let delete = UIContextualAction(style: .destructive, title: "Delete", handler: { [weak self] _, _, completion in
+            // alert
+            self?.viewModel.input.editRowIntent.onNext(indexPath.row)
+            completion(true)
+        })
+        //delete.image = UIImage(named: "edit")
+        delete.backgroundColor = UIColor.init(red: 0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 0.0)
+
+        return UISwipeActionsConfiguration(actions: [delete, edit])
+    }
+}
+
+extension AccountsListViewController: UITableViewDragDelegate, UITableViewDropDelegate {
+    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        []
+    }
+    
+    func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
+        
     }
 }

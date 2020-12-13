@@ -71,6 +71,7 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                 </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="Cxo-AE-BLN" firstAttribute="leading" secondItem="biD-Ew-SvM" secondAttribute="leading" constant="20" id="ekF-yi-VLq"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Cxo-AE-BLN" secondAttribute="bottom" priority="999" constant="10" id="gAs-HJ-vsK"/>
@@ -80,6 +81,9 @@
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="baseCardView" destination="Cxo-AE-BLN" id="InF-bg-6aS"/>
+            </connections>
             <point key="canvasLocation" x="286.95652173913044" y="103.125"/>
         </tableViewCell>
     </objects>

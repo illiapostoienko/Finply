@@ -13,31 +13,32 @@ import RxSwiftExt
 
 protocol AccountsListViewModelOutput {
     var dataSource: Observable<[AccountsListTableItem]> { get }
-    var isEditModeEnabled: Driver<Bool> { get }
 }
 
 protocol AccountsListViewModelInput {
     var backButtonTap: AnyObserver<Void> { get }
-    var editButtonTap: AnyObserver<Void> { get }
     var addButtonTap: AnyObserver<Void> { get }
     var tabButtonTap: AnyObserver<AccountsListTab> { get }
     var rowSelected: AnyObserver<Int> { get }
+    var editRowIntent: AnyObserver<Int> { get }
     var deleteRowIntent: AnyObserver<Int> { get }
     var changeOrderIntent: AnyObserver<(fromIndex: Int, toIndex: Int)> { get }
     
-    var accountAdded: AnyObserver<FPAccount> { get }
-    var accountEdited: AnyObserver<FPAccount> { get }
+    var accountAdded: AnyObserver<AccountModelType> { get }
+    var accountEdited: AnyObserver<AccountModelType> { get }
     var accountGroupAdded: AnyObserver<FPAccountGroup> { get }
     var accountGroupEdited: AnyObserver<FPAccountGroup> { get }
 }
 
 protocol AccountsListViewModelCoordination {
     var back: Observable<Void> { get }
+    
     var addAccount: Observable<Void> { get }
-    var addGroup: Observable<Void> { get }
-    var editAccount: Observable<FPAccount> { get }
-    var accountSelected: Observable<FPAccount> { get }
+    var editAccount: Observable<AccountModelType> { get }
+    var addAccountGroup: Observable<Void> { get }
     var editAccountGroup: Observable<FPAccountGroup> { get }
+    
+    var accountSelected: Observable<AccountModelType> { get }
     var accountGroupSelected: Observable<FPAccountGroup> { get }
 }
 
@@ -60,48 +61,48 @@ final class AccountsListViewModel: AccountsListViewModelType, AccountsListViewMo
     
     // Output
     var dataSource: Observable<[AccountsListTableItem]> { _dataSource.asObservable() }
-    var isEditModeEnabled: Driver<Bool> { _isEditModeEnabled.asDriver() }
     
     // Input
     var backButtonTap: AnyObserver<Void> { _backTapStream.asObserver() }
-    var editButtonTap: AnyObserver<Void> { _editTapStream.asObserver() }
     var addButtonTap: AnyObserver<Void> { _addTapStream.asObserver() }
     var tabButtonTap: AnyObserver<AccountsListTab> { _tabTapStream.asObserver() }
     var rowSelected: AnyObserver<Int> { _rowSelectedStream.asObserver() }
+    var editRowIntent: AnyObserver<Int> { _editRowStream.asObserver() }
     var deleteRowIntent: AnyObserver<Int> { _deleteRowStream.asObserver() }
     var changeOrderIntent: AnyObserver<(fromIndex: Int, toIndex: Int)> { _changeOrderStream.asObserver() }
     
-    var accountAdded: AnyObserver<FPAccount> { _accountAddedStream.asObserver() }
-    var accountEdited: AnyObserver<FPAccount> { _accountEditedStream.asObserver() }
+    var accountAdded: AnyObserver<AccountModelType> { _accountAddedStream.asObserver() }
+    var accountEdited: AnyObserver<AccountModelType> { _accountEditedStream.asObserver() }
     var accountGroupAdded: AnyObserver<FPAccountGroup> { _accountGroupAddedStream.asObserver() }
     var accountGroupEdited: AnyObserver<FPAccountGroup> { _accountGroupEditedStream.asObserver() }
     
     // Coordination
     var back: Observable<Void> { _backTapStream }
     var addAccount: Observable<Void> { _addTapStream.withLatestFrom(_currentTab).filter{ $0 == .accounts }.ignoreContent() }
-    var addGroup: Observable<Void> { _addTapStream.withLatestFrom(_currentTab).filter{ $0 == .groups }.ignoreContent() }
-    var editAccount: Observable<FPAccount>
-    var accountSelected: Observable<FPAccount>
+    var addAccountGroup: Observable<Void> { _addTapStream.withLatestFrom(_currentTab).filter{ $0 == .groups }.ignoreContent() }
+    var editAccount: Observable<AccountModelType>
+    var accountSelected: Observable<AccountModelType>
     var editAccountGroup: Observable<FPAccountGroup>
     var accountGroupSelected: Observable<FPAccountGroup>
 
     // Local Streams
     private let _backTapStream = PublishSubject<Void>()
-    private let _editTapStream = PublishSubject<Void>()
     private let _addTapStream = PublishSubject<Void>()
     private let _tabTapStream = PublishSubject<AccountsListTab>()
     private let _rowSelectedStream = PublishSubject<Int>()
     private let _deleteRowStream = PublishSubject<Int>()
+    private let _editRowStream = PublishSubject<Int>()
     private let _changeOrderStream = PublishSubject<(fromIndex: Int, toIndex: Int)>()
-    private var _accountAddedStream = PublishSubject<FPAccount>()
-    private var _accountEditedStream = PublishSubject<FPAccount>()
+    
+    private var _accountAddedStream = PublishSubject<AccountModelType>()
+    private var _accountEditedStream = PublishSubject<AccountModelType>()
     private var _accountGroupAddedStream = PublishSubject<FPAccountGroup>()
     private var _accountGroupEditedStream = PublishSubject<FPAccountGroup>()
     
     private let _currentTab = BehaviorRelay<AccountsListTab>(value: .accounts)
     private let _dataSource = BehaviorRelay<[AccountsListTableItem]>(value: [])
     private let _isEditModeEnabled = BehaviorRelay<Bool>(value: false)
-    private let loadedAccounts = BehaviorRelay<[FPAccount]>(value: [])
+    private let loadedAccounts = BehaviorRelay<[AccountModelType]>(value: [])
     private let loadedGroups = BehaviorRelay<[FPAccountGroup]>(value: [])
     
     //Services
@@ -110,12 +111,6 @@ final class AccountsListViewModel: AccountsListViewModelType, AccountsListViewMo
     
     init() {
         _tabTapStream.bind(to: _currentTab).disposed(by: bag)
-        
-        _editTapStream
-            .withLatestFrom(_isEditModeEnabled)
-            .toggle()
-            .bind(to: _isEditModeEnabled)
-            .disposed(by: bag)
         
         let latestState = Observable.combineLatest(_isEditModeEnabled, _currentTab, loadedAccounts, loadedGroups).map{ (isEditMode: $0, tab: $1, accounts: $2, groups: $3) }
         let selectedRowWithLatestData = _rowSelectedStream
@@ -146,6 +141,7 @@ final class AccountsListViewModel: AccountsListViewModelType, AccountsListViewMo
         // _accountGroupAddedStream -> add loadedGroups
         // _accountGroupEditedStream -> find and edit in loadedGroups
         
+        //editRowIntent -> edit
         //deleteRowIntent -> delete
         //changeOrderIntent -> change order
         
@@ -167,15 +163,15 @@ final class AccountsListViewModel: AccountsListViewModelType, AccountsListViewMo
             .disposed(by: bag)
         
         // load accounts and groups into internal arrays
-        let mocks: [FPAccount] = [
-            FPAccount(id: UUID(), name: "Account 1", baseValue: 0.0, calculatedValue: 0.0, currency: "UAH", order: 0),
-            FPAccount(id: UUID(), name: "Account 1", baseValue: 0.0, calculatedValue: 0.0, currency: "UAH", order: 1),
-            FPAccount(id: UUID(), name: "Account 1", baseValue: 0.0, calculatedValue: 0.0, currency: "UAH", order: 2),
-            FPAccount(id: UUID(), name: "Account 1", baseValue: 0.0, calculatedValue: 0.0, currency: "UAH", order: 3),
-            FPAccount(id: UUID(), name: "Account 1", baseValue: 0.0, calculatedValue: 0.0, currency: "UAH", order: 4),
-            FPAccount(id: UUID(), name: "Account 1", baseValue: 0.0, calculatedValue: 0.0, currency: "UAH", order: 5),
-            FPAccount(id: UUID(), name: "Account 1", baseValue: 0.0, calculatedValue: 0.0, currency: "UAH", order: 6),
-            FPAccount(id: UUID(), name: "Account 1", baseValue: 0.0, calculatedValue: 0.0, currency: "UAH", order: 7)
+        let mocks: [AccountModelType] = [
+            AccountModel(name: "Some name", baseValueInCents: 0, currency: .afghani, order: 0),
+            AccountModel(name: "Some name", baseValueInCents: 0, currency: .afghani, order: 1),
+            AccountModel(name: "Some name", baseValueInCents: 0, currency: .afghani, order: 2),
+            AccountModel(name: "Some name", baseValueInCents: 0, currency: .afghani, order: 3),
+            AccountModel(name: "Some name", baseValueInCents: 0, currency: .afghani, order: 4),
+            AccountModel(name: "Some name", baseValueInCents: 0, currency: .afghani, order: 5),
+            AccountModel(name: "Some name", baseValueInCents: 0, currency: .afghani, order: 6),
+            AccountModel(name: "Some name", baseValueInCents: 0, currency: .afghani, order: 7)
         ]
         
         loadedAccounts.accept(mocks)
@@ -188,7 +184,7 @@ enum AccountsListTableItem: IdentifiableType, Equatable {
     
     var identity: String {
         switch self {
-        case .account(let viewModel): return viewModel.accountModel.id.uuidString
+        case .account(let viewModel): return viewModel.accountModel.id
         case .group(let viewModel): return viewModel.accountGroupModel.id.uuidString
         }
     }

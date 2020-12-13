@@ -14,5 +14,5 @@ protocol AccountOperationCellViewModelType {
 
 final class AccountOperationCellViewModel: AccountOperationCellViewModelType {
     
-    let operation = FPOperation(id: UUID(), accountId: UUID(), flow: .noneIncome, value: 23.94, creationDate: Date(), comment: "Some comment", photoPath: nil, tagIds: [])
+    let operation = FPOperation(id: UUID(), accountId: UUID(), flow: .noneExpense, valueInCents: 23, creationDate: Date(), operationDate: Date(), comment: "ef")
 }

@@ -8,12 +8,12 @@
 import Foundation
 
 protocol UserStateServiceType {
-    func getCurrentOpenedAccount() -> FPAccount
+    func getCurrentOpenedAccount() -> AccountModelType
 }
 
 final class UserStateService: UserStateServiceType {
     
-    func getCurrentOpenedAccount() -> FPAccount {
-        return FPAccount(id: UUID(), name: "Some name", baseValue: 0.0, calculatedValue: 0.0, currency: "UAH", order: 0)
+    func getCurrentOpenedAccount() -> AccountModelType {
+        return AccountModel(name: "Some name", baseValueInCents: 0, currency: .afghani, order: 0)
     }
 }

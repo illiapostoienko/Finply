@@ -11,16 +11,16 @@ struct FPOperation {
     let id: UUID
     
     let accountId: UUID
-    let flow: OperationFlow
+    let flow: OperationKind
     
-    let value: Double
+    let valueInCents: Int
     let creationDate: Date
-    let setDate: Date
+    let operationDate: Date
     let comment: String?
-    let photoPath: String?
-    let tagIds: [String]
+    //let photoPath: String?
+    //let tagIds: [String]
     
-    enum OperationFlow {
+    enum OperationKind {
         case noneIncome
         case noneExpense
         case categoryIncome(categoryId: UUID)

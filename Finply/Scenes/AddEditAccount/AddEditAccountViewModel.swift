@@ -10,13 +10,13 @@ import RxCocoa
 
 protocol AddEditAccountViewModelCoordination {
     var close: Observable<Void> { get }
-    var accountComplete: Observable<FPAccount> { get }
+    var accountComplete: Observable<AccountModelType> { get }
 }
 
 protocol AddEditAccountViewModelType: BaseModalViewModelType {
     var coordination: AddEditAccountViewModelCoordination { get }
     
-    func setupAccountToEdit(_ accountToEdit: FPAccount)
+    func setupAccountToEdit(_ accountToEdit: AccountModelType)
 }
 
 final class AddEditAccountViewModel: AddEditAccountViewModelType, AddEditAccountViewModelCoordination,
@@ -38,16 +38,16 @@ final class AddEditAccountViewModel: AddEditAccountViewModelType, AddEditAccount
     
     // Coordination
     var close: Observable<Void> { _closeTapStream }
-    var accountComplete: Observable<FPAccount> { _accountCompleteStream }
+    var accountComplete: Observable<AccountModelType> { _accountCompleteStream }
     
     // Locals
     private let _closeTapStream = PublishSubject<Void>()
     private let _checkButtonStream = PublishSubject<Void>()
     private let _itemSelectedStream = PublishSubject<Int>()
-    private let _accountCompleteStream = PublishSubject<FPAccount>()
+    private let _accountCompleteStream = PublishSubject<AccountModelType>()
     
     private let _currentTitle: BehaviorRelay<String>
-    private let _existingAccount = BehaviorRelay<FPAccount?>(value: nil)
+    private let _existingAccount = BehaviorRelay<AccountModelType?>(value: nil)
     private let _dataSource = BehaviorRelay<[BaseModalTableViewItem]>(value: [])
     
     init() {
@@ -56,9 +56,11 @@ final class AddEditAccountViewModel: AddEditAccountViewModelType, AddEditAccount
         
         // _checkButtonStream -> fill _completedAccount if everything is ok,
         // or show validation error if not
+        
+        _dataSource.accept([.titleInput(viewModel: TitleInputCellViewModel())])
     }
     
-    func setupAccountToEdit(_ accountToEdit: FPAccount) {
+    func setupAccountToEdit(_ accountToEdit: AccountModelType) {
         _currentTitle.accept("Edit Account")
         _existingAccount.accept(accountToEdit)
         // fill childs with accountToEdit's values

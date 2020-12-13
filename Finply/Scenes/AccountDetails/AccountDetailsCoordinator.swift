@@ -118,7 +118,7 @@ final class AccountDetailsCoordinator: BaseCoordinator<Void> {
         return coordinate(to: coordinator)
     }
     
-    private func coordinateToEditAccount(accountToEdit: FPAccount) -> Observable<AddEditAccountCoordinationResult> {
+    private func coordinateToEditAccount(accountToEdit: AccountModelType) -> Observable<AddEditAccountCoordinationResult> {
         let coordinator = AddEditAccountCoordinator(accountToEdit: accountToEdit,
                                                     presentingViewController: accountDetailsVc,
                                                     dependencyContainer: dependencyContainer)

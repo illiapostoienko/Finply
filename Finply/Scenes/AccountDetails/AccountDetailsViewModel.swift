@@ -25,7 +25,7 @@ protocol AccountDetailsViewModelCoordination {
     var editOperation: Observable<FPOperation> { get }
     var reportDetails: Observable<Void> { get }
     var accountsList: Observable<Void> { get }
-    var editAccount: Observable<FPAccount> { get }
+    var editAccount: Observable<AccountModelType> { get }
     var profile: Observable<Void> { get }
 }
 
@@ -61,14 +61,14 @@ final class AccountDetailsViewModel: AccountDetailsViewModelType, AccountDetails
     var editOperation: Observable<FPOperation>
     var reportDetails: Observable<Void> { accountMonthDetailsViewModel.reportDetailsTap }
     var accountsList: Observable<Void> { accountHeaderViewModel.accountTap }
-    var editAccount: Observable<FPAccount> { accountHeaderViewModel.editAccountTap.withLatestFrom(_currentAccount) }
+    var editAccount: Observable<AccountModelType> { accountHeaderViewModel.editAccountTap.withLatestFrom(_currentAccount) }
     var profile: Observable<Void> { accountHeaderViewModel.profileTap }
     
     // Local Streams
     private let _addTapStream = PublishSubject<Void>()
     private let _rowSelectedStream = PublishSubject<IndexPath>()
-    private let _currentAccount: BehaviorRelay<FPAccount>
-    private let loadedOperations = BehaviorRelay<[FPAccount]>(value: [])
+    private let _currentAccount: BehaviorRelay<AccountModelType>
+    private let loadedOperations = BehaviorRelay<[AccountModelType]>(value: [])
     
     //Services
     private let userStateService: UserStateServiceType
@@ -86,7 +86,7 @@ final class AccountDetailsViewModel: AccountDetailsViewModelType, AccountDetails
         let account = userStateService.getCurrentOpenedAccount()
         //setup viewModels with account
         
-        self._currentAccount = BehaviorRelay<FPAccount>(value: account)
+        self._currentAccount = BehaviorRelay<AccountModelType>(value: account)
         
         currentOperationSections = BehaviorRelay<[OperationsSection]>(value: mockData)
     

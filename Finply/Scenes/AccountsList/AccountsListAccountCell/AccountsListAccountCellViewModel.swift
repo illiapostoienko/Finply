@@ -10,14 +10,14 @@ import RxCocoa
 import Foundation
 
 protocol AccountsListAccountCellViewModelType {
-    var accountModel: FPAccount { get }
+    var accountModel: AccountModelType { get }
 }
 
 final class AccountsListAccountCellViewModel: AccountsListAccountCellViewModelType {
     
-    let accountModel: FPAccount
+    let accountModel: AccountModelType
     
-    init(accountModel: FPAccount = FPAccount(id: UUID(), name: "", baseValue: 0.0, calculatedValue: 0.0, currency: "UAH", order: 0)) {
+    init(accountModel: AccountModelType = AccountModel(name: "Some name", baseValueInCents: 0, currency: .afghani, order: 0)) {
         self.accountModel = accountModel
     }
 }

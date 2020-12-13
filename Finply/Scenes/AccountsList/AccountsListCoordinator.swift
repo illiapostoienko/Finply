@@ -11,7 +11,7 @@ import Dip
 
 enum AccountsListCoordinationResult {
     case back
-    case accountSelected(model: FPAccount)
+    case accountSelected(model: AccountModelType)
     case accountsGroupSelected(model: FPAccountGroup)
 }
 
@@ -51,8 +51,6 @@ final class AccountsListCoordinator: BaseCoordinator<AccountsListCoordinationRes
             })
             .disposed(by: bag)
         
-//        viewModel.coordination.addGroup -> coordinate
-        
         viewModel.coordination.editAccount
             .flatMap{ [unowned self] in self.coordinateToAddEditAccount(accountToEdit: $0) }
             .subscribe(onNext: {
@@ -63,6 +61,7 @@ final class AccountsListCoordinator: BaseCoordinator<AccountsListCoordinationRes
             })
             .disposed(by: bag)
         
+//        viewModel.coordination.addAccountGroup -> coordinate
 //        viewModel.coordination.editAccountGroup
         
         return Observable.merge(
@@ -76,10 +75,17 @@ final class AccountsListCoordinator: BaseCoordinator<AccountsListCoordinationRes
     }
     
     // MARK: - Coordination
-    private func coordinateToAddEditAccount(accountToEdit: FPAccount? = nil) -> Observable<AddEditAccountCoordinationResult> {
+    private func coordinateToAddEditAccount(accountToEdit: AccountModelType? = nil) -> Observable<AddEditAccountCoordinationResult> {
         let coordinator = AddEditAccountCoordinator(accountToEdit: accountToEdit,
                                                     presentingViewController: viewController,
                                                     dependencyContainer: dependencyContainer)
         return coordinate(to: coordinator)
     }
+    
+//    private func coordinateToAddEditAccountGroup(accountToEdit: FPAccountGroup? = nil) -> Observable<AddEditAccountGroupCoordinationResult> {
+//        let coordinator = AddEditAccountGroupCoordinator(accountToEdit: accountToEdit,
+//                                                    presentingViewController: viewController,
+//                                                    dependencyContainer: dependencyContainer)
+//        return coordinate(to: coordinator)
+//    }
 }

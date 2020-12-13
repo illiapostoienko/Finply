@@ -11,17 +11,17 @@ import Dip
 
 enum AddEditAccountCoordinationResult {
     case close
-    case accountAdded(FPAccount)
-    case accountEdited(FPAccount)
+    case accountAdded(AccountModelType)
+    case accountEdited(AccountModelType)
 }
 
 final class AddEditAccountCoordinator: BaseCoordinator<AddEditAccountCoordinationResult> {
     
-    let accountToEdit: FPAccount?
+    let accountToEdit: AccountModelType?
     let presentingViewController: UIViewController
     let dependencyContainer: DependencyContainer
     
-    init(accountToEdit: FPAccount?, presentingViewController: UIViewController, dependencyContainer: DependencyContainer) {
+    init(accountToEdit: AccountModelType?, presentingViewController: UIViewController, dependencyContainer: DependencyContainer) {
         self.accountToEdit = accountToEdit
         self.presentingViewController = presentingViewController
         self.dependencyContainer = dependencyContainer

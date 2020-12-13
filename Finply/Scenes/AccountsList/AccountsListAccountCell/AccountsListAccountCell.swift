@@ -11,31 +11,25 @@ import RxCocoa
 
 final class AccountsListAccountCell: UITableViewCell, NibReusable, BindableType {
     
+    @IBOutlet private var baseCardView: GradientView!
+    
     var viewModel: AccountsListAccountCellViewModelType!
     
     private var bag = DisposeBag()
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        commonInit()
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        let backgroundView = UIView()
+        backgroundView.backgroundColor = .clear
+        self.selectedBackgroundView = backgroundView
     }
 
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        commonInit()
-    }
-    
     override func prepareForReuse() {
         bag = DisposeBag()
     }
     
     func bindViewModel() {
         
-    }
-    
-    private func commonInit() {
-        let backgroundView = UIView()
-        backgroundView.backgroundColor = .clear
-        self.selectedBackgroundView = backgroundView
     }
 }

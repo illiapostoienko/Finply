@@ -18,7 +18,7 @@ final class FinplyDI {
         container.register{ PlanningListViewModel() }.implements(PlanningListViewModelType.self)
         
         //Main Branches
-        container.register{ AddEditOperationViewModel(operationService: $0) }.implements(AddEditOperationViewModelType.self)
+        container.register{ AddEditOperationViewModel() }.implements(AddEditOperationViewModelType.self)
         container.register{ AccountsListViewModel() }.implements(AccountsListViewModelType.self)
         container.register{ ReportDetailsViewModel() }.implements(ReportDetailsViewModelType.self)
         container.register{ AddEditAccountViewModel() }.implements(AddEditAccountViewModelType.self)
@@ -31,8 +31,7 @@ final class FinplyDI {
     }
     
     static func registerCoreServices(container: DependencyContainer) {
-        container.register{ FPAccountService() }.implements(FPAccountServiceType.self)
-        container.register{ FPOperationService() }.implements(FPOperationServiceType.self)
+
         container.register{ UserStateService() }.implements(UserStateServiceType.self)
     }
     

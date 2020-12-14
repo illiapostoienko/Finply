@@ -12,7 +12,7 @@ import Dip
 enum AccountsListCoordinationResult {
     case back
     case accountSelected(model: AccountModelType)
-    case accountsGroupSelected(model: FPAccountGroup)
+    case accountsGroupSelected(model: AccountGroupModelType)
 }
 
 final class AccountsListCoordinator: BaseCoordinator<AccountsListCoordinationResult> {

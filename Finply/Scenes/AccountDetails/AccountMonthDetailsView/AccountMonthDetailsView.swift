@@ -58,8 +58,4 @@ final class AccountMonthDetailsView: NibLoadable, BindableType {
             .bind(to: viewModel.reportDetailsTap)
             .disposed(by: bag)
     }
-    
-    func adjustLayout(by percent: CGFloat) {
-        
-    }
 }

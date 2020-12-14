@@ -210,7 +210,6 @@ extension AccountDetailsViewController: UITableViewDelegate {
     
     private func adjustOtherViewsLayout(by percent: CGFloat) {
         accountHeaderView.adjustLayout(by: percent)
-        monthDetailsView.adjustLayout(by: percent)
     }
     
     enum TableState {

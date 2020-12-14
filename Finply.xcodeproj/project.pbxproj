@@ -17,6 +17,9 @@
 		EA02380B2585EAF500A284C4 /* OperationSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA02380A2585EAF500A284C4 /* OperationSectionModel.swift */; };
 		EA02380F2585ED3300A284C4 /* OperationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA02380E2585ED3300A284C4 /* OperationModel.swift */; };
 		EA0238122585F01200A284C4 /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0238112585F01200A284C4 /* CategoryModel.swift */; };
+		EA0238162585FB9F00A284C4 /* AccountInGroupContainerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA0238152585FB9F00A284C4 /* AccountInGroupContainerView.xib */; };
+		EA0238192585FF4600A284C4 /* AccountInGroupContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0238182585FF4600A284C4 /* AccountInGroupContainerView.swift */; };
+		EA02381C2585FF8D00A284C4 /* AccountsInGroupContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA02381B2585FF8D00A284C4 /* AccountsInGroupContainerView.swift */; };
 		EA1D9E692524A80A00E2027F /* AddEditOperationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1D9E682524A80A00E2027F /* AddEditOperationCoordinator.swift */; };
 		EA1D9E712524B07100E2027F /* AddEditOperationViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA1D9E702524B07100E2027F /* AddEditOperationViewController.storyboard */; };
 		EA1D9E752524B07B00E2027F /* AddEditOperationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1D9E742524B07B00E2027F /* AddEditOperationViewController.swift */; };
@@ -126,6 +129,9 @@
 		EA02380A2585EAF500A284C4 /* OperationSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationSectionModel.swift; sourceTree = "<group>"; };
 		EA02380E2585ED3300A284C4 /* OperationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationModel.swift; sourceTree = "<group>"; };
 		EA0238112585F01200A284C4 /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
+		EA0238152585FB9F00A284C4 /* AccountInGroupContainerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountInGroupContainerView.xib; sourceTree = "<group>"; };
+		EA0238182585FF4600A284C4 /* AccountInGroupContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInGroupContainerView.swift; sourceTree = "<group>"; };
+		EA02381B2585FF8D00A284C4 /* AccountsInGroupContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsInGroupContainerView.swift; sourceTree = "<group>"; };
 		EA1D9E682524A80A00E2027F /* AddEditOperationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditOperationCoordinator.swift; sourceTree = "<group>"; };
 		EA1D9E702524B07100E2027F /* AddEditOperationViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddEditOperationViewController.storyboard; sourceTree = "<group>"; };
 		EA1D9E742524B07B00E2027F /* AddEditOperationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditOperationViewController.swift; sourceTree = "<group>"; };
@@ -288,6 +294,16 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
+		EA0238142585FB7400A284C4 /* AccountInGroupContainerView */ = {
+			isa = PBXGroup;
+			children = (
+				EA0238152585FB9F00A284C4 /* AccountInGroupContainerView.xib */,
+				EA0238182585FF4600A284C4 /* AccountInGroupContainerView.swift */,
+				EA02381B2585FF8D00A284C4 /* AccountsInGroupContainerView.swift */,
+			);
+			path = AccountInGroupContainerView;
+			sourceTree = "<group>";
+		};
 		EA1D9E672524A7EC00E2027F /* AddEditOperation */ = {
 			isa = PBXGroup;
 			children = (
@@ -320,6 +336,7 @@
 		EA7EE7332571859500A82386 /* AccountsListGroupCell */ = {
 			isa = PBXGroup;
 			children = (
+				EA0238142585FB7400A284C4 /* AccountInGroupContainerView */,
 				EA7EE73B2571875300A82386 /* AccountsListGroupCell.xib */,
 				EA7EE735257186FE00A82386 /* AccountsListGroupCell.swift */,
 				EA7EE7382571872B00A82386 /* AccountsListGroupCellViewModelType.swift */,
@@ -726,6 +743,7 @@
 				EA930C3C2523D54F00E12805 /* Assets.xcassets in Resources */,
 				EA1D9E712524B07100E2027F /* AddEditOperationViewController.storyboard in Resources */,
 				EA9F662E2554E44000441ED0 /* PlanningListViewController.storyboard in Resources */,
+				EA0238162585FB9F00A284C4 /* AccountInGroupContainerView.xib in Resources */,
 				EAD68A302554F8150083B30D /* AccountHeaderView.xib in Resources */,
 				EAD68A6E25558AC80083B30D /* AccountOperationsSectionHeader.xib in Resources */,
 				EA7EE73C2571875300A82386 /* AccountsListGroupCell.xib in Resources */,
@@ -785,9 +803,11 @@
 				EA930CED25248A4800E12805 /* FPCategory.swift in Sources */,
 				EAD68B0F255B012C0083B30D /* ProfileDetailsViewController.swift in Sources */,
 				EAD68A412554F8810083B30D /* AccountDetailsCoordinator.swift in Sources */,
+				EA02381C2585FF8D00A284C4 /* AccountsInGroupContainerView.swift in Sources */,
 				EA0237FE25855BAE00A284C4 /* RealmObjectDelegate.swift in Sources */,
 				EA9BCAA125434434003DE283 /* AccountsListViewModel.swift in Sources */,
 				EA9F66322554E44000441ED0 /* BudgetsListCoordinator.swift in Sources */,
+				EA0238192585FF4600A284C4 /* AccountInGroupContainerView.swift in Sources */,
 				EA7EE723257161C600A82386 /* PushTransition.swift in Sources */,
 				EAD68AD7255953A30083B30D /* Rx+Extensions.swift in Sources */,
 				EAD68A7125558AD10083B30D /* AccountOperationsSectionHeader.swift in Sources */,

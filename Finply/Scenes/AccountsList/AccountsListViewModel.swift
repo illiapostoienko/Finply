@@ -26,8 +26,8 @@ protocol AccountsListViewModelInput {
     
     var accountAdded: AnyObserver<AccountModelType> { get }
     var accountEdited: AnyObserver<AccountModelType> { get }
-    var accountGroupAdded: AnyObserver<FPAccountGroup> { get }
-    var accountGroupEdited: AnyObserver<FPAccountGroup> { get }
+    var accountGroupAdded: AnyObserver<AccountGroupModelType> { get }
+    var accountGroupEdited: AnyObserver<AccountGroupModelType> { get }
 }
 
 protocol AccountsListViewModelCoordination {
@@ -36,10 +36,10 @@ protocol AccountsListViewModelCoordination {
     var addAccount: Observable<Void> { get }
     var editAccount: Observable<AccountModelType> { get }
     var addAccountGroup: Observable<Void> { get }
-    var editAccountGroup: Observable<FPAccountGroup> { get }
+    var editAccountGroup: Observable<AccountGroupModelType> { get }
     
     var accountSelected: Observable<AccountModelType> { get }
-    var accountGroupSelected: Observable<FPAccountGroup> { get }
+    var accountGroupSelected: Observable<AccountGroupModelType> { get }
 }
 
 protocol AccountsListViewModelType {
@@ -73,8 +73,8 @@ final class AccountsListViewModel: AccountsListViewModelType, AccountsListViewMo
     
     var accountAdded: AnyObserver<AccountModelType> { _accountAddedStream.asObserver() }
     var accountEdited: AnyObserver<AccountModelType> { _accountEditedStream.asObserver() }
-    var accountGroupAdded: AnyObserver<FPAccountGroup> { _accountGroupAddedStream.asObserver() }
-    var accountGroupEdited: AnyObserver<FPAccountGroup> { _accountGroupEditedStream.asObserver() }
+    var accountGroupAdded: AnyObserver<AccountGroupModelType> { _accountGroupAddedStream.asObserver() }
+    var accountGroupEdited: AnyObserver<AccountGroupModelType> { _accountGroupEditedStream.asObserver() }
     
     // Coordination
     var back: Observable<Void> { _backTapStream }
@@ -82,8 +82,8 @@ final class AccountsListViewModel: AccountsListViewModelType, AccountsListViewMo
     var addAccountGroup: Observable<Void> { _addTapStream.withLatestFrom(_currentTab).filter{ $0 == .groups }.ignoreContent() }
     var editAccount: Observable<AccountModelType>
     var accountSelected: Observable<AccountModelType>
-    var editAccountGroup: Observable<FPAccountGroup>
-    var accountGroupSelected: Observable<FPAccountGroup>
+    var editAccountGroup: Observable<AccountGroupModelType>
+    var accountGroupSelected: Observable<AccountGroupModelType>
 
     // Local Streams
     private let _backTapStream = PublishSubject<Void>()
@@ -96,14 +96,14 @@ final class AccountsListViewModel: AccountsListViewModelType, AccountsListViewMo
     
     private var _accountAddedStream = PublishSubject<AccountModelType>()
     private var _accountEditedStream = PublishSubject<AccountModelType>()
-    private var _accountGroupAddedStream = PublishSubject<FPAccountGroup>()
-    private var _accountGroupEditedStream = PublishSubject<FPAccountGroup>()
+    private var _accountGroupAddedStream = PublishSubject<AccountGroupModelType>()
+    private var _accountGroupEditedStream = PublishSubject<AccountGroupModelType>()
     
     private let _currentTab = BehaviorRelay<AccountsListTab>(value: .accounts)
     private let _dataSource = BehaviorRelay<[AccountsListTableItem]>(value: [])
     private let _isEditModeEnabled = BehaviorRelay<Bool>(value: false)
     private let loadedAccounts = BehaviorRelay<[AccountModelType]>(value: [])
-    private let loadedGroups = BehaviorRelay<[FPAccountGroup]>(value: [])
+    private let loadedGroups = BehaviorRelay<[AccountGroupModelType]>(value: [])
     
     //Services
     
@@ -163,7 +163,7 @@ final class AccountsListViewModel: AccountsListViewModelType, AccountsListViewMo
             .disposed(by: bag)
         
         // load accounts and groups into internal arrays
-        let mocks: [AccountModelType] = [
+        let mockAccounts: [AccountModelType] = [
             AccountModel(name: "Some name", baseValueInCents: 0, currency: .afghani, order: 0),
             AccountModel(name: "Some name", baseValueInCents: 0, currency: .afghani, order: 1),
             AccountModel(name: "Some name", baseValueInCents: 0, currency: .afghani, order: 2),
@@ -174,7 +174,13 @@ final class AccountsListViewModel: AccountsListViewModelType, AccountsListViewMo
             AccountModel(name: "Some name", baseValueInCents: 0, currency: .afghani, order: 7)
         ]
         
-        loadedAccounts.accept(mocks)
+        let mockGroups: [AccountGroupModelType] = [
+            AccountGroupModel(name: "Everyday", order: 0),
+            AccountGroupModel(name: "Everyday", order: 0)
+        ]
+        
+        loadedAccounts.accept(mockAccounts)
+        loadedGroups.accept(mockGroups)
     }
 }
 
@@ -185,7 +191,7 @@ enum AccountsListTableItem: IdentifiableType, Equatable {
     var identity: String {
         switch self {
         case .account(let viewModel): return viewModel.accountModel.id
-        case .group(let viewModel): return viewModel.accountGroupModel.id.uuidString
+        case .group(let viewModel): return viewModel.accountGroupModel.id
         }
     }
     

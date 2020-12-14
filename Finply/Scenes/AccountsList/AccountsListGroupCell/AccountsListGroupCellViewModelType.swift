@@ -9,14 +9,14 @@ import RxSwift
 import RxCocoa
 
 protocol AccountsListGroupCellViewModelType {
-    var accountGroupModel: FPAccountGroup { get }
+    var accountGroupModel: AccountGroupModelType { get }
 }
 
 final class AccountsListGroupCellViewModel: AccountsListGroupCellViewModelType {
     
-    let accountGroupModel: FPAccountGroup
+    let accountGroupModel: AccountGroupModelType
     
-    init(accountGroupModel: FPAccountGroup) {
+    init(accountGroupModel: AccountGroupModelType) {
         self.accountGroupModel = accountGroupModel
     }
 }

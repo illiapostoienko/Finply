@@ -35,7 +35,7 @@ final class AddEditAccountCoordinator: BaseCoordinator<AddEditAccountCoordinatio
         
         accountToEdit.map{ viewModel.setupAccountToEdit($0) }
         
-        vc.modalPresentationStyle = .overFullScreen
+        //vc.modalPresentationStyle = .overFullScreen
         presentingViewController.present(vc, animated: true)
         
         return Observable.merge(

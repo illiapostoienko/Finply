@@ -9,22 +9,22 @@ import UIKit
 
 public extension UITableView {
 
-    var indexesOfVisibleSections: [Int] {
-        var visibleSectionIndexes = [Int]()
+    var indicesOfVisibleSections: [Int] {
+        var visibleSectionIndices = [Int]()
         
         for i in 0..<numberOfSections {
             let headerRect = self.style == .plain ? rect(forSection: i) : rectForHeader(inSection: i)
             
             let visiblePartOfTableView: CGRect = CGRect(x: contentOffset.x, y: contentOffset.y, width: bounds.size.width, height: bounds.size.height)
-            if visiblePartOfTableView.intersects(headerRect) { visibleSectionIndexes.append(i) }
+            if visiblePartOfTableView.intersects(headerRect) { visibleSectionIndices.append(i) }
         }
         
-        return visibleSectionIndexes
+        return visibleSectionIndices
     }
 
     var visibleSectionHeaders: [UITableViewHeaderFooterView] {
         var visibleSections = [UITableViewHeaderFooterView]()
-        indexesOfVisibleSections.forEach{
+        indicesOfVisibleSections.forEach{
             if let sectionHeader = headerView(forSection: $0) {
                 visibleSections.append(sectionHeader)
             }

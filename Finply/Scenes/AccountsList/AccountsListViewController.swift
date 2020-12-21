@@ -28,14 +28,13 @@ final class AccountsListViewController: UIViewController, BindableType {
     private var dataSource: RxTableViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AccountsListTableItem>>!
     
     var viewModel: AccountsListViewModelType!
-    var transitionFrame: CGRect = .zero
     
     private let bag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
-        updateSlider(by: .accounts)
+        updateTabAppearance(by: .accounts)
     }
     
     func bindViewModel() {
@@ -66,7 +65,7 @@ final class AccountsListViewController: UIViewController, BindableType {
         Observable.merge(accountsTabButton.rx.tap.map{ .accounts },
                          groupsTabButton.rx.tap.map{ .groups })
             .do(onNext: { [weak self] tab in
-                self?.updateSlider(by: tab)
+                self?.updateTabAppearance(by: tab)
                 self?.tableView.setEditing(false, animated: true)
             })
             .bind(to: viewModel.input.tabButtonTap)
@@ -93,38 +92,36 @@ final class AccountsListViewController: UIViewController, BindableType {
     private func setupTableView() {
         tableView.register(cellType: AccountsListAccountCell.self)
         tableView.register(cellType: AccountsListGroupCell.self)
-        tableView.delegate = self
-        tableView.dragDelegate = self
-        tableView.dropDelegate = self
-        tableView.dragInteractionEnabled = true
-
+        
         dataSource = RxTableViewSectionedAnimatedDataSource(
             configureCell: { dataSource, tableView, indexPath, _ in
+                if let spacer = tableView.reorder.spacerCell(for: indexPath) { return spacer }
                 switch dataSource[indexPath] {
                 case .account(let viewModel):
                     var cell = tableView.dequeueReusableCell(for: indexPath) as AccountsListAccountCell
                     cell.bind(to: viewModel)
+                    cell.swipeDelegate = self
                     return cell
                 case .group(let viewModel):
                     var cell = tableView.dequeueReusableCell(for: indexPath) as AccountsListGroupCell
                     cell.bind(to: viewModel)
+                    cell.swipeDelegate = self
                     return cell
                 }
-            },
-            canEditRowAtIndexPath: { _, _ in
-                return true
-            },
-            canMoveRowAtIndexPath: { _, _ in
-                return true
             }
         )
         
         tableView.estimatedRowHeight = UITableView.automaticDimension
         tableView.rowHeight = UITableView.automaticDimension
         tableView.tableFooterView = UIView()
+        
+        tableView.reorder.delegate = self
+        tableView.reorder.cellScale = 1.05
+        tableView.reorder.shadowOpacity = 0
+        tableView.reorder.shadowRadius = 0
     }
     
-    private func updateSlider(by tab: AccountsListTab) {
+    private func updateTabAppearance(by tab: AccountsListTab) {
         let buttonToOperate: UIButton
         
         switch tab {
@@ -132,6 +129,7 @@ final class AccountsListViewController: UIViewController, BindableType {
         case .groups: buttonToOperate = groupsTabButton
         }
         
+        //Slider
         let width = view.frame.width
         let buttonFrame = buttonToOperate.frame
         let labelFrame = buttonToOperate.titleLabel?.frame
@@ -146,8 +144,17 @@ final class AccountsListViewController: UIViewController, BindableType {
         
         sliderLeadingConstraint.constant = leftValue
         sliderTrailingConstraint.constant = rightValue
-        UIView.animate(withDuration: 0.2) {
-            self.view.layoutIfNeeded()
+        
+        self.view.layoutIfNeeded()
+        
+        //Button Color
+        switch tab {
+        case .accounts:
+            accountsTabButton.setTitleColor(#colorLiteral(red: 0.3019607843, green: 0.4, blue: 0.8745098039, alpha: 1), for: [])
+            groupsTabButton.setTitleColor(#colorLiteral(red: 0.6823529412, green: 0.7176470588, blue: 0.7568627451, alpha: 1), for: [])
+        case .groups:
+            accountsTabButton.setTitleColor(#colorLiteral(red: 0.6823529412, green: 0.7176470588, blue: 0.7568627451, alpha: 1), for: [])
+            groupsTabButton.setTitleColor(#colorLiteral(red: 0.3019607843, green: 0.4, blue: 0.8745098039, alpha: 1), for: [])
         }
     }
     
@@ -156,35 +163,21 @@ final class AccountsListViewController: UIViewController, BindableType {
     }
 }
 
-extension AccountsListViewController: UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        
-        let edit = UIContextualAction(style: .normal, title: "Edit", handler: { [weak self] _, _, completion in
-            self?.viewModel.input.editRowIntent.onNext(indexPath.row)
-            completion(true)
-        })
-        edit.image = UIImage(named: "edit")
-        edit.backgroundColor = UIColor.init(red: 0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 0.0)
-        
-        let delete = UIContextualAction(style: .destructive, title: "Delete", handler: { [weak self] _, _, completion in
-            // alert
-            self?.viewModel.input.editRowIntent.onNext(indexPath.row)
-            completion(true)
-        })
-        //delete.image = UIImage(named: "edit")
-        delete.backgroundColor = UIColor.init(red: 0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 0.0)
-
-        return UISwipeActionsConfiguration(actions: [delete, edit])
+extension AccountsListViewController: TableViewReorderDelegate {
+    func tableViewDidFinishReordering(_ tableView: UITableView, from initialSourceIndexPath: IndexPath, to finalDestinationIndexPath: IndexPath) {
+        viewModel
+            .input
+            .changeOrderIntent
+            .onNext((fromIndex: initialSourceIndexPath.row, toIndex: finalDestinationIndexPath.row))
     }
 }
 
-extension AccountsListViewController: UITableViewDragDelegate, UITableViewDropDelegate {
-    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
-        []
-    }
-    
-    func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
-        
+extension AccountsListViewController: SwipeableCellDelegate {
+    func didStartSwiping(_ cell: SwipeableCell) {
+        tableView.visibleCells.forEach{ visibleCell in
+            guard visibleCell !== cell else { return }
+            if let accountCell = visibleCell as? AccountsListAccountCell { accountCell.resetCellPosition(toInitial: true) }
+            if let groupCell = visibleCell as? AccountsListGroupCell { groupCell.resetCellPosition(toInitial: true) }
+        }
     }
 }

@@ -24,6 +24,7 @@ final class AppCoordinator: BaseCoordinator<Void> {
     
     private let containerViewController: UIViewController = UIViewController()
     private let pageViewController: UIPageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+    
     private let accountDetailsVc: AccountDetailsViewController = AccountDetailsViewController.instantiate()
     private let budgetsListVc: BudgetsListViewController = BudgetsListViewController.instantiate()
     private let planningListVc: PlanningListViewController = PlanningListViewController.instantiate()
@@ -31,7 +32,6 @@ final class AppCoordinator: BaseCoordinator<Void> {
     init(window: UIWindow, dependencyContainer: DependencyContainer) {
         self.window = window
         self.dependencyContainer = dependencyContainer
-        
         super.init()
     }
     
@@ -63,25 +63,17 @@ final class AppCoordinator: BaseCoordinator<Void> {
 }
 
 extension AppCoordinator: UIPageViewControllerDataSource {
-
+    
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        return self.viewController(before: viewController)
-    }
-    
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        return self.viewController(after: viewController)
-    }
-    
-    private func viewController(before viewController: UIViewController) -> UIViewController? {
         guard let page = self.page(for: viewController),
-            let previousPage = page.pageBefore() else { return nil }
+              let previousPage = page.pageBefore() else { return nil }
         
         return self.viewController(for: previousPage)
     }
     
-    private func viewController(after viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         guard let page = self.page(for: viewController),
-            let nextPage = page.pageAfter() else { return nil }
+              let nextPage = page.pageAfter() else { return nil }
         
         return self.viewController(for: nextPage)
     }

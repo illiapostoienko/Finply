@@ -20,12 +20,19 @@
 		EA0238162585FB9F00A284C4 /* AccountInGroupContainerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA0238152585FB9F00A284C4 /* AccountInGroupContainerView.xib */; };
 		EA0238192585FF4600A284C4 /* AccountInGroupContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0238182585FF4600A284C4 /* AccountInGroupContainerView.swift */; };
 		EA02381C2585FF8D00A284C4 /* AccountsInGroupContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA02381B2585FF8D00A284C4 /* AccountsInGroupContainerView.swift */; };
+		EA02382625876D3800A284C4 /* UITableView+Reorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA02382025876D3800A284C4 /* UITableView+Reorder.swift */; };
+		EA02382725876D3800A284C4 /* ReorderController+SnapshotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA02382125876D3800A284C4 /* ReorderController+SnapshotView.swift */; };
+		EA02382825876D3800A284C4 /* ReorderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA02382225876D3800A284C4 /* ReorderController.swift */; };
+		EA02382925876D3800A284C4 /* ReorderController+GestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA02382325876D3800A284C4 /* ReorderController+GestureRecognizer.swift */; };
+		EA02382A25876D3800A284C4 /* ReorderController+DestinationRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA02382425876D3800A284C4 /* ReorderController+DestinationRow.swift */; };
+		EA02382B25876D3800A284C4 /* ReorderController+AutoScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA02382525876D3800A284C4 /* ReorderController+AutoScroll.swift */; };
 		EA1D9E692524A80A00E2027F /* AddEditOperationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1D9E682524A80A00E2027F /* AddEditOperationCoordinator.swift */; };
 		EA1D9E712524B07100E2027F /* AddEditOperationViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA1D9E702524B07100E2027F /* AddEditOperationViewController.storyboard */; };
 		EA1D9E752524B07B00E2027F /* AddEditOperationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1D9E742524B07B00E2027F /* AddEditOperationViewController.swift */; };
 		EA1D9E792524B08500E2027F /* AddEditOperationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1D9E782524B08500E2027F /* AddEditOperationViewModel.swift */; };
 		EA1D9E9E2524D9C000E2027F /* File in Resources */ = {isa = PBXBuildFile; fileRef = EA1D9E9D2524D9C000E2027F /* File */; };
 		EA48F367256681B5007FE1BA /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F366256681B5007FE1BA /* UIView+Extensions.swift */; };
+		EA7C119B258CBAB800CED84B /* SwipeableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7C119A258CBAB800CED84B /* SwipeableCell.swift */; };
 		EA7EE723257161C600A82386 /* PushTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7EE722257161C600A82386 /* PushTransition.swift */; };
 		EA7EE7292571838E00A82386 /* AccountsListAccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7EE7282571838E00A82386 /* AccountsListAccountCell.swift */; };
 		EA7EE72E257183C700A82386 /* AccountsListAccountCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7EE72D257183C700A82386 /* AccountsListAccountCellViewModel.swift */; };
@@ -132,12 +139,19 @@
 		EA0238152585FB9F00A284C4 /* AccountInGroupContainerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountInGroupContainerView.xib; sourceTree = "<group>"; };
 		EA0238182585FF4600A284C4 /* AccountInGroupContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInGroupContainerView.swift; sourceTree = "<group>"; };
 		EA02381B2585FF8D00A284C4 /* AccountsInGroupContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsInGroupContainerView.swift; sourceTree = "<group>"; };
+		EA02382025876D3800A284C4 /* UITableView+Reorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Reorder.swift"; sourceTree = "<group>"; };
+		EA02382125876D3800A284C4 /* ReorderController+SnapshotView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ReorderController+SnapshotView.swift"; sourceTree = "<group>"; };
+		EA02382225876D3800A284C4 /* ReorderController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReorderController.swift; sourceTree = "<group>"; };
+		EA02382325876D3800A284C4 /* ReorderController+GestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ReorderController+GestureRecognizer.swift"; sourceTree = "<group>"; };
+		EA02382425876D3800A284C4 /* ReorderController+DestinationRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ReorderController+DestinationRow.swift"; sourceTree = "<group>"; };
+		EA02382525876D3800A284C4 /* ReorderController+AutoScroll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ReorderController+AutoScroll.swift"; sourceTree = "<group>"; };
 		EA1D9E682524A80A00E2027F /* AddEditOperationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditOperationCoordinator.swift; sourceTree = "<group>"; };
 		EA1D9E702524B07100E2027F /* AddEditOperationViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddEditOperationViewController.storyboard; sourceTree = "<group>"; };
 		EA1D9E742524B07B00E2027F /* AddEditOperationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditOperationViewController.swift; sourceTree = "<group>"; };
 		EA1D9E782524B08500E2027F /* AddEditOperationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditOperationViewModel.swift; sourceTree = "<group>"; };
 		EA1D9E9D2524D9C000E2027F /* File */ = {isa = PBXFileReference; lastKnownFileType = text; path = File; sourceTree = "<group>"; };
 		EA48F366256681B5007FE1BA /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
+		EA7C119A258CBAB800CED84B /* SwipeableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeableCell.swift; sourceTree = "<group>"; };
 		EA7EE722257161C600A82386 /* PushTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushTransition.swift; sourceTree = "<group>"; };
 		EA7EE7282571838E00A82386 /* AccountsListAccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsListAccountCell.swift; sourceTree = "<group>"; };
 		EA7EE72D257183C700A82386 /* AccountsListAccountCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsListAccountCellViewModel.swift; sourceTree = "<group>"; };
@@ -302,6 +316,19 @@
 				EA02381B2585FF8D00A284C4 /* AccountsInGroupContainerView.swift */,
 			);
 			path = AccountInGroupContainerView;
+			sourceTree = "<group>";
+		};
+		EA02381F25876D3800A284C4 /* UITableView+Reorder */ = {
+			isa = PBXGroup;
+			children = (
+				EA02382025876D3800A284C4 /* UITableView+Reorder.swift */,
+				EA02382125876D3800A284C4 /* ReorderController+SnapshotView.swift */,
+				EA02382225876D3800A284C4 /* ReorderController.swift */,
+				EA02382325876D3800A284C4 /* ReorderController+GestureRecognizer.swift */,
+				EA02382425876D3800A284C4 /* ReorderController+DestinationRow.swift */,
+				EA02382525876D3800A284C4 /* ReorderController+AutoScroll.swift */,
+			);
+			path = "UITableView+Reorder";
 			sourceTree = "<group>";
 		};
 		EA1D9E672524A7EC00E2027F /* AddEditOperation */ = {
@@ -591,10 +618,12 @@
 		EAD68A98255804530083B30D /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
+				EA02381F25876D3800A284C4 /* UITableView+Reorder */,
 				EA7EE74125727FE900A82386 /* BaseModalViewController */,
 				EA7EE7122571551B00A82386 /* CustomTransitions */,
 				EAD68AD925595AA40083B30D /* PieChartView */,
 				EAAE9BF3256ED7F400790931 /* GradientView.swift */,
+				EA7C119A258CBAB800CED84B /* SwipeableCell.swift */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
@@ -779,6 +808,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA02382825876D3800A284C4 /* ReorderController.swift in Sources */,
 				EAD68ADF25595AE00083B30D /* PieChartView.swift in Sources */,
 				EA0237D1258548D100A284C4 /* RealmRepository.swift in Sources */,
 				EAD68A482554F9C80083B30D /* AppCoordinator.swift in Sources */,
@@ -793,7 +823,9 @@
 				EA930C332523D54D00E12805 /* AppDelegate.swift in Sources */,
 				EAD68A67255582B20083B30D /* AccountHeaderViewModel.swift in Sources */,
 				EA930CC2252484CD00E12805 /* UITableView+Reusable.swift in Sources */,
+				EA02382B25876D3800A284C4 /* ReorderController+AutoScroll.swift in Sources */,
 				EAD68A492554F9C80083B30D /* BaseCoordinator.swift in Sources */,
+				EA02382625876D3800A284C4 /* UITableView+Reorder.swift in Sources */,
 				EA7EE74A2572837400A82386 /* BaseModalViewModelType.swift in Sources */,
 				EAD68AEE2559D52D0083B30D /* HighCategoryContainerView.swift in Sources */,
 				EA9BCAA42543443F003DE283 /* AccountsListCoordinator.swift in Sources */,
@@ -825,6 +857,7 @@
 				EA930C352523D54D00E12805 /* SceneDelegate.swift in Sources */,
 				EA02380F2585ED3300A284C4 /* OperationModel.swift in Sources */,
 				EAD68AF2255ADEA00083B30D /* HighCategoriesContainerView.swift in Sources */,
+				EA7C119B258CBAB800CED84B /* SwipeableCell.swift in Sources */,
 				EA9F662F2554E44000441ED0 /* PlanningListCoordinator.swift in Sources */,
 				EAD68A402554F8810083B30D /* AccountDetailsViewController.swift in Sources */,
 				EA0237D825854D6B00A284C4 /* AccountModel.swift in Sources */,
@@ -838,9 +871,11 @@
 				EA7EE7462572807300A82386 /* BaseModalViewController.swift in Sources */,
 				EA930CD62524859E00E12805 /* BindableType.swift in Sources */,
 				EAD68A522555064F0083B30D /* AccountMonthDetailsView.swift in Sources */,
+				EA02382725876D3800A284C4 /* ReorderController+SnapshotView.swift in Sources */,
 				EA9BCA9E25434421003DE283 /* AccountsListViewController.swift in Sources */,
 				EA930CCC2524854600E12805 /* NibBased.swift in Sources */,
 				EAD68B23255EA9490083B30D /* UITableView+Extensions.swift in Sources */,
+				EA02382925876D3800A284C4 /* ReorderController+GestureRecognizer.swift in Sources */,
 				EAD68B1E255B07110083B30D /* AddEditAccountViewModel.swift in Sources */,
 				EA0237F4258554B300A284C4 /* CurrencyLocale.swift in Sources */,
 				EA0238082585EA3400A284C4 /* AccountGroupModel.swift in Sources */,
@@ -856,6 +891,7 @@
 				EA9F66302554E44000441ED0 /* PlanningListViewController.swift in Sources */,
 				EA0238122585F01200A284C4 /* CategoryModel.swift in Sources */,
 				EAD68B01255B00870083B30D /* ReportDetailsViewController.swift in Sources */,
+				EA02382A25876D3800A284C4 /* ReorderController+DestinationRow.swift in Sources */,
 				EA9F66352554E44000441ED0 /* BudgetsListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

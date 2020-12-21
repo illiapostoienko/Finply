@@ -37,8 +37,6 @@ final class AccountsListCoordinator: BaseCoordinator<AccountsListCoordinationRes
         viewController = AccountsListViewController.instantiate()
         viewController.bind(to: viewModel)
         
-        viewController.modalPresentationStyle = .custom
-        viewController.transitioningDelegate = transitionDelegate
         presentingViewController.present(viewController, animated: true)
         
         viewModel.coordination.addAccount

@@ -17,15 +17,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zCK-ht-bJF">
-                                <rect key="frame" x="0.0" y="121" width="414" height="615"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <rect key="frame" x="0.0" y="93" width="414" height="643"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dUA-jT-1U2" userLabel="HeaderView">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="121"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="93"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AGy-hi-qTr" userLabel="Plus">
-                                        <rect key="frame" x="369" y="45" width="30" height="30"/>
+                                        <rect key="frame" x="369" y="20" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="NRQ-Q3-stw"/>
                                             <constraint firstAttribute="width" constant="30" id="yDk-1Q-AHP"/>
@@ -33,32 +33,32 @@
                                         <state key="normal" image="plus_20"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="55w-cK-miP" userLabel="Back">
-                                        <rect key="frame" x="9" y="45" width="30" height="30"/>
+                                        <rect key="frame" x="15" y="20" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="30" id="I85-QA-rat"/>
                                             <constraint firstAttribute="height" constant="30" id="JRc-XQ-9wi"/>
                                         </constraints>
-                                        <state key="normal" image="back"/>
+                                        <state key="normal" image="cancel_20"/>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Accounts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KsH-PQ-ijL">
-                                        <rect key="frame" x="171.33333333333334" y="50" width="71.333333333333343" height="20.333333333333329"/>
+                                        <rect key="frame" x="171.33333333333334" y="25" width="71.333333333333343" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="36" translatesAutoresizingMaskIntoConstraints="NO" id="aTo-Sb-iGa" userLabel="ButtonsStack">
-                                        <rect key="frame" x="20" y="90" width="138" height="28"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="aTo-Sb-iGa" userLabel="ButtonsStack">
+                                        <rect key="frame" x="20" y="62" width="130" height="28"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I7f-K9-ulJ">
-                                                <rect key="frame" x="0.0" y="0.0" width="57" height="28"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I7f-K9-ulJ">
+                                                <rect key="frame" x="0.0" y="0.0" width="60" height="28"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
                                                 <state key="normal" title="Accounts">
-                                                    <color key="titleColor" red="0.68235294120000001" green="0.71764705880000002" blue="0.75686274509999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="titleColor" red="0.30196078431372547" green="0.40000000000000002" blue="0.87450980392156863" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AvS-gd-aXG">
-                                                <rect key="frame" x="93" y="0.0" width="45" height="28"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AvS-gd-aXG">
+                                                <rect key="frame" x="84" y="0.0" width="46" height="28"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
                                                 <state key="normal" title="Groups">
                                                     <color key="titleColor" red="0.68235294120000001" green="0.71764705880000002" blue="0.75686274509999996" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
@@ -66,14 +66,14 @@
                                         </subviews>
                                     </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LDO-AE-Dvr" userLabel="BottomSeparator">
-                                        <rect key="frame" x="0.0" y="120" width="414" height="1"/>
+                                        <rect key="frame" x="0.0" y="92" width="414" height="1"/>
                                         <color key="backgroundColor" red="0.93333333333333335" green="0.94117647058823528" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="ASq-70-xnq"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xzB-22-DGb" userLabel="Slider">
-                                        <rect key="frame" x="20" y="118" width="374" height="3"/>
+                                        <rect key="frame" x="20" y="90" width="374" height="3"/>
                                         <color key="backgroundColor" red="0.30196078431372547" green="0.40000000000000002" blue="0.87450980392156863" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -88,7 +88,7 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.98039215686274506" green="0.99215686274509807" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="55w-cK-miP" firstAttribute="top" secondItem="dUA-jT-1U2" secondAttribute="top" constant="45" id="0Zv-dc-K5F"/>
+                                    <constraint firstItem="55w-cK-miP" firstAttribute="top" secondItem="dUA-jT-1U2" secondAttribute="top" constant="20" id="0Zv-dc-K5F"/>
                                     <constraint firstAttribute="trailing" secondItem="LDO-AE-Dvr" secondAttribute="trailing" id="6b1-Fc-jU9"/>
                                     <constraint firstItem="aTo-Sb-iGa" firstAttribute="leading" secondItem="dUA-jT-1U2" secondAttribute="leading" constant="20" id="8Ud-wG-md1"/>
                                     <constraint firstItem="xzB-22-DGb" firstAttribute="leading" secondItem="dUA-jT-1U2" secondAttribute="leading" constant="20" id="GzU-KV-WRL"/>
@@ -102,8 +102,8 @@
                                     <constraint firstItem="LDO-AE-Dvr" firstAttribute="leading" secondItem="dUA-jT-1U2" secondAttribute="leading" id="exM-xr-VUC"/>
                                     <constraint firstItem="KsH-PQ-ijL" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="55w-cK-miP" secondAttribute="trailing" constant="10" id="lwE-Ch-wtG"/>
                                     <constraint firstAttribute="bottom" secondItem="xzB-22-DGb" secondAttribute="bottom" id="oK1-QU-adg"/>
-                                    <constraint firstItem="aTo-Sb-iGa" firstAttribute="top" secondItem="55w-cK-miP" secondAttribute="bottom" constant="15" id="tae-Rf-wNB"/>
-                                    <constraint firstItem="55w-cK-miP" firstAttribute="leading" secondItem="dUA-jT-1U2" secondAttribute="leading" constant="9" id="y39-zC-tdl"/>
+                                    <constraint firstItem="aTo-Sb-iGa" firstAttribute="top" secondItem="55w-cK-miP" secondAttribute="bottom" constant="12" id="tae-Rf-wNB"/>
+                                    <constraint firstItem="55w-cK-miP" firstAttribute="leading" secondItem="dUA-jT-1U2" secondAttribute="leading" constant="15" id="y39-zC-tdl"/>
                                     <constraint firstAttribute="bottom" secondItem="LDO-AE-Dvr" secondAttribute="bottom" id="z6G-lK-UlI"/>
                                 </constraints>
                             </view>
@@ -140,7 +140,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="back" width="8" height="16"/>
+        <image name="cancel_20" width="20" height="20"/>
         <image name="plus_20" width="20" height="20"/>
         <namedColor name="baseBackgroundColor">
             <color red="0.98039215686274506" green="0.99215686274509807" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

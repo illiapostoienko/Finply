@@ -31,6 +31,13 @@ final class AddEditAccountViewController: UIViewController, BindableType {
     }
     
     func bindViewModel() {
+        viewModel.output.sceneState
+            .subscribe(onNext: { [weak self] state in
+                self?.selectorArrowView.isHidden = !state.isAddAction
+                self?.selectorButton.isEnabled = state.isAddAction
+                self?.titleLabel.text = state.title
+            })
+        
         closeButton.rx.tap
             .bind(to: viewModel.input.closeButtonTap)
             .disposed(by: bag)
@@ -50,14 +57,32 @@ final class AddEditAccountViewController: UIViewController, BindableType {
             .bind(to: viewModel.input.rowSelected).disposed(by: bag)
     }
     
+    @IBAction func selectorButtonPressed(_ sender: Any) {
+        let options = AddEditAccountSceneState.addOptions
+        
+        let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        AddEditAccountSceneState.addOptions.forEach{ option in
+            let action = UIAlertAction(title: option.title, style: .default) { [weak self] _ in
+                self?.viewModel.setup(with: option)
+            }
+            sheet.addAction(action)
+        }
+        
+        sheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        present(sheet, animated: true, completion: nil)
+    }
+    
     func setupTableView() {
         tableView.register(cellType: TitleInputCell.self)
         tableView.register(cellType: BallanceInputCell.self)
         tableView.register(cellType: IconSelectionCell.self)
         tableView.register(cellType: ColorSelectionCell.self)
         tableView.register(cellType: AccountsSelectionCell.self)
+        tableView.register(cellType: ClearCell.self)
         
-        dataSource = RxTableViewSectionedAnimatedDataSource(
+        dataSource = RxTableViewSectionedAnimatedDataSource(animationConfiguration: .init(insertAnimation: .fade, reloadAnimation: .fade, deleteAnimation: .fade),
             configureCell: { dataSource, tableView, indexPath, _ in
                 switch dataSource[indexPath] {
                 case .titleInput(let viewModel):
@@ -84,6 +109,9 @@ final class AddEditAccountViewController: UIViewController, BindableType {
                     var cell = tableView.dequeueReusableCell(for: indexPath) as AccountsSelectionCell
                     cell.bind(to: viewModel)
                     return cell
+                
+                case .clear:
+                    return tableView.dequeueReusableCell(for: indexPath) as ClearCell
                 }
             }
         )

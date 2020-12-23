@@ -11,35 +11,23 @@ import RxDataSources
 import Foundation
 import RxSwiftExt
 
-protocol AccountsListViewModelOutput {
-    var dataSource: Observable<[AccountsListTableItem]> { get }
-}
-
 protocol AccountsListViewModelInput {
     var backButtonTap: AnyObserver<Void> { get }
     var addButtonTap: AnyObserver<Void> { get }
     var tabButtonTap: AnyObserver<AccountsListTab> { get }
     var rowSelected: AnyObserver<Int> { get }
-    var editRowIntent: AnyObserver<Int> { get }
-    var deleteRowIntent: AnyObserver<Int> { get }
-    var changeOrderIntent: AnyObserver<(fromIndex: Int, toIndex: Int)> { get }
+    var changeOrder: AnyObserver<(fromIndex: Int, toIndex: Int)> { get }
     
-    var accountAdded: AnyObserver<AccountModelType> { get }
-    var accountEdited: AnyObserver<AccountModelType> { get }
-    var accountGroupAdded: AnyObserver<AccountGroupModelType> { get }
-    var accountGroupEdited: AnyObserver<AccountGroupModelType> { get }
+    var addEditAccountResult: AnyObserver<AddEditAccountCoordinationResult> { get }
+}
+
+protocol AccountsListViewModelOutput {
+    var dataSource: Observable<[AccountsListTableItem]> { get }
 }
 
 protocol AccountsListViewModelCoordination {
-    var back: Observable<Void> { get }
-    
-    var addAccount: Observable<Void> { get }
-    var editAccount: Observable<AccountModelType> { get }
-    var addAccountGroup: Observable<Void> { get }
-    var editAccountGroup: Observable<AccountGroupModelType> { get }
-    
-    var accountSelected: Observable<AccountModelType> { get }
-    var accountGroupSelected: Observable<AccountGroupModelType> { get }
+    var completeCoordinationResult: Observable<AccountsListCoordinationResult> { get }
+    var openAddEditAccount: Observable<AddEditAccountSceneState> { get }
 }
 
 protocol AccountsListViewModelType {
@@ -62,101 +50,97 @@ final class AccountsListViewModel: AccountsListViewModelType, AccountsListViewMo
     // Output
     var dataSource: Observable<[AccountsListTableItem]> { _dataSource.asObservable() }
     
-    // Input
-    var backButtonTap: AnyObserver<Void> { _backTapStream.asObserver() }
-    var addButtonTap: AnyObserver<Void> { _addTapStream.asObserver() }
-    var tabButtonTap: AnyObserver<AccountsListTab> { _tabTapStream.asObserver() }
-    var rowSelected: AnyObserver<Int> { _rowSelectedStream.asObserver() }
-    var editRowIntent: AnyObserver<Int> { _editRowStream.asObserver() }
-    var deleteRowIntent: AnyObserver<Int> { _deleteRowStream.asObserver() }
-    var changeOrderIntent: AnyObserver<(fromIndex: Int, toIndex: Int)> { _changeOrderStream.asObserver() }
+    private let _dataSource = BehaviorRelay<[AccountsListTableItem]>(value: [])
     
-    var accountAdded: AnyObserver<AccountModelType> { _accountAddedStream.asObserver() }
-    var accountEdited: AnyObserver<AccountModelType> { _accountEditedStream.asObserver() }
-    var accountGroupAdded: AnyObserver<AccountGroupModelType> { _accountGroupAddedStream.asObserver() }
-    var accountGroupEdited: AnyObserver<AccountGroupModelType> { _accountGroupEditedStream.asObserver() }
+    // Input
+    var backButtonTap: AnyObserver<Void> { _backButtonTap.asObserver() }
+    var addButtonTap: AnyObserver<Void> { _addButtonTap.asObserver() }
+    var tabButtonTap: AnyObserver<AccountsListTab> { _tabButtonTap.asObserver() }
+    var rowSelected: AnyObserver<Int> { _rowSelected.asObserver() }
+    var changeOrder: AnyObserver<(fromIndex: Int, toIndex: Int)> { _changeOrder.asObserver() }
+    var addEditAccountResult: AnyObserver<AddEditAccountCoordinationResult> { _addEditAccountResult.asObserver() }
+    
+    private let _backButtonTap = PublishSubject<Void>()
+    private let _addButtonTap = PublishSubject<Void>()
+    private let _tabButtonTap = PublishSubject<AccountsListTab>()
+    private let _rowSelected = PublishSubject<Int>()
+    private let _changeOrder = PublishSubject<(fromIndex: Int, toIndex: Int)>()
+    private let _addEditAccountResult = PublishSubject<AddEditAccountCoordinationResult>()
     
     // Coordination
-    var back: Observable<Void> { _backTapStream }
-    var addAccount: Observable<Void> { _addTapStream.withLatestFrom(_currentTab).filter{ $0 == .accounts }.ignoreContent() }
-    var addAccountGroup: Observable<Void> { _addTapStream.withLatestFrom(_currentTab).filter{ $0 == .groups }.ignoreContent() }
-    var editAccount: Observable<AccountModelType>
-    var accountSelected: Observable<AccountModelType>
-    var editAccountGroup: Observable<AccountGroupModelType>
-    var accountGroupSelected: Observable<AccountGroupModelType>
-
-    // Local Streams
-    private let _backTapStream = PublishSubject<Void>()
-    private let _addTapStream = PublishSubject<Void>()
-    private let _tabTapStream = PublishSubject<AccountsListTab>()
-    private let _rowSelectedStream = PublishSubject<Int>()
-    private let _deleteRowStream = PublishSubject<Int>()
-    private let _editRowStream = PublishSubject<Int>()
-    private let _changeOrderStream = PublishSubject<(fromIndex: Int, toIndex: Int)>()
+    var completeCoordinationResult: Observable<AccountsListCoordinationResult> { _completeCoordinationResult }
+    var openAddEditAccount: Observable<AddEditAccountSceneState> { _openAddEditAccount }
     
-    private var _accountAddedStream = PublishSubject<AccountModelType>()
-    private var _accountEditedStream = PublishSubject<AccountModelType>()
-    private var _accountGroupAddedStream = PublishSubject<AccountGroupModelType>()
-    private var _accountGroupEditedStream = PublishSubject<AccountGroupModelType>()
+    private let _completeCoordinationResult = PublishSubject<AccountsListCoordinationResult>()
+    private let _openAddEditAccount = PublishSubject<AddEditAccountSceneState>()
     
+    // Locals
     private let _currentTab = BehaviorRelay<AccountsListTab>(value: .accounts)
-    private let _dataSource = BehaviorRelay<[AccountsListTableItem]>(value: [])
-    private let _isEditModeEnabled = BehaviorRelay<Bool>(value: false)
     private let loadedAccounts = BehaviorRelay<[AccountModelType]>(value: [])
     private let loadedGroups = BehaviorRelay<[AccountGroupModelType]>(value: [])
+    
+    private var accountItems: Observable<[AccountsListTableItem]> {
+        loadedAccounts.map{ $0.map { .account(viewModel: AccountsListAccountCellViewModel(accountModel: $0)) }}
+    }
+    
+    private var groupItems: Observable<[AccountsListTableItem]> {
+        loadedGroups.map{ $0.map { .group(viewModel: AccountsListGroupCellViewModel(accountGroupModel: $0)) }}
+    }
     
     //Services
     
     private let bag = DisposeBag()
     
     init() {
-        _tabTapStream.bind(to: _currentTab).disposed(by: bag)
+        _tabButtonTap
+            .bind(to: _currentTab)
+            .disposed(by: bag)
         
-        let latestState = Observable.combineLatest(_isEditModeEnabled, _currentTab, loadedAccounts, loadedGroups).map{ (isEditMode: $0, tab: $1, accounts: $2, groups: $3) }
-        let selectedRowWithLatestData = _rowSelectedStream
-            .withLatestFrom(latestState) { ($0, $1) }
+        let latestState = Observable.combineLatest(_currentTab, loadedAccounts, loadedGroups).map{ (tab: $0, accounts: $1, groups: $2) }
+        let selectedRowWithLatestData = _rowSelected.withLatestFrom(latestState) { ($0, $1) }
         
-        editAccount = selectedRowWithLatestData
-            .filter{ _, latestState in latestState.isEditMode && latestState.tab == .accounts }
+        _backButtonTap
+            .map{ .back }
+            .bind(to: _completeCoordinationResult)
+            .disposed(by: bag)
+        
+        selectedRowWithLatestData
+            .filter{ $1.tab == .accounts }
             .map{ $1.accounts[safe: $0] }
             .unwrap()
+            .map{ .accountSelected(model: $0) }
+            .bind(to: _completeCoordinationResult)
+            .disposed(by: bag)
         
-        editAccountGroup = selectedRowWithLatestData
-            .filter{ _, latestState in latestState.isEditMode && latestState.tab == .groups }
+        selectedRowWithLatestData
+            .filter{ $1.tab == .accounts }
             .map{ $1.groups[safe: $0] }
             .unwrap()
+            .map{ .accountGroupSelected(model: $0) }
+            .bind(to: _completeCoordinationResult)
+            .disposed(by: bag)
 
-        accountSelected = selectedRowWithLatestData
-            .filter{ _, latestState in !latestState.isEditMode && latestState.tab == .accounts }
-            .map{ $1.accounts[safe: $0] }
-            .unwrap()
-
-        accountGroupSelected = selectedRowWithLatestData
-            .filter{ _, latestState in !latestState.isEditMode && latestState.tab == .groups }
-            .map{ $1.groups[safe: $0] }
-            .unwrap()
+        _addButtonTap
+            .withLatestFrom(_currentTab)
+            .map{
+                switch $0 {
+                case .accounts: return .addAccount
+                case .groups: return .addAccountGroup
+                }
+            }
+            .bind(to: _openAddEditAccount)
+            .disposed(by: bag)
         
-        // _accountAddedStream -> add to loadedAccounts
-        // _accountEditedStream  -> find and edit in loadedAccounts
-        // _accountGroupAddedStream -> add loadedGroups
-        // _accountGroupEditedStream -> find and edit in loadedGroups
-        
-        //editRowIntent -> edit
-        //deleteRowIntent -> delete
+        // edit on cell -> _openAddEditAccount
+        // delete on cell -> delete from loaded list
+        // _addEditAccountResult -> parse and add/edit cells
         //changeOrderIntent -> change order
         
-        Observable.combineLatest(_currentTab, loadedAccounts, loadedGroups)
+        Observable.combineLatest(_currentTab, accountItems, groupItems)
             .map{ tab, accounts, groups -> [AccountsListTableItem] in
                 switch tab {
-                case .accounts:
-                    return accounts
-                        .map{ AccountsListAccountCellViewModel(accountModel: $0) }
-                        .map{ AccountsListTableItem.account(viewModel: $0) }
-                    
-                case .groups:
-                    return groups
-                        .map{ AccountsListGroupCellViewModel(accountGroupModel: $0) }
-                        .map{ AccountsListTableItem.group(viewModel: $0) }
+                case .accounts: return accounts
+                case .groups: return groups
                 }
             }
             .bind(to: _dataSource)

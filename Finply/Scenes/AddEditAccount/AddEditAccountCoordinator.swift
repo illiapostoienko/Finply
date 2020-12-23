@@ -46,57 +46,27 @@ final class AddEditAccountCoordinator: BaseCoordinator<AddEditAccountCoordinatio
         
         viewModel.setup(with: state)
         
-        var configuredResultStream: Observable<AddEditAccountCoordinationResult> {
-            let streams = viewModel.coordination
-            switch state {
-            case .addAccount:       return streams.accountComplete.map{ .accountAdded($0) }
-            case .editAccount:      return streams.accountComplete.map{ .accountEdited($0) }
-            case .addAccountGroup:  return streams.accountGroupComplete.map{ .accountGroupAdded($0) }
-            case .editAccountGroup: return streams.accountGroupComplete.map{ .accountGroupEdited($0) }
-            }
-        }
-        
-        viewController = AddEditAccountViewController.instantiate()
-        viewController.bind(to: viewModel)
-        
         viewModel.coordination.openCurrencyList
             .flatMap{ [unowned self] in self.coordinateToCurrencyList() }
-            .subscribe(onNext: {
-                switch $0 {
-                case .selectedCurrency(let currency): return // pass to vm
-                default: return
-                }
-            })
+            .bind(to: viewModel.input.currencyListResult)
             .disposed(by: bag)
         
         viewModel.coordination.openColorSelection
             .flatMap{ [unowned self] in self.coordinateToColorSetsList() }
-            .subscribe(onNext: {
-                switch $0 {
-                case .selectedColor: return // pass to vm
-                case .selectedColorSet: return // pass to vm
-                default: return
-                }
-            })
+            .bind(to: viewModel.input.colorSetsListResult)
             .disposed(by: bag)
         
         viewModel.coordination.openIconSelection
             .flatMap{ [unowned self] in self.coordinateToIconsList() }
-            .subscribe(onNext: {
-                switch $0 {
-                case .selectedIcon: return // pass to vm
-                default: return
-                }
-            })
+            .bind(to: viewModel.input.iconsListResult)
             .disposed(by: bag)
         
+        viewController = AddEditAccountViewController.instantiate()
+        viewController.bind(to: viewModel)
         presentingViewController.present(viewController, animated: true)
         
-        return Observable.merge(
-            [
-                viewModel.coordination.close.map{ .close },
-                configuredResultStream
-            ])
+        return viewModel.coordination
+            .completeCoordinationResult
             .take(1)
             .do(onNext: { [weak self] _ in self?.viewController.dismiss(animated: true) })
     }
@@ -117,21 +87,5 @@ final class AddEditAccountCoordinator: BaseCoordinator<AddEditAccountCoordinatio
         let coordinator = ColorSetsListCoordinator(presentingViewController: viewController,
                                                   dependencyContainer: dependencyContainer)
         return coordinate(to: coordinator)
-    }
-}
-
-extension AddEditAccountSceneState {
-    var editAccountValue: AccountModelType? {
-        if case .editAccount(let accountModel) = self {
-            return accountModel
-        }
-        return nil
-    }
-    
-    var editAccountsGroupValue: AccountGroupModelType? {
-        if case .editAccountGroup(let accountGroupModel) = self {
-            return accountGroupModel
-        }
-        return nil
     }
 }

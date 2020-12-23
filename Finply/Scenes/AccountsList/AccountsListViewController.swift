@@ -77,15 +77,9 @@ final class AccountsListViewController: UIViewController, BindableType {
             .disposed(by: bag)
         
         tableView.rx
-            .itemDeleted
-            .map{ $0.row }
-            .bind(to: viewModel.input.deleteRowIntent)
-            .disposed(by: bag)
-        
-        tableView.rx
             .itemMoved
             .map{ (fromIndex: $0.row, toIndex: $1.row) }
-            .bind(to: viewModel.input.changeOrderIntent)
+            .bind(to: viewModel.input.changeOrder)
             .disposed(by: bag)
     }
     
@@ -165,9 +159,7 @@ final class AccountsListViewController: UIViewController, BindableType {
 
 extension AccountsListViewController: TableViewReorderDelegate {
     func tableViewDidFinishReordering(_ tableView: UITableView, from initialSourceIndexPath: IndexPath, to finalDestinationIndexPath: IndexPath) {
-        viewModel
-            .input
-            .changeOrderIntent
+        viewModel.input.changeOrder
             .onNext((fromIndex: initialSourceIndexPath.row, toIndex: finalDestinationIndexPath.row))
     }
 }

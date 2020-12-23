@@ -22,6 +22,7 @@ final class BallanceInputCell: UITableViewCell, BindableType, NibReusable {
     override func awakeFromNib() {
         super.awakeFromNib()
         textFieldBaseView.makeBorder(width: 1, color: #colorLiteral(red: 0.7137254902, green: 0.7764705882, blue: 0.8509803922, alpha: 0.5))
+        removeSeparator()
     }
     
     func bindViewModel() {

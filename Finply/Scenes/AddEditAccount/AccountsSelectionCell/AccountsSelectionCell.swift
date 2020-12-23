@@ -12,6 +12,11 @@ final class AccountsSelectionCell: UITableViewCell, BindableType, NibReusable {
     
     var viewModel: AccountsSelectionCellViewModelType!
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        removeSeparator()
+    }
+    
     func bindViewModel() {
         
     }

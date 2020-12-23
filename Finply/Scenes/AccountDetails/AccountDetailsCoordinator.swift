@@ -68,7 +68,7 @@ final class AccountDetailsCoordinator: BaseCoordinator<Void> {
                 switch $0 {
                 case .back: return
                 case .accountSelected(let account): return // pass to vm
-                case .accountsGroupSelected(let accountGroup): return // pass to vm
+                case .accountGroupSelected(let accountGroup): return // pass to vm
                 }
             })
             .disposed(by: bag)

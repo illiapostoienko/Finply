@@ -13,19 +13,19 @@ protocol AddEditAccountViewModelInput {
     var closeButtonTap: AnyObserver<Void> { get }
     var checkButtonTap: AnyObserver<Void> { get }
     var rowSelected: AnyObserver<Int> { get }
+    
+    var currencyListResult: AnyObserver<CurrencyListCoordinationResult> { get }
+    var iconsListResult: AnyObserver<IconsListCoordinationResult> { get }
+    var colorSetsListResult: AnyObserver<ColorSetsListCoordinationResult> { get }
 }
 
 protocol AddEditAccountViewModelOutput {
-    var sceneState: AddEditAccountSceneState! { get }
-    
+    var sceneState: Observable<AddEditAccountSceneState> { get }
     var dataSource: Observable<[AddEditAccountTableViewItem]> { get }
 }
 
 protocol AddEditAccountViewModelCoordination {
-    var close: Observable<Void> { get }
-    
-    var accountComplete: Observable<AccountModelType> { get }
-    var accountGroupComplete: Observable<AccountGroupModelType> { get }
+    var completeCoordinationResult: Observable<AddEditAccountCoordinationResult> { get }
     
     var openCurrencyList: Observable<Void> { get }
     var openColorSelection: Observable<Void> { get }
@@ -47,59 +47,65 @@ final class AddEditAccountViewModel: AddEditAccountViewModelType, AddEditAccount
     var coordination: AddEditAccountViewModelCoordination { return self }
     
     // Output
-    var sceneState: AddEditAccountSceneState!
+    var sceneState: Observable<AddEditAccountSceneState> { _sceneState.asObservable() }
     var dataSource: Observable<[AddEditAccountTableViewItem]> { _dataSource.asObservable() }
     
+    private let _sceneState = BehaviorRelay<AddEditAccountSceneState>(value: .addAccount)
+    private let _dataSource = BehaviorRelay<[AddEditAccountTableViewItem]>(value: [])
+    
     // Input
-    var closeButtonTap: AnyObserver<Void> { _closeTapStream.asObserver() }
-    var checkButtonTap: AnyObserver<Void> { _checkButtonStream.asObserver() }
-    var rowSelected: AnyObserver<Int> { _rowSelectedStream.asObserver() }
+    var closeButtonTap: AnyObserver<Void> { _closeButtonTap.asObserver() }
+    var checkButtonTap: AnyObserver<Void> { _checkButtonTap.asObserver() }
+    var rowSelected: AnyObserver<Int> { _rowSelected.asObserver() }
+    
+    var currencyListResult: AnyObserver<CurrencyListCoordinationResult> { _currencyListResult.asObserver() }
+    var iconsListResult: AnyObserver<IconsListCoordinationResult> { _iconsListResult.asObserver() }
+    var colorSetsListResult: AnyObserver<ColorSetsListCoordinationResult> { _colorSetsListResult.asObserver() }
+    
+    private let _closeButtonTap = PublishSubject<Void>()
+    private let _checkButtonTap = PublishSubject<Void>()
+    private let _rowSelected = PublishSubject<Int>()
+    private let _currencyListResult = PublishSubject<CurrencyListCoordinationResult>()
+    private let _iconsListResult = PublishSubject<IconsListCoordinationResult>()
+    private let _colorSetsListResult = PublishSubject<ColorSetsListCoordinationResult>()
     
     // Coordination
-    var close: Observable<Void> { _closeTapStream }
-    var accountComplete: Observable<AccountModelType> { _accountCompleteStream }
-    var accountGroupComplete: Observable<AccountGroupModelType>  { _accountGroupCompleteStream }
-    var openCurrencyList: Observable<Void> { _openCurrencyListStream }
-    var openColorSelection: Observable<Void> { _openColorSelectionStream }
-    var openIconSelection: Observable<Void> { _openIconSelectionStream }
+    var completeCoordinationResult: Observable<AddEditAccountCoordinationResult> { _completeCoordinationResult }
+    var openCurrencyList: Observable<Void> { _openCurrencyList }
+    var openColorSelection: Observable<Void> { _openColorSelection }
+    var openIconSelection: Observable<Void> { _openIconSelection }
     
-    // Local Streams
-    private let _closeTapStream = PublishSubject<Void>()
-    private let _checkButtonStream = PublishSubject<Void>()
-    private let _openCurrencyListStream = PublishSubject<Void>()
-    private let _openColorSelectionStream = PublishSubject<Void>() // with already selected Color
-    private let _openIconSelectionStream = PublishSubject<Void>()
-    private let _accountCompleteStream = PublishSubject<AccountModelType>()
-    private let _accountGroupCompleteStream = PublishSubject<AccountGroupModelType>()
-    private let _dataSource = BehaviorRelay<[AddEditAccountTableViewItem]>(value: [])
-    private let _rowSelectedStream = PublishSubject<Int>()
+    private let _completeCoordinationResult = PublishSubject<AddEditAccountCoordinationResult>()
+    private let _openCurrencyList = PublishSubject<Void>() // with already selected currency?
+    private let _openColorSelection = PublishSubject<Void>() // with already selected Color?
+    private let _openIconSelection = PublishSubject<Void>() // with already selected icon?
     
     //Childs
-    private let titleInputViewModel: TitleInputCellViewModelType
-    private let ballanceInputCellViewModel: BallanceInputCellViewModelType
-    private let iconSelectionCellViewModel: IconSelectionCellViewModelType
-    private let colorSelectionCellViewModel: ColorSelectionCellViewModelType
-    private let accountsSelectionCellViewModelType: AccountsSelectionCellViewModelType
+    private let titleInputVm: TitleInputCellViewModelType
+    private let ballanceInputCellVm: BallanceInputCellViewModelType
+    private let iconSelectionCellVm: IconSelectionCellViewModelType
+    private let colorSelectionCellVm: ColorSelectionCellViewModelType
+    private let accountsSelectionCellVm: AccountsSelectionCellViewModelType
     
     private let bag = DisposeBag()
     
-    init(titleInputViewModel: TitleInputCellViewModelType = TitleInputCellViewModel(),
-         ballanceInputCellViewModel: BallanceInputCellViewModelType = BallanceInputCellViewModel(),
-         iconSelectionCellViewModel: IconSelectionCellViewModelType = IconSelectionCellViewModel(),
-         colorSelectionCellViewModel: ColorSelectionCellViewModelType = ColorSelectionCellViewModel(),
-         accountsSelectionCellViewModelType: AccountsSelectionCellViewModelType = AccountsSelectionCellViewModel())
+    init(titleInputVm: TitleInputCellViewModelType = TitleInputCellViewModel(),
+         ballanceInputCellVm: BallanceInputCellViewModelType = BallanceInputCellViewModel(),
+         iconSelectionCellVm: IconSelectionCellViewModelType = IconSelectionCellViewModel(),
+         colorSelectionCellVm: ColorSelectionCellViewModelType = ColorSelectionCellViewModel(),
+         accountsSelectionCellVm: AccountsSelectionCellViewModelType = AccountsSelectionCellViewModel())
     {
-        self.titleInputViewModel = titleInputViewModel
-        self.ballanceInputCellViewModel = ballanceInputCellViewModel
-        self.iconSelectionCellViewModel = iconSelectionCellViewModel
-        self.colorSelectionCellViewModel = colorSelectionCellViewModel
-        self.accountsSelectionCellViewModelType = accountsSelectionCellViewModelType
+        self.titleInputVm = titleInputVm
+        self.ballanceInputCellVm = ballanceInputCellVm
+        self.iconSelectionCellVm = iconSelectionCellVm
+        self.colorSelectionCellVm = colorSelectionCellVm
+        self.accountsSelectionCellVm = accountsSelectionCellVm
         
-        ballanceInputCellViewModel.currencyTapped
-            .bind(to: _openCurrencyListStream)
+        ballanceInputCellVm.currencyTapped
+            .bind(to: _openCurrencyList)
             .disposed(by: bag)
         
-        let selectedItemStream = _rowSelectedStream
+        let selectedItemStream = _rowSelected
             .withLatestFrom(_dataSource) { row, dataSource in dataSource[safe: row] }
             .unwrap()
         
@@ -110,8 +116,8 @@ final class AddEditAccountViewModel: AddEditAccountViewModelType, AddEditAccount
                 return nil
             }
             .unwrap()
-            .map{ _ in } // get current color
-            .bind(to: _openColorSelectionStream)
+            .map{ _ in } // get current color set
+            .bind(to: _openColorSelection)
             .disposed(by: bag)
         
         //Icon Selection
@@ -122,18 +128,47 @@ final class AddEditAccountViewModel: AddEditAccountViewModelType, AddEditAccount
             }
             .unwrap()
             .map{ _ in } // get current icon
-            .bind(to: _openIconSelectionStream)
+            .bind(to: _openIconSelection)
+            .disposed(by: bag)
+        
+        _currencyListResult
+            .bind(to: ballanceInputCellVm.currencyListResult)
+            .disposed(by: bag)
+        
+        _iconsListResult
+            .bind(to: iconSelectionCellVm.iconsListResult)
+            .disposed(by: bag)
+        
+        _colorSetsListResult.bind(to: colorSelectionCellVm.colorSetsListResult)
+            .disposed(by: bag)
+        
+        _closeButtonTap
+            .map{ .close }
+            .bind(to: _completeCoordinationResult)
+            .disposed(by: bag)
+        
+        // create or edit account/account group -> bind _completeCoordinationResult
+        
+        _sceneState
+            .map{ state -> [AddEditAccountTableViewItem] in
+                var itemsSet: [AddEditAccountTableViewItem] = []
+                
+                itemsSet.append(.titleInput(viewModel: titleInputVm))
+                if state.isAccountAction { itemsSet.append(.ballanceInput(viewModel: ballanceInputCellVm)) }
+                itemsSet.append(.clear)
+                itemsSet.append(.iconSelect(viewModel: iconSelectionCellVm))
+                itemsSet.append(.colorSelect(viewModel: colorSelectionCellVm))
+                if state.isAccountGroupAction { itemsSet.append(.accountsSelect(viewModel: accountsSelectionCellVm)) }
+                
+                return itemsSet
+            }
+            .bind(to: _dataSource)
             .disposed(by: bag)
     }
     
     func setup(with state: AddEditAccountSceneState) {
-        
-        _dataSource.accept([
-            .titleInput(viewModel: titleInputViewModel),
-            .ballanceInput(viewModel: ballanceInputCellViewModel),
-            .iconSelect(viewModel: iconSelectionCellViewModel),
-            .colorSelect(viewModel: colorSelectionCellViewModel)
-        ])
+        guard _sceneState.value != state else { return }
+        _sceneState.accept(state)
     }
 }
 
@@ -145,6 +180,7 @@ enum AddEditAccountTableViewItem: IdentifiableType, Equatable {
     case iconSelect(viewModel: IconSelectionCellViewModelType)
     case colorSelect(viewModel: ColorSelectionCellViewModelType)
     case accountsSelect(viewModel: AccountsSelectionCellViewModelType)
+    case clear
     
     var identity: String {
         switch self {
@@ -153,10 +189,69 @@ enum AddEditAccountTableViewItem: IdentifiableType, Equatable {
         case .iconSelect: return "iconSelect"
         case .colorSelect: return "colorSelect"
         case .accountsSelect: return "accountsSelect"
+        case .clear: return "clear"
         }
     }
     
     static func == (lhs: AddEditAccountTableViewItem, rhs: AddEditAccountTableViewItem) -> Bool {
         return lhs.identity == rhs.identity
+    }
+}
+
+extension AddEditAccountSceneState: Equatable {
+    
+    static func == (lhs: AddEditAccountSceneState, rhs: AddEditAccountSceneState) -> Bool {
+        switch (lhs, rhs) {
+        case (.addAccount, .addAccount): return true
+        case (.addAccountGroup, .addAccountGroup): return true
+        case (.editAccount, .editAccount): return true
+        case (.editAccountGroup, .editAccountGroup): return true
+        default: return false
+        }
+    }
+    
+    var editAccountValue: AccountModelType? {
+        if case .editAccount(let accountModel) = self {
+            return accountModel
+        }
+        return nil
+    }
+    
+    var editAccountGroupValue: AccountGroupModelType? {
+        if case .editAccountGroup(let accountGroupModel) = self {
+            return accountGroupModel
+        }
+        return nil
+    }
+    
+    var isAccountAction: Bool {
+        if case .editAccount = self { return true }
+        else if case .addAccount = self { return true }
+        return false
+    }
+    
+    var isAccountGroupAction: Bool {
+        if case .editAccountGroup = self { return true }
+        else if case .addAccountGroup = self { return true }
+        return false
+    }
+    
+    var isAddAction: Bool {
+        if case .addAccount = self { return true }
+        else if case .addAccountGroup = self { return true }
+        return false
+    }
+    
+    var title: String {
+        switch self {
+        case .addAccount: return "Add Account"
+        case .addAccountGroup: return "Add Accounts Group"
+        case .editAccount: return "Edit Account"
+        case .editAccountGroup:  return "Edit Accounts Group"
+        }
+    }
+    
+    static var addOptions: [AddEditAccountSceneState] {
+        return [.addAccount, .addAccountGroup]
     }
 }

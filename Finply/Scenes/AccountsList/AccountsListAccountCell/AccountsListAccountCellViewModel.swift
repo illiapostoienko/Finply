@@ -17,32 +17,44 @@ protocol AccountsListAccountCellViewModelType {
     var deleteTap: AnyObserver<Void> { get }
     
     //Output
+    var editAccount: Observable<AccountModelType> { get }
+    var deleteAccount: Observable<AccountModelType> { get }
 }
 
 final class AccountsListAccountCellViewModel: AccountsListAccountCellViewModelType {
     
-    let accountModel: AccountModelType
+    var accountModel: AccountModelType { _accountModel.value }
     
-    var editTap: AnyObserver<Void> { _editTapStream.asObserver() }
-    var deleteTap: AnyObserver<Void> { _deleteTapStream.asObserver() }
+    // Input
+    var editTap: AnyObserver<Void> { _editTap.asObserver() }
+    var deleteTap: AnyObserver<Void> { _deleteTap.asObserver() }
     
-    private let _editTapStream = PublishSubject<Void>()
-    private let _deleteTapStream = PublishSubject<Void>()
+    private let _editTap = PublishSubject<Void>()
+    private let _deleteTap = PublishSubject<Void>()
+    
+    // Output
+    var editAccount: Observable<AccountModelType> { _editAccount }
+    var deleteAccount: Observable<AccountModelType> { _deleteAccount }
+    
+    private let _editAccount = PublishSubject<AccountModelType>()
+    private let _deleteAccount = PublishSubject<AccountModelType>()
+    
+    // Locals
+    private let _accountModel: BehaviorRelay<AccountModelType>
     private let bag = DisposeBag()
     
     init(accountModel: AccountModelType = AccountModel(name: "Some name", baseValueInCents: 0, currency: .afghani, order: 0)) {
-        self.accountModel = accountModel
+
+        _accountModel = BehaviorRelay<AccountModelType>(value: accountModel)
         
-        _editTapStream
-            .subscribe(onNext: {
-                print("edit taped")
-            })
+        _editTap
+            .withLatestFrom(_accountModel)
+            .bind(to: _editAccount)
             .disposed(by: bag)
         
-        _deleteTapStream
-            .subscribe(onNext: {
-                print("delete taped")
-            })
+        _deleteTap
+            .withLatestFrom(_accountModel)
+            .bind(to: _deleteAccount)
             .disposed(by: bag)
     }
 }

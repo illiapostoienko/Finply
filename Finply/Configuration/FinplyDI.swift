@@ -27,7 +27,9 @@ final class FinplyDI {
         //Secondary Modules
         container.register{ AccountHeaderViewModel() }.implements(AccountHeaderViewModelType.self)
         container.register{ AccountMonthDetailsViewModel() }.implements(AccountMonthDetailsViewModelType.self)
-        
+        container.register{ CurrencyListViewModel() }.implements(CurrencyListViewModelType.self)
+        container.register{ ColorSetsListViewModel() }.implements(ColorSetsListViewModelType.self)
+        container.register{ IconsListViewModel() }.implements(IconsListViewModelType.self)
     }
     
     static func registerCoreServices(container: DependencyContainer) {

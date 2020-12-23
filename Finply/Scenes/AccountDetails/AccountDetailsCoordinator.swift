@@ -14,7 +14,6 @@ final class AccountDetailsCoordinator: BaseCoordinator<Void> {
     private let dependencyContainer: DependencyContainer
     private var accountDetailsVc: AccountDetailsViewController
     private let basePageViewController: UIPageViewController
-    private let accountDetailsPushTransitionDelegate: PushTransitionDelegate
     
     private let bag = DisposeBag()
     
@@ -22,7 +21,6 @@ final class AccountDetailsCoordinator: BaseCoordinator<Void> {
         self.accountDetailsVc = accountDetailsVc
         self.basePageViewController = basePageViewController
         self.dependencyContainer = dependencyContainer
-        accountDetailsPushTransitionDelegate = PushTransitionDelegate(initialVc: accountDetailsVc)
     }
     
     private(set) var viewController = AccountDetailsViewController.instantiate()
@@ -113,13 +111,12 @@ final class AccountDetailsCoordinator: BaseCoordinator<Void> {
 
     private func coordinateToAccountsList() -> Observable<AccountsListCoordinationResult> {
         let coordinator = AccountsListCoordinator(presentingViewController: accountDetailsVc,
-                                                  transitionDelegate: accountDetailsPushTransitionDelegate,
                                                   dependencyContainer: dependencyContainer)
         return coordinate(to: coordinator)
     }
     
     private func coordinateToEditAccount(accountToEdit: AccountModelType) -> Observable<AddEditAccountCoordinationResult> {
-        let coordinator = AddEditAccountCoordinator(accountToEdit: accountToEdit,
+        let coordinator = AddEditAccountCoordinator(state: .editAccount(accountToEdit),
                                                     presentingViewController: accountDetailsVc,
                                                     dependencyContainer: dependencyContainer)
         return coordinate(to: coordinator)

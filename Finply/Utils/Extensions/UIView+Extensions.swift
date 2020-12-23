@@ -18,4 +18,9 @@ extension UIView {
         subview.topAnchor.constraint(equalTo: topAnchor, constant: insets.top).isActive = true
         subview.bottomAnchor.constraint(equalTo: bottomAnchor, constant: insets.bottom).isActive = true
     }
+    
+    public func makeBorder(width: CGFloat, color: UIColor) {
+        self.layer.borderWidth = width
+        self.layer.borderColor = color.cgColor
+    }
 }

@@ -8,6 +8,7 @@ disabled_rules:
    - todo
    - identifier_name
    - weak_delegate
+   - cyclomatic_complexity
 
 opt_in_rules:
   - empty_count

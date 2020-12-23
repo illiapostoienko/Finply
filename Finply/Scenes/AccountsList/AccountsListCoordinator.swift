@@ -18,49 +18,42 @@ enum AccountsListCoordinationResult {
 final class AccountsListCoordinator: BaseCoordinator<AccountsListCoordinationResult> {
     
     private let presentingViewController: UIViewController
-    private let transitionDelegate: PushTransitionDelegate
     private let dependencyContainer: DependencyContainer
     
     private var viewController: AccountsListViewController!
     
     private let bag = DisposeBag()
     
-    init(presentingViewController: UIViewController, transitionDelegate: PushTransitionDelegate, dependencyContainer: DependencyContainer) {
+    init(presentingViewController: UIViewController, dependencyContainer: DependencyContainer) {
         self.presentingViewController = presentingViewController
-        self.transitionDelegate = transitionDelegate
         self.dependencyContainer = dependencyContainer
     }
     
     override func start() -> Observable<AccountsListCoordinationResult> {
-        
         guard let viewModel = try? dependencyContainer.resolve() as AccountsListViewModelType else { return Observable.never() }
+        
         viewController = AccountsListViewController.instantiate()
         viewController.bind(to: viewModel)
         
         presentingViewController.present(viewController, animated: true)
         
-        viewModel.coordination.addAccount
-            .flatMap{ [unowned self] _ in self.coordinateToAddEditAccount() }
-            .subscribe(onNext: {
-                switch $0 {
-                case .accountAdded(let model): return // pass to vm
-                default: return
-                }
-            })
-            .disposed(by: bag)
-        
-        viewModel.coordination.editAccount
-            .flatMap{ [unowned self] in self.coordinateToAddEditAccount(accountToEdit: $0) }
-            .subscribe(onNext: {
-                switch $0 {
-                case .accountEdited(let model): return // pass to vm
-                default: return
-                }
-            })
-            .disposed(by: bag)
-        
-//        viewModel.coordination.addAccountGroup -> coordinate
-//        viewModel.coordination.editAccountGroup
+        Observable.merge([
+            viewModel.coordination.addAccount.map{ AddEditAccountSceneState.addAccount },
+            viewModel.coordination.editAccount.map{ AddEditAccountSceneState.editAccount($0) },
+            viewModel.coordination.addAccountGroup.map{ AddEditAccountSceneState.addAccountGroup },
+            viewModel.coordination.editAccountGroup.map{ AddEditAccountSceneState.editAccountGroup($0) }
+        ])
+        .flatMap{ [unowned self] in self.coordinateToAddEditAccount($0) }
+        .subscribe(onNext: {
+            switch $0 {
+            case .accountAdded(let addedAccount): return // add to vm
+            case .accountEdited(let editedAccount): return // edit in vm
+            case .accountGroupAdded(let addedAccountGroup): return // add to vm
+            case .accountGroupEdited(let editedAccountGroup): return // edit in vm
+            default: return
+            }
+        })
+        .disposed(by: bag)
         
         return Observable.merge(
             [
@@ -73,17 +66,10 @@ final class AccountsListCoordinator: BaseCoordinator<AccountsListCoordinationRes
     }
     
     // MARK: - Coordination
-    private func coordinateToAddEditAccount(accountToEdit: AccountModelType? = nil) -> Observable<AddEditAccountCoordinationResult> {
-        let coordinator = AddEditAccountCoordinator(accountToEdit: accountToEdit,
+    private func coordinateToAddEditAccount(_ state: AddEditAccountSceneState) -> Observable<AddEditAccountCoordinationResult> {
+        let coordinator = AddEditAccountCoordinator(state: state,
                                                     presentingViewController: viewController,
                                                     dependencyContainer: dependencyContainer)
         return coordinate(to: coordinator)
     }
-    
-//    private func coordinateToAddEditAccountGroup(accountToEdit: FPAccountGroup? = nil) -> Observable<AddEditAccountGroupCoordinationResult> {
-//        let coordinator = AddEditAccountGroupCoordinator(accountToEdit: accountToEdit,
-//                                                    presentingViewController: viewController,
-//                                                    dependencyContainer: dependencyContainer)
-//        return coordinate(to: coordinator)
-//    }
 }

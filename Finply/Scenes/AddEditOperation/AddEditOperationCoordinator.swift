@@ -36,7 +36,6 @@ final class AddEditOperationCoordinator: BaseCoordinator<AddEditOperationCoordin
         var vc = AddEditOperationViewController.instantiate()
         vc.bind(to: viewModel)
         
-        vc.modalPresentationStyle = .overFullScreen
         presentingViewController.present(vc, animated: true)
         
         return Observable.merge(

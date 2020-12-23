@@ -40,9 +40,6 @@
 		EA7EE736257186FE00A82386 /* AccountsListGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7EE735257186FE00A82386 /* AccountsListGroupCell.swift */; };
 		EA7EE7392571872B00A82386 /* AccountsListGroupCellViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7EE7382571872B00A82386 /* AccountsListGroupCellViewModelType.swift */; };
 		EA7EE73C2571875300A82386 /* AccountsListGroupCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA7EE73B2571875300A82386 /* AccountsListGroupCell.xib */; };
-		EA7EE7432572801E00A82386 /* BaseModalViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA7EE7422572801E00A82386 /* BaseModalViewController.storyboard */; };
-		EA7EE7462572807300A82386 /* BaseModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7EE7452572807300A82386 /* BaseModalViewController.swift */; };
-		EA7EE74A2572837400A82386 /* BaseModalViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7EE7492572837400A82386 /* BaseModalViewModelType.swift */; };
 		EA7EE7502572FE6C00A82386 /* TitleInputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7EE74F2572FE6C00A82386 /* TitleInputCell.swift */; };
 		EA7EE7532572FECB00A82386 /* TitleInputCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7EE7522572FECB00A82386 /* TitleInputCellViewModel.swift */; };
 		EA7EE7562572FF4300A82386 /* TitleInputCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA7EE7552572FF4300A82386 /* TitleInputCell.xib */; };
@@ -75,6 +72,14 @@
 		EA9BCAA125434434003DE283 /* AccountsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9BCAA025434434003DE283 /* AccountsListViewModel.swift */; };
 		EA9BCAA42543443F003DE283 /* AccountsListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9BCAA32543443F003DE283 /* AccountsListCoordinator.swift */; };
 		EA9BCAA8254345AA003DE283 /* AccountsListViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA9BCAA7254345AA003DE283 /* AccountsListViewController.storyboard */; };
+		EA9F051825936F4100B81A8E /* IconsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9F051425936F4100B81A8E /* IconsListViewModel.swift */; };
+		EA9F051925936F4100B81A8E /* IconsListViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA9F051525936F4100B81A8E /* IconsListViewController.storyboard */; };
+		EA9F051A25936F4100B81A8E /* IconsListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9F051625936F4100B81A8E /* IconsListCoordinator.swift */; };
+		EA9F051B25936F4100B81A8E /* IconsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9F051725936F4100B81A8E /* IconsListViewController.swift */; };
+		EA9F053D2593716E00B81A8E /* ColorSetsListViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA9F05392593716E00B81A8E /* ColorSetsListViewController.storyboard */; };
+		EA9F053E2593716E00B81A8E /* ColorSetsListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9F053A2593716E00B81A8E /* ColorSetsListCoordinator.swift */; };
+		EA9F053F2593716E00B81A8E /* ColorSetsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9F053B2593716E00B81A8E /* ColorSetsListViewModel.swift */; };
+		EA9F05402593716E00B81A8E /* ColorSetsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9F053C2593716E00B81A8E /* ColorSetsListViewController.swift */; };
 		EA9F662E2554E44000441ED0 /* PlanningListViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA9F66252554E44000441ED0 /* PlanningListViewController.storyboard */; };
 		EA9F662F2554E44000441ED0 /* PlanningListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9F66262554E44000441ED0 /* PlanningListCoordinator.swift */; };
 		EA9F66302554E44000441ED0 /* PlanningListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9F66272554E44000441ED0 /* PlanningListViewController.swift */; };
@@ -123,6 +128,25 @@
 		EAD68B1B255B07110083B30D /* AddEditAccountCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD68B17255B07110083B30D /* AddEditAccountCoordinator.swift */; };
 		EAD68B1E255B07110083B30D /* AddEditAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD68B1A255B07110083B30D /* AddEditAccountViewModel.swift */; };
 		EAD68B23255EA9490083B30D /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD68B22255EA9490083B30D /* UITableView+Extensions.swift */; };
+		EAE2170B2590D12700095EB5 /* AddEditAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE2170A2590D12700095EB5 /* AddEditAccountViewController.swift */; };
+		EAE2170E2590D49B00095EB5 /* AddEditAccountViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EAE2170D2590D49B00095EB5 /* AddEditAccountViewController.storyboard */; };
+		EAE217142591141900095EB5 /* BallanceInputCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAE217132591141900095EB5 /* BallanceInputCell.xib */; };
+		EAE217172591142300095EB5 /* BallanceInputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE217162591142300095EB5 /* BallanceInputCell.swift */; };
+		EAE2171A2591143300095EB5 /* BallanceInputCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE217192591143300095EB5 /* BallanceInputCellViewModel.swift */; };
+		EAE2171E2591175D00095EB5 /* IconSelectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAE2171D2591175D00095EB5 /* IconSelectionCell.xib */; };
+		EAE217212591176800095EB5 /* IconSelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE217202591176800095EB5 /* IconSelectionCell.swift */; };
+		EAE217242591177300095EB5 /* IconSelectionCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE217232591177300095EB5 /* IconSelectionCellViewModel.swift */; };
+		EAE2172A2591196900095EB5 /* ColorSelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE217292591196900095EB5 /* ColorSelectionCell.swift */; };
+		EAE2172E2591197800095EB5 /* ColorSelectionCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE2172D2591197800095EB5 /* ColorSelectionCellViewModel.swift */; };
+		EAE217322591198600095EB5 /* ColorSelectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAE217312591198600095EB5 /* ColorSelectionCell.xib */; };
+		EAE2173625911C9D00095EB5 /* UITableViewCell+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE2173525911C9D00095EB5 /* UITableViewCell+Extension.swift */; };
+		EAE2173A259122E200095EB5 /* AccountsSelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE21739259122E200095EB5 /* AccountsSelectionCell.swift */; };
+		EAE2173E259122F700095EB5 /* AccountsSelectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAE2173D259122F700095EB5 /* AccountsSelectionCell.xib */; };
+		EAE217412591230200095EB5 /* AccountsSelectionCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE217402591230200095EB5 /* AccountsSelectionCellViewModel.swift */; };
+		EAE2174D259128D000095EB5 /* CurrencyListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE21749259128D000095EB5 /* CurrencyListCoordinator.swift */; };
+		EAE2174E259128D000095EB5 /* CurrencyListViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EAE2174A259128D000095EB5 /* CurrencyListViewController.storyboard */; };
+		EAE2174F259128D000095EB5 /* CurrencyListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE2174B259128D000095EB5 /* CurrencyListViewController.swift */; };
+		EAE21750259128D000095EB5 /* CurrencyListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE2174C259128D000095EB5 /* CurrencyListViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -159,9 +183,6 @@
 		EA7EE735257186FE00A82386 /* AccountsListGroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsListGroupCell.swift; sourceTree = "<group>"; };
 		EA7EE7382571872B00A82386 /* AccountsListGroupCellViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsListGroupCellViewModelType.swift; sourceTree = "<group>"; };
 		EA7EE73B2571875300A82386 /* AccountsListGroupCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountsListGroupCell.xib; sourceTree = "<group>"; };
-		EA7EE7422572801E00A82386 /* BaseModalViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BaseModalViewController.storyboard; sourceTree = "<group>"; };
-		EA7EE7452572807300A82386 /* BaseModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseModalViewController.swift; sourceTree = "<group>"; };
-		EA7EE7492572837400A82386 /* BaseModalViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseModalViewModelType.swift; sourceTree = "<group>"; };
 		EA7EE74F2572FE6C00A82386 /* TitleInputCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleInputCell.swift; sourceTree = "<group>"; };
 		EA7EE7522572FECB00A82386 /* TitleInputCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleInputCellViewModel.swift; sourceTree = "<group>"; };
 		EA7EE7552572FF4300A82386 /* TitleInputCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TitleInputCell.xib; sourceTree = "<group>"; };
@@ -190,6 +211,14 @@
 		EA9BCAA025434434003DE283 /* AccountsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsListViewModel.swift; sourceTree = "<group>"; };
 		EA9BCAA32543443F003DE283 /* AccountsListCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsListCoordinator.swift; sourceTree = "<group>"; };
 		EA9BCAA7254345AA003DE283 /* AccountsListViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AccountsListViewController.storyboard; sourceTree = "<group>"; };
+		EA9F051425936F4100B81A8E /* IconsListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IconsListViewModel.swift; sourceTree = "<group>"; };
+		EA9F051525936F4100B81A8E /* IconsListViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = IconsListViewController.storyboard; sourceTree = "<group>"; };
+		EA9F051625936F4100B81A8E /* IconsListCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IconsListCoordinator.swift; sourceTree = "<group>"; };
+		EA9F051725936F4100B81A8E /* IconsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IconsListViewController.swift; sourceTree = "<group>"; };
+		EA9F05392593716E00B81A8E /* ColorSetsListViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ColorSetsListViewController.storyboard; sourceTree = "<group>"; };
+		EA9F053A2593716E00B81A8E /* ColorSetsListCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorSetsListCoordinator.swift; sourceTree = "<group>"; };
+		EA9F053B2593716E00B81A8E /* ColorSetsListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorSetsListViewModel.swift; sourceTree = "<group>"; };
+		EA9F053C2593716E00B81A8E /* ColorSetsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorSetsListViewController.swift; sourceTree = "<group>"; };
 		EA9F66252554E44000441ED0 /* PlanningListViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PlanningListViewController.storyboard; sourceTree = "<group>"; };
 		EA9F66262554E44000441ED0 /* PlanningListCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlanningListCoordinator.swift; sourceTree = "<group>"; };
 		EA9F66272554E44000441ED0 /* PlanningListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlanningListViewController.swift; sourceTree = "<group>"; };
@@ -236,6 +265,25 @@
 		EAD68B17255B07110083B30D /* AddEditAccountCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEditAccountCoordinator.swift; sourceTree = "<group>"; };
 		EAD68B1A255B07110083B30D /* AddEditAccountViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEditAccountViewModel.swift; sourceTree = "<group>"; };
 		EAD68B22255EA9490083B30D /* UITableView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift"; sourceTree = "<group>"; };
+		EAE2170A2590D12700095EB5 /* AddEditAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditAccountViewController.swift; sourceTree = "<group>"; };
+		EAE2170D2590D49B00095EB5 /* AddEditAccountViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddEditAccountViewController.storyboard; sourceTree = "<group>"; };
+		EAE217132591141900095EB5 /* BallanceInputCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BallanceInputCell.xib; sourceTree = "<group>"; };
+		EAE217162591142300095EB5 /* BallanceInputCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BallanceInputCell.swift; sourceTree = "<group>"; };
+		EAE217192591143300095EB5 /* BallanceInputCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BallanceInputCellViewModel.swift; sourceTree = "<group>"; };
+		EAE2171D2591175D00095EB5 /* IconSelectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IconSelectionCell.xib; sourceTree = "<group>"; };
+		EAE217202591176800095EB5 /* IconSelectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconSelectionCell.swift; sourceTree = "<group>"; };
+		EAE217232591177300095EB5 /* IconSelectionCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconSelectionCellViewModel.swift; sourceTree = "<group>"; };
+		EAE217292591196900095EB5 /* ColorSelectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelectionCell.swift; sourceTree = "<group>"; };
+		EAE2172D2591197800095EB5 /* ColorSelectionCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelectionCellViewModel.swift; sourceTree = "<group>"; };
+		EAE217312591198600095EB5 /* ColorSelectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ColorSelectionCell.xib; sourceTree = "<group>"; };
+		EAE2173525911C9D00095EB5 /* UITableViewCell+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Extension.swift"; sourceTree = "<group>"; };
+		EAE21739259122E200095EB5 /* AccountsSelectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsSelectionCell.swift; sourceTree = "<group>"; };
+		EAE2173D259122F700095EB5 /* AccountsSelectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountsSelectionCell.xib; sourceTree = "<group>"; };
+		EAE217402591230200095EB5 /* AccountsSelectionCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsSelectionCellViewModel.swift; sourceTree = "<group>"; };
+		EAE21749259128D000095EB5 /* CurrencyListCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyListCoordinator.swift; sourceTree = "<group>"; };
+		EAE2174A259128D000095EB5 /* CurrencyListViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CurrencyListViewController.storyboard; sourceTree = "<group>"; };
+		EAE2174B259128D000095EB5 /* CurrencyListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyListViewController.swift; sourceTree = "<group>"; };
+		EAE2174C259128D000095EB5 /* CurrencyListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyListViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -371,16 +419,6 @@
 			path = AccountsListGroupCell;
 			sourceTree = "<group>";
 		};
-		EA7EE74125727FE900A82386 /* BaseModalViewController */ = {
-			isa = PBXGroup;
-			children = (
-				EA7EE7422572801E00A82386 /* BaseModalViewController.storyboard */,
-				EA7EE7452572807300A82386 /* BaseModalViewController.swift */,
-				EA7EE7492572837400A82386 /* BaseModalViewModelType.swift */,
-			);
-			path = BaseModalViewController;
-			sourceTree = "<group>";
-		};
 		EA7EE74E2572FE0F00A82386 /* TitleInputCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -451,6 +489,7 @@
 				EAD68B16255B07110083B30D /* AddEditAccount */,
 				EAD68AF9255B00870083B30D /* ReportDetails */,
 				EAD68B08255B012C0083B30D /* ProfileDetails */,
+				EA9F051D25936F9D00B81A8E /* SecondaryScenes */,
 				EAD68A98255804530083B30D /* UIComponents */,
 				EAD68A472554F9C80083B30D /* BaseCoordinator.swift */,
 				EAD68A462554F9C80083B30D /* AppCoordinator.swift */,
@@ -534,8 +573,41 @@
 				EA48F366256681B5007FE1BA /* UIView+Extensions.swift */,
 				EAAE9C11256F090700790931 /* UIVIewController+Extensions.swift */,
 				EAAE9C1425701F8200790931 /* UIPageViewController+Extensions.swift */,
+				EAE2173525911C9D00095EB5 /* UITableViewCell+Extension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		EA9F051325936F4100B81A8E /* IconsList */ = {
+			isa = PBXGroup;
+			children = (
+				EA9F051525936F4100B81A8E /* IconsListViewController.storyboard */,
+				EA9F051725936F4100B81A8E /* IconsListViewController.swift */,
+				EA9F051425936F4100B81A8E /* IconsListViewModel.swift */,
+				EA9F051625936F4100B81A8E /* IconsListCoordinator.swift */,
+			);
+			path = IconsList;
+			sourceTree = "<group>";
+		};
+		EA9F051D25936F9D00B81A8E /* SecondaryScenes */ = {
+			isa = PBXGroup;
+			children = (
+				EA9F05382593716E00B81A8E /* ColorSetsList */,
+				EAE21748259128D000095EB5 /* CurrencyList */,
+				EA9F051325936F4100B81A8E /* IconsList */,
+			);
+			path = SecondaryScenes;
+			sourceTree = "<group>";
+		};
+		EA9F05382593716E00B81A8E /* ColorSetsList */ = {
+			isa = PBXGroup;
+			children = (
+				EA9F05392593716E00B81A8E /* ColorSetsListViewController.storyboard */,
+				EA9F053A2593716E00B81A8E /* ColorSetsListCoordinator.swift */,
+				EA9F053B2593716E00B81A8E /* ColorSetsListViewModel.swift */,
+				EA9F053C2593716E00B81A8E /* ColorSetsListViewController.swift */,
+			);
+			path = ColorSetsList;
 			sourceTree = "<group>";
 		};
 		EA9F66242554E44000441ED0 /* PlanningList */ = {
@@ -619,7 +691,6 @@
 			isa = PBXGroup;
 			children = (
 				EA02381F25876D3800A284C4 /* UITableView+Reorder */,
-				EA7EE74125727FE900A82386 /* BaseModalViewController */,
 				EA7EE7122571551B00A82386 /* CustomTransitions */,
 				EAD68AD925595AA40083B30D /* PieChartView */,
 				EAAE9BF3256ED7F400790931 /* GradientView.swift */,
@@ -673,10 +744,67 @@
 			isa = PBXGroup;
 			children = (
 				EA7EE74E2572FE0F00A82386 /* TitleInputCell */,
+				EAE21712259113FF00095EB5 /* BallanceInputCell */,
+				EAE2171C259116B200095EB5 /* IconSelectionCell */,
+				EAE21726259118F900095EB5 /* ColorSelectionCell */,
+				EAE21738259122CC00095EB5 /* AccountsSelectionCell */,
+				EAE2170D2590D49B00095EB5 /* AddEditAccountViewController.storyboard */,
+				EAE2170A2590D12700095EB5 /* AddEditAccountViewController.swift */,
 				EAD68B1A255B07110083B30D /* AddEditAccountViewModel.swift */,
 				EAD68B17255B07110083B30D /* AddEditAccountCoordinator.swift */,
 			);
 			path = AddEditAccount;
+			sourceTree = "<group>";
+		};
+		EAE21712259113FF00095EB5 /* BallanceInputCell */ = {
+			isa = PBXGroup;
+			children = (
+				EAE217132591141900095EB5 /* BallanceInputCell.xib */,
+				EAE217162591142300095EB5 /* BallanceInputCell.swift */,
+				EAE217192591143300095EB5 /* BallanceInputCellViewModel.swift */,
+			);
+			path = BallanceInputCell;
+			sourceTree = "<group>";
+		};
+		EAE2171C259116B200095EB5 /* IconSelectionCell */ = {
+			isa = PBXGroup;
+			children = (
+				EAE2171D2591175D00095EB5 /* IconSelectionCell.xib */,
+				EAE217202591176800095EB5 /* IconSelectionCell.swift */,
+				EAE217232591177300095EB5 /* IconSelectionCellViewModel.swift */,
+			);
+			path = IconSelectionCell;
+			sourceTree = "<group>";
+		};
+		EAE21726259118F900095EB5 /* ColorSelectionCell */ = {
+			isa = PBXGroup;
+			children = (
+				EAE217312591198600095EB5 /* ColorSelectionCell.xib */,
+				EAE217292591196900095EB5 /* ColorSelectionCell.swift */,
+				EAE2172D2591197800095EB5 /* ColorSelectionCellViewModel.swift */,
+			);
+			path = ColorSelectionCell;
+			sourceTree = "<group>";
+		};
+		EAE21738259122CC00095EB5 /* AccountsSelectionCell */ = {
+			isa = PBXGroup;
+			children = (
+				EAE2173D259122F700095EB5 /* AccountsSelectionCell.xib */,
+				EAE21739259122E200095EB5 /* AccountsSelectionCell.swift */,
+				EAE217402591230200095EB5 /* AccountsSelectionCellViewModel.swift */,
+			);
+			path = AccountsSelectionCell;
+			sourceTree = "<group>";
+		};
+		EAE21748259128D000095EB5 /* CurrencyList */ = {
+			isa = PBXGroup;
+			children = (
+				EAE2174A259128D000095EB5 /* CurrencyListViewController.storyboard */,
+				EAE2174B259128D000095EB5 /* CurrencyListViewController.swift */,
+				EAE2174C259128D000095EB5 /* CurrencyListViewModel.swift */,
+				EAE21749259128D000095EB5 /* CurrencyListCoordinator.swift */,
+			);
+			path = CurrencyList;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -761,21 +889,28 @@
 				EAD68A4F255505B80083B30D /* AccountMonthDetailsView.xib in Resources */,
 				EA9F66342554E44000441ED0 /* BudgetsListViewController.storyboard in Resources */,
 				EA9BCAA8254345AA003DE283 /* AccountsListViewController.storyboard in Resources */,
+				EAE2170E2590D49B00095EB5 /* AddEditAccountViewController.storyboard in Resources */,
+				EAE2171E2591175D00095EB5 /* IconSelectionCell.xib in Resources */,
 				EAD68B0E255B012C0083B30D /* ProfileDetailsViewController.storyboard in Resources */,
 				EA7F616D252B2D13008CA432 /* .swiftlint.yml in Resources */,
 				EAD68AEB2559D5110083B30D /* HighCategoryContainerView.xib in Resources */,
+				EAE2173E259122F700095EB5 /* AccountsSelectionCell.xib in Resources */,
 				EAD68AFF255B00870083B30D /* ReportDetailsViewController.storyboard in Resources */,
+				EAE217142591141900095EB5 /* BallanceInputCell.xib in Resources */,
 				EA7EE7562572FF4300A82386 /* TitleInputCell.xib in Resources */,
 				EA930C3F2523D54F00E12805 /* LaunchScreen.storyboard in Resources */,
 				EAD68A3E2554F8810083B30D /* AccountDetailsViewController.storyboard in Resources */,
-				EA7EE7432572801E00A82386 /* BaseModalViewController.storyboard in Resources */,
 				EA930C3C2523D54F00E12805 /* Assets.xcassets in Resources */,
 				EA1D9E712524B07100E2027F /* AddEditOperationViewController.storyboard in Resources */,
 				EA9F662E2554E44000441ED0 /* PlanningListViewController.storyboard in Resources */,
 				EA0238162585FB9F00A284C4 /* AccountInGroupContainerView.xib in Resources */,
 				EAD68A302554F8150083B30D /* AccountHeaderView.xib in Resources */,
+				EAE217322591198600095EB5 /* ColorSelectionCell.xib in Resources */,
+				EAE2174E259128D000095EB5 /* CurrencyListViewController.storyboard in Resources */,
+				EA9F051925936F4100B81A8E /* IconsListViewController.storyboard in Resources */,
 				EAD68A6E25558AC80083B30D /* AccountOperationsSectionHeader.xib in Resources */,
 				EA7EE73C2571875300A82386 /* AccountsListGroupCell.xib in Resources */,
+				EA9F053D2593716E00B81A8E /* ColorSetsListViewController.storyboard in Resources */,
 				EA1D9E9E2524D9C000E2027F /* File in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -826,7 +961,6 @@
 				EA02382B25876D3800A284C4 /* ReorderController+AutoScroll.swift in Sources */,
 				EAD68A492554F9C80083B30D /* BaseCoordinator.swift in Sources */,
 				EA02382625876D3800A284C4 /* UITableView+Reorder.swift in Sources */,
-				EA7EE74A2572837400A82386 /* BaseModalViewModelType.swift in Sources */,
 				EAD68AEE2559D52D0083B30D /* HighCategoryContainerView.swift in Sources */,
 				EA9BCAA42543443F003DE283 /* AccountsListCoordinator.swift in Sources */,
 				EA930CD02524857900E12805 /* Reusable.swift in Sources */,
@@ -835,60 +969,78 @@
 				EA930CED25248A4800E12805 /* FPCategory.swift in Sources */,
 				EAD68B0F255B012C0083B30D /* ProfileDetailsViewController.swift in Sources */,
 				EAD68A412554F8810083B30D /* AccountDetailsCoordinator.swift in Sources */,
+				EAE2172A2591196900095EB5 /* ColorSelectionCell.swift in Sources */,
 				EA02381C2585FF8D00A284C4 /* AccountsInGroupContainerView.swift in Sources */,
 				EA0237FE25855BAE00A284C4 /* RealmObjectDelegate.swift in Sources */,
 				EA9BCAA125434434003DE283 /* AccountsListViewModel.swift in Sources */,
 				EA9F66322554E44000441ED0 /* BudgetsListCoordinator.swift in Sources */,
 				EA0238192585FF4600A284C4 /* AccountInGroupContainerView.swift in Sources */,
 				EA7EE723257161C600A82386 /* PushTransition.swift in Sources */,
+				EAE2171A2591143300095EB5 /* BallanceInputCellViewModel.swift in Sources */,
 				EAD68AD7255953A30083B30D /* Rx+Extensions.swift in Sources */,
 				EAD68A7125558AD10083B30D /* AccountOperationsSectionHeader.swift in Sources */,
 				EA930CC82524851000E12805 /* StoryboardBased.swift in Sources */,
 				EA1D9E692524A80A00E2027F /* AddEditOperationCoordinator.swift in Sources */,
 				EAD68A6A255582EF0083B30D /* AccountMonthDetailsViewModel.swift in Sources */,
+				EAE2174D259128D000095EB5 /* CurrencyListCoordinator.swift in Sources */,
 				EA7EE736257186FE00A82386 /* AccountsListGroupCell.swift in Sources */,
 				EA7EE7292571838E00A82386 /* AccountsListAccountCell.swift in Sources */,
 				EAAE9C1525701F8200790931 /* UIPageViewController+Extensions.swift in Sources */,
+				EAE2173625911C9D00095EB5 /* UITableViewCell+Extension.swift in Sources */,
 				EA7EE7392571872B00A82386 /* AccountsListGroupCellViewModelType.swift in Sources */,
 				EA0237F2258554B000A284C4 /* Currency.swift in Sources */,
 				EA930CF525248BA400E12805 /* FPAccountGroup.swift in Sources */,
+				EAE217242591177300095EB5 /* IconSelectionCellViewModel.swift in Sources */,
+				EAE217212591176800095EB5 /* IconSelectionCell.swift in Sources */,
 				EAD68B00255B00870083B30D /* ReportDetailsViewModel.swift in Sources */,
 				EAD68A332554F8220083B30D /* AccountHeaderView.swift in Sources */,
+				EAE217172591142300095EB5 /* BallanceInputCell.swift in Sources */,
 				EA930C352523D54D00E12805 /* SceneDelegate.swift in Sources */,
 				EA02380F2585ED3300A284C4 /* OperationModel.swift in Sources */,
 				EAD68AF2255ADEA00083B30D /* HighCategoriesContainerView.swift in Sources */,
+				EAE2174F259128D000095EB5 /* CurrencyListViewController.swift in Sources */,
 				EA7C119B258CBAB800CED84B /* SwipeableCell.swift in Sources */,
 				EA9F662F2554E44000441ED0 /* PlanningListCoordinator.swift in Sources */,
 				EAD68A402554F8810083B30D /* AccountDetailsViewController.swift in Sources */,
+				EA9F053F2593716E00B81A8E /* ColorSetsListViewModel.swift in Sources */,
 				EA0237D825854D6B00A284C4 /* AccountModel.swift in Sources */,
 				EAD68B10255B012C0083B30D /* ProfileDetailsCoordinator.swift in Sources */,
 				EA7EE7502572FE6C00A82386 /* TitleInputCell.swift in Sources */,
+				EAE217412591230200095EB5 /* AccountsSelectionCellViewModel.swift in Sources */,
 				EA7EE7532572FECB00A82386 /* TitleInputCellViewModel.swift in Sources */,
 				EAD68B1B255B07110083B30D /* AddEditAccountCoordinator.swift in Sources */,
 				EAD68A61255580AA0083B30D /* AccountOperationCell.swift in Sources */,
+				EA9F05402593716E00B81A8E /* ColorSetsListViewController.swift in Sources */,
 				EA1D9E792524B08500E2027F /* AddEditOperationViewModel.swift in Sources */,
 				EA1D9E752524B07B00E2027F /* AddEditOperationViewController.swift in Sources */,
-				EA7EE7462572807300A82386 /* BaseModalViewController.swift in Sources */,
 				EA930CD62524859E00E12805 /* BindableType.swift in Sources */,
 				EAD68A522555064F0083B30D /* AccountMonthDetailsView.swift in Sources */,
 				EA02382725876D3800A284C4 /* ReorderController+SnapshotView.swift in Sources */,
 				EA9BCA9E25434421003DE283 /* AccountsListViewController.swift in Sources */,
 				EA930CCC2524854600E12805 /* NibBased.swift in Sources */,
+				EAE21750259128D000095EB5 /* CurrencyListViewModel.swift in Sources */,
 				EAD68B23255EA9490083B30D /* UITableView+Extensions.swift in Sources */,
+				EA9F053E2593716E00B81A8E /* ColorSetsListCoordinator.swift in Sources */,
 				EA02382925876D3800A284C4 /* ReorderController+GestureRecognizer.swift in Sources */,
+				EAE2172E2591197800095EB5 /* ColorSelectionCellViewModel.swift in Sources */,
 				EAD68B1E255B07110083B30D /* AddEditAccountViewModel.swift in Sources */,
 				EA0237F4258554B300A284C4 /* CurrencyLocale.swift in Sources */,
 				EA0238082585EA3400A284C4 /* AccountGroupModel.swift in Sources */,
+				EA9F051825936F4100B81A8E /* IconsListViewModel.swift in Sources */,
+				EAE2173A259122E200095EB5 /* AccountsSelectionCell.swift in Sources */,
 				EA48F367256681B5007FE1BA /* UIView+Extensions.swift in Sources */,
 				EAD68ADB25595AB80083B30D /* PieChartView+Rx.swift in Sources */,
 				EA930D032524943C00E12805 /* FinplyDI.swift in Sources */,
+				EAE2170B2590D12700095EB5 /* AddEditAccountViewController.swift in Sources */,
 				EA7EE72E257183C700A82386 /* AccountsListAccountCellViewModel.swift in Sources */,
 				EAD68A74255591030083B30D /* Foundation+Extensions.swift in Sources */,
+				EA9F051A25936F4100B81A8E /* IconsListCoordinator.swift in Sources */,
 				EA930CE7252486DB00E12805 /* FPOperation.swift in Sources */,
 				EAAE9C12256F090700790931 /* UIVIewController+Extensions.swift in Sources */,
 				EAD68B0D255B012C0083B30D /* ProfileDetailsViewModel.swift in Sources */,
 				EA9F66332554E44000441ED0 /* BudgetsListViewModel.swift in Sources */,
 				EA9F66302554E44000441ED0 /* PlanningListViewController.swift in Sources */,
+				EA9F051B25936F4100B81A8E /* IconsListViewController.swift in Sources */,
 				EA0238122585F01200A284C4 /* CategoryModel.swift in Sources */,
 				EAD68B01255B00870083B30D /* ReportDetailsViewController.swift in Sources */,
 				EA02382A25876D3800A284C4 /* ReorderController+DestinationRow.swift in Sources */,

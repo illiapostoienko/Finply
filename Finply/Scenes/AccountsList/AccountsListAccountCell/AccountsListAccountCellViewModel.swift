@@ -43,7 +43,7 @@ final class AccountsListAccountCellViewModel: AccountsListAccountCellViewModelTy
     private let _accountModel: BehaviorRelay<AccountModelType>
     private let bag = DisposeBag()
     
-    init(accountModel: AccountModelType = AccountModel(name: "Some name", baseValueInCents: 0, currency: .afghani, order: 0)) {
+    init(accountModel: AccountModelType) {
 
         _accountModel = BehaviorRelay<AccountModelType>(value: accountModel)
         

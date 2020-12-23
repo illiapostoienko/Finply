@@ -147,24 +147,24 @@ final class AccountsListViewModel: AccountsListViewModelType, AccountsListViewMo
             .disposed(by: bag)
         
         // load accounts and groups into internal arrays
-        let mockAccounts: [AccountModelType] = [
-            AccountModel(name: "Some name", baseValueInCents: 0, currency: .afghani, order: 0),
-            AccountModel(name: "Some name", baseValueInCents: 0, currency: .afghani, order: 1),
-            AccountModel(name: "Some name", baseValueInCents: 0, currency: .afghani, order: 2),
-            AccountModel(name: "Some name", baseValueInCents: 0, currency: .afghani, order: 3),
-            AccountModel(name: "Some name", baseValueInCents: 0, currency: .afghani, order: 4),
-            AccountModel(name: "Some name", baseValueInCents: 0, currency: .afghani, order: 5),
-            AccountModel(name: "Some name", baseValueInCents: 0, currency: .afghani, order: 6),
-            AccountModel(name: "Some name", baseValueInCents: 0, currency: .afghani, order: 7)
-        ]
+//        let mockAccounts: [AccountModelType] = [
+//            AccountModel(name: "Some name", baseValueInCents: 0, currency: .afghani, order: 0),
+//            AccountModel(name: "Some name", baseValueInCents: 0, currency: .afghani, order: 1),
+//            AccountModel(name: "Some name", baseValueInCents: 0, currency: .afghani, order: 2),
+//            AccountModel(name: "Some name", baseValueInCents: 0, currency: .afghani, order: 3),
+//            AccountModel(name: "Some name", baseValueInCents: 0, currency: .afghani, order: 4),
+//            AccountModel(name: "Some name", baseValueInCents: 0, currency: .afghani, order: 5),
+//            AccountModel(name: "Some name", baseValueInCents: 0, currency: .afghani, order: 6),
+//            AccountModel(name: "Some name", baseValueInCents: 0, currency: .afghani, order: 7)
+//        ]
         
-        let mockGroups: [AccountGroupModelType] = [
-            AccountGroupModel(name: "Everyday", order: 0),
-            AccountGroupModel(name: "Everyday", order: 0)
-        ]
-        
-        loadedAccounts.accept(mockAccounts)
-        loadedGroups.accept(mockGroups)
+//        let mockGroups: [AccountGroupModelType] = [
+//            AccountGroupModel(name: "Everyday", order: 0),
+//            AccountGroupModel(name: "Everyday", order: 0)
+//        ]
+//
+//        loadedAccounts.accept(mockAccounts)
+//        loadedGroups.accept(mockGroups)
     }
 }
 

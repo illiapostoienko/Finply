@@ -17,7 +17,7 @@ protocol OperationModelType {
     
     var creationDate: Date { get }
     var operationDate: Date { get }
-    var valueInCents: Int64 { get }
+    var valueInCents: Int { get }
     var comment: String? { get }
     var photoPath: String? { get }
     var operationType: OperationModel.OperationType { get }
@@ -34,7 +34,7 @@ final class OperationModel: Object, OperationModelType {
     
     @objc dynamic var creationDate = Date()
     @objc dynamic var operationDate = Date()
-    @objc dynamic var valueInCents: Int64 = 0
+    @objc dynamic var valueInCents: Int = 0
     @objc dynamic var comment: String?
     @objc dynamic var photoPath: String?
     @objc dynamic private var operationTypeId = OperationType.expense.rawValue
@@ -52,7 +52,7 @@ final class OperationModel: Object, OperationModelType {
         return "id"
     }
     
-    convenience init(accountId: String, operationSectionId: String, categoryId: String, creationDate: Date, operationDate: Date, valueInCents: Int64, comment: String?, photoPath: String?, operationKind: OperationType) {
+    convenience init(accountId: String, operationSectionId: String, categoryId: String, creationDate: Date, operationDate: Date, valueInCents: Int, comment: String?, photoPath: String?, operationKind: OperationType) {
         self.init()
         self.accountId = accountId
         self.operationSectionId = operationSectionId

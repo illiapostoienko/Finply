@@ -11,7 +11,6 @@
 		EA0237D825854D6B00A284C4 /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0237D725854D6B00A284C4 /* AccountModel.swift */; };
 		EA0237F2258554B000A284C4 /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0237E42585523800A284C4 /* Currency.swift */; };
 		EA0237F4258554B300A284C4 /* CurrencyLocale.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0237E52585523A00A284C4 /* CurrencyLocale.swift */; };
-		EA0237F925855ACE00A284C4 /* AccountsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0237F825855ACE00A284C4 /* AccountsRepository.swift */; };
 		EA0237FE25855BAE00A284C4 /* RealmObjectDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0237FD25855BAE00A284C4 /* RealmObjectDelegate.swift */; };
 		EA0238082585EA3400A284C4 /* AccountGroupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0238072585EA3400A284C4 /* AccountGroupModel.swift */; };
 		EA02380B2585EAF500A284C4 /* OperationSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA02380A2585EAF500A284C4 /* OperationSectionModel.swift */; };
@@ -26,6 +25,8 @@
 		EA02382925876D3800A284C4 /* ReorderController+GestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA02382325876D3800A284C4 /* ReorderController+GestureRecognizer.swift */; };
 		EA02382A25876D3800A284C4 /* ReorderController+DestinationRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA02382425876D3800A284C4 /* ReorderController+DestinationRow.swift */; };
 		EA02382B25876D3800A284C4 /* ReorderController+AutoScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA02382525876D3800A284C4 /* ReorderController+AutoScroll.swift */; };
+		EA1715472593F2AB00F97C39 /* AccountsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1715462593F2AB00F97C39 /* AccountsService.swift */; };
+		EA17154A2593F2CE00F97C39 /* OrderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1715492593F2CE00F97C39 /* OrderService.swift */; };
 		EA1D9E692524A80A00E2027F /* AddEditOperationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1D9E682524A80A00E2027F /* AddEditOperationCoordinator.swift */; };
 		EA1D9E712524B07100E2027F /* AddEditOperationViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA1D9E702524B07100E2027F /* AddEditOperationViewController.storyboard */; };
 		EA1D9E752524B07B00E2027F /* AddEditOperationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1D9E742524B07B00E2027F /* AddEditOperationViewController.swift */; };
@@ -54,8 +55,6 @@
 		EA930C3C2523D54F00E12805 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA930C3B2523D54F00E12805 /* Assets.xcassets */; };
 		EA930C3F2523D54F00E12805 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA930C3D2523D54F00E12805 /* LaunchScreen.storyboard */; };
 		EA930C6B2523D89C00E12805 /* Dip in Frameworks */ = {isa = PBXBuildFile; productRef = EA930C6A2523D89C00E12805 /* Dip */; settings = {ATTRIBUTES = (Required, ); }; };
-		EA930C6F2523DA9E00E12805 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = EA930C6E2523DA9E00E12805 /* Realm */; };
-		EA930C712523DA9E00E12805 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = EA930C702523DA9E00E12805 /* RealmSwift */; };
 		EA930CC2252484CD00E12805 /* UITableView+Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA930CC1252484CD00E12805 /* UITableView+Reusable.swift */; };
 		EA930CC82524851000E12805 /* StoryboardBased.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA930CC72524851000E12805 /* StoryboardBased.swift */; };
 		EA930CCC2524854600E12805 /* NibBased.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA930CCB2524854600E12805 /* NibBased.swift */; };
@@ -82,6 +81,11 @@
 		EA9F05402593716E00B81A8E /* ColorSetsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9F053C2593716E00B81A8E /* ColorSetsListViewController.swift */; };
 		EA9F05452593A75100B81A8E /* ClearCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA9F05442593A75100B81A8E /* ClearCell.xib */; };
 		EA9F05482593A75B00B81A8E /* ClearCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9F05472593A75B00B81A8E /* ClearCell.swift */; };
+		EA9F054B2593C01900B81A8E /* FinplyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9F054A2593C01900B81A8E /* FinplyRepository.swift */; };
+		EA9F054F2593C2C300B81A8E /* Realm+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9F054E2593C2C300B81A8E /* Realm+Extensions.swift */; };
+		EA9F05522593C75000B81A8E /* UITextField+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9F05512593C75000B81A8E /* UITextField+Extensions.swift */; };
+		EA9F05572593D4E900B81A8E /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = EA9F05562593D4E900B81A8E /* RealmSwift */; };
+		EA9F05592593D4E900B81A8E /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = EA9F05582593D4E900B81A8E /* Realm */; };
 		EA9F662E2554E44000441ED0 /* PlanningListViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA9F66252554E44000441ED0 /* PlanningListViewController.storyboard */; };
 		EA9F662F2554E44000441ED0 /* PlanningListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9F66262554E44000441ED0 /* PlanningListCoordinator.swift */; };
 		EA9F66302554E44000441ED0 /* PlanningListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9F66272554E44000441ED0 /* PlanningListViewController.swift */; };
@@ -156,7 +160,6 @@
 		EA0237D725854D6B00A284C4 /* AccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AccountModel.swift; path = ../../../../../Documents/AccountModel.swift; sourceTree = "<group>"; };
 		EA0237E42585523800A284C4 /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
 		EA0237E52585523A00A284C4 /* CurrencyLocale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyLocale.swift; sourceTree = "<group>"; };
-		EA0237F825855ACE00A284C4 /* AccountsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsRepository.swift; sourceTree = "<group>"; };
 		EA0237FD25855BAE00A284C4 /* RealmObjectDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmObjectDelegate.swift; sourceTree = "<group>"; };
 		EA0238072585EA3400A284C4 /* AccountGroupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountGroupModel.swift; sourceTree = "<group>"; };
 		EA02380A2585EAF500A284C4 /* OperationSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationSectionModel.swift; sourceTree = "<group>"; };
@@ -171,6 +174,8 @@
 		EA02382325876D3800A284C4 /* ReorderController+GestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ReorderController+GestureRecognizer.swift"; sourceTree = "<group>"; };
 		EA02382425876D3800A284C4 /* ReorderController+DestinationRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ReorderController+DestinationRow.swift"; sourceTree = "<group>"; };
 		EA02382525876D3800A284C4 /* ReorderController+AutoScroll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ReorderController+AutoScroll.swift"; sourceTree = "<group>"; };
+		EA1715462593F2AB00F97C39 /* AccountsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsService.swift; sourceTree = "<group>"; };
+		EA1715492593F2CE00F97C39 /* OrderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderService.swift; sourceTree = "<group>"; };
 		EA1D9E682524A80A00E2027F /* AddEditOperationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditOperationCoordinator.swift; sourceTree = "<group>"; };
 		EA1D9E702524B07100E2027F /* AddEditOperationViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddEditOperationViewController.storyboard; sourceTree = "<group>"; };
 		EA1D9E742524B07B00E2027F /* AddEditOperationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditOperationViewController.swift; sourceTree = "<group>"; };
@@ -223,6 +228,9 @@
 		EA9F053C2593716E00B81A8E /* ColorSetsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorSetsListViewController.swift; sourceTree = "<group>"; };
 		EA9F05442593A75100B81A8E /* ClearCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ClearCell.xib; sourceTree = "<group>"; };
 		EA9F05472593A75B00B81A8E /* ClearCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearCell.swift; sourceTree = "<group>"; };
+		EA9F054A2593C01900B81A8E /* FinplyRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinplyRepository.swift; sourceTree = "<group>"; };
+		EA9F054E2593C2C300B81A8E /* Realm+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Realm+Extensions.swift"; sourceTree = "<group>"; };
+		EA9F05512593C75000B81A8E /* UITextField+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extensions.swift"; sourceTree = "<group>"; };
 		EA9F66252554E44000441ED0 /* PlanningListViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PlanningListViewController.storyboard; sourceTree = "<group>"; };
 		EA9F66262554E44000441ED0 /* PlanningListCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlanningListCoordinator.swift; sourceTree = "<group>"; };
 		EA9F66272554E44000441ED0 /* PlanningListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlanningListViewController.swift; sourceTree = "<group>"; };
@@ -298,12 +306,12 @@
 				EA7F6167252B2C2C008CA432 /* RxCocoa in Frameworks */,
 				EA7F6165252B2C2C008CA432 /* RxRelay in Frameworks */,
 				EA9BCA982543384D003DE283 /* RxSwiftExt in Frameworks */,
+				EA9F05572593D4E900B81A8E /* RealmSwift in Frameworks */,
+				EA9F05592593D4E900B81A8E /* Realm in Frameworks */,
 				EA930C6B2523D89C00E12805 /* Dip in Frameworks */,
-				EA930C6F2523DA9E00E12805 /* Realm in Frameworks */,
 				EA7F6163252B2C2C008CA432 /* RxSwift in Frameworks */,
 				EAD68A59255580040083B30D /* Differentiator in Frameworks */,
 				EAD68A57255580040083B30D /* RxDataSources in Frameworks */,
-				EA930C712523DA9E00E12805 /* RealmSwift in Frameworks */,
 				EA7F6169252B2C2C008CA432 /* RxBlocking in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -346,7 +354,7 @@
 			isa = PBXGroup;
 			children = (
 				EA0237FC25855B9C00A284C4 /* Common */,
-				EA0237F825855ACE00A284C4 /* AccountsRepository.swift */,
+				EA9F054A2593C01900B81A8E /* FinplyRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -514,6 +522,8 @@
 			isa = PBXGroup;
 			children = (
 				EA7EE7592573175300A82386 /* UserStateService.swift */,
+				EA1715462593F2AB00F97C39 /* AccountsService.swift */,
+				EA1715492593F2CE00F97C39 /* OrderService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -578,6 +588,8 @@
 				EAAE9C11256F090700790931 /* UIVIewController+Extensions.swift */,
 				EAAE9C1425701F8200790931 /* UIPageViewController+Extensions.swift */,
 				EAE2173525911C9D00095EB5 /* UITableViewCell+Extension.swift */,
+				EA9F054E2593C2C300B81A8E /* Realm+Extensions.swift */,
+				EA9F05512593C75000B81A8E /* UITextField+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -840,8 +852,6 @@
 			name = Finply;
 			packageProductDependencies = (
 				EA930C6A2523D89C00E12805 /* Dip */,
-				EA930C6E2523DA9E00E12805 /* Realm */,
-				EA930C702523DA9E00E12805 /* RealmSwift */,
 				EA7F6162252B2C2C008CA432 /* RxSwift */,
 				EA7F6164252B2C2C008CA432 /* RxRelay */,
 				EA7F6166252B2C2C008CA432 /* RxCocoa */,
@@ -849,6 +859,8 @@
 				EA9BCA972543384D003DE283 /* RxSwiftExt */,
 				EAD68A56255580040083B30D /* RxDataSources */,
 				EAD68A58255580040083B30D /* Differentiator */,
+				EA9F05562593D4E900B81A8E /* RealmSwift */,
+				EA9F05582593D4E900B81A8E /* Realm */,
 			);
 			productName = Fimple;
 			productReference = EA930C2F2523D54D00E12805 /* Finply.app */;
@@ -879,10 +891,10 @@
 			mainGroup = EA930C262523D54D00E12805;
 			packageReferences = (
 				EA930C692523D89C00E12805 /* XCRemoteSwiftPackageReference "Dip" */,
-				EA930C6D2523DA9E00E12805 /* XCRemoteSwiftPackageReference "realm-cocoa" */,
 				EA7F6161252B2C2C008CA432 /* XCRemoteSwiftPackageReference "RxSwift" */,
 				EA9BCA962543384D003DE283 /* XCRemoteSwiftPackageReference "RxSwiftExt" */,
 				EAD68A55255580040083B30D /* XCRemoteSwiftPackageReference "RxDataSources" */,
+				EA9F05552593D4E900B81A8E /* XCRemoteSwiftPackageReference "realm-cocoa" */,
 			);
 			productRefGroup = EA930C302523D54D00E12805 /* Products */;
 			projectDirPath = "";
@@ -958,12 +970,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA17154A2593F2CE00F97C39 /* OrderService.swift in Sources */,
 				EA02382825876D3800A284C4 /* ReorderController.swift in Sources */,
 				EAD68ADF25595AE00083B30D /* PieChartView.swift in Sources */,
 				EA0237D1258548D100A284C4 /* RealmRepository.swift in Sources */,
 				EAD68A482554F9C80083B30D /* AppCoordinator.swift in Sources */,
-				EA0237F925855ACE00A284C4 /* AccountsRepository.swift in Sources */,
 				EA9F66312554E44000441ED0 /* PlanningListViewModel.swift in Sources */,
+				EA9F054F2593C2C300B81A8E /* Realm+Extensions.swift in Sources */,
 				EA7EE75A2573175300A82386 /* UserStateService.swift in Sources */,
 				EA930CDC252485C500E12805 /* NibLoadable.swift in Sources */,
 				EA02380B2585EAF500A284C4 /* OperationSectionModel.swift in Sources */,
@@ -997,6 +1010,7 @@
 				EAD68A7125558AD10083B30D /* AccountOperationsSectionHeader.swift in Sources */,
 				EA930CC82524851000E12805 /* StoryboardBased.swift in Sources */,
 				EA1D9E692524A80A00E2027F /* AddEditOperationCoordinator.swift in Sources */,
+				EA1715472593F2AB00F97C39 /* AccountsService.swift in Sources */,
 				EAD68A6A255582EF0083B30D /* AccountMonthDetailsViewModel.swift in Sources */,
 				EAE2174D259128D000095EB5 /* CurrencyListCoordinator.swift in Sources */,
 				EA7EE736257186FE00A82386 /* AccountsListGroupCell.swift in Sources */,
@@ -1009,6 +1023,7 @@
 				EAE217242591177300095EB5 /* IconSelectionCellViewModel.swift in Sources */,
 				EAE217212591176800095EB5 /* IconSelectionCell.swift in Sources */,
 				EAD68B00255B00870083B30D /* ReportDetailsViewModel.swift in Sources */,
+				EA9F054B2593C01900B81A8E /* FinplyRepository.swift in Sources */,
 				EAD68A332554F8220083B30D /* AccountHeaderView.swift in Sources */,
 				EAE217172591142300095EB5 /* BallanceInputCell.swift in Sources */,
 				EA930C352523D54D00E12805 /* SceneDelegate.swift in Sources */,
@@ -1020,6 +1035,7 @@
 				EAD68A402554F8810083B30D /* AccountDetailsViewController.swift in Sources */,
 				EA9F053F2593716E00B81A8E /* ColorSetsListViewModel.swift in Sources */,
 				EA0237D825854D6B00A284C4 /* AccountModel.swift in Sources */,
+				EA9F05522593C75000B81A8E /* UITextField+Extensions.swift in Sources */,
 				EAD68B10255B012C0083B30D /* ProfileDetailsCoordinator.swift in Sources */,
 				EA7EE7502572FE6C00A82386 /* TitleInputCell.swift in Sources */,
 				EAE217412591230200095EB5 /* AccountsSelectionCellViewModel.swift in Sources */,
@@ -1282,20 +1298,20 @@
 				minimumVersion = 7.1.1;
 			};
 		};
-		EA930C6D2523DA9E00E12805 /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/realm/realm-cocoa";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.4.5;
-			};
-		};
 		EA9BCA962543384D003DE283 /* XCRemoteSwiftPackageReference "RxSwiftExt" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/RxSwiftCommunity/RxSwiftExt";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 5.2.0;
+			};
+		};
+		EA9F05552593D4E900B81A8E /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-cocoa";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.5.0;
 			};
 		};
 		EAD68A55255580040083B30D /* XCRemoteSwiftPackageReference "RxDataSources" */ = {
@@ -1334,20 +1350,20 @@
 			package = EA930C692523D89C00E12805 /* XCRemoteSwiftPackageReference "Dip" */;
 			productName = Dip;
 		};
-		EA930C6E2523DA9E00E12805 /* Realm */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = EA930C6D2523DA9E00E12805 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
-			productName = Realm;
-		};
-		EA930C702523DA9E00E12805 /* RealmSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = EA930C6D2523DA9E00E12805 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
-			productName = RealmSwift;
-		};
 		EA9BCA972543384D003DE283 /* RxSwiftExt */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = EA9BCA962543384D003DE283 /* XCRemoteSwiftPackageReference "RxSwiftExt" */;
 			productName = RxSwiftExt;
+		};
+		EA9F05562593D4E900B81A8E /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EA9F05552593D4E900B81A8E /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			productName = RealmSwift;
+		};
+		EA9F05582593D4E900B81A8E /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EA9F05552593D4E900B81A8E /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			productName = Realm;
 		};
 		EAD68A56255580040083B30D /* RxDataSources */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -72,7 +72,7 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="currencyButton" destination="H6G-fy-BpH" id="DFf-4g-Omh"/>
-                <outlet property="inputTextField" destination="G9y-lZ-9iD" id="jB9-ws-EXC"/>
+                <outlet property="inputTextField" destination="G9y-lZ-9iD" id="fea-Yd-pb8"/>
                 <outlet property="textFieldBaseView" destination="1VU-zw-7Gu" id="YMv-x5-CXF"/>
                 <outlet property="titleLabel" destination="IPO-H8-3Yg" id="MZt-XL-h6F"/>
             </connections>

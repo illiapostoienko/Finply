@@ -8,9 +8,10 @@
 import Foundation
 import RealmSwift
 
-protocol CategoryModelType {
+protocol CategoryModelType: OrderableType {
     var id: String { get }
-    var name: String { get }
+    var name: String { get set }
+    
     // color, icon,
 }
 
@@ -21,6 +22,7 @@ final class CategoryModel: Object, CategoryModelType {
     
     @objc dynamic var name = ""
     @objc dynamic private var categoryTypeId: Int = 0
+    @objc dynamic var order = 0
     
     @objc dynamic var parentCategory: CategoryModel?
     
@@ -42,5 +44,9 @@ final class CategoryModel: Object, CategoryModelType {
     enum CategoryType: Int {
         case income
         case expense
+    }
+    
+    func changeOrder(to order: Int) {
+        self.order = order
     }
 }

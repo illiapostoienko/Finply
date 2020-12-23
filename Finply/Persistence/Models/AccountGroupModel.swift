@@ -8,10 +8,9 @@
 import Foundation
 import RealmSwift
 
-protocol AccountGroupModelType {
+protocol AccountGroupModelType: OrderableType {
     var id: String { get }
-    var name: String { get }
-    var order: Int { get }
+    var name: String { get set }
     
     // color, icon, iconset
 }
@@ -29,9 +28,17 @@ final class AccountGroupModel: Object, AccountGroupModelType {
         return "id"
     }
     
+    static var orderKey: String {
+        return #keyPath(order)
+    }
+    
     convenience init(name: String, order: Int) {
         self.init()
         self.name = name
+        self.order = order
+    }
+    
+    func changeOrder(to order: Int) {
         self.order = order
     }
 }

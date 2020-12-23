@@ -29,5 +29,15 @@ final class BallanceInputCell: UITableViewCell, BindableType, NibReusable {
         currencyButton.rx.tap
             .bind(to: viewModel.currencyTapped)
             .disposed(by: bag)
+        
+        inputTextField.rx.text
+            .orEmpty
+            .distinctUntilChanged()
+            .bind(to: viewModel.inputStringValue)
+            .disposed(by: bag)
+        
+        viewModel.currentStringValue
+            .bind(to: inputTextField.rx.text)
+            .disposed(by: bag)
     }
 }

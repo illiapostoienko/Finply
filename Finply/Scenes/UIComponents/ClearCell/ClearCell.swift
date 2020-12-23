@@ -9,7 +9,7 @@ import UIKit
 
 final class ClearCell: UITableViewCell, NibReusable {
     
-    @IBOutlet var heightConstraint: NSLayoutConstraint!
+    @IBOutlet private var heightConstraint: NSLayoutConstraint!
     
     func setHeight(_ height: CGFloat) {
         heightConstraint.constant = height

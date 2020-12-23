@@ -22,6 +22,7 @@ protocol AddEditAccountViewModelInput {
 protocol AddEditAccountViewModelOutput {
     var sceneState: Observable<AddEditAccountSceneState> { get }
     var dataSource: Observable<[AddEditAccountTableViewItem]> { get }
+    var isCheckButtonEnabled: Observable<Bool> { get }
 }
 
 protocol AddEditAccountViewModelCoordination {
@@ -40,6 +41,7 @@ protocol AddEditAccountViewModelType {
     func setup(with state: AddEditAccountSceneState)
 }
 
+//swiftlint:disable force_unwrapping
 final class AddEditAccountViewModel: AddEditAccountViewModelType, AddEditAccountViewModelCoordination, AddEditAccountViewModelInput, AddEditAccountViewModelOutput {
     
     var input: AddEditAccountViewModelInput { return self }
@@ -49,6 +51,7 @@ final class AddEditAccountViewModel: AddEditAccountViewModelType, AddEditAccount
     // Output
     var sceneState: Observable<AddEditAccountSceneState> { _sceneState.asObservable() }
     var dataSource: Observable<[AddEditAccountTableViewItem]> { _dataSource.asObservable() }
+    let isCheckButtonEnabled: Observable<Bool>
     
     private let _sceneState = BehaviorRelay<AddEditAccountSceneState>(value: .addAccount)
     private let _dataSource = BehaviorRelay<[AddEditAccountTableViewItem]>(value: [])
@@ -87,14 +90,17 @@ final class AddEditAccountViewModel: AddEditAccountViewModelType, AddEditAccount
     private let colorSelectionCellVm: ColorSelectionCellViewModelType
     private let accountsSelectionCellVm: AccountsSelectionCellViewModelType
     
+    private let accountsService: AccountsServiceType
     private let bag = DisposeBag()
     
-    init(titleInputVm: TitleInputCellViewModelType = TitleInputCellViewModel(),
+    init(accountsService: AccountsServiceType,
+         titleInputVm: TitleInputCellViewModelType = TitleInputCellViewModel(),
          ballanceInputCellVm: BallanceInputCellViewModelType = BallanceInputCellViewModel(),
          iconSelectionCellVm: IconSelectionCellViewModelType = IconSelectionCellViewModel(),
          colorSelectionCellVm: ColorSelectionCellViewModelType = ColorSelectionCellViewModel(),
          accountsSelectionCellVm: AccountsSelectionCellViewModelType = AccountsSelectionCellViewModel())
     {
+        self.accountsService = accountsService
         self.titleInputVm = titleInputVm
         self.ballanceInputCellVm = ballanceInputCellVm
         self.iconSelectionCellVm = iconSelectionCellVm
@@ -147,9 +153,70 @@ final class AddEditAccountViewModel: AddEditAccountViewModelType, AddEditAccount
             .bind(to: _completeCoordinationResult)
             .disposed(by: bag)
         
-        // create or edit account/account group -> bind _completeCoordinationResult
+        let latestDataSet = Observable
+            .combineLatest(titleInputVm.nameString, ballanceInputCellVm.inputValueInCents, ballanceInputCellVm.selectedCurrency)
+            .map{ (name: $0.0, value: $0.1, currency: $0.2) }
+        
+        isCheckButtonEnabled = latestDataSet.withLatestFrom(_sceneState) { set, state in
+            if state.isAccountGroupAction {
+                return !set.name.isEmpty
+            } else {
+                guard let inputValueInCents = set.value else { return false }
+                return !set.name.isEmpty && inputValueInCents != 0
+            }
+        }
+        
+        // Adding/Updaing Account
+        _checkButtonTap
+            .withLatestFrom(_sceneState)
+            .filter{ $0.isAccountAction }
+            .withLatestFrom(latestDataSet) { (state: $0, data: $1) }
+            .filter{ $0.data.value != nil }
+            .debug()
+            .flatMap{ [accountsService] set -> Single<AddEditAccountCoordinationResult> in
+                if var existingAccount = set.state.editAccountValue {
+                    let calculatedValueDelta = existingAccount.calculatedValueInCents - existingAccount.baseValueInCents
+                    existingAccount.name = set.data.name
+                    existingAccount.baseValueInCents = set.data.value!
+                    existingAccount.calculatedValueInCents = set.data.value! + calculatedValueDelta
+                    existingAccount.currency = set.data.currency
+                    // + icon, color
+                    return accountsService
+                        .updateAccount(existingAccount)
+                        .map{ .accountEdited(existingAccount) }
+                } else {
+                    return accountsService
+                        .addAccount(name: set.data.name, baseValueInCents: set.data.value!, calculatedValueInCents: set.data.value!, currency: set.data.currency)
+                        .map{ .accountAdded($0) }
+                        .debug()
+                }
+            }
+            .bind(to: _completeCoordinationResult)
+            .disposed(by: bag)
+        
+        // Adding/Updaing AccountGroup
+        _checkButtonTap
+            .withLatestFrom(_sceneState)
+            .filter{ $0.isAccountGroupAction }
+            .withLatestFrom(latestDataSet) { (state: $0, data: $1) }
+            .flatMap{ [accountsService] set -> Single<AddEditAccountCoordinationResult> in
+                if var existingAccountGroup = set.state.editAccountGroupValue {
+                    existingAccountGroup.name = set.data.name
+                    // + icon, color, selected accounts
+                    return accountsService
+                        .updateAccountGroup(existingAccountGroup)
+                        .map{ .accountGroupEdited(existingAccountGroup) }
+                } else {
+                    return accountsService
+                        .addAccountGroup(name: set.data.name)
+                        .map{ .accountGroupAdded($0) }
+                }
+            }
+            .bind(to: _completeCoordinationResult)
+            .disposed(by: bag)
         
         _sceneState
+            .distinctUntilChanged()
             .map{ state -> [AddEditAccountTableViewItem] in
                 var itemsSet: [AddEditAccountTableViewItem] = []
                 

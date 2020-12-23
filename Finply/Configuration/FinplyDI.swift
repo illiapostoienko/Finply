@@ -21,7 +21,7 @@ final class FinplyDI {
         container.register{ AddEditOperationViewModel() }.implements(AddEditOperationViewModelType.self)
         container.register{ AccountsListViewModel() }.implements(AccountsListViewModelType.self)
         container.register{ ReportDetailsViewModel() }.implements(ReportDetailsViewModelType.self)
-        container.register{ AddEditAccountViewModel() }.implements(AddEditAccountViewModelType.self)
+        container.register{ AddEditAccountViewModel(accountsService: $0) }.implements(AddEditAccountViewModelType.self)
         container.register{ ProfileDetailsViewModel() }.implements(ProfileDetailsViewModelType.self)
         
         //Secondary Modules
@@ -34,10 +34,10 @@ final class FinplyDI {
     
     static func registerCoreServices(container: DependencyContainer) {
 
-        container.register{ UserStateService() }.implements(UserStateServiceType.self)
-    }
-    
-    static func registerPersistence(container: DependencyContainer) {
+        container.register{ UserStateService(repository: $0) }.implements(UserStateServiceType.self)
+        container.register{ OrderService() }.implements(OrderServiceType.self)
+        container.register{ AccountsService(repository: $0, orderService: $1) }.implements(AccountsServiceType.self)
         
+        container.register{ FinplyRepository() }.implements(FinplyRepositoryType.self)
     }
 }

@@ -19,7 +19,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let container = DependencyContainer()
         FinplyDI.registerViewModels(container: container)
         FinplyDI.registerCoreServices(container: container)
-        FinplyDI.registerPersistence(container: container)
         return container
     }
     

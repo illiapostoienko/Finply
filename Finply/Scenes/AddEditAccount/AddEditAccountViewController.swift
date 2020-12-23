@@ -55,6 +55,10 @@ final class AddEditAccountViewController: UIViewController, BindableType {
             .do(onNext: { [weak self] in self?.tableView.deselectRow(at: $0, animated: true) })
             .map{ $0.row }
             .bind(to: viewModel.input.rowSelected).disposed(by: bag)
+        
+        viewModel.output.isCheckButtonEnabled
+            .bind(to: checkButton.rx.isEnabled)
+            .disposed(by: bag)
     }
     
     @IBAction func selectorButtonPressed(_ sender: Any) {

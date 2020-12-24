@@ -8,11 +8,13 @@
 import Foundation
 import RealmSwift
 
-protocol AccountGroupModelType: OrderableType {
+protocol AccountGroupModelType: class, OrderableType {
     var id: String { get }
-    var name: String { get set }
+    var name: String { get }
     
     // color, icon, iconset
+    
+    func updateProperties(name: String)
 }
 
 final class AccountGroupModel: Object, AccountGroupModelType {

@@ -62,5 +62,9 @@ final class AccountsListGroupCell: SwipeableCell, NibReusable, BindableType {
         deleteActionButton.rx.tap
             .bind(to: viewModel.deleteTap)
             .disposed(by: bag)
+        
+        viewModel.accountGroupModel.map{ $0.name }
+            .bind(to: nameLabel.rx.text)
+            .disposed(by: bag)
     }
 }

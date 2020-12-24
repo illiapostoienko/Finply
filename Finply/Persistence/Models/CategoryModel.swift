@@ -10,9 +10,12 @@ import RealmSwift
 
 protocol CategoryModelType: OrderableType {
     var id: String { get }
-    var name: String { get set }
+    var name: String { get }
+    var categoryType: CategoryModel.CategoryType { get }
     
     // color, icon,
+    
+    func updateProperties(name: String, categoryType: CategoryModel.CategoryType)
 }
 
 //swiftlint:disable force_unwrapping
@@ -46,7 +49,22 @@ final class CategoryModel: Object, CategoryModelType {
         case expense
     }
     
-    func changeOrder(to order: Int) {
-        self.order = order
+    weak var repositoryDelegate: RealmRepositoryDelegate?
+    
+    func updateOrder(to order: Int) {
+        repositoryDelegate?.selfUpdate(modelAction: { [unowned self] () -> [Object] in
+            let updatingSelf = self
+            updatingSelf.order = order
+            return [updatingSelf]
+        })
+    }
+    
+    func updateProperties(name: String, categoryType: CategoryType) {
+        repositoryDelegate?.selfUpdate(modelAction: { [unowned self] () -> [Object] in
+            let updatingSelf = self
+            updatingSelf.name = name
+            updatingSelf.categoryType = categoryType
+            return [updatingSelf]
+        })
     }
 }

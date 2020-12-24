@@ -81,13 +81,51 @@ final class AccountsListViewModel: AccountsListViewModelType, AccountsListViewMo
     private let _currentTab = BehaviorRelay<AccountsListTab>(value: .accounts)
     private let loadedAccounts = BehaviorRelay<[AccountModelType]>(value: [])
     private let loadedAccountGroups = BehaviorRelay<[AccountGroupModelType]>(value: [])
+    private let _deleteAccount = PublishSubject<AccountModelType>()
+    private let _deleteAccountGroup = PublishSubject<AccountGroupModelType>()
     
     private var accountItems: Observable<[AccountsListTableItem]> {
-        loadedAccounts.map{ $0.map { .account(viewModel: AccountsListAccountCellViewModel(accountModel: $0)) }}
+        loadedAccounts.map{ [unowned self] accounts in
+            var accounts = accounts
+            accounts.sort(by: { $0.order < $1.order })
+            
+            return accounts.map {
+                let vm = AccountsListAccountCellViewModel(accountModel: $0)
+                
+                vm.editAccount
+                    .map{ AddEditAccountSceneState.editAccount($0) }
+                    .bind(to: self._openAddEditAccount)
+                    .disposed(by: self.bag)
+                
+                vm.deleteAccount
+                    .bind(to: self._deleteAccount)
+                    .disposed(by: self.bag)
+                
+                return .account(viewModel: vm)
+            }
+        }
     }
     
     private var groupItems: Observable<[AccountsListTableItem]> {
-        loadedAccountGroups.map{ $0.map { .group(viewModel: AccountsListGroupCellViewModel(accountGroupModel: $0)) }}
+        loadedAccountGroups.map{ [unowned self] groups in
+            var groups = groups
+            groups.sort(by: { $0.order < $1.order })
+            
+            return groups.map {
+                let vm = AccountsListGroupCellViewModel(accountGroupModel: $0)
+                
+                vm.editAccountGroup
+                    .map{ AddEditAccountSceneState.editAccountGroup($0) }
+                    .bind(to: self._openAddEditAccount)
+                    .disposed(by: self.bag)
+                
+                vm.deleteAccountGroup
+                    .bind(to: self._deleteAccountGroup)
+                    .disposed(by: self.bag)
+                
+                return .accountGroup(viewModel: vm)
+            }
+        }
     }
     
     //Services
@@ -136,9 +174,43 @@ final class AccountsListViewModel: AccountsListViewModelType, AccountsListViewMo
             .bind(to: _openAddEditAccount)
             .disposed(by: bag)
         
-        // edit on cell -> _openAddEditAccount
-        // delete on cell -> delete from loaded list
-        // _addEditAccountResult -> parse and add/edit cells
+//        _addEditAccountResult
+//            .map{
+//                switch $0 {
+//                case .accountAdded(_):
+//                    <#code#>
+//                case .accountEdited(_):
+//                    <#code#>
+//                case .accountGroupAdded(_):
+//                    <#code#>
+//                case .accountGroupEdited(_):
+//                    <#code#>
+//                default: return
+//                }
+//            }
+        
+        _deleteAccount
+            .withLatestFrom(loadedAccounts) { [unowned self] accountToDelete, accounts in
+                var accounts = accounts
+                accounts.removeAll(where: { $0 === accountToDelete })
+                self.loadedAccounts.accept(accounts)
+                return accountToDelete
+            }
+            .flatMap{ [unowned self] in self.accountsService.deleteAccount($0) }
+            .subscribe()
+            .disposed(by: bag)
+        
+        _deleteAccountGroup
+            .withLatestFrom(loadedAccountGroups) { [unowned self] accountGroupToDelete, accountGroups in
+                var accountGroups = accountGroups
+                accountGroups.removeAll(where: { $0 === accountGroupToDelete })
+                self.loadedAccountGroups.accept(accountGroups)
+                return accountGroupToDelete
+            }
+            .flatMap{ [unowned self] in self.accountsService.deleteAccountGroup($0) }
+            .subscribe()
+            .disposed(by: bag)
+        
         // changeOrderIntent -> change order
         
         Observable.combineLatest(_currentTab, accountItems, groupItems)
@@ -165,12 +237,12 @@ final class AccountsListViewModel: AccountsListViewModelType, AccountsListViewMo
 
 enum AccountsListTableItem: IdentifiableType, Equatable {
     case account(viewModel: AccountsListAccountCellViewModelType)
-    case group(viewModel: AccountsListGroupCellViewModelType)
+    case accountGroup(viewModel: AccountsListGroupCellViewModelType)
     
     var identity: String {
         switch self {
         case .account(let viewModel): return viewModel.getAccountId()
-        case .group(let viewModel): return viewModel.getAccountGroupId()
+        case .accountGroup(let viewModel): return viewModel.getAccountGroupId()
         }
     }
     

@@ -92,7 +92,7 @@ final class AccountsListViewController: UIViewController, BindableType {
         tableView.register(cellType: AccountsListAccountCell.self)
         tableView.register(cellType: AccountsListGroupCell.self)
         
-        dataSource = RxTableViewSectionedAnimatedDataSource(
+        dataSource = RxTableViewSectionedAnimatedDataSource(animationConfiguration: AnimationConfiguration(insertAnimation: .fade, reloadAnimation: .fade, deleteAnimation: .fade),
             configureCell: { [unowned self] dataSource, tableView, indexPath, _ in
                 if let spacer = tableView.reorder.spacerCell(for: indexPath) { return spacer }
                 switch dataSource[indexPath] {
@@ -101,7 +101,7 @@ final class AccountsListViewController: UIViewController, BindableType {
                     cell.bind(to: viewModel)
                     cell.swipeDelegate = self
                     return cell
-                case .group(let viewModel):
+                case .accountGroup(let viewModel):
                     var cell = tableView.dequeueReusableCell(for: indexPath) as AccountsListGroupCell
                     cell.bind(to: viewModel)
                     cell.swipeDelegate = self

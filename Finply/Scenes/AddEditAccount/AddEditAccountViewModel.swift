@@ -172,14 +172,15 @@ final class AddEditAccountViewModel: AddEditAccountViewModelType, AddEditAccount
             .filter{ $0.isAccountAction }
             .withLatestFrom(latestDataSet) { (state: $0, data: $1) }
             .filter{ $0.data.value != nil }
-            .debug()
             .flatMap{ [accountsService] set -> Single<AddEditAccountCoordinationResult> in
                 if var existingAccount = set.state.editAccountValue {
                     let calculatedValueDelta = existingAccount.calculatedValueInCents - existingAccount.baseValueInCents
-                    existingAccount.name = set.data.name
-                    existingAccount.baseValueInCents = set.data.value!
-                    existingAccount.calculatedValueInCents = set.data.value! + calculatedValueDelta
-                    existingAccount.currency = set.data.currency
+                    
+                    existingAccount.updateProperties(name: set.data.name,
+                                                     baseValueInCents: set.data.value!,
+                                                     calculatedValueInCents: set.data.value! + calculatedValueDelta,
+                                                     currency: set.data.currency)
+                
                     // + icon, color
                     return accountsService
                         .updateAccount(existingAccount)
@@ -188,7 +189,6 @@ final class AddEditAccountViewModel: AddEditAccountViewModelType, AddEditAccount
                     return accountsService
                         .addAccount(name: set.data.name, baseValueInCents: set.data.value!, calculatedValueInCents: set.data.value!, currency: set.data.currency)
                         .map{ .accountAdded($0) }
-                        .debug()
                 }
             }
             .bind(to: _completeCoordinationResult)
@@ -201,7 +201,9 @@ final class AddEditAccountViewModel: AddEditAccountViewModelType, AddEditAccount
             .withLatestFrom(latestDataSet) { (state: $0, data: $1) }
             .flatMap{ [accountsService] set -> Single<AddEditAccountCoordinationResult> in
                 if var existingAccountGroup = set.state.editAccountGroupValue {
-                    existingAccountGroup.name = set.data.name
+                    
+                    existingAccountGroup.updateProperties(name: set.data.name)
+ 
                     // + icon, color, selected accounts
                     return accountsService
                         .updateAccountGroup(existingAccountGroup)

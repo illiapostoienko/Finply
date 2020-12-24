@@ -11,6 +11,10 @@ import RealmSwift
 //swiftlint:disable force_try
 class RealmRepository<Model: Object> {
     
+    deinit {
+        print("deinit RealmRepository \(Model.self)")
+    }
+    
     let realm: Realm
     
     init() {

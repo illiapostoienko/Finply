@@ -10,14 +10,16 @@ import RxSwift
 import RxCocoa
 
 protocol FinplyRepositoryType {
-    func getOderedAccounts() -> Single<[AccountModel]>
+    func getAccounts() -> Single<[AccountModel]>
     func addAccount(name: String, baseValueInCents: Int, calculatedValueInCents: Int, currency: Currency, order: Int) -> Single<AccountModel>
     func updateAccount(_ accountModel: AccountModel) -> Single<Void>
+    func updateAccounts(_ accountModels: [AccountModel]) -> Single<Void>
     func deleteAccount(_ accountModel: AccountModel) -> Single<Void>
     
-    func getOderedAccountGroups() -> Single<[AccountGroupModel]>
+    func getAccountGroups() -> Single<[AccountGroupModel]>
     func addAccountGroup(name: String, order: Int) -> Single<AccountGroupModel>
     func updateAccountGroup(_ accountGroupModel: AccountGroupModel) -> Single<Void>
+    func updateAccountGroups(_ accountGroupModels: [AccountGroupModel]) -> Single<Void>
     func deleteAccountGroup(_ accountGroupModel: AccountGroupModel) -> Single<Void>
 }
 
@@ -29,10 +31,19 @@ final class FinplyRepository: FinplyRepositoryType {
     private let operationsRepository = RealmRepository<OperationModel>()
     private let categoriesRepository = RealmRepository<CategoryModel>()
     
-    func getOderedAccounts() -> Single<[AccountModel]> {
+    deinit {
+        print("deinit FinplyRepository")
+    }
+    
+    func getAccounts() -> Single<[AccountModel]> {
         return Single.create { [unowned self] observer in
             do {
-                let models = self.accountsRepository.getAllSorted(orderKey: AccountModel.orderKey, ascending: true).toArray()
+                let models = self.accountsRepository
+                    .getAll()
+                    .map{ [accountsRepository] account -> AccountModel in
+                        account.repositoryDelegate = accountsRepository
+                        return account
+                    }
                 observer(.success(models))
             } catch {
                 observer(.error(error))
@@ -57,9 +68,13 @@ final class FinplyRepository: FinplyRepositoryType {
     }
     
     func updateAccount(_ accountModel: AccountModel) -> Single<Void> {
+        updateAccounts([accountModel])
+    }
+    
+    func updateAccounts(_ accountModels: [AccountModel]) -> Single<Void> {
         return Single.create { [unowned self] observer in
             do {
-                self.accountsRepository.addOrUpdate(models: [accountModel])
+                self.accountsRepository.addOrUpdate(models: accountModels)
                 observer(.success(()))
             } catch {
                 observer(.error(error))
@@ -82,10 +97,15 @@ final class FinplyRepository: FinplyRepositoryType {
         }
     }
     
-    func getOderedAccountGroups() -> Single<[AccountGroupModel]> {
+    func getAccountGroups() -> Single<[AccountGroupModel]> {
         return Single.create { [unowned self] observer in
             do {
-                let models = self.accountGroupsRepository.getAllSorted(orderKey: AccountGroupModel.orderKey, ascending: true).toArray()
+                let models = self.accountGroupsRepository
+                    .getAll()
+                    .map{ [accountsRepository] accountGroup -> AccountGroupModel in
+                        accountGroup.repositoryDelegate = accountsRepository
+                        return accountGroup
+                    }
                 observer(.success(models))
             } catch {
                 observer(.error(error))
@@ -110,9 +130,13 @@ final class FinplyRepository: FinplyRepositoryType {
     }
     
     func updateAccountGroup(_ accountGroupModel: AccountGroupModel) -> Single<Void> {
+        updateAccountGroups([accountGroupModel])
+    }
+    
+    func updateAccountGroups(_ accountGroupModels: [AccountGroupModel]) -> Single<Void> {
         return Single.create { [unowned self] observer in
             do {
-                self.accountGroupsRepository.addOrUpdate(models: [accountGroupModel])
+                self.accountGroupsRepository.addOrUpdate(models: accountGroupModels)
                 observer(.success(()))
             } catch {
                 observer(.error(error))
@@ -125,7 +149,7 @@ final class FinplyRepository: FinplyRepositoryType {
     func deleteAccountGroup(_ accountGroupModel: AccountGroupModel) -> Single<Void> {
         return Single.create { [unowned self] observer in
             do {
-                self.accountGroupsRepository.addOrUpdate(models: [accountGroupModel])
+                self.accountGroupsRepository.delete(models: [accountGroupModel])
                 observer(.success(()))
             } catch {
                 observer(.error(error))

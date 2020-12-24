@@ -10,7 +10,7 @@ import RxCocoa
 import Foundation
 
 protocol AccountsListAccountCellViewModelType {
-    var accountModel: AccountModelType { get }
+    var accountModel: Observable<AccountModelType> { get }
     
     //Input
     var editTap: AnyObserver<Void> { get }
@@ -19,11 +19,13 @@ protocol AccountsListAccountCellViewModelType {
     //Output
     var editAccount: Observable<AccountModelType> { get }
     var deleteAccount: Observable<AccountModelType> { get }
+    
+    func getAccountId() -> String
 }
 
 final class AccountsListAccountCellViewModel: AccountsListAccountCellViewModelType {
     
-    var accountModel: AccountModelType { _accountModel.value }
+    var accountModel: Observable<AccountModelType> { _accountModel.asObservable() }
     
     // Input
     var editTap: AnyObserver<Void> { _editTap.asObserver() }
@@ -44,7 +46,6 @@ final class AccountsListAccountCellViewModel: AccountsListAccountCellViewModelTy
     private let bag = DisposeBag()
     
     init(accountModel: AccountModelType) {
-
         _accountModel = BehaviorRelay<AccountModelType>(value: accountModel)
         
         _editTap
@@ -56,5 +57,9 @@ final class AccountsListAccountCellViewModel: AccountsListAccountCellViewModelTy
             .withLatestFrom(_accountModel)
             .bind(to: _deleteAccount)
             .disposed(by: bag)
+    }
+    
+    func getAccountId() -> String {
+        _accountModel.value.id
     }
 }

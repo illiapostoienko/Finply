@@ -17,6 +17,7 @@ protocol AccountsListViewModelInput {
     var tabButtonTap: AnyObserver<AccountsListTab> { get }
     var rowSelected: AnyObserver<Int> { get }
     var changeOrder: AnyObserver<(fromIndex: Int, toIndex: Int)> { get }
+    var reload: AnyObserver<Void> { get }
     
     var addEditAccountResult: AnyObserver<AddEditAccountCoordinationResult> { get }
 }
@@ -59,6 +60,7 @@ final class AccountsListViewModel: AccountsListViewModelType, AccountsListViewMo
     var rowSelected: AnyObserver<Int> { _rowSelected.asObserver() }
     var changeOrder: AnyObserver<(fromIndex: Int, toIndex: Int)> { _changeOrder.asObserver() }
     var addEditAccountResult: AnyObserver<AddEditAccountCoordinationResult> { _addEditAccountResult.asObserver() }
+    var reload: AnyObserver<Void> { _reload.asObserver() }
     
     private let _backButtonTap = PublishSubject<Void>()
     private let _addButtonTap = PublishSubject<Void>()
@@ -66,6 +68,7 @@ final class AccountsListViewModel: AccountsListViewModelType, AccountsListViewMo
     private let _rowSelected = PublishSubject<Int>()
     private let _changeOrder = PublishSubject<(fromIndex: Int, toIndex: Int)>()
     private let _addEditAccountResult = PublishSubject<AddEditAccountCoordinationResult>()
+    private let _reload = PublishSubject<Void>()
     
     // Coordination
     var completeCoordinationResult: Observable<AccountsListCoordinationResult> { _completeCoordinationResult }
@@ -77,26 +80,28 @@ final class AccountsListViewModel: AccountsListViewModelType, AccountsListViewMo
     // Locals
     private let _currentTab = BehaviorRelay<AccountsListTab>(value: .accounts)
     private let loadedAccounts = BehaviorRelay<[AccountModelType]>(value: [])
-    private let loadedGroups = BehaviorRelay<[AccountGroupModelType]>(value: [])
+    private let loadedAccountGroups = BehaviorRelay<[AccountGroupModelType]>(value: [])
     
     private var accountItems: Observable<[AccountsListTableItem]> {
         loadedAccounts.map{ $0.map { .account(viewModel: AccountsListAccountCellViewModel(accountModel: $0)) }}
     }
     
     private var groupItems: Observable<[AccountsListTableItem]> {
-        loadedGroups.map{ $0.map { .group(viewModel: AccountsListGroupCellViewModel(accountGroupModel: $0)) }}
+        loadedAccountGroups.map{ $0.map { .group(viewModel: AccountsListGroupCellViewModel(accountGroupModel: $0)) }}
     }
     
     //Services
-    
+    private let accountsService: AccountsServiceType
     private let bag = DisposeBag()
     
-    init() {
+    init(accountsService: AccountsServiceType) {
+        self.accountsService = accountsService
+        
         _tabButtonTap
             .bind(to: _currentTab)
             .disposed(by: bag)
         
-        let latestState = Observable.combineLatest(_currentTab, loadedAccounts, loadedGroups).map{ (tab: $0, accounts: $1, groups: $2) }
+        let latestState = Observable.combineLatest(_currentTab, loadedAccounts, loadedAccountGroups).map{ (tab: $0, accounts: $1, groups: $2) }
         let selectedRowWithLatestData = _rowSelected.withLatestFrom(latestState) { ($0, $1) }
         
         _backButtonTap
@@ -134,7 +139,7 @@ final class AccountsListViewModel: AccountsListViewModelType, AccountsListViewMo
         // edit on cell -> _openAddEditAccount
         // delete on cell -> delete from loaded list
         // _addEditAccountResult -> parse and add/edit cells
-        //changeOrderIntent -> change order
+        // changeOrderIntent -> change order
         
         Observable.combineLatest(_currentTab, accountItems, groupItems)
             .map{ tab, accounts, groups -> [AccountsListTableItem] in
@@ -146,25 +151,15 @@ final class AccountsListViewModel: AccountsListViewModelType, AccountsListViewMo
             .bind(to: _dataSource)
             .disposed(by: bag)
         
-        // load accounts and groups into internal arrays
-//        let mockAccounts: [AccountModelType] = [
-//            AccountModel(name: "Some name", baseValueInCents: 0, currency: .afghani, order: 0),
-//            AccountModel(name: "Some name", baseValueInCents: 0, currency: .afghani, order: 1),
-//            AccountModel(name: "Some name", baseValueInCents: 0, currency: .afghani, order: 2),
-//            AccountModel(name: "Some name", baseValueInCents: 0, currency: .afghani, order: 3),
-//            AccountModel(name: "Some name", baseValueInCents: 0, currency: .afghani, order: 4),
-//            AccountModel(name: "Some name", baseValueInCents: 0, currency: .afghani, order: 5),
-//            AccountModel(name: "Some name", baseValueInCents: 0, currency: .afghani, order: 6),
-//            AccountModel(name: "Some name", baseValueInCents: 0, currency: .afghani, order: 7)
-//        ]
+        _reload
+            .flatMap{ [unowned self] in self.accountsService.getOrderedAccounts() }
+            .bind(to: loadedAccounts)
+            .disposed(by: bag)
         
-//        let mockGroups: [AccountGroupModelType] = [
-//            AccountGroupModel(name: "Everyday", order: 0),
-//            AccountGroupModel(name: "Everyday", order: 0)
-//        ]
-//
-//        loadedAccounts.accept(mockAccounts)
-//        loadedGroups.accept(mockGroups)
+        _reload
+            .flatMap{ [unowned self] in self.accountsService.getOrderedAccountGroups() }
+            .bind(to: loadedAccountGroups)
+            .disposed(by: bag)
     }
 }
 
@@ -174,8 +169,8 @@ enum AccountsListTableItem: IdentifiableType, Equatable {
     
     var identity: String {
         switch self {
-        case .account(let viewModel): return viewModel.accountModel.id
-        case .group(let viewModel): return viewModel.accountGroupModel.id
+        case .account(let viewModel): return viewModel.getAccountId()
+        case .group(let viewModel): return viewModel.getAccountGroupId()
         }
     }
     

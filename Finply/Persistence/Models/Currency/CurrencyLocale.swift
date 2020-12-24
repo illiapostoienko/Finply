@@ -7,9 +7,17 @@
 
 import Foundation
 
+public protocol LocaleConvertible {
+    var locale: Locale { get }
+}
+
+extension Locale: LocaleConvertible {
+    public var locale: Locale { return self }
+}
+
 //swiftlint:disable type_body_length
 //swiftlint:disable file_length
-enum CurrencyLocale: String {
+enum CurrencyLocale: String, LocaleConvertible {
     
     case current = "current"
     case autoUpdating = "currentAutoUpdating"

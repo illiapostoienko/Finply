@@ -12,6 +12,9 @@ import RxCocoa
 final class AccountsListAccountCell: SwipeableCell, NibReusable, BindableType {
     
     @IBOutlet private var baseCardView: GradientView!
+    @IBOutlet private var iconImageView: UIImageView!
+    @IBOutlet private var nameLabel: UILabel!
+    @IBOutlet private var valueLabel: UILabel!
     @IBOutlet private var swipeActionsContainerView: UIView!
     @IBOutlet private var deleteActionButton: UIButton!
     @IBOutlet private var editActionButton: UIButton!
@@ -24,8 +27,8 @@ final class AccountsListAccountCell: SwipeableCell, NibReusable, BindableType {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        viewTranslationUpdates = { self.updateSwipeBy(offset: $0) }
-        calculateCurrentOffset = { self.swipeViewLeadingConstraint.constant }
+        viewTranslationUpdates = { [unowned self] in self.updateSwipeBy(offset: $0) }
+        calculateCurrentOffset = { [unowned self] in self.swipeViewLeadingConstraint.constant }
         
         swipeThreshold = swipeActionsContainerView.frame.width
         addSwipeRecognizer(to: baseCardView)
@@ -52,6 +55,10 @@ final class AccountsListAccountCell: SwipeableCell, NibReusable, BindableType {
         
         deleteActionButton.rx.tap
             .bind(to: viewModel.deleteTap)
+            .disposed(by: bag)
+        
+        viewModel.accountModel.map{ $0.name }
+            .bind(to: nameLabel.rx.text)
             .disposed(by: bag)
     }
 }

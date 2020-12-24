@@ -50,6 +50,7 @@
 		EA7F6167252B2C2C008CA432 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = EA7F6166252B2C2C008CA432 /* RxCocoa */; };
 		EA7F6169252B2C2C008CA432 /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = EA7F6168252B2C2C008CA432 /* RxBlocking */; };
 		EA7F616D252B2D13008CA432 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = EA7F616C252B2D13008CA432 /* .swiftlint.yml */; };
+		EA81D1EA2594B64600333680 /* CurrencyFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA81D1E92594B64600333680 /* CurrencyFormatter.swift */; };
 		EA930C332523D54D00E12805 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA930C322523D54D00E12805 /* AppDelegate.swift */; };
 		EA930C352523D54D00E12805 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA930C342523D54D00E12805 /* SceneDelegate.swift */; };
 		EA930C3C2523D54F00E12805 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA930C3B2523D54F00E12805 /* Assets.xcassets */; };
@@ -195,6 +196,7 @@
 		EA7EE7552572FF4300A82386 /* TitleInputCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TitleInputCell.xib; sourceTree = "<group>"; };
 		EA7EE7592573175300A82386 /* UserStateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStateService.swift; sourceTree = "<group>"; };
 		EA7F616C252B2D13008CA432 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
+		EA81D1E92594B64600333680 /* CurrencyFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyFormatter.swift; sourceTree = "<group>"; };
 		EA930C2F2523D54D00E12805 /* Finply.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Finply.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA930C322523D54D00E12805 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EA930C342523D54D00E12805 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -721,6 +723,7 @@
 				EAD68AD925595AA40083B30D /* PieChartView */,
 				EAAE9BF3256ED7F400790931 /* GradientView.swift */,
 				EA7C119A258CBAB800CED84B /* SwipeableCell.swift */,
+				EA81D1E92594B64600333680 /* CurrencyFormatter.swift */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
@@ -995,6 +998,7 @@
 				EA930CE12524865A00E12805 /* Sequence+Extensions.swift in Sources */,
 				EAD68AFE255B00870083B30D /* ReportDetailsCoordinator.swift in Sources */,
 				EA930CED25248A4800E12805 /* FPCategory.swift in Sources */,
+				EA81D1EA2594B64600333680 /* CurrencyFormatter.swift in Sources */,
 				EAD68B0F255B012C0083B30D /* ProfileDetailsViewController.swift in Sources */,
 				EAD68A412554F8810083B30D /* AccountDetailsCoordinator.swift in Sources */,
 				EAE2172A2591196900095EB5 /* ColorSelectionCell.swift in Sources */,

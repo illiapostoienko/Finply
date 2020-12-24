@@ -149,8 +149,11 @@
                 <outlet property="baseCardView" destination="Cxo-AE-BLN" id="InF-bg-6aS"/>
                 <outlet property="deleteActionButton" destination="R7H-w7-qqL" id="wG1-Qw-Ikm"/>
                 <outlet property="editActionButton" destination="925-FE-83O" id="yVR-qw-k4F"/>
+                <outlet property="iconImageView" destination="twf-Xf-9bK" id="W10-AH-8BV"/>
+                <outlet property="nameLabel" destination="z7Y-zm-8ve" id="DcW-Fj-oh6"/>
                 <outlet property="swipeActionsContainerView" destination="3gX-7i-1Y6" id="5JT-Ze-7rQ"/>
                 <outlet property="swipeViewLeadingConstraint" destination="wi2-ix-mFk" id="HJo-81-Azr"/>
+                <outlet property="valueLabel" destination="46O-Pp-aNv" id="gvo-ok-yid"/>
             </connections>
             <point key="canvasLocation" x="334.78260869565219" y="97.767857142857139"/>
         </tableViewCell>

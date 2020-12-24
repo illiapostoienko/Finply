@@ -32,8 +32,8 @@ final class AccountsListGroupCell: SwipeableCell, NibReusable, BindableType {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        viewTranslationUpdates = { self.updateSwipeBy(offset: $0) }
-        calculateCurrentOffset = { self.swipeViewLeadingConstraint.constant }
+        viewTranslationUpdates = { [unowned self] in self.updateSwipeBy(offset: $0) }
+        calculateCurrentOffset = { [unowned self] in self.swipeViewLeadingConstraint.constant }
         
         swipeThreshold = swipeActionsContainerView.frame.width
         addSwipeRecognizer(to: baseCardView)

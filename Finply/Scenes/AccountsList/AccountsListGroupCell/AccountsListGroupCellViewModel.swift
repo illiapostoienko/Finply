@@ -9,7 +9,7 @@ import RxSwift
 import RxCocoa
 
 protocol AccountsListGroupCellViewModelType {
-    var accountGroupModel: AccountGroupModelType { get }
+    var accountGroupModel: Observable<AccountGroupModelType> { get }
     
     //Input
     var editTap: AnyObserver<Void> { get }
@@ -18,11 +18,13 @@ protocol AccountsListGroupCellViewModelType {
     //Output
     var editAccountGroup: Observable<AccountGroupModelType> { get }
     var deleteAccountGroup: Observable<AccountGroupModelType> { get }
+    
+    func getAccountGroupId() -> String
 }
 
 final class AccountsListGroupCellViewModel: AccountsListGroupCellViewModelType {
     
-    let accountGroupModel: AccountGroupModelType
+    var accountGroupModel: Observable<AccountGroupModelType> { _accountGroupModel.asObservable() }
     
     // Input
     var editTap: AnyObserver<Void> { _editTap.asObserver() }
@@ -42,9 +44,7 @@ final class AccountsListGroupCellViewModel: AccountsListGroupCellViewModelType {
     private let _accountGroupModel: BehaviorRelay<AccountGroupModelType>
     private let bag = DisposeBag()
     
-    init(accountGroupModel: AccountGroupModelType) {
-        self.accountGroupModel = accountGroupModel
-        
+    init(accountGroupModel: AccountGroupModelType) {        
         _accountGroupModel = BehaviorRelay<AccountGroupModelType>(value: accountGroupModel)
         
         _editTap
@@ -56,5 +56,9 @@ final class AccountsListGroupCellViewModel: AccountsListGroupCellViewModelType {
             .withLatestFrom(_accountGroupModel)
             .bind(to: _deleteAccountGroup)
             .disposed(by: bag)
+    }
+    
+    func getAccountGroupId() -> String {
+        _accountGroupModel.value.id
     }
 }

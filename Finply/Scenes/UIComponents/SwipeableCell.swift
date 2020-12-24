@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import RxSwift
 
 @objc protocol SwipeableCellDelegate: class {
     @objc optional func didStartSwiping(_ cell: SwipeableCell)
@@ -31,7 +32,7 @@ class SwipeableCell: UITableViewCell {
     
     fileprivate(set) var swipeState: SwipeableCellState = .initial
     var swipeDirection: SwipeableCellDirection = .left
-    var swipeThreshold: CGFloat!
+    var swipeThreshold: CGFloat = 100
     var swipePanElasticityFactor: CGFloat = 0.7
     var swipeAnimationDuration: Double = 0.3
     
@@ -73,7 +74,7 @@ class SwipeableCell: UITableViewCell {
                 animateContent(for: panOffset)
             }
             else {
-                self.resetCellPosition()
+                resetCellPosition()
             }
         }
     }
@@ -108,14 +109,14 @@ class SwipeableCell: UITableViewCell {
     }
     
     func resetCellPosition(toInitial: Bool = false) {
-        UIView.animate(withDuration: swipeAnimationDuration, delay: 0, options: .allowUserInteraction, animations: {
+        UIView.animate(withDuration: swipeAnimationDuration, delay: 0, options: .allowUserInteraction, animations: { [unowned self] in
             
-            let state = toInitial ? .initial : self.swipeState
+            let state = toInitial ? .initial : swipeState
             let desiredOffset: CGFloat
             switch state {
             case .initial: desiredOffset = 0
-            case .leftEnd: desiredOffset = -self.swipeThreshold
-            case .rightEnd: desiredOffset = self.swipeThreshold
+            case .leftEnd: desiredOffset = -swipeThreshold
+            case .rightEnd: desiredOffset = swipeThreshold
             }
             self.viewTranslationUpdates(desiredOffset)
             self.layoutIfNeeded()

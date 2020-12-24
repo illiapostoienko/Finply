@@ -11,9 +11,11 @@ import RxSwift
 protocol AccountsServiceType {
     func addAccount(name: String, baseValueInCents: Int, calculatedValueInCents: Int, currency: Currency) -> Single<AccountModelType>
     func updateAccount(_ account: AccountModelType) -> Single<Void>
+    func getOrderedAccounts() -> Single<[AccountModelType]>
     
     func addAccountGroup(name: String) -> Single<AccountGroupModelType>
     func updateAccountGroup(_ account: AccountGroupModelType) -> Single<Void>
+    func getOrderedAccountGroups() -> Single<[AccountGroupModelType]>
 }
 
 final class AccountsService: AccountsServiceType {
@@ -40,6 +42,11 @@ final class AccountsService: AccountsServiceType {
         repository.updateAccount(account as! AccountModel)
     }
     
+    func getOrderedAccounts() -> Single<[AccountModelType]> {
+        repository.getOderedAccounts()
+            .map{ $0.map{ $0 as AccountModelType }}
+    }
+    
     func addAccountGroup(name: String) -> Single<AccountGroupModelType> {
         repository
             .getOderedAccountGroups()
@@ -53,5 +60,10 @@ final class AccountsService: AccountsServiceType {
     func updateAccountGroup(_ account: AccountGroupModelType) -> Single<Void> {
         //swiftlint:disable:next force_cast
         repository.updateAccountGroup(account as! AccountGroupModel)
+    }
+    
+    func getOrderedAccountGroups() -> Single<[AccountGroupModelType]> {
+        repository.getOderedAccountGroups()
+            .map{ $0.map{ $0 as AccountGroupModelType }}
     }
 }

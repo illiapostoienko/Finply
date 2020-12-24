@@ -64,9 +64,9 @@ final class AccountsListViewController: UIViewController, BindableType {
         
         Observable.merge(accountsTabButton.rx.tap.map{ .accounts },
                          groupsTabButton.rx.tap.map{ .groups })
-            .do(onNext: { [weak self] tab in
-                self?.updateTabAppearance(by: tab)
-                self?.tableView.setEditing(false, animated: true)
+            .do(onNext: { [unowned self] tab in
+                self.updateTabAppearance(by: tab)
+                self.tableView.setEditing(false, animated: true)
             })
             .bind(to: viewModel.input.tabButtonTap)
             .disposed(by: bag)
@@ -81,6 +81,11 @@ final class AccountsListViewController: UIViewController, BindableType {
             .map{ (fromIndex: $0.row, toIndex: $1.row) }
             .bind(to: viewModel.input.changeOrder)
             .disposed(by: bag)
+        
+        self.rx.methodInvoked(#selector(viewDidAppear(_:)))
+            .ignoreContent()
+            .bind(to: viewModel.input.reload)
+            .disposed(by: bag)
     }
     
     private func setupTableView() {
@@ -88,7 +93,7 @@ final class AccountsListViewController: UIViewController, BindableType {
         tableView.register(cellType: AccountsListGroupCell.self)
         
         dataSource = RxTableViewSectionedAnimatedDataSource(
-            configureCell: { dataSource, tableView, indexPath, _ in
+            configureCell: { [unowned self] dataSource, tableView, indexPath, _ in
                 if let spacer = tableView.reorder.spacerCell(for: indexPath) { return spacer }
                 switch dataSource[indexPath] {
                 case .account(let viewModel):

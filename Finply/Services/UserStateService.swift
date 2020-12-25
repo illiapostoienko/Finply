@@ -6,20 +6,21 @@
 //
 
 import Foundation
+import RxSwift
 
 protocol UserStateServiceType {
-    func getCurrentOpenedAccount() -> AccountModelType
+    //func getCurrentOpenedAccount() -> Single<AccountDto>
 }
 
 final class UserStateService: UserStateServiceType {
     
-    let repository: FinplyRepositoryType
+    let repository: AccountsRepositoryType
     
-    init(repository: FinplyRepositoryType) {
+    init(repository: AccountsRepositoryType) {
         self.repository = repository
     }
     
-    func getCurrentOpenedAccount() -> AccountModelType {
-        return AccountModel(name: "Some name", baseValueInCents: 0, calculatedValueInCents: 0, currency: .afghani, order: 0)
-    }
+//    func getCurrentOpenedAccount() -> Single<AccountDto> {
+//
+//    }
 }

@@ -9,6 +9,12 @@ import UIKit
 import RxSwift
 import Dip
 
+enum AccountDetailsSceneState {
+    case none
+    case accountSelected(AccountDto)
+    case accountGroupSelected(AccountGroupDto)
+}
+
 final class AccountDetailsCoordinator: BaseCoordinator<Void> {
     
     private let dependencyContainer: DependencyContainer
@@ -73,15 +79,15 @@ final class AccountDetailsCoordinator: BaseCoordinator<Void> {
             })
             .disposed(by: bag)
         
-        viewModel.coordination.editAccount
-            .flatMap{ [ unowned self] in self.coordinateToEditAccount(accountToEdit: $0) }
-            .subscribe(onNext: {
-                switch $0 {
-                case .accountEdited(let model): return // pass to vm
-                default: return
-                }
-            })
-            .disposed(by: bag)
+//        viewModel.coordination.editAccount
+//            .flatMap{ [ unowned self] in self.coordinateToEditAccount(accountToEdit: $0) }
+//            .subscribe(onNext: {
+//                switch $0 {
+//                case .accountEdited(let model): return // pass to vm
+//                default: return
+//                }
+//            })
+//            .disposed(by: bag)
         
         viewModel.coordination.profile
             .flatMap{ [ unowned self] in self.coordinateToProfileDetails() }
@@ -115,7 +121,7 @@ final class AccountDetailsCoordinator: BaseCoordinator<Void> {
         return coordinate(to: coordinator)
     }
     
-    private func coordinateToEditAccount(accountToEdit: AccountModelType) -> Observable<AddEditAccountCoordinationResult> {
+    private func coordinateToEditAccount(accountToEdit: AccountDto) -> Observable<AddEditAccountCoordinationResult> {
         let coordinator = AddEditAccountCoordinator(state: .editAccount(accountToEdit),
                                                     presentingViewController: accountDetailsVc,
                                                     dependencyContainer: dependencyContainer)

@@ -154,7 +154,7 @@ final class AddEditAccountViewModel: AddEditAccountViewModelType, AddEditAccount
             .disposed(by: bag)
         
         let latestDataSet = Observable
-            .combineLatest(titleInputVm.nameString, ballanceInputCellVm.inputValueInCents, ballanceInputCellVm.selectedCurrency)
+            .combineLatest(titleInputVm.currentName, ballanceInputCellVm.ballanceInCents, ballanceInputCellVm.selectedCurrency)
             .map{ (name: $0.0, value: $0.1, currency: $0.2) }
         
         isCheckButtonEnabled = latestDataSet.withLatestFrom(_sceneState) { set, state in
@@ -176,12 +176,12 @@ final class AddEditAccountViewModel: AddEditAccountViewModelType, AddEditAccount
                 if var existingAccount = set.state.editAccountValue {
                     let calculatedValueDelta = existingAccount.calculatedValueInCents - existingAccount.baseValueInCents
                     
-                    existingAccount.updateProperties(name: set.data.name,
-                                                     baseValueInCents: set.data.value!,
-                                                     calculatedValueInCents: set.data.value! + calculatedValueDelta,
-                                                     currency: set.data.currency)
-                
+                    existingAccount.name = set.data.name
+                    existingAccount.baseValueInCents = set.data.value!
+                    existingAccount.calculatedValueInCents = set.data.value! + calculatedValueDelta
+                    existingAccount.currency = set.data.currency
                     // + icon, color
+                    
                     return accountsService
                         .updateAccount(existingAccount)
                         .map{ .accountEdited(existingAccount) }
@@ -202,9 +202,9 @@ final class AddEditAccountViewModel: AddEditAccountViewModelType, AddEditAccount
             .flatMap{ [accountsService] set -> Single<AddEditAccountCoordinationResult> in
                 if var existingAccountGroup = set.state.editAccountGroupValue {
                     
-                    existingAccountGroup.updateProperties(name: set.data.name)
- 
+                    existingAccountGroup.name = set.data.name
                     // + icon, color, selected accounts
+                    
                     return accountsService
                         .updateAccountGroup(existingAccountGroup)
                         .map{ .accountGroupEdited(existingAccountGroup) }
@@ -218,12 +218,17 @@ final class AddEditAccountViewModel: AddEditAccountViewModelType, AddEditAccount
             .disposed(by: bag)
         
         _sceneState
-            .distinctUntilChanged()
             .map{ state -> [AddEditAccountTableViewItem] in
                 var itemsSet: [AddEditAccountTableViewItem] = []
                 
+                state.existingName.map{ titleInputVm.setCurrentName($0) }
                 itemsSet.append(.titleInput(viewModel: titleInputVm))
-                if state.isAccountAction { itemsSet.append(.ballanceInput(viewModel: ballanceInputCellVm)) }
+                
+                if state.isAccountAction {
+                    state.existingBallance.map{ ballanceInputCellVm.setCurrentBallance($0) }
+                    itemsSet.append(.ballanceInput(viewModel: ballanceInputCellVm))
+                }
+            
                 itemsSet.append(.clear)
                 itemsSet.append(.iconSelect(viewModel: iconSelectionCellVm))
                 itemsSet.append(.colorSelect(viewModel: colorSelectionCellVm))
@@ -273,20 +278,20 @@ extension AddEditAccountSceneState: Equatable {
         switch (lhs, rhs) {
         case (.addAccount, .addAccount): return true
         case (.addAccountGroup, .addAccountGroup): return true
-        case (.editAccount, .editAccount): return true
-        case (.editAccountGroup, .editAccountGroup): return true
+        case (.editAccount(let left), .editAccount(let right)): return left.id == right.id
+        case (.editAccountGroup(let left), .editAccountGroup(let right)): return left.id == right.id
         default: return false
         }
     }
     
-    var editAccountValue: AccountModelType? {
+    var editAccountValue: AccountDto? {
         if case .editAccount(let accountModel) = self {
             return accountModel
         }
         return nil
     }
     
-    var editAccountGroupValue: AccountGroupModelType? {
+    var editAccountGroupValue: AccountGroupDto? {
         if case .editAccountGroup(let accountGroupModel) = self {
             return accountGroupModel
         }
@@ -310,6 +315,19 @@ extension AddEditAccountSceneState: Equatable {
         else if case .addAccountGroup = self { return true }
         return false
     }
+    
+    var existingName: String? {
+        if case .editAccount(let existingAcocunt) = self { return existingAcocunt.name }
+        if case .editAccountGroup(let existingAcocuntGroup) = self { return existingAcocuntGroup.name }
+        return nil
+    }
+    
+    var existingBallance: Int? {
+        if case .editAccount(let existingAcocunt) = self { return existingAcocunt.baseValueInCents }
+        return nil
+    }
+    
+    //icon, color
     
     var title: String {
         switch self {

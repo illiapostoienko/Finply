@@ -8,18 +8,8 @@
 import Foundation
 import RealmSwift
 
-protocol CategoryModelType: OrderableType {
-    var id: String { get }
-    var name: String { get }
-    var categoryType: CategoryModel.CategoryType { get }
-    
-    // color, icon,
-    
-    func updateProperties(name: String, categoryType: CategoryModel.CategoryType)
-}
-
 //swiftlint:disable force_unwrapping
-final class CategoryModel: Object, CategoryModelType {
+final class CategoryModel: Object {
     
     @objc dynamic var id = UUID().uuidString
     
@@ -47,24 +37,5 @@ final class CategoryModel: Object, CategoryModelType {
     enum CategoryType: Int {
         case income
         case expense
-    }
-    
-    weak var repositoryDelegate: RealmRepositoryDelegate?
-    
-    func updateOrder(to order: Int) {
-        repositoryDelegate?.selfUpdate(modelAction: { [unowned self] () -> [Object] in
-            let updatingSelf = self
-            updatingSelf.order = order
-            return [updatingSelf]
-        })
-    }
-    
-    func updateProperties(name: String, categoryType: CategoryType) {
-        repositoryDelegate?.selfUpdate(modelAction: { [unowned self] () -> [Object] in
-            let updatingSelf = self
-            updatingSelf.name = name
-            updatingSelf.categoryType = categoryType
-            return [updatingSelf]
-        })
     }
 }

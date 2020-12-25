@@ -11,8 +11,8 @@ import Dip
 
 enum AccountsListCoordinationResult {
     case back
-    case accountSelected(model: AccountModelType)
-    case accountGroupSelected(model: AccountGroupModelType)
+    case accountSelected(model: AccountDto)
+    case accountGroupSelected(model: AccountGroupDto)
 }
 
 final class AccountsListCoordinator: BaseCoordinator<AccountsListCoordinationResult> {

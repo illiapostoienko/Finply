@@ -8,14 +8,7 @@
 import Foundation
 import RealmSwift
 
-protocol OperationSectionModelType {
-    var id: String { get }
-    var sectionDate: Date { get }
-    
-    // operations
-}
-
-final class OperationSectionModel: Object, OperationSectionModelType {
+final class OperationSectionModel: Object {
     
     @objc dynamic var id = UUID().uuidString
     
@@ -26,7 +19,7 @@ final class OperationSectionModel: Object, OperationSectionModelType {
     let accounts = LinkingObjects(fromType: AccountModel.self, property: "operationSections")
     
     override static func primaryKey() -> String? {
-        return "id"
+        return #keyPath(id)
     }
     
     convenience init(accountId: String, sectionDate: Date) {

@@ -8,10 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		EA0237D1258548D100A284C4 /* RealmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0237D0258548D100A284C4 /* RealmRepository.swift */; };
-		EA0237D825854D6B00A284C4 /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0237D725854D6B00A284C4 /* AccountModel.swift */; };
-		EA0237F2258554B000A284C4 /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0237E42585523800A284C4 /* Currency.swift */; };
-		EA0237F4258554B300A284C4 /* CurrencyLocale.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0237E52585523A00A284C4 /* CurrencyLocale.swift */; };
-		EA0237FE25855BAE00A284C4 /* RealmObjectDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0237FD25855BAE00A284C4 /* RealmObjectDelegate.swift */; };
 		EA0238082585EA3400A284C4 /* AccountGroupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0238072585EA3400A284C4 /* AccountGroupModel.swift */; };
 		EA02380B2585EAF500A284C4 /* OperationSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA02380A2585EAF500A284C4 /* OperationSectionModel.swift */; };
 		EA02380F2585ED3300A284C4 /* OperationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA02380E2585ED3300A284C4 /* OperationModel.swift */; };
@@ -33,6 +29,8 @@
 		EA1D9E792524B08500E2027F /* AddEditOperationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1D9E782524B08500E2027F /* AddEditOperationViewModel.swift */; };
 		EA1D9E9E2524D9C000E2027F /* File in Resources */ = {isa = PBXBuildFile; fileRef = EA1D9E9D2524D9C000E2027F /* File */; };
 		EA48F367256681B5007FE1BA /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F366256681B5007FE1BA /* UIView+Extensions.swift */; };
+		EA76168025962818000A7EC2 /* Rx+BiBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA76167F25962818000A7EC2 /* Rx+BiBinding.swift */; };
+		EA761683259643EF000A7EC2 /* PresentationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA761682259643EF000A7EC2 /* PresentationDelegate.swift */; };
 		EA7C119B258CBAB800CED84B /* SwipeableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7C119A258CBAB800CED84B /* SwipeableCell.swift */; };
 		EA7EE723257161C600A82386 /* PushTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7EE722257161C600A82386 /* PushTransition.swift */; };
 		EA7EE7292571838E00A82386 /* AccountsListAccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7EE7282571838E00A82386 /* AccountsListAccountCell.swift */; };
@@ -51,6 +49,12 @@
 		EA7F6169252B2C2C008CA432 /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = EA7F6168252B2C2C008CA432 /* RxBlocking */; };
 		EA7F616D252B2D13008CA432 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = EA7F616C252B2D13008CA432 /* .swiftlint.yml */; };
 		EA81D1EA2594B64600333680 /* CurrencyFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA81D1E92594B64600333680 /* CurrencyFormatter.swift */; };
+		EA81D1EE259518E400333680 /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA81D1ED259518E400333680 /* AccountModel.swift */; };
+		EA81D1F62595212B00333680 /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA81D1F52595212B00333680 /* Currency.swift */; };
+		EA81D1F9259521B500333680 /* AccountsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA81D1F8259521B500333680 /* AccountsRepository.swift */; };
+		EA81D1FE2595221400333680 /* AccountDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA81D1FD2595221400333680 /* AccountDto.swift */; };
+		EA81D2022595223B00333680 /* AccountGroupDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA81D2012595223B00333680 /* AccountGroupDto.swift */; };
+		EA81D2052595226800333680 /* OperationSectionDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA81D2042595226800333680 /* OperationSectionDto.swift */; };
 		EA930C332523D54D00E12805 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA930C322523D54D00E12805 /* AppDelegate.swift */; };
 		EA930C352523D54D00E12805 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA930C342523D54D00E12805 /* SceneDelegate.swift */; };
 		EA930C3C2523D54F00E12805 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA930C3B2523D54F00E12805 /* Assets.xcassets */; };
@@ -82,7 +86,6 @@
 		EA9F05402593716E00B81A8E /* ColorSetsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9F053C2593716E00B81A8E /* ColorSetsListViewController.swift */; };
 		EA9F05452593A75100B81A8E /* ClearCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA9F05442593A75100B81A8E /* ClearCell.xib */; };
 		EA9F05482593A75B00B81A8E /* ClearCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9F05472593A75B00B81A8E /* ClearCell.swift */; };
-		EA9F054B2593C01900B81A8E /* FinplyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9F054A2593C01900B81A8E /* FinplyRepository.swift */; };
 		EA9F054F2593C2C300B81A8E /* Realm+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9F054E2593C2C300B81A8E /* Realm+Extensions.swift */; };
 		EA9F05522593C75000B81A8E /* UITextField+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9F05512593C75000B81A8E /* UITextField+Extensions.swift */; };
 		EA9F05572593D4E900B81A8E /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = EA9F05562593D4E900B81A8E /* RealmSwift */; };
@@ -158,10 +161,6 @@
 
 /* Begin PBXFileReference section */
 		EA0237D0258548D100A284C4 /* RealmRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmRepository.swift; sourceTree = "<group>"; };
-		EA0237D725854D6B00A284C4 /* AccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AccountModel.swift; path = ../../../../../Documents/AccountModel.swift; sourceTree = "<group>"; };
-		EA0237E42585523800A284C4 /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
-		EA0237E52585523A00A284C4 /* CurrencyLocale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyLocale.swift; sourceTree = "<group>"; };
-		EA0237FD25855BAE00A284C4 /* RealmObjectDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmObjectDelegate.swift; sourceTree = "<group>"; };
 		EA0238072585EA3400A284C4 /* AccountGroupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountGroupModel.swift; sourceTree = "<group>"; };
 		EA02380A2585EAF500A284C4 /* OperationSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationSectionModel.swift; sourceTree = "<group>"; };
 		EA02380E2585ED3300A284C4 /* OperationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationModel.swift; sourceTree = "<group>"; };
@@ -183,6 +182,8 @@
 		EA1D9E782524B08500E2027F /* AddEditOperationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditOperationViewModel.swift; sourceTree = "<group>"; };
 		EA1D9E9D2524D9C000E2027F /* File */ = {isa = PBXFileReference; lastKnownFileType = text; path = File; sourceTree = "<group>"; };
 		EA48F366256681B5007FE1BA /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
+		EA76167F25962818000A7EC2 /* Rx+BiBinding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rx+BiBinding.swift"; sourceTree = "<group>"; };
+		EA761682259643EF000A7EC2 /* PresentationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationDelegate.swift; sourceTree = "<group>"; };
 		EA7C119A258CBAB800CED84B /* SwipeableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeableCell.swift; sourceTree = "<group>"; };
 		EA7EE722257161C600A82386 /* PushTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushTransition.swift; sourceTree = "<group>"; };
 		EA7EE7282571838E00A82386 /* AccountsListAccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsListAccountCell.swift; sourceTree = "<group>"; };
@@ -197,6 +198,12 @@
 		EA7EE7592573175300A82386 /* UserStateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStateService.swift; sourceTree = "<group>"; };
 		EA7F616C252B2D13008CA432 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
 		EA81D1E92594B64600333680 /* CurrencyFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyFormatter.swift; sourceTree = "<group>"; };
+		EA81D1ED259518E400333680 /* AccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountModel.swift; sourceTree = "<group>"; };
+		EA81D1F52595212B00333680 /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
+		EA81D1F8259521B500333680 /* AccountsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsRepository.swift; sourceTree = "<group>"; };
+		EA81D1FD2595221400333680 /* AccountDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDto.swift; sourceTree = "<group>"; };
+		EA81D2012595223B00333680 /* AccountGroupDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountGroupDto.swift; sourceTree = "<group>"; };
+		EA81D2042595226800333680 /* OperationSectionDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationSectionDto.swift; sourceTree = "<group>"; };
 		EA930C2F2523D54D00E12805 /* Finply.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Finply.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA930C322523D54D00E12805 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EA930C342523D54D00E12805 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -230,7 +237,6 @@
 		EA9F053C2593716E00B81A8E /* ColorSetsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorSetsListViewController.swift; sourceTree = "<group>"; };
 		EA9F05442593A75100B81A8E /* ClearCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ClearCell.xib; sourceTree = "<group>"; };
 		EA9F05472593A75B00B81A8E /* ClearCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearCell.swift; sourceTree = "<group>"; };
-		EA9F054A2593C01900B81A8E /* FinplyRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinplyRepository.swift; sourceTree = "<group>"; };
 		EA9F054E2593C2C300B81A8E /* Realm+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Realm+Extensions.swift"; sourceTree = "<group>"; };
 		EA9F05512593C75000B81A8E /* UITextField+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extensions.swift"; sourceTree = "<group>"; };
 		EA9F66252554E44000441ED0 /* PlanningListViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PlanningListViewController.storyboard; sourceTree = "<group>"; };
@@ -333,30 +339,21 @@
 		EA0237D625854D5D00A284C4 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				EA0237E32585522D00A284C4 /* Currency */,
-				EA0237D725854D6B00A284C4 /* AccountModel.swift */,
+				EA81D1ED259518E400333680 /* AccountModel.swift */,
 				EA0238072585EA3400A284C4 /* AccountGroupModel.swift */,
 				EA02380A2585EAF500A284C4 /* OperationSectionModel.swift */,
 				EA02380E2585ED3300A284C4 /* OperationModel.swift */,
 				EA0238112585F01200A284C4 /* CategoryModel.swift */,
+				EA81D1F52595212B00333680 /* Currency.swift */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		EA0237E32585522D00A284C4 /* Currency */ = {
-			isa = PBXGroup;
-			children = (
-				EA0237E42585523800A284C4 /* Currency.swift */,
-				EA0237E52585523A00A284C4 /* CurrencyLocale.swift */,
-			);
-			path = Currency;
 			sourceTree = "<group>";
 		};
 		EA0237EC258552B900A284C4 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
 				EA0237FC25855B9C00A284C4 /* Common */,
-				EA9F054A2593C01900B81A8E /* FinplyRepository.swift */,
+				EA81D1F8259521B500333680 /* AccountsRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -365,7 +362,6 @@
 			isa = PBXGroup;
 			children = (
 				EA0237D0258548D100A284C4 /* RealmRepository.swift */,
-				EA0237FD25855BAE00A284C4 /* RealmObjectDelegate.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -443,6 +439,16 @@
 			path = TitleInputCell;
 			sourceTree = "<group>";
 		};
+		EA81D1FC259521FB00333680 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				EA81D1FD2595221400333680 /* AccountDto.swift */,
+				EA81D2012595223B00333680 /* AccountGroupDto.swift */,
+				EA81D2042595226800333680 /* OperationSectionDto.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		EA88F77325372F7B005F9EC0 /* AccountsList */ = {
 			isa = PBXGroup;
 			children = (
@@ -477,8 +483,9 @@
 			isa = PBXGroup;
 			children = (
 				EA930C472523D5A100E12805 /* Scenes */,
-				EA0237D325854CDE00A284C4 /* Persistence */,
+				EA81D1FC259521FB00333680 /* Models */,
 				EA930C4C2523D61200E12805 /* Services */,
+				EA0237D325854CDE00A284C4 /* Persistence */,
 				EA930C4F2523D64F00E12805 /* Models (Donor) */,
 				EA930C502523D66800E12805 /* Configuration */,
 				EA930C4E2523D63500E12805 /* Utils */,
@@ -592,6 +599,7 @@
 				EAE2173525911C9D00095EB5 /* UITableViewCell+Extension.swift */,
 				EA9F054E2593C2C300B81A8E /* Realm+Extensions.swift */,
 				EA9F05512593C75000B81A8E /* UITextField+Extensions.swift */,
+				EA76167F25962818000A7EC2 /* Rx+BiBinding.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -724,6 +732,7 @@
 				EAAE9BF3256ED7F400790931 /* GradientView.swift */,
 				EA7C119A258CBAB800CED84B /* SwipeableCell.swift */,
 				EA81D1E92594B64600333680 /* CurrencyFormatter.swift */,
+				EA761682259643EF000A7EC2 /* PresentationDelegate.swift */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
@@ -979,8 +988,10 @@
 				EA0237D1258548D100A284C4 /* RealmRepository.swift in Sources */,
 				EAD68A482554F9C80083B30D /* AppCoordinator.swift in Sources */,
 				EA9F66312554E44000441ED0 /* PlanningListViewModel.swift in Sources */,
+				EA81D1F9259521B500333680 /* AccountsRepository.swift in Sources */,
 				EA9F054F2593C2C300B81A8E /* Realm+Extensions.swift in Sources */,
 				EA7EE75A2573175300A82386 /* UserStateService.swift in Sources */,
+				EA81D1F62595212B00333680 /* Currency.swift in Sources */,
 				EA930CDC252485C500E12805 /* NibLoadable.swift in Sources */,
 				EA02380B2585EAF500A284C4 /* OperationSectionModel.swift in Sources */,
 				EAD68A3F2554F8810083B30D /* AccountDetailsViewModel.swift in Sources */,
@@ -992,6 +1003,8 @@
 				EA02382B25876D3800A284C4 /* ReorderController+AutoScroll.swift in Sources */,
 				EAD68A492554F9C80083B30D /* BaseCoordinator.swift in Sources */,
 				EA02382625876D3800A284C4 /* UITableView+Reorder.swift in Sources */,
+				EA81D2022595223B00333680 /* AccountGroupDto.swift in Sources */,
+				EA81D1EE259518E400333680 /* AccountModel.swift in Sources */,
 				EAD68AEE2559D52D0083B30D /* HighCategoryContainerView.swift in Sources */,
 				EA9BCAA42543443F003DE283 /* AccountsListCoordinator.swift in Sources */,
 				EA930CD02524857900E12805 /* Reusable.swift in Sources */,
@@ -1003,13 +1016,13 @@
 				EAD68A412554F8810083B30D /* AccountDetailsCoordinator.swift in Sources */,
 				EAE2172A2591196900095EB5 /* ColorSelectionCell.swift in Sources */,
 				EA02381C2585FF8D00A284C4 /* AccountsInGroupContainerView.swift in Sources */,
-				EA0237FE25855BAE00A284C4 /* RealmObjectDelegate.swift in Sources */,
 				EA9BCAA125434434003DE283 /* AccountsListViewModel.swift in Sources */,
 				EA9F66322554E44000441ED0 /* BudgetsListCoordinator.swift in Sources */,
 				EA9F05482593A75B00B81A8E /* ClearCell.swift in Sources */,
 				EA0238192585FF4600A284C4 /* AccountInGroupContainerView.swift in Sources */,
 				EA7EE723257161C600A82386 /* PushTransition.swift in Sources */,
 				EAE2171A2591143300095EB5 /* BallanceInputCellViewModel.swift in Sources */,
+				EA761683259643EF000A7EC2 /* PresentationDelegate.swift in Sources */,
 				EAD68AD7255953A30083B30D /* Rx+Extensions.swift in Sources */,
 				EAD68A7125558AD10083B30D /* AccountOperationsSectionHeader.swift in Sources */,
 				EA930CC82524851000E12805 /* StoryboardBased.swift in Sources */,
@@ -1022,12 +1035,10 @@
 				EAAE9C1525701F8200790931 /* UIPageViewController+Extensions.swift in Sources */,
 				EAE2173625911C9D00095EB5 /* UITableViewCell+Extension.swift in Sources */,
 				EA7EE7392571872B00A82386 /* AccountsListGroupCellViewModel.swift in Sources */,
-				EA0237F2258554B000A284C4 /* Currency.swift in Sources */,
 				EA930CF525248BA400E12805 /* FPAccountGroup.swift in Sources */,
 				EAE217242591177300095EB5 /* IconSelectionCellViewModel.swift in Sources */,
 				EAE217212591176800095EB5 /* IconSelectionCell.swift in Sources */,
 				EAD68B00255B00870083B30D /* ReportDetailsViewModel.swift in Sources */,
-				EA9F054B2593C01900B81A8E /* FinplyRepository.swift in Sources */,
 				EAD68A332554F8220083B30D /* AccountHeaderView.swift in Sources */,
 				EAE217172591142300095EB5 /* BallanceInputCell.swift in Sources */,
 				EA930C352523D54D00E12805 /* SceneDelegate.swift in Sources */,
@@ -1038,12 +1049,12 @@
 				EA9F662F2554E44000441ED0 /* PlanningListCoordinator.swift in Sources */,
 				EAD68A402554F8810083B30D /* AccountDetailsViewController.swift in Sources */,
 				EA9F053F2593716E00B81A8E /* ColorSetsListViewModel.swift in Sources */,
-				EA0237D825854D6B00A284C4 /* AccountModel.swift in Sources */,
 				EA9F05522593C75000B81A8E /* UITextField+Extensions.swift in Sources */,
 				EAD68B10255B012C0083B30D /* ProfileDetailsCoordinator.swift in Sources */,
 				EA7EE7502572FE6C00A82386 /* TitleInputCell.swift in Sources */,
 				EAE217412591230200095EB5 /* AccountsSelectionCellViewModel.swift in Sources */,
 				EA7EE7532572FECB00A82386 /* TitleInputCellViewModel.swift in Sources */,
+				EA81D2052595226800333680 /* OperationSectionDto.swift in Sources */,
 				EAD68B1B255B07110083B30D /* AddEditAccountCoordinator.swift in Sources */,
 				EAD68A61255580AA0083B30D /* AccountOperationCell.swift in Sources */,
 				EA9F05402593716E00B81A8E /* ColorSetsListViewController.swift in Sources */,
@@ -1058,9 +1069,9 @@
 				EAD68B23255EA9490083B30D /* UITableView+Extensions.swift in Sources */,
 				EA9F053E2593716E00B81A8E /* ColorSetsListCoordinator.swift in Sources */,
 				EA02382925876D3800A284C4 /* ReorderController+GestureRecognizer.swift in Sources */,
+				EA76168025962818000A7EC2 /* Rx+BiBinding.swift in Sources */,
 				EAE2172E2591197800095EB5 /* ColorSelectionCellViewModel.swift in Sources */,
 				EAD68B1E255B07110083B30D /* AddEditAccountViewModel.swift in Sources */,
-				EA0237F4258554B300A284C4 /* CurrencyLocale.swift in Sources */,
 				EA0238082585EA3400A284C4 /* AccountGroupModel.swift in Sources */,
 				EA9F051825936F4100B81A8E /* IconsListViewModel.swift in Sources */,
 				EAE2173A259122E200095EB5 /* AccountsSelectionCell.swift in Sources */,
@@ -1068,6 +1079,7 @@
 				EAD68ADB25595AB80083B30D /* PieChartView+Rx.swift in Sources */,
 				EA930D032524943C00E12805 /* FinplyDI.swift in Sources */,
 				EAE2170B2590D12700095EB5 /* AddEditAccountViewController.swift in Sources */,
+				EA81D1FE2595221400333680 /* AccountDto.swift in Sources */,
 				EA7EE72E257183C700A82386 /* AccountsListAccountCellViewModel.swift in Sources */,
 				EAD68A74255591030083B30D /* Foundation+Extensions.swift in Sources */,
 				EA9F051A25936F4100B81A8E /* IconsListCoordinator.swift in Sources */,

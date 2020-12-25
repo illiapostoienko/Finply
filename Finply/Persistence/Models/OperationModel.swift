@@ -8,23 +8,8 @@
 import Foundation
 import RealmSwift
 
-protocol OperationModelType {
-    var id: String { get }
-    
-    var accountId: String { get }
-    var operationSectionId: String { get }
-    var categoryId: String { get }
-    
-    var creationDate: Date { get }
-    var operationDate: Date { get }
-    var valueInCents: Int { get }
-    var comment: String? { get }
-    var photoPath: String? { get }
-    var operationType: OperationModel.OperationType { get }
-}
-
 //swiftlint:disable force_unwrapping
-final class OperationModel: Object, OperationModelType {
+final class OperationModel: Object {
     
     @objc dynamic var id = UUID().uuidString
     

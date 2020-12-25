@@ -37,9 +37,15 @@ class RealmRepository<Model: Object> {
         realm.object(ofType: Model.self, forPrimaryKey: id)
     }
     
-    func addOrUpdate(models: [Model]) {
+    func add(models: [Model]) {
         try! realm.write {
             realm.add(models, update: .modified)
+        }
+    }
+    
+    func update(_ actions: () -> Void) {
+        try! realm.write {
+            actions()
         }
     }
     

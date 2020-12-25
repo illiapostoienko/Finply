@@ -79,10 +79,10 @@ final class AccountsListViewModel: AccountsListViewModelType, AccountsListViewMo
     
     // Locals
     private let _currentTab = BehaviorRelay<AccountsListTab>(value: .accounts)
-    private let loadedAccounts = BehaviorRelay<[AccountModelType]>(value: [])
-    private let loadedAccountGroups = BehaviorRelay<[AccountGroupModelType]>(value: [])
-    private let _deleteAccount = PublishSubject<AccountModelType>()
-    private let _deleteAccountGroup = PublishSubject<AccountGroupModelType>()
+    private let loadedAccounts = BehaviorRelay<[AccountDto]>(value: [])
+    private let loadedAccountGroups = BehaviorRelay<[AccountGroupDto]>(value: [])
+    private let _deleteAccount = PublishSubject<AccountDto>()
+    private let _deleteAccountGroup = PublishSubject<AccountGroupDto>()
     
     private var accountItems: Observable<[AccountsListTableItem]> {
         loadedAccounts.map{ [unowned self] accounts in
@@ -174,20 +174,37 @@ final class AccountsListViewModel: AccountsListViewModelType, AccountsListViewMo
             .bind(to: _openAddEditAccount)
             .disposed(by: bag)
         
-//        _addEditAccountResult
-//            .map{
-//                switch $0 {
-//                case .accountAdded(_):
-//                    <#code#>
-//                case .accountEdited(_):
-//                    <#code#>
-//                case .accountGroupAdded(_):
-//                    <#code#>
-//                case .accountGroupEdited(_):
-//                    <#code#>
-//                default: return
-//                }
-//            }
+        _addEditAccountResult
+            .withLatestFrom(latestState) { result, data -> [AccountDto]? in
+                var accounts = data.accounts
+                switch result {
+                case .accountAdded(let accountDto): accounts.append(accountDto)
+                //case .accountEdited(let accountDto): return nil
+                default: return nil
+                }
+                return accounts
+            }
+            .unwrap()
+            .bind(to: loadedAccounts)
+            .disposed(by: bag)
+        
+        _addEditAccountResult
+            .withLatestFrom(latestState) { result, data -> [AccountGroupDto]? in
+                var accountGroups = data.groups
+                switch result {
+                case .accountGroupAdded(let accountGroupDto): accountGroups.append(accountGroupDto)
+                //case .accountGroupEdited(let accountGroupDto): return nil
+                default: return nil
+                }
+                return accountGroups
+            }
+            .unwrap()
+            .bind(to: loadedAccountGroups)
+            .disposed(by: bag)
+        
+        _changeOrder.withLatestFrom(latestState) { orderSet, dataSet in
+            
+        }
         
         _deleteAccount
             .withLatestFrom(loadedAccounts) { [unowned self] accountToDelete, accounts in
@@ -211,8 +228,6 @@ final class AccountsListViewModel: AccountsListViewModelType, AccountsListViewMo
             .subscribe()
             .disposed(by: bag)
         
-        // changeOrderIntent -> change order
-        
         Observable.combineLatest(_currentTab, accountItems, groupItems)
             .map{ tab, accounts, groups -> [AccountsListTableItem] in
                 switch tab {
@@ -224,12 +239,12 @@ final class AccountsListViewModel: AccountsListViewModelType, AccountsListViewMo
             .disposed(by: bag)
         
         _reload
-            .flatMap{ [unowned self] in self.accountsService.getOrderedAccounts() }
+            .flatMap{ [unowned self] in self.accountsService.getAllAccounts() }
             .bind(to: loadedAccounts)
             .disposed(by: bag)
         
         _reload
-            .flatMap{ [unowned self] in self.accountsService.getOrderedAccountGroups() }
+            .flatMap{ [unowned self] in self.accountsService.getAllAccountGroups() }
             .bind(to: loadedAccountGroups)
             .disposed(by: bag)
     }

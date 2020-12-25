@@ -38,6 +38,6 @@ final class FinplyDI {
         container.register{ OrderService() }.implements(OrderServiceType.self)
         container.register{ AccountsService(repository: $0, orderService: $1) }.implements(AccountsServiceType.self)
         
-        container.register{ FinplyRepository() }.implements(FinplyRepositoryType.self)
+        container.register{ AccountsRepository() }.implements(AccountsRepositoryType.self)
     }
 }

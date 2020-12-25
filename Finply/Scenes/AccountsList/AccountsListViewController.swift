@@ -100,11 +100,13 @@ final class AccountsListViewController: UIViewController, BindableType {
                     var cell = tableView.dequeueReusableCell(for: indexPath) as AccountsListAccountCell
                     cell.bind(to: viewModel)
                     cell.swipeDelegate = self
+                    cell.presentationDelegate = self
                     return cell
                 case .accountGroup(let viewModel):
                     var cell = tableView.dequeueReusableCell(for: indexPath) as AccountsListGroupCell
                     cell.bind(to: viewModel)
                     cell.swipeDelegate = self
+                    cell.presentationDelegate = self
                     return cell
                 }
             }

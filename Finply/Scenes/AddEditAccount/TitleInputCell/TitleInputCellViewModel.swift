@@ -10,17 +10,18 @@ import RxCocoa
 
 protocol TitleInputCellViewModelType {
     
-    var inputText: AnyObserver<String> { get }
+    // BiBinded to Cell
+    var currentName: BehaviorRelay<String> { get }
     
-    // Output
-    var nameString: Observable<String> { get }
+    func setCurrentName(_ name: String)
 }
 
 final class TitleInputCellViewModel: TitleInputCellViewModelType {
     
-    var inputText: AnyObserver<String> { currentName.asObserver() }
+    // BiBinded to Cell
+    let currentName = BehaviorRelay<String>(value: "")
     
-    var nameString: Observable<String> { currentName }
-    
-    private let currentName = BehaviorSubject<String>(value: "")
+    func setCurrentName(_ name: String) {
+        currentName.accept(name)
+    }
 }

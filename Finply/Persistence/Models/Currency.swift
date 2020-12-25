@@ -2,7 +2,7 @@
 //  Currency.swift
 //  Finply
 //
-//  Created by Illia Postoienko on 12.12.2020.
+//  Created by Illia Postoienko on 24.12.2020.
 //
 
 enum Currency: String {

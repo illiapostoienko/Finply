@@ -8,16 +8,7 @@
 import Foundation
 import RealmSwift
 
-protocol AccountGroupModelType: class, OrderableType {
-    var id: String { get }
-    var name: String { get }
-    
-    // color, icon, iconset
-    
-    func updateProperties(name: String)
-}
-
-final class AccountGroupModel: Object, AccountGroupModelType {
+final class AccountGroupModel: Object {
     
     @objc dynamic var id = UUID().uuidString
     
@@ -27,7 +18,7 @@ final class AccountGroupModel: Object, AccountGroupModelType {
     var accounts = List<AccountModel>()
     
     override static func primaryKey() -> String? {
-        return "id"
+        return #keyPath(id)
     }
     
     static var orderKey: String {
@@ -37,10 +28,6 @@ final class AccountGroupModel: Object, AccountGroupModelType {
     convenience init(name: String, order: Int) {
         self.init()
         self.name = name
-        self.order = order
-    }
-    
-    func changeOrder(to order: Int) {
         self.order = order
     }
 }

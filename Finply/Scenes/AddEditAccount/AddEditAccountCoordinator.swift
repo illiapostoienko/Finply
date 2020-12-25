@@ -11,17 +11,17 @@ import Dip
 
 enum AddEditAccountCoordinationResult {
     case close
-    case accountAdded(AccountModelType)
-    case accountEdited(AccountModelType)
-    case accountGroupAdded(AccountGroupModelType)
-    case accountGroupEdited(AccountGroupModelType)
+    case accountAdded(AccountDto)
+    case accountEdited(AccountDto)
+    case accountGroupAdded(AccountGroupDto)
+    case accountGroupEdited(AccountGroupDto)
 }
 
 enum AddEditAccountSceneState {
     case addAccount
     case addAccountGroup
-    case editAccount(AccountModelType)
-    case editAccountGroup(AccountGroupModelType)
+    case editAccount(AccountDto)
+    case editAccountGroup(AccountGroupDto)
 }
 
 final class AddEditAccountCoordinator: BaseCoordinator<AddEditAccountCoordinationResult> {

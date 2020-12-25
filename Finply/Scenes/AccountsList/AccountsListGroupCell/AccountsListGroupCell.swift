@@ -19,6 +19,8 @@ final class AccountsListGroupCell: SwipeableCell, NibReusable, BindableType {
     @IBOutlet private var nameLabel: UILabel!
     @IBOutlet private var accountsInGroupContainerView: AccountsInGroupContainerView!
     
+    weak var presentationDelegate: PresentationDelegate?
+    
     var viewModel: AccountsListGroupCellViewModelType!
     
     private var bag = DisposeBag()

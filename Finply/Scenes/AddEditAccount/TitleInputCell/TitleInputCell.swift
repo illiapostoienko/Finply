@@ -26,10 +26,7 @@ final class TitleInputCell: UITableViewCell, BindableType, NibReusable {
     }
     
     func bindViewModel() {
-        inputTextField.rx.text
-            .orEmpty
-            .bind(to: viewModel.inputText)
-            .disposed(by: bag)
+        (inputTextField.rx.text.orEmpty <-> viewModel.currentName).disposed(by: bag)
     }
 }
 

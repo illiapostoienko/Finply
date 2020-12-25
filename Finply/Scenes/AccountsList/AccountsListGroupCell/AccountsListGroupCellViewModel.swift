@@ -11,14 +11,14 @@ import RxCocoa
 protocol AccountsListGroupCellViewModelType {
     
     //Input
-    var accountGroupUpdate: AnyObserver<AccountGroupModelType> { get }
+    var accountGroupUpdate: AnyObserver<AccountGroupDto> { get }
     var editTap: AnyObserver<Void> { get }
     var deleteTap: AnyObserver<Void> { get }
     
     //Output
-    var accountGroupModel: Observable<AccountGroupModelType> { get }
-    var editAccountGroup: Observable<AccountGroupModelType> { get }
-    var deleteAccountGroup: Observable<AccountGroupModelType> { get }
+    var accountGroupModel: Observable<AccountGroupDto> { get }
+    var editAccountGroup: Observable<AccountGroupDto> { get }
+    var deleteAccountGroup: Observable<AccountGroupDto> { get }
     
     func getAccountGroupId() -> String
 }
@@ -26,28 +26,28 @@ protocol AccountsListGroupCellViewModelType {
 final class AccountsListGroupCellViewModel: AccountsListGroupCellViewModelType {
     
     // Input
-    var accountGroupUpdate: AnyObserver<AccountGroupModelType> { _accountGroupUpdate.asObserver() }
+    var accountGroupUpdate: AnyObserver<AccountGroupDto> { _accountGroupUpdate.asObserver() }
     var editTap: AnyObserver<Void> { _editTap.asObserver() }
     var deleteTap: AnyObserver<Void> { _deleteTap.asObserver() }
     
     private let _editTap = PublishSubject<Void>()
     private let _deleteTap = PublishSubject<Void>()
-    private var _accountGroupUpdate = PublishSubject<AccountGroupModelType>()
+    private var _accountGroupUpdate = PublishSubject<AccountGroupDto>()
     
     // Output
-    var accountGroupModel: Observable<AccountGroupModelType> { _accountGroupModel.asObservable() }
-    var editAccountGroup: Observable<AccountGroupModelType> { _editAccountGroup }
-    var deleteAccountGroup: Observable<AccountGroupModelType> { _deleteAccountGroup }
+    var accountGroupModel: Observable<AccountGroupDto> { _accountGroupModel.asObservable() }
+    var editAccountGroup: Observable<AccountGroupDto> { _editAccountGroup }
+    var deleteAccountGroup: Observable<AccountGroupDto> { _deleteAccountGroup }
     
-    private let _editAccountGroup = PublishSubject<AccountGroupModelType>()
-    private let _deleteAccountGroup = PublishSubject<AccountGroupModelType>()
+    private let _editAccountGroup = PublishSubject<AccountGroupDto>()
+    private let _deleteAccountGroup = PublishSubject<AccountGroupDto>()
     
     // Locals
-    private let _accountGroupModel: BehaviorRelay<AccountGroupModelType>
+    private let _accountGroupModel: BehaviorRelay<AccountGroupDto>
     private let bag = DisposeBag()
     
-    init(accountGroupModel: AccountGroupModelType) {        
-        _accountGroupModel = BehaviorRelay<AccountGroupModelType>(value: accountGroupModel)
+    init(accountGroupModel: AccountGroupDto) {
+        _accountGroupModel = BehaviorRelay<AccountGroupDto>(value: accountGroupModel)
         
         _accountGroupUpdate
             .bind(to: _accountGroupModel)

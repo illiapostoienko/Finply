@@ -7,46 +7,64 @@
 
 import Foundation
 import RxSwift
+import RxCocoa
 
 protocol BallanceInputCellViewModelType {
-    var currencyTapped: PublishSubject<Void> { get }
     
     // Input
-    var inputStringValue: AnyObserver<String> { get }
+    var currencyTapped: PublishSubject<Void> { get }
     var currencyListResult: AnyObserver<CurrencyListCoordinationResult> { get }
     
     // Output
-    var inputValueInCents: Observable<Int?> { get }
-    var currentStringValue: Observable<String> { get }
     var selectedCurrency: Observable<Currency> { get }
+    var ballanceInCents: Observable<Int?> { get }
+    
+    // BiBinded to Cell
+    var ballanceString: BehaviorRelay<String> { get }
+    
+    func setCurrentBallance(_ ballanceInCents: Int)
 }
 
 final class BallanceInputCellViewModel: BallanceInputCellViewModelType {
     
+    // Input
     let currencyTapped = PublishSubject<Void>() // with selected currency
-    
-    var inputStringValue: AnyObserver<String> { _inputStringValue.asObserver() }
     var currencyListResult: AnyObserver<CurrencyListCoordinationResult> { _currencyListResult.asObserver() }
+    
+    // Output
+    var selectedCurrency: Observable<Currency> { _selectedCurrency.asObservable() }
+    var ballanceInCents: Observable<Int?>
+    
+    // BiBinded to Cell
+    let ballanceString: BehaviorRelay<String> = BehaviorRelay<String>(value: "")
     
     private let _inputStringValue = PublishSubject<String>()
     private let _currencyListResult = PublishSubject<CurrencyListCoordinationResult>()
     
-    let inputValueInCents: Observable<Int?>
-    var currentStringValue: Observable<String> { _stringValue }
-    var selectedCurrency: Observable<Currency> { _selectedCurrency }
-    
-    private let _selectedCurrency = BehaviorSubject<Currency>(value: .dollar)
-    private let _stringValue = BehaviorSubject<String>(value: "")
+    private let _selectedCurrency = BehaviorRelay<Currency>(value: .dollar)
     private let bag = DisposeBag()
     
     init() {
-        inputValueInCents = _stringValue
-            .map{ stringValue in Double(stringValue).flatMap{ round($0*100) }.flatMap{ Int($0) }}
+        ballanceInCents = ballanceString
+            .map{ stringValue in Double(stringValue)
+                .flatMap{ round($0*100) }
+                .flatMap{ Int($0) }
+            }
         
-        _inputStringValue
-            .bind(to: _stringValue)
+        _currencyListResult
+            .map{ result -> Currency? in
+                switch result {
+                case .selectedCurrency(let currency): return currency
+                default: return nil
+                }
+            }
+            .unwrap()
+            .bind(to: _selectedCurrency)
             .disposed(by: bag)
-        
-        // _currencyListResult -> set currency if needed
+    }
+    
+    func setCurrentBallance(_ ballanceInCents: Int) {
+        let doubleValue = Double(ballanceInCents)/Double(100)
+        ballanceString.accept(String(doubleValue))
     }
 }

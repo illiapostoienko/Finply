@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class OperationSectionDto {
+struct OperationSectionDto {
     
     let id: String
     let accountId: String

@@ -21,7 +21,7 @@ final class FinplyDI {
         container.register{ AddEditOperationViewModel() }.implements(AddEditOperationViewModelType.self)
         container.register{ AccountsListViewModel(accountsService: $0, orderService: $1) }.implements(AccountsListViewModelType.self)
         container.register{ ReportDetailsViewModel() }.implements(ReportDetailsViewModelType.self)
-        container.register{ AddEditAccountViewModel(accountsService: $0) }.implements(AddEditAccountViewModelType.self)
+        container.register{ AddEditAccountViewModel(accountsService: $0, accountsRepository: $1) }.implements(AddEditAccountViewModelType.self)
         container.register{ ProfileDetailsViewModel() }.implements(ProfileDetailsViewModelType.self)
         
         //Secondary Modules

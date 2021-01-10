@@ -20,6 +20,7 @@ final class AccountsListAccountCell: SwipeTableViewCell, NibReusable, BindableTy
     
     var viewModel: AccountsListAccountCellViewModelType!
     
+    private let formatter = CurrencyFormatter()
     private var bag = DisposeBag()
     
     override func awakeFromNib() {
@@ -36,12 +37,21 @@ final class AccountsListAccountCell: SwipeTableViewCell, NibReusable, BindableTy
     }
     
     func bindViewModel() {        
-        viewModel.accountModel.map{ $0.name }
+        viewModel.account.map{ $0.name }
             .bind(to: nameLabel.rx.text)
             .disposed(by: bag)
         
-        viewModel.accountModel.map{ String($0.order) }
+        viewModel.account.map{ String($0.order) }
             .bind(to: orderLabel.rx.text)
+            .disposed(by: bag)
+        
+        viewModel.account
+            .map{ [unowned self] account -> String? in
+                self.formatter.currency = account.currency
+                let doubleValue = Double(account.calculatedValueInCents) / Double(100)
+                return self.formatter.string(from: doubleValue)
+            }
+            .bind(to: valueLabel.rx.text)
             .disposed(by: bag)
     }
 }

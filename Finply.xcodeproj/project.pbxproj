@@ -67,9 +67,6 @@
 		EA930CD62524859E00E12805 /* BindableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA930CD52524859E00E12805 /* BindableType.swift */; };
 		EA930CDC252485C500E12805 /* NibLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA930CDB252485C500E12805 /* NibLoadable.swift */; };
 		EA930CE12524865A00E12805 /* Sequence+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA930CE02524865A00E12805 /* Sequence+Extensions.swift */; };
-		EA930CE7252486DB00E12805 /* FPOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA930CE6252486DB00E12805 /* FPOperation.swift */; };
-		EA930CED25248A4800E12805 /* FPCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA930CEC25248A4800E12805 /* FPCategory.swift */; };
-		EA930CF525248BA400E12805 /* FPAccountGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA930CF425248BA400E12805 /* FPAccountGroup.swift */; };
 		EA930D032524943C00E12805 /* FinplyDI.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA930D022524943C00E12805 /* FinplyDI.swift */; };
 		EA9BCA982543384D003DE283 /* RxSwiftExt in Frameworks */ = {isa = PBXBuildFile; productRef = EA9BCA972543384D003DE283 /* RxSwiftExt */; };
 		EA9BCA9E25434421003DE283 /* AccountsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9BCA9D25434421003DE283 /* AccountsListViewController.swift */; };
@@ -157,6 +154,10 @@
 		EAE2174E259128D000095EB5 /* CurrencyListViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EAE2174A259128D000095EB5 /* CurrencyListViewController.storyboard */; };
 		EAE2174F259128D000095EB5 /* CurrencyListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE2174B259128D000095EB5 /* CurrencyListViewController.swift */; };
 		EAE21750259128D000095EB5 /* CurrencyListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE2174C259128D000095EB5 /* CurrencyListViewModel.swift */; };
+		EAEC11E125AB680300C92C80 /* AccountsSelectionContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEC11E025AB680300C92C80 /* AccountsSelectionContainerView.swift */; };
+		EAEC11E525AB681000C92C80 /* AccountSelectionContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEC11E425AB681000C92C80 /* AccountSelectionContainerView.swift */; };
+		EAEC11E825AB681B00C92C80 /* AccountSelectionContainerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAEC11E725AB681B00C92C80 /* AccountSelectionContainerView.xib */; };
+		EAEC11ED25AB8E6700C92C80 /* OperationDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEC11EC25AB8E6700C92C80 /* OperationDto.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -218,9 +219,6 @@
 		EA930CD52524859E00E12805 /* BindableType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindableType.swift; sourceTree = "<group>"; };
 		EA930CDB252485C500E12805 /* NibLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibLoadable.swift; sourceTree = "<group>"; };
 		EA930CE02524865A00E12805 /* Sequence+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+Extensions.swift"; sourceTree = "<group>"; };
-		EA930CE6252486DB00E12805 /* FPOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPOperation.swift; sourceTree = "<group>"; };
-		EA930CEC25248A4800E12805 /* FPCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPCategory.swift; sourceTree = "<group>"; };
-		EA930CF425248BA400E12805 /* FPAccountGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPAccountGroup.swift; sourceTree = "<group>"; };
 		EA930D022524943C00E12805 /* FinplyDI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinplyDI.swift; sourceTree = "<group>"; };
 		EA9BCA9D25434421003DE283 /* AccountsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsListViewController.swift; sourceTree = "<group>"; };
 		EA9BCAA025434434003DE283 /* AccountsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsListViewModel.swift; sourceTree = "<group>"; };
@@ -303,6 +301,10 @@
 		EAE2174A259128D000095EB5 /* CurrencyListViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CurrencyListViewController.storyboard; sourceTree = "<group>"; };
 		EAE2174B259128D000095EB5 /* CurrencyListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyListViewController.swift; sourceTree = "<group>"; };
 		EAE2174C259128D000095EB5 /* CurrencyListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyListViewModel.swift; sourceTree = "<group>"; };
+		EAEC11E025AB680300C92C80 /* AccountsSelectionContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsSelectionContainerView.swift; sourceTree = "<group>"; };
+		EAEC11E425AB681000C92C80 /* AccountSelectionContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSelectionContainerView.swift; sourceTree = "<group>"; };
+		EAEC11E725AB681B00C92C80 /* AccountSelectionContainerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountSelectionContainerView.xib; sourceTree = "<group>"; };
+		EAEC11EC25AB8E6700C92C80 /* OperationDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationDto.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -445,6 +447,7 @@
 				EA81D1FD2595221400333680 /* AccountDto.swift */,
 				EA81D2012595223B00333680 /* AccountGroupDto.swift */,
 				EA81D2042595226800333680 /* OperationSectionDto.swift */,
+				EAEC11EC25AB8E6700C92C80 /* OperationDto.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -486,7 +489,6 @@
 				EA81D1FC259521FB00333680 /* Models */,
 				EA930C4C2523D61200E12805 /* Services */,
 				EA0237D325854CDE00A284C4 /* Persistence */,
-				EA930C4F2523D64F00E12805 /* Models (Donor) */,
 				EA930C502523D66800E12805 /* Configuration */,
 				EA930C4E2523D63500E12805 /* Utils */,
 				EA930C492523D5C600E12805 /* Resources */,
@@ -546,16 +548,6 @@
 				EA930CDB252485C500E12805 /* NibLoadable.swift */,
 			);
 			path = Utils;
-			sourceTree = "<group>";
-		};
-		EA930C4F2523D64F00E12805 /* Models (Donor) */ = {
-			isa = PBXGroup;
-			children = (
-				EA930CE6252486DB00E12805 /* FPOperation.swift */,
-				EA930CEC25248A4800E12805 /* FPCategory.swift */,
-				EA930CF425248BA400E12805 /* FPAccountGroup.swift */,
-			);
-			path = "Models (Donor)";
 			sourceTree = "<group>";
 		};
 		EA930C502523D66800E12805 /* Configuration */ = {
@@ -826,6 +818,7 @@
 		EAE21738259122CC00095EB5 /* AccountsSelectionCell */ = {
 			isa = PBXGroup;
 			children = (
+				EAEC11DF25AB67B700C92C80 /* AccountsSelectionContainerView */,
 				EAE2173D259122F700095EB5 /* AccountsSelectionCell.xib */,
 				EAE21739259122E200095EB5 /* AccountsSelectionCell.swift */,
 				EAE217402591230200095EB5 /* AccountsSelectionCellViewModel.swift */,
@@ -842,6 +835,16 @@
 				EAE21749259128D000095EB5 /* CurrencyListCoordinator.swift */,
 			);
 			path = CurrencyList;
+			sourceTree = "<group>";
+		};
+		EAEC11DF25AB67B700C92C80 /* AccountsSelectionContainerView */ = {
+			isa = PBXGroup;
+			children = (
+				EAEC11E725AB681B00C92C80 /* AccountSelectionContainerView.xib */,
+				EAEC11E425AB681000C92C80 /* AccountSelectionContainerView.swift */,
+				EAEC11E025AB680300C92C80 /* AccountsSelectionContainerView.swift */,
+			);
+			path = AccountsSelectionContainerView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -938,6 +941,7 @@
 				EAE217142591141900095EB5 /* BallanceInputCell.xib in Resources */,
 				EA7EE7562572FF4300A82386 /* TitleInputCell.xib in Resources */,
 				EA930C3F2523D54F00E12805 /* LaunchScreen.storyboard in Resources */,
+				EAEC11E825AB681B00C92C80 /* AccountSelectionContainerView.xib in Resources */,
 				EAD68A3E2554F8810083B30D /* AccountDetailsViewController.storyboard in Resources */,
 				EA930C3C2523D54F00E12805 /* Assets.xcassets in Resources */,
 				EA1D9E712524B07100E2027F /* AddEditOperationViewController.storyboard in Resources */,
@@ -1006,12 +1010,12 @@
 				EA02382625876D3800A284C4 /* UITableView+Reorder.swift in Sources */,
 				EA81D2022595223B00333680 /* AccountGroupDto.swift in Sources */,
 				EA81D1EE259518E400333680 /* AccountModel.swift in Sources */,
+				EAEC11E525AB681000C92C80 /* AccountSelectionContainerView.swift in Sources */,
 				EAD68AEE2559D52D0083B30D /* HighCategoryContainerView.swift in Sources */,
 				EA9BCAA42543443F003DE283 /* AccountsListCoordinator.swift in Sources */,
 				EA930CD02524857900E12805 /* Reusable.swift in Sources */,
 				EA930CE12524865A00E12805 /* Sequence+Extensions.swift in Sources */,
 				EAD68AFE255B00870083B30D /* ReportDetailsCoordinator.swift in Sources */,
-				EA930CED25248A4800E12805 /* FPCategory.swift in Sources */,
 				EA81D1EA2594B64600333680 /* CurrencyFormatter.swift in Sources */,
 				EAD68B0F255B012C0083B30D /* ProfileDetailsViewController.swift in Sources */,
 				EAD68A412554F8810083B30D /* AccountDetailsCoordinator.swift in Sources */,
@@ -1036,7 +1040,6 @@
 				EAAE9C1525701F8200790931 /* UIPageViewController+Extensions.swift in Sources */,
 				EAE2173625911C9D00095EB5 /* UITableViewCell+Extension.swift in Sources */,
 				EA7EE7392571872B00A82386 /* AccountsListGroupCellViewModel.swift in Sources */,
-				EA930CF525248BA400E12805 /* FPAccountGroup.swift in Sources */,
 				EAE217242591177300095EB5 /* IconSelectionCellViewModel.swift in Sources */,
 				EAE217212591176800095EB5 /* IconSelectionCell.swift in Sources */,
 				EAD68B00255B00870083B30D /* ReportDetailsViewModel.swift in Sources */,
@@ -1053,9 +1056,11 @@
 				EAD68B10255B012C0083B30D /* ProfileDetailsCoordinator.swift in Sources */,
 				EA7EE7502572FE6C00A82386 /* TitleInputCell.swift in Sources */,
 				EAE217412591230200095EB5 /* AccountsSelectionCellViewModel.swift in Sources */,
+				EAEC11E125AB680300C92C80 /* AccountsSelectionContainerView.swift in Sources */,
 				EA7EE7532572FECB00A82386 /* TitleInputCellViewModel.swift in Sources */,
 				EA81D2052595226800333680 /* OperationSectionDto.swift in Sources */,
 				EAD68B1B255B07110083B30D /* AddEditAccountCoordinator.swift in Sources */,
+				EAEC11ED25AB8E6700C92C80 /* OperationDto.swift in Sources */,
 				EAD68A61255580AA0083B30D /* AccountOperationCell.swift in Sources */,
 				EA9F05402593716E00B81A8E /* ColorSetsListViewController.swift in Sources */,
 				EA1D9E792524B08500E2027F /* AddEditOperationViewModel.swift in Sources */,
@@ -1083,7 +1088,6 @@
 				EA7EE72E257183C700A82386 /* AccountsListAccountCellViewModel.swift in Sources */,
 				EAD68A74255591030083B30D /* Foundation+Extensions.swift in Sources */,
 				EA9F051A25936F4100B81A8E /* IconsListCoordinator.swift in Sources */,
-				EA930CE7252486DB00E12805 /* FPOperation.swift in Sources */,
 				EAAE9C12256F090700790931 /* UIVIewController+Extensions.swift in Sources */,
 				EAD68B0D255B012C0083B30D /* ProfileDetailsViewModel.swift in Sources */,
 				EA9F66332554E44000441ED0 /* BudgetsListViewModel.swift in Sources */,

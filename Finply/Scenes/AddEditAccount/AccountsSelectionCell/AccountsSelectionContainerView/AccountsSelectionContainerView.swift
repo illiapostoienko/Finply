@@ -1,15 +1,15 @@
 //
-//  AccountsInGroupContainerView.swift
+//  AccountsSelectionContainerView.swift
 //  Finply
 //
-//  Created by Illia Postoienko on 13.12.2020.
+//  Created by Illia Postoienko on 10.01.2021.
 //
 
 import UIKit
 import RxSwift
 import RxCocoa
 
-final class AccountsInGroupContainerView: UIView {
+final class AccountsSelectionContainerView: UIView {
     
     lazy var containerStackView: UIStackView = {
         let stack = UIStackView()
@@ -39,21 +39,20 @@ final class AccountsInGroupContainerView: UIView {
         bottomAnchor.constraint(equalTo: containerStackView.bottomAnchor).isActive = true
     }
     
-    func setup(with items: [AccountInGroupContainerItem]) {
-        
+    func setup(with viewModels: [AccountSelectionContainerViewModel]) {
         containerStackView.arrangedSubviews.forEach{ $0.removeFromSuperview() }
         
-        items.forEach{ item in
-            let container = AccountInGroupContainerView.loadFromNib()
-            container.set(item: item)
+        viewModels.forEach{ viewModel in
+            var container = AccountSelectionContainerView.loadFromNib()
+            container.bind(to: viewModel)
             containerStackView.addArrangedSubview(container)
         }
     }
 }
 
-extension Reactive where Base: AccountsInGroupContainerView {
+extension Reactive where Base: AccountsSelectionContainerView {
     
-    var items: Binder<[AccountInGroupContainerItem]> {
+    var items: Binder<[AccountSelectionContainerViewModel]> {
         Binder(self.base) { containerView, items in
             containerView.setup(with: items)
         }

@@ -22,7 +22,7 @@ protocol AccountDetailsViewModelOutput {
 
 protocol AccountDetailsViewModelCoordination {
     var addOperation: Observable<Void> { get }
-    var editOperation: Observable<FPOperation> { get }
+    //var editOperation: Observable<Void> { get }
     var reportDetails: Observable<Void> { get }
     var accountsList: Observable<Void> { get }
     //var editAccount: Observable<AccountDto> { get }
@@ -58,7 +58,7 @@ final class AccountDetailsViewModel: AccountDetailsViewModelType, AccountDetails
     
     // Coordination
     var addOperation: Observable<Void> { _addTapStream }
-    var editOperation: Observable<FPOperation>
+    //var editOperation: Observable<Void> { _editOperation.asObservable() }
     var reportDetails: Observable<Void> { accountMonthDetailsViewModel.reportDetailsTap }
     var accountsList: Observable<Void> { accountHeaderViewModel.accountTap }
     
@@ -68,8 +68,10 @@ final class AccountDetailsViewModel: AccountDetailsViewModelType, AccountDetails
     
     // Local Streams
     private let _addTapStream = PublishSubject<Void>()
-    private let _rowSelectedStream = PublishSubject<IndexPath>()
+    private let _editOperation = PublishSubject<Void>()
+    private let _rowSelectedStream = PublishSubject<IndexPath>() // editOperation
     private let _sceneState: BehaviorRelay<AccountDetailsSceneState> = BehaviorRelay<AccountDetailsSceneState>(value: .none)
+    
     private let loadedOperations = BehaviorRelay<[AccountDto]>(value: [])
     
     private let userStateService: UserStateServiceType
@@ -92,13 +94,13 @@ final class AccountDetailsViewModel: AccountDetailsViewModelType, AccountDetails
                 }
             }
         
-        editOperation = _rowSelectedStream
-            .withLatestFrom(currentOperationSections) { indexPath, sections in
-                sections[safe: indexPath.section]
-                    .flatMap{ section in section.cells[safe: indexPath.item] }
-                    .flatMap{ cell in cell.operation }
-            }
-            .unwrap()
+//        editOperation = _rowSelectedStream
+//            .withLatestFrom(currentOperationSections) { indexPath, sections in
+//                sections[safe: indexPath.section]
+//                    .flatMap{ section in section.cells[safe: indexPath.item] }
+//                    .flatMap{ cell in cell.operation }
+//            }
+//            .unwrap()
     }
 }
 
@@ -178,7 +180,7 @@ enum AccountOperationsTableItem: IdentifiableType, Equatable {
     
     var identity: String {
         switch self {
-        case .operation(let vm): return vm.operation.id.uuidString
+        case .operation(let vm): return UUID().uuidString
         }
     }
     
@@ -187,6 +189,6 @@ enum AccountOperationsTableItem: IdentifiableType, Equatable {
             return lhs.identity == rhs.identity
         }
 
-        return lhsVM.operation.id == rhsVM.operation.id
+        return UUID().uuidString == UUID().uuidString
     }
 }

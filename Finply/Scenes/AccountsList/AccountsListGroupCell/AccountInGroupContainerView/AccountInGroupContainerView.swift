@@ -9,7 +9,8 @@ import UIKit
 
 struct AccountInGroupContainerItem: Equatable {
     let accountName: String
-    let value: String
+    let valueInCents: Int
+    let currency: Currency
 }
 
 final class AccountInGroupContainerView: UIView, NibBased {
@@ -18,6 +19,7 @@ final class AccountInGroupContainerView: UIView, NibBased {
     @IBOutlet private var valueLabel: UILabel!
     
     private var currentItem: AccountInGroupContainerItem?
+    private let formatter = CurrencyFormatter()
     
     func set(item: AccountInGroupContainerItem) {
         guard item != currentItem else { return }
@@ -25,6 +27,9 @@ final class AccountInGroupContainerView: UIView, NibBased {
         currentItem = item
         
         nameLabel.text = item.accountName
-        valueLabel.text = item.value
+        
+        formatter.currency = item.currency
+        let doubleValue = Double(item.valueInCents) / Double(100)
+        valueLabel.text = formatter.string(from: doubleValue)
     }
 }

@@ -16,7 +16,7 @@ final class CurrencyFormatter {
     
     let numberFormatter: NumberFormatter
     
-    init(_ currency: Currency? = nil) {
+    init() {
         numberFormatter = NumberFormatter()
         numberFormatter.alwaysShowsDecimalSeparator = false
         numberFormatter.numberStyle = .currency
@@ -25,14 +25,13 @@ final class CurrencyFormatter {
         numberFormatter.maximumFractionDigits = 2
         numberFormatter.minimumIntegerDigits = 1
         numberFormatter.locale = .current
-        currency.map{ numberFormatter.currencyCode = $0.rawValue }
     }
     
-    public func string(from double: Double) -> String? {
+    func string(from double: Double) -> String? {
         return numberFormatter.string(from: double)
     }
     
-    public func double(from string: String) -> Double? {
+    func double(from string: String) -> Double? {
         Double(string)
     }
 }

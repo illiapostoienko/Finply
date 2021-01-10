@@ -3,7 +3,6 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -16,37 +15,32 @@
                 <rect key="frame" x="0.0" y="0.0" width="414" height="141"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7zC-Be-3d3">
-                        <rect key="frame" x="40" y="48" width="75" height="75"/>
-                        <color key="backgroundColor" systemColor="systemRedColor"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="75" id="FV2-yF-Fh9"/>
-                            <constraint firstAttribute="height" constant="75" id="VRt-Kz-Qti"/>
-                        </constraints>
-                    </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Accounts:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U3D-aX-rmI">
-                        <rect key="frame" x="20" y="12" width="64" height="16"/>
+                        <rect key="frame" x="20" y="30" width="64" height="16"/>
                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
                         <color key="textColor" red="0.68235294120000001" green="0.71764705880000002" blue="0.75686274509999996" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J3F-g5-3hu" customClass="AccountsSelectionContainerView" customModule="Finply" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="52" width="414" height="89"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="7zC-Be-3d3" firstAttribute="top" secondItem="U3D-aX-rmI" secondAttribute="bottom" constant="20" id="0Eu-Ws-vbl"/>
-                    <constraint firstItem="7zC-Be-3d3" firstAttribute="leading" secondItem="bbA-dH-A08" secondAttribute="leadingMargin" constant="20" id="318-M1-mQa"/>
+                    <constraint firstItem="J3F-g5-3hu" firstAttribute="top" secondItem="U3D-aX-rmI" secondAttribute="bottom" constant="6" id="GxO-wd-i4i"/>
                     <constraint firstItem="U3D-aX-rmI" firstAttribute="leading" secondItem="bbA-dH-A08" secondAttribute="leading" constant="20" id="LE0-Lw-1hb"/>
-                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="7zC-Be-3d3" secondAttribute="bottom" priority="999" constant="10" id="gMR-TW-wlE"/>
-                    <constraint firstItem="U3D-aX-rmI" firstAttribute="top" secondItem="bbA-dH-A08" secondAttribute="top" constant="12" id="kLI-4B-nrx"/>
+                    <constraint firstAttribute="bottom" secondItem="J3F-g5-3hu" secondAttribute="bottom" id="R2Q-pF-t9R"/>
+                    <constraint firstItem="U3D-aX-rmI" firstAttribute="top" secondItem="bbA-dH-A08" secondAttribute="top" constant="30" id="kLI-4B-nrx"/>
+                    <constraint firstItem="J3F-g5-3hu" firstAttribute="leading" secondItem="bbA-dH-A08" secondAttribute="leading" id="rUL-KL-bQj"/>
+                    <constraint firstAttribute="trailing" secondItem="J3F-g5-3hu" secondAttribute="trailing" id="uxA-UK-s2M"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="accountsContainer" destination="J3F-g5-3hu" id="wC4-Fs-xeD"/>
+            </connections>
             <point key="canvasLocation" x="-265.21739130434787" y="126.22767857142857"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-    </resources>
 </document>

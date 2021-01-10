@@ -11,13 +11,14 @@ import RxCocoa
 
 protocol AccountsRepositoryType {
     func getAccounts() -> Single<[AccountDto]>
+    func getAccountsOrdered() -> Single<[AccountDto]>
     func addAccount(name: String, baseValueInCents: Int, calculatedValueInCents: Int, currency: Currency, order: Int) -> Single<AccountDto>
     func updateAccount(_ dto: AccountDto) -> Single<Void>
     func updateAccounts(_ dtos: [AccountDto]) -> Single<Void>
     func deleteAccount(_ dto: AccountDto) -> Single<Void>
     
     func getAccountGroups() -> Single<[AccountGroupDto]>
-    func addAccountGroup(name: String, order: Int) -> Single<AccountGroupDto>
+    func addAccountGroup(name: String, order: Int, accounts: [AccountDto]) -> Single<AccountGroupDto>
     func updateAccountGroup(_ dto: AccountGroupDto) -> Single<Void>
     func updateAccountGroups(_ dtos: [AccountGroupDto]) -> Single<Void>
     func deleteAccountGroup(_ dto: AccountGroupDto) -> Single<Void>
@@ -32,6 +33,19 @@ final class AccountsRepository: AccountsRepositoryType {
         return Single.create { [unowned self] observer in
             do {
                 let models = self.accountsRepository.getAll().toArray().map{ AccountDto(accountModel: $0) }
+                observer(.success(models))
+            } catch {
+                observer(.error(error))
+            }
+            
+            return Disposables.create()
+        }
+    }
+    
+    func getAccountsOrdered() -> Single<[AccountDto]> {
+        return Single.create { [unowned self] observer in
+            do {
+                let models = self.accountsRepository.getAllSorted(orderKey: AccountModel.orderKey, ascending: true).toArray().map{ AccountDto(accountModel: $0) }
                 observer(.success(models))
             } catch {
                 observer(.error(error))
@@ -98,10 +112,12 @@ final class AccountsRepository: AccountsRepositoryType {
         }
     }
     
-    func addAccountGroup(name: String, order: Int) -> Single<AccountGroupDto> {
+    func addAccountGroup(name: String, order: Int, accounts: [AccountDto]) -> Single<AccountGroupDto> {
         return Single.create { [unowned self] observer in
             do {
                 let newAccountGroup = AccountGroupModel(name: name, order: order)
+                newAccountGroup.accounts.append(objectsIn: accounts.map{ $0.accountModel })
+                
                 self.accountGroupsRepository.add(models: [newAccountGroup])
                 observer(.success(AccountGroupDto(accountGroupModel: newAccountGroup)))
             } catch {

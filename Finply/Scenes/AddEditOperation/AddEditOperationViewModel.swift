@@ -9,19 +9,10 @@ import RxSwift
 import RxCocoa
 
 protocol AddEditOperationViewModelType {
-    
-    var cancelTapped: PublishSubject<Void> { get }
-    var operationAdded: Observable<FPOperation> { get }
-    var operationEdited: Observable<FPOperation> { get }
+
 }
 
 final class AddEditOperationViewModel: AddEditOperationViewModelType {
         
-    var cancelTapped = PublishSubject<Void>()
-    var operationAdded: Observable<FPOperation> = PublishSubject<FPOperation>()
-    var operationEdited: Observable<FPOperation> = PublishSubject<FPOperation>()
-    
-    init() {
-        
-    }
+
 }

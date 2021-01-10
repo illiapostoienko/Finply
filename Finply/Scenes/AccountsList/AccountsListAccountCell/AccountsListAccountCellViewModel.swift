@@ -9,24 +9,24 @@ import RxSwift
 import RxCocoa
 
 protocol AccountsListAccountCellViewModelType {
-    var accountModel: Observable<AccountDto> { get }
+    var account: Observable<AccountDto> { get }
     
     func getActualModel() -> AccountDto
 }
 
 final class AccountsListAccountCellViewModel: AccountsListAccountCellViewModelType {
     
-    var accountModel: Observable<AccountDto> { _accountModel.asObservable() }
+    var account: Observable<AccountDto> { _account.asObservable() }
     
     // Locals
-    private let _accountModel: BehaviorRelay<AccountDto>
+    private let _account: BehaviorRelay<AccountDto>
     private let bag = DisposeBag()
     
-    init(accountModel: AccountDto) {
-        _accountModel = BehaviorRelay<AccountDto>(value: accountModel)
+    init(account: AccountDto) {
+        _account = BehaviorRelay<AccountDto>(value: account)
     }
     
     func getActualModel() -> AccountDto {
-        _accountModel.value
+        _account.value
     }
 }

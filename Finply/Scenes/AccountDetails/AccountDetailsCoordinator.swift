@@ -49,15 +49,15 @@ final class AccountDetailsCoordinator: BaseCoordinator<Void> {
             })
             .disposed(by: bag)
         
-        viewModel.coordination.editOperation
-            .flatMap{ [unowned self] in self.coordinateToAddEditOperation(operationToEdit: $0) }
-            .subscribe(onNext: {
-                switch $0 {
-                case .operationEdited(let model): return // pass to vm
-                default: return
-                }
-            })
-            .disposed(by: bag)
+//        viewModel.coordination.editOperation
+//            .flatMap{ [unowned self] in self.coordinateToAddEditOperation(operationToEdit: $0) }
+//            .subscribe(onNext: {
+//                switch $0 {
+//                case .operationEdited(let model): return // pass to vm
+//                default: return
+//                }
+//            })
+//            .disposed(by: bag)
         
         viewModel.coordination.reportDetails
             .flatMap{ [unowned self] in self.coordinateToReportDetails() }
@@ -102,7 +102,7 @@ final class AccountDetailsCoordinator: BaseCoordinator<Void> {
     }
     
     // MARK: - Coordination
-    private func coordinateToAddEditOperation(operationToEdit: FPOperation? = nil) -> Observable<AddEditOperationCoordinationResult> {
+    private func coordinateToAddEditOperation(operationToEdit: OperationDto? = nil) -> Observable<AddEditOperationCoordinationResult> {
         let coordinator = AddEditOperationCoordinator(presentingViewController: accountDetailsVc,
                                                       dependencyContainer: dependencyContainer,
                                                       operationToEdit: operationToEdit)

@@ -10,8 +10,8 @@ import RxSwift
 import Dip
 
 enum AddEditOperationCoordinationResult {
-    case operationAdded(FPOperation)
-    case operationEdited(FPOperation)
+    case operationAdded(OperationDto)
+    case operationEdited(OperationDto)
     case close
 }
 
@@ -19,14 +19,13 @@ final class AddEditOperationCoordinator: BaseCoordinator<AddEditOperationCoordin
     
     let presentingViewController: UIViewController
     let dependencyContainer: DependencyContainer
-    let operationToEdit: FPOperation?
     
     private let selfDismissStream = PublishSubject<Void>()
     
-    init(presentingViewController: UIViewController, dependencyContainer: DependencyContainer, operationToEdit: FPOperation? = nil) {
+    init(presentingViewController: UIViewController, dependencyContainer: DependencyContainer, operationToEdit: OperationDto? = nil) {
         self.presentingViewController = presentingViewController
         self.dependencyContainer = dependencyContainer
-        self.operationToEdit = operationToEdit
+
     }
     
     override func start() -> Observable<AddEditOperationCoordinationResult> {
@@ -38,13 +37,6 @@ final class AddEditOperationCoordinator: BaseCoordinator<AddEditOperationCoordin
         
         presentingViewController.present(vc, animated: true)
         
-        return Observable.merge(
-            [
-                viewModel.cancelTapped.map{ .close },
-                viewModel.operationAdded.map{ .operationAdded($0) },
-                viewModel.operationEdited.map{ .operationEdited($0) }
-            ])
-            .take(1)
-            .do(onNext: { [vc] _ in vc.dismiss(animated: true) })
+        return Observable.never()
     }
 }

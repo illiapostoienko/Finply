@@ -16,7 +16,7 @@ protocol AccountsServiceType {
     func deleteAccount(_ account: AccountDto) -> Single<Void>
     func changeAccountOrder(fromIndex: Int, toIndex: Int) -> Single<Void>
     
-    func addAccountGroup(name: String) -> Single<AccountGroupDto>
+    func addAccountGroup(name: String, accounts: [AccountDto]) -> Single<AccountGroupDto>
     func updateAccountGroup(_ accountGroup: AccountGroupDto) -> Single<Void>
     func updateAccountGroups(_ accountGroups: [AccountGroupDto]) -> Single<Void>
     func getAllAccountGroups() -> Single<[AccountGroupDto]>
@@ -71,11 +71,11 @@ final class AccountsService: AccountsServiceType {
     }
     
     // MARK: - Account Groups
-    func addAccountGroup(name: String) -> Single<AccountGroupDto> {
+    func addAccountGroup(name: String, accounts: [AccountDto]) -> Single<AccountGroupDto> {
         repository
             .getAccountGroups()
             .map{ [orderService] in orderService.createLastOrder(in: $0) }
-            .flatMap { [repository] in repository.addAccountGroup(name: name, order: $0) }
+            .flatMap { [repository] in repository.addAccountGroup(name: name, order: $0, accounts: accounts) }
     }
     
     func updateAccountGroup(_ accountGroup: AccountGroupDto) -> Single<Void> {

@@ -30,13 +30,6 @@ final class AccountsListGroupCell: SwipeTableViewCell, NibReusable, BindableType
     
     override func awakeFromNib() {
         super.awakeFromNib()
-
-        accountsInGroupContainerView
-            .setup(with: [
-                AccountInGroupContainerItem(accountName: "Monobank", value: "$324.3"),
-                AccountInGroupContainerItem(accountName: "Monobank White", value: "$3134.3"),
-                AccountInGroupContainerItem(accountName: "Raiffeisen", value: "$42243.5")
-            ])
         
         let backgroundView = UIView()
         backgroundView.backgroundColor = .clear
@@ -44,12 +37,18 @@ final class AccountsListGroupCell: SwipeTableViewCell, NibReusable, BindableType
     }
     
     func bindViewModel() {
-        viewModel.accountGroupModel.map{ $0.name }
+        viewModel.accountGroup.map{ $0.name }
             .bind(to: nameLabel.rx.text)
             .disposed(by: bag)
         
-        viewModel.accountGroupModel.map{ String($0.order) }
+        viewModel.accountGroup.map{ String($0.order) }
             .bind(to: orderLabel.rx.text)
+            .disposed(by: bag)
+        
+        viewModel.accountGroup
+            .map{ $0.accounts }
+            .map{ $0.map{ AccountInGroupContainerItem(accountName: $0.name, valueInCents: $0.calculatedValueInCents, currency: $0.currency) }}
+            .bind(to: accountsInGroupContainerView.rx.items)
             .disposed(by: bag)
     }
 }

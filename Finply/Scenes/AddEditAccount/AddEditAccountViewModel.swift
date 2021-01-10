@@ -91,9 +91,11 @@ final class AddEditAccountViewModel: AddEditAccountViewModelType, AddEditAccount
     private let accountsSelectionCellVm: AccountsSelectionCellViewModelType
     
     private let accountsService: AccountsServiceType
+    private let accountsRepository: AccountsRepositoryType
     private let bag = DisposeBag()
     
     init(accountsService: AccountsServiceType,
+         accountsRepository: AccountsRepositoryType,
          titleInputVm: TitleInputCellViewModelType = TitleInputCellViewModel(),
          ballanceInputCellVm: BallanceInputCellViewModelType = BallanceInputCellViewModel(),
          iconSelectionCellVm: IconSelectionCellViewModelType = IconSelectionCellViewModel(),
@@ -101,6 +103,7 @@ final class AddEditAccountViewModel: AddEditAccountViewModelType, AddEditAccount
          accountsSelectionCellVm: AccountsSelectionCellViewModelType = AccountsSelectionCellViewModel())
     {
         self.accountsService = accountsService
+        self.accountsRepository = accountsRepository
         self.titleInputVm = titleInputVm
         self.ballanceInputCellVm = ballanceInputCellVm
         self.iconSelectionCellVm = iconSelectionCellVm
@@ -154,12 +157,12 @@ final class AddEditAccountViewModel: AddEditAccountViewModelType, AddEditAccount
             .disposed(by: bag)
         
         let latestDataSet = Observable
-            .combineLatest(titleInputVm.currentName, ballanceInputCellVm.ballanceInCents, ballanceInputCellVm.selectedCurrency)
-            .map{ (name: $0.0, value: $0.1, currency: $0.2) }
+            .combineLatest(titleInputVm.currentName, ballanceInputCellVm.ballanceInCents, ballanceInputCellVm.selectedCurrency, accountsSelectionCellVm.selectedAccounts)
+            .map{ (name: $0.0, value: $0.1, currency: $0.2, selectedAccounts: $0.3) }
         
         isCheckButtonEnabled = latestDataSet.withLatestFrom(_sceneState) { set, state in
             if state.isAccountGroupAction {
-                return !set.name.isEmpty
+                return !set.name.isEmpty && !set.selectedAccounts.isEmpty
             } else {
                 guard let inputValueInCents = set.value else { return false }
                 return !set.name.isEmpty && inputValueInCents != 0
@@ -203,6 +206,7 @@ final class AddEditAccountViewModel: AddEditAccountViewModelType, AddEditAccount
                 if var existingAccountGroup = set.state.editAccountGroupValue {
                     
                     existingAccountGroup.name = set.data.name
+                    existingAccountGroup.accounts = set.data.selectedAccounts
                     // + icon, color, selected accounts
                     
                     return accountsService
@@ -210,7 +214,7 @@ final class AddEditAccountViewModel: AddEditAccountViewModelType, AddEditAccount
                         .map{ .accountGroupEdited(existingAccountGroup) }
                 } else {
                     return accountsService
-                        .addAccountGroup(name: set.data.name)
+                        .addAccountGroup(name: set.data.name, accounts: set.data.selectedAccounts)
                         .map{ .accountGroupAdded($0) }
                 }
             }
@@ -232,11 +236,20 @@ final class AddEditAccountViewModel: AddEditAccountViewModelType, AddEditAccount
                 itemsSet.append(.clear)
                 itemsSet.append(.iconSelect(viewModel: iconSelectionCellVm))
                 itemsSet.append(.colorSelect(viewModel: colorSelectionCellVm))
-                if state.isAccountGroupAction { itemsSet.append(.accountsSelect(viewModel: accountsSelectionCellVm)) }
+                if state.isAccountGroupAction {
+                    accountsSelectionCellVm.setupSelectedAccounts(state.existingSelectedAccounts ?? [])
+                    itemsSet.append(.accountsSelect(viewModel: accountsSelectionCellVm))
+                }
                 
                 return itemsSet
             }
             .bind(to: _dataSource)
+            .disposed(by: bag)
+        
+        accountsRepository.getAccountsOrdered()
+            .subscribe(onSuccess: { [weak self] accounts in
+                self?.accountsSelectionCellVm.setupLoadedAccounts(accounts)
+            })
             .disposed(by: bag)
     }
     
@@ -317,13 +330,18 @@ extension AddEditAccountSceneState: Equatable {
     }
     
     var existingName: String? {
-        if case .editAccount(let existingAcocunt) = self { return existingAcocunt.name }
-        if case .editAccountGroup(let existingAcocuntGroup) = self { return existingAcocuntGroup.name }
+        if case .editAccount(let existingAccount) = self { return existingAccount.name }
+        if case .editAccountGroup(let existingAccountGroup) = self { return existingAccountGroup.name }
         return nil
     }
     
     var existingBallance: Int? {
         if case .editAccount(let existingAcocunt) = self { return existingAcocunt.baseValueInCents }
+        return nil
+    }
+    
+    var existingSelectedAccounts: [AccountDto]? {
+        if case .editAccountGroup(let existingAccountGroup) = self { return existingAccountGroup.accounts }
         return nil
     }
     

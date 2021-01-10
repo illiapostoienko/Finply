@@ -75,6 +75,7 @@ final class AccountsListViewModel: AccountsListViewModelType, AccountsListViewMo
     private let _changeOrder = PublishSubject<(fromIndex: Int, toIndex: Int)>()
     private let _addEditAccountResult = PublishSubject<AddEditAccountCoordinationResult>()
     private let _reload = PublishSubject<Void>()
+    private let _reloadAccountGroups = PublishSubject<Void>()
     
     // Coordination
     var completeCoordinationResult: Observable<AccountsListCoordinationResult> { _completeCoordinationResult }
@@ -92,7 +93,7 @@ final class AccountsListViewModel: AccountsListViewModelType, AccountsListViewMo
         loadedAccounts.map{ accounts in
             var accounts = accounts
             accounts.sort(by: { $0.order < $1.order })
-            return accounts.map { .account(viewModel: AccountsListAccountCellViewModel(accountModel: $0)) }
+            return accounts.map { .account(viewModel: AccountsListAccountCellViewModel(account: $0)) }
         }
     }
     
@@ -100,7 +101,7 @@ final class AccountsListViewModel: AccountsListViewModelType, AccountsListViewMo
         loadedAccountGroups.map{ groups in
             var groups = groups
             groups.sort(by: { $0.order < $1.order })
-            return groups.map { .accountGroup(viewModel: AccountsListGroupCellViewModel(accountGroupModel: $0)) }
+            return groups.map { .accountGroup(viewModel: AccountsListGroupCellViewModel(accountGroup: $0)) }
         }
     }
     
@@ -168,6 +169,7 @@ final class AccountsListViewModel: AccountsListViewModelType, AccountsListViewMo
                 return accounts
             }
             .unwrap()
+            .do(onNext: { [unowned self] _ in self._reloadAccountGroups.onNext(()) })
             .bind(to: loadedAccounts)
             .disposed(by: bag)
         
@@ -246,7 +248,7 @@ final class AccountsListViewModel: AccountsListViewModelType, AccountsListViewMo
                 return accountToDelete
             }
             .flatMap{ [unowned self] in self.accountsService.deleteAccount($0) }
-            .subscribe()
+            .bind(to: _reloadAccountGroups)
             .disposed(by: bag)
         
         _rowDeleteTap
@@ -282,6 +284,10 @@ final class AccountsListViewModel: AccountsListViewModelType, AccountsListViewMo
             .disposed(by: bag)
         
         _reload
+            .bind(to: _reloadAccountGroups)
+            .disposed(by: bag)
+        
+        _reloadAccountGroups
             .flatMap{ [unowned self] in self.accountsService.getAllAccountGroups() }
             .bind(to: loadedAccountGroups)
             .disposed(by: bag)

@@ -9,6 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import RxDataSources
+import SwipeCellKit
 
 final class AccountsListViewController: UIViewController, BindableType {
     
@@ -99,22 +100,21 @@ final class AccountsListViewController: UIViewController, BindableType {
                 case .account(let viewModel):
                     var cell = tableView.dequeueReusableCell(for: indexPath) as AccountsListAccountCell
                     cell.bind(to: viewModel)
-                    cell.swipeDelegate = self
-                    cell.presentationDelegate = self
+                    cell.delegate = self
                     return cell
                 case .accountGroup(let viewModel):
                     var cell = tableView.dequeueReusableCell(for: indexPath) as AccountsListGroupCell
                     cell.bind(to: viewModel)
-                    cell.swipeDelegate = self
-                    cell.presentationDelegate = self
+                    cell.delegate = self
                     return cell
                 }
-            }
+            }, canEditRowAtIndexPath: { _, _  in true }
         )
         
         tableView.estimatedRowHeight = UITableView.automaticDimension
         tableView.rowHeight = UITableView.automaticDimension
         tableView.tableFooterView = UIView()
+        tableView.separatorStyle = .none
         
         tableView.reorder.delegate = self
         tableView.reorder.cellScale = 1.05
@@ -168,15 +168,48 @@ extension AccountsListViewController: TableViewReorderDelegate {
     func tableViewDidFinishReordering(_ tableView: UITableView, from initialSourceIndexPath: IndexPath, to finalDestinationIndexPath: IndexPath) {
         viewModel.input.changeOrder
             .onNext((fromIndex: initialSourceIndexPath.row, toIndex: finalDestinationIndexPath.row))
+        tableView.reloadData()
     }
 }
 
-extension AccountsListViewController: SwipeableCellDelegate {
-    func didStartSwiping(_ cell: SwipeableCell) {
-        tableView.visibleCells.forEach{ visibleCell in
-            guard visibleCell !== cell else { return }
-            if let accountCell = visibleCell as? AccountsListAccountCell { accountCell.resetCellPosition(toInitial: true) }
-            if let groupCell = visibleCell as? AccountsListGroupCell { groupCell.resetCellPosition(toInitial: true) }
+extension AccountsListViewController: SwipeTableViewCellDelegate {
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+        guard orientation == .right else { return nil }
+
+        let deleteAction = SwipeAction(style: .destructive, title: nil) { [unowned self] _, indexPath in
+            let alert = UIAlertController(title: "Delete Account", message: "Are you sure to delete account? This action cannot be recovered.", preferredStyle: .alert)
+            let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            let delete = UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
+                self.viewModel.input.rowDeleteTap.onNext(indexPath.row)
+            })
+            alert.addAction(cancel)
+            alert.addAction(delete)
+            
+            self.present(alert, animated: true, completion: nil)
         }
+        
+        deleteAction.image = UIImage(named: "swipe_delete")
+        deleteAction.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.0)
+        deleteAction.transitionDelegate = ScaleTransition.default
+        deleteAction.hidesWhenSelected = true
+        
+        let editAction = SwipeAction(style: .default, title: nil) { [unowned self] _, indexPath in
+            self.viewModel.input.rowEditTap.onNext(indexPath.row)
+        }
+        
+        editAction.image = UIImage(named: "swipe_edit")
+        editAction.hidesWhenSelected = true
+        editAction.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.0)
+        editAction.transitionDelegate = ScaleTransition.default
+        
+        return [deleteAction, editAction]
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeOptions {
+        var options = SwipeOptions()
+        options.expansionStyle = .none
+        options.transitionStyle = .drag
+        options.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.0)
+        return options
     }
 }

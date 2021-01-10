@@ -28,10 +28,10 @@
 		EA1D9E752524B07B00E2027F /* AddEditOperationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1D9E742524B07B00E2027F /* AddEditOperationViewController.swift */; };
 		EA1D9E792524B08500E2027F /* AddEditOperationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1D9E782524B08500E2027F /* AddEditOperationViewModel.swift */; };
 		EA1D9E9E2524D9C000E2027F /* File in Resources */ = {isa = PBXBuildFile; fileRef = EA1D9E9D2524D9C000E2027F /* File */; };
+		EA42441E259F931200072D0B /* SwipeCellKit in Frameworks */ = {isa = PBXBuildFile; productRef = EA42441D259F931200072D0B /* SwipeCellKit */; };
 		EA48F367256681B5007FE1BA /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA48F366256681B5007FE1BA /* UIView+Extensions.swift */; };
 		EA76168025962818000A7EC2 /* Rx+BiBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA76167F25962818000A7EC2 /* Rx+BiBinding.swift */; };
 		EA761683259643EF000A7EC2 /* PresentationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA761682259643EF000A7EC2 /* PresentationDelegate.swift */; };
-		EA7C119B258CBAB800CED84B /* SwipeableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7C119A258CBAB800CED84B /* SwipeableCell.swift */; };
 		EA7EE723257161C600A82386 /* PushTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7EE722257161C600A82386 /* PushTransition.swift */; };
 		EA7EE7292571838E00A82386 /* AccountsListAccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7EE7282571838E00A82386 /* AccountsListAccountCell.swift */; };
 		EA7EE72E257183C700A82386 /* AccountsListAccountCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7EE72D257183C700A82386 /* AccountsListAccountCellViewModel.swift */; };
@@ -184,7 +184,6 @@
 		EA48F366256681B5007FE1BA /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		EA76167F25962818000A7EC2 /* Rx+BiBinding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rx+BiBinding.swift"; sourceTree = "<group>"; };
 		EA761682259643EF000A7EC2 /* PresentationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationDelegate.swift; sourceTree = "<group>"; };
-		EA7C119A258CBAB800CED84B /* SwipeableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeableCell.swift; sourceTree = "<group>"; };
 		EA7EE722257161C600A82386 /* PushTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushTransition.swift; sourceTree = "<group>"; };
 		EA7EE7282571838E00A82386 /* AccountsListAccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsListAccountCell.swift; sourceTree = "<group>"; };
 		EA7EE72D257183C700A82386 /* AccountsListAccountCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsListAccountCellViewModel.swift; sourceTree = "<group>"; };
@@ -313,6 +312,7 @@
 			files = (
 				EA7F6167252B2C2C008CA432 /* RxCocoa in Frameworks */,
 				EA7F6165252B2C2C008CA432 /* RxRelay in Frameworks */,
+				EA42441E259F931200072D0B /* SwipeCellKit in Frameworks */,
 				EA9BCA982543384D003DE283 /* RxSwiftExt in Frameworks */,
 				EA9F05572593D4E900B81A8E /* RealmSwift in Frameworks */,
 				EA9F05592593D4E900B81A8E /* Realm in Frameworks */,
@@ -730,7 +730,6 @@
 				EA7EE7122571551B00A82386 /* CustomTransitions */,
 				EAD68AD925595AA40083B30D /* PieChartView */,
 				EAAE9BF3256ED7F400790931 /* GradientView.swift */,
-				EA7C119A258CBAB800CED84B /* SwipeableCell.swift */,
 				EA81D1E92594B64600333680 /* CurrencyFormatter.swift */,
 				EA761682259643EF000A7EC2 /* PresentationDelegate.swift */,
 			);
@@ -873,6 +872,7 @@
 				EAD68A58255580040083B30D /* Differentiator */,
 				EA9F05562593D4E900B81A8E /* RealmSwift */,
 				EA9F05582593D4E900B81A8E /* Realm */,
+				EA42441D259F931200072D0B /* SwipeCellKit */,
 			);
 			productName = Fimple;
 			productReference = EA930C2F2523D54D00E12805 /* Finply.app */;
@@ -907,6 +907,7 @@
 				EA9BCA962543384D003DE283 /* XCRemoteSwiftPackageReference "RxSwiftExt" */,
 				EAD68A55255580040083B30D /* XCRemoteSwiftPackageReference "RxDataSources" */,
 				EA9F05552593D4E900B81A8E /* XCRemoteSwiftPackageReference "realm-cocoa" */,
+				EA42441C259F931200072D0B /* XCRemoteSwiftPackageReference "SwipeCellKit" */,
 			);
 			productRefGroup = EA930C302523D54D00E12805 /* Products */;
 			projectDirPath = "";
@@ -1045,7 +1046,6 @@
 				EA02380F2585ED3300A284C4 /* OperationModel.swift in Sources */,
 				EAD68AF2255ADEA00083B30D /* HighCategoriesContainerView.swift in Sources */,
 				EAE2174F259128D000095EB5 /* CurrencyListViewController.swift in Sources */,
-				EA7C119B258CBAB800CED84B /* SwipeableCell.swift in Sources */,
 				EA9F662F2554E44000441ED0 /* PlanningListCoordinator.swift in Sources */,
 				EAD68A402554F8810083B30D /* AccountDetailsViewController.swift in Sources */,
 				EA9F053F2593716E00B81A8E /* ColorSetsListViewModel.swift in Sources */,
@@ -1298,6 +1298,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		EA42441C259F931200072D0B /* XCRemoteSwiftPackageReference "SwipeCellKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwipeCellKit/SwipeCellKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.7.1;
+			};
+		};
 		EA7F6161252B2C2C008CA432 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ReactiveX/RxSwift";
@@ -1341,6 +1349,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		EA42441D259F931200072D0B /* SwipeCellKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EA42441C259F931200072D0B /* XCRemoteSwiftPackageReference "SwipeCellKit" */;
+			productName = SwipeCellKit;
+		};
 		EA7F6162252B2C2C008CA432 /* RxSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = EA7F6161252B2C2C008CA432 /* XCRemoteSwiftPackageReference "RxSwift" */;

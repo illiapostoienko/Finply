@@ -5,7 +5,7 @@
 //  Created by Illia Postoienko on 24.12.2020.
 //
 
-final class AccountDto: OrderableType {
+struct AccountDto: OrderableType, Equatable {
     
     let id: String
     var name: String
@@ -37,7 +37,16 @@ final class AccountDto: OrderableType {
         accountModel.order = order
     }
     
-    func updateOrder(to order: Int) {
+    mutating func updateOrder(to order: Int) {
         self.order = order
+    }
+    
+    static func == (lhs: AccountDto, rhs: AccountDto) -> Bool {
+        return lhs.id == rhs.id
+            && lhs.name == rhs.name
+            && lhs.baseValueInCents == rhs.baseValueInCents
+            && lhs.calculatedValueInCents == rhs.calculatedValueInCents
+            && lhs.currency == rhs.currency
+            && lhs.order == rhs.order
     }
 }

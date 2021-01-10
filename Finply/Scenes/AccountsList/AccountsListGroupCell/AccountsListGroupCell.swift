@@ -8,18 +8,16 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import SwipeCellKit
 
-final class AccountsListGroupCell: SwipeableCell, NibReusable, BindableType {
+final class AccountsListGroupCell: SwipeTableViewCell, NibReusable, BindableType {
     
-    @IBOutlet private var baseCardView: GradientView!
-    @IBOutlet private var swipeActionsContainerView: UIView!
-    @IBOutlet private var deleteActionButton: UIButton!
-    @IBOutlet private var editActionButton: UIButton!
-    @IBOutlet private var swipeViewLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet private var baseIconView: GradientView!
+    @IBOutlet private var iconImageView: UIImageView!
     @IBOutlet private var nameLabel: UILabel!
+    @IBOutlet private var valueLabel: UILabel!
     @IBOutlet private var accountsInGroupContainerView: AccountsInGroupContainerView!
-    
-    weak var presentationDelegate: PresentationDelegate?
+    @IBOutlet private var orderLabel: UILabel!
     
     var viewModel: AccountsListGroupCellViewModelType!
     
@@ -28,18 +26,11 @@ final class AccountsListGroupCell: SwipeableCell, NibReusable, BindableType {
     override func prepareForReuse() {
         super.prepareForReuse()
         bag = DisposeBag()
-        swipeViewLeadingConstraint.constant = 0
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        viewTranslationUpdates = { [unowned self] in self.updateSwipeBy(offset: $0) }
-        calculateCurrentOffset = { [unowned self] in self.swipeViewLeadingConstraint.constant }
-        
-        swipeThreshold = swipeActionsContainerView.frame.width
-        addSwipeRecognizer(to: baseCardView)
-        
         accountsInGroupContainerView
             .setup(with: [
                 AccountInGroupContainerItem(accountName: "Monobank", value: "$324.3"),
@@ -52,21 +43,13 @@ final class AccountsListGroupCell: SwipeableCell, NibReusable, BindableType {
         self.selectedBackgroundView = backgroundView
     }
     
-    func updateSwipeBy(offset: CGFloat) {
-        swipeViewLeadingConstraint.constant = offset
-    }
-    
     func bindViewModel() {
-        editActionButton.rx.tap
-            .bind(to: viewModel.editTap)
-            .disposed(by: bag)
-        
-        deleteActionButton.rx.tap
-            .bind(to: viewModel.deleteTap)
-            .disposed(by: bag)
-        
         viewModel.accountGroupModel.map{ $0.name }
             .bind(to: nameLabel.rx.text)
+            .disposed(by: bag)
+        
+        viewModel.accountGroupModel.map{ String($0.order) }
+            .bind(to: orderLabel.rx.text)
             .disposed(by: bag)
     }
 }

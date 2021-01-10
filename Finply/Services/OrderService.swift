@@ -10,7 +10,7 @@ import Foundation
 protocol OrderableType {
     var order: Int { get }
     
-    func updateOrder(to order: Int)
+    mutating func updateOrder(to order: Int)
 }
 
 protocol OrderServiceType {
@@ -20,10 +20,6 @@ protocol OrderServiceType {
 }
 
 final class OrderService: OrderServiceType {
-    
-    deinit {
-        print("deinit OrderService")
-    }
     
     func createLastOrder(in models: [OrderableType]) -> Int {
         models.count
@@ -38,22 +34,25 @@ final class OrderService: OrderServiceType {
         
         orderToModelDict[fromOrder]
             .map{
-                $0.updateOrder(to: toOrder)
-                modelsToUpdate.append($0)
+                var updatingModel = $0
+                updatingModel.updateOrder(to: toOrder)
+                modelsToUpdate.append(updatingModel)
             }
 
         if fromOrder < toOrder {
             for order in (fromOrder + 1)...toOrder {
                 orderToModelDict[order].map{
-                    $0.updateOrder(to: order - 1)
-                    modelsToUpdate.append($0)
+                    var updatingModel = $0
+                    updatingModel.updateOrder(to: order - 1)
+                    modelsToUpdate.append(updatingModel)
                 }
             }
         } else {
             for order in toOrder..<fromOrder {
                 orderToModelDict[order].map{
-                    $0.updateOrder(to: order + 1)
-                    modelsToUpdate.append($0)
+                    var updatingModel = $0
+                    updatingModel.updateOrder(to: order + 1)
+                    modelsToUpdate.append(updatingModel)
                 }
             }
         }
@@ -65,8 +64,9 @@ final class OrderService: OrderServiceType {
         models
             .filter{ $0.order > order }
             .map{
-                $0.updateOrder(to: $0.order - 1)
-                return $0
+                var updatingModel = $0
+                updatingModel.updateOrder(to: $0.order - 1)
+                return updatingModel
             }
     }
 }

@@ -29,15 +29,6 @@
         }
       },
       {
-        "package": "RxBiBinding",
-        "repositoryURL": "https://github.com/RxSwiftCommunity/RxBiBinding",
-        "state": {
-          "branch": null,
-          "revision": "30dbade1ae70a350d37c8464c77dabecbb855cd6",
-          "version": "0.2.5"
-        }
-      },
-      {
         "package": "RxDataSources",
         "repositoryURL": "https://github.com/RxSwiftCommunity/RxDataSources",
         "state": {
@@ -62,6 +53,15 @@
           "branch": null,
           "revision": "9620cd55a58c1cf3370375140c45379c40049f55",
           "version": "5.2.0"
+        }
+      },
+      {
+        "package": "SwipeCellKit",
+        "repositoryURL": "https://github.com/SwipeCellKit/SwipeCellKit",
+        "state": {
+          "branch": null,
+          "revision": "7219cad3098637176ace311510d11467dbfb9bb0",
+          "version": "2.7.1"
         }
       }
     ]

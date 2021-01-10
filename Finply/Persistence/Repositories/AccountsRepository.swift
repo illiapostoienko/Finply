@@ -28,10 +28,6 @@ final class AccountsRepository: AccountsRepositoryType {
     private let accountsRepository = RealmRepository<AccountModel>()
     private let accountGroupsRepository = RealmRepository<AccountGroupModel>()
     
-    deinit {
-        print("deinit AccountsRepository")
-    }
-    
     func getAccounts() -> Single<[AccountDto]> {
         return Single.create { [unowned self] observer in
             do {

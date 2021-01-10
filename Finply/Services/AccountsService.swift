@@ -11,12 +11,14 @@ import RxSwift
 protocol AccountsServiceType {
     func addAccount(name: String, baseValueInCents: Int, calculatedValueInCents: Int, currency: Currency) -> Single<AccountDto>
     func updateAccount(_ account: AccountDto) -> Single<Void>
+    func updateAccounts(_ accounts: [AccountDto]) -> Single<Void>
     func getAllAccounts() -> Single<[AccountDto]>
     func deleteAccount(_ account: AccountDto) -> Single<Void>
     func changeAccountOrder(fromIndex: Int, toIndex: Int) -> Single<Void>
     
     func addAccountGroup(name: String) -> Single<AccountGroupDto>
     func updateAccountGroup(_ accountGroup: AccountGroupDto) -> Single<Void>
+    func updateAccountGroups(_ accountGroups: [AccountGroupDto]) -> Single<Void>
     func getAllAccountGroups() -> Single<[AccountGroupDto]>
     func deleteAccountGroup(_ accountGroup: AccountGroupDto) -> Single<Void>
     func changeAccountGroupOrder(fromIndex: Int, toIndex: Int) -> Single<Void>
@@ -47,6 +49,10 @@ final class AccountsService: AccountsServiceType {
         repository.updateAccount(account)
     }
     
+    func updateAccounts(_ accounts: [AccountDto]) -> Single<Void> {
+        repository.updateAccounts(accounts)
+    }
+    
     func getAllAccounts() -> Single<[AccountDto]> {
         repository.getAccounts()
     }
@@ -74,6 +80,10 @@ final class AccountsService: AccountsServiceType {
     
     func updateAccountGroup(_ accountGroup: AccountGroupDto) -> Single<Void> {
         repository.updateAccountGroup(accountGroup)
+    }
+    
+    func updateAccountGroups(_ accountGroups: [AccountGroupDto]) -> Single<Void> {
+        repository.updateAccountGroups(accountGroups)
     }
     
     func getAllAccountGroups() -> Single<[AccountGroupDto]> {

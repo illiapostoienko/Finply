@@ -5,7 +5,7 @@
 //  Created by Illia Postoienko on 24.12.2020.
 //
 
-final class AccountGroupDto: OrderableType {
+struct AccountGroupDto: OrderableType, Equatable {
     
     let id: String
     var name: String
@@ -28,7 +28,13 @@ final class AccountGroupDto: OrderableType {
         accountGroupModel.order = order
     }
     
-    func updateOrder(to order: Int) {
+    mutating func updateOrder(to order: Int) {
         self.order = order
+    }
+    
+    static func == (lhs: AccountGroupDto, rhs: AccountGroupDto) -> Bool {
+        return lhs.id == rhs.id
+            && lhs.name == rhs.name
+            && lhs.order == rhs.order
     }
 }

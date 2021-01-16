@@ -10,8 +10,8 @@ import Foundation
 final class CurrencyFormatter {
     
     var currency: Currency {
-        set { numberFormatter.currencyCode = newValue.rawValue }
         get { Currency(rawValue: numberFormatter.currencyCode) ?? .dollar }
+        set { numberFormatter.currencyCode = newValue.rawValue }
     }
     
     let numberFormatter: NumberFormatter

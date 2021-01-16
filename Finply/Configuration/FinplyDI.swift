@@ -12,19 +12,19 @@ final class FinplyDI {
  
     static func registerViewModels(container: DependencyContainer) {
 
-        //Main Pages
+        // Main Pages
         container.register{ AccountDetailsViewModel(userStateService: $0) }.implements(AccountDetailsViewModelType.self)
         container.register{ BudgetsListViewModel() }.implements(BudgetsListViewModelType.self)
         container.register{ PlanningListViewModel() }.implements(PlanningListViewModelType.self)
         
-        //Main Branches
+        // Main Branches
         container.register{ AddEditOperationViewModel() }.implements(AddEditOperationViewModelType.self)
         container.register{ AccountsListViewModel(accountsService: $0, orderService: $1) }.implements(AccountsListViewModelType.self)
         container.register{ ReportDetailsViewModel() }.implements(ReportDetailsViewModelType.self)
         container.register{ AddEditAccountViewModel(accountsService: $0, accountsRepository: $1) }.implements(AddEditAccountViewModelType.self)
         container.register{ ProfileDetailsViewModel() }.implements(ProfileDetailsViewModelType.self)
         
-        //Secondary Modules
+        // Secondary Modules
         container.register{ AccountHeaderViewModel() }.implements(AccountHeaderViewModelType.self)
         container.register{ AccountMonthDetailsViewModel() }.implements(AccountMonthDetailsViewModelType.self)
         container.register{ CurrencyListViewModel() }.implements(CurrencyListViewModelType.self)

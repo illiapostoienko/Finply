@@ -7,7 +7,7 @@
 
 import UIKit
 
-//swiftlint:disable force_cast
+// swiftlint:disable force_cast
 @IBDesignable
 public class GradientView: UIView {
     @IBInspectable var startColor: UIColor = .black { didSet { updateColors() }}

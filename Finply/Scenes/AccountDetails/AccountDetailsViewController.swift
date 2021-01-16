@@ -133,7 +133,7 @@ extension AccountDetailsViewController: UITableViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard !isEndDraggingUpdatesInProgress else { return }
         
-        //disable scroll down in collapsed state
+        // disable scroll down in collapsed state
         if tableViewState.isCollapsed, scrollView.contentOffset.y <= 0 {
             scrollView.contentOffset = .zero
         }

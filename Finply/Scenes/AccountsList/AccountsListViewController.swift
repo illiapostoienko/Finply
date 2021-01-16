@@ -130,7 +130,7 @@ final class AccountsListViewController: UIViewController, BindableType {
         case .groups: buttonToOperate = groupsTabButton
         }
         
-        //Slider
+        // Slider
         let width = view.frame.width
         let buttonFrame = buttonToOperate.frame
         let labelFrame = buttonToOperate.titleLabel?.frame
@@ -148,7 +148,7 @@ final class AccountsListViewController: UIViewController, BindableType {
         
         self.view.layoutIfNeeded()
         
-        //Button Color
+        // Button Color
         switch tab {
         case .accounts:
             accountsTabButton.setTitleColor(#colorLiteral(red: 0.3019607843, green: 0.4, blue: 0.8745098039, alpha: 1), for: [])

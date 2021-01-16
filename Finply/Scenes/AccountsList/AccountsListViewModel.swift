@@ -105,7 +105,7 @@ final class AccountsListViewModel: AccountsListViewModelType, AccountsListViewMo
         }
     }
     
-    //Services
+    // Services
     private let accountsService: AccountsServiceType
     private let orderService: OrderServiceType
     private let bag = DisposeBag()

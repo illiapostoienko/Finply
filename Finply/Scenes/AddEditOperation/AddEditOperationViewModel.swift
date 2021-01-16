@@ -14,5 +14,4 @@ protocol AddEditOperationViewModelType {
 
 final class AddEditOperationViewModel: AddEditOperationViewModelType {
         
-
 }

@@ -11,13 +11,13 @@ import RxCocoa
 
 final class AccountHeaderView: NibLoadable, BindableType {
     
-    //Profile
+    // Profile
     @IBOutlet private var profileContainerView: UIView!
     @IBOutlet private var greetingLabel: UILabel!
     @IBOutlet private var nameLabel: UILabel!
     @IBOutlet private var profileButton: UIButton!
     
-    //Card
+    // Card
     @IBOutlet private var cardView: GradientView!
     @IBOutlet private var cardMaskImageView: UIImageView!
     @IBOutlet private var cardViewTopConstraint: NSLayoutConstraint!
@@ -27,7 +27,7 @@ final class AccountHeaderView: NibLoadable, BindableType {
     @IBOutlet private var editAccountButton: UIButton!
     @IBOutlet private var accountNameLabel: UILabel!
     
-    //Main Ballance
+    // Main Ballance
     @IBOutlet private var ballanceLabel: UILabel!
     @IBOutlet private var ballanceTopConstraint: NSLayoutConstraint!
     @IBOutlet private var ballanceLeadingConstraint: NSLayoutConstraint!

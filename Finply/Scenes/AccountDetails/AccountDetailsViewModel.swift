@@ -22,10 +22,10 @@ protocol AccountDetailsViewModelOutput {
 
 protocol AccountDetailsViewModelCoordination {
     var addOperation: Observable<Void> { get }
-    //var editOperation: Observable<Void> { get }
+    // var editOperation: Observable<Void> { get }
     var reportDetails: Observable<Void> { get }
     var accountsList: Observable<Void> { get }
-    //var editAccount: Observable<AccountDto> { get }
+    // var editAccount: Observable<AccountDto> { get }
     var profile: Observable<Void> { get }
 }
 
@@ -58,11 +58,11 @@ final class AccountDetailsViewModel: AccountDetailsViewModelType, AccountDetails
     
     // Coordination
     var addOperation: Observable<Void> { _addTapStream }
-    //var editOperation: Observable<Void> { _editOperation.asObservable() }
+    // var editOperation: Observable<Void> { _editOperation.asObservable() }
     var reportDetails: Observable<Void> { accountMonthDetailsViewModel.reportDetailsTap }
     var accountsList: Observable<Void> { accountHeaderViewModel.accountTap }
     
-    //var editAccount: Observable<AccountDto> { accountHeaderViewModel.editAccountTap.withLatestFrom(_currentAccount) }
+    // var editAccount: Observable<AccountDto> { accountHeaderViewModel.editAccountTap.withLatestFrom(_currentAccount) }
     
     var profile: Observable<Void> { accountHeaderViewModel.profileTap }
     

@@ -8,7 +8,7 @@
 import Foundation
 import RealmSwift
 
-//swiftlint:disable force_unwrapping
+// swiftlint:disable force_unwrapping
 final class AccountModel: Object {
     
     @objc dynamic var id = UUID().uuidString

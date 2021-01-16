@@ -34,7 +34,7 @@ extension ReorderController {
         let cellFrame = tableView.convert(cell.frame, to: superview)
         
         UIGraphicsBeginImageContextWithOptions(cell.bounds.size, false, 0)
-        //swiftlint:disable:next force_unwrapping
+        // swiftlint:disable:next force_unwrapping
         cell.layer.render(in: UIGraphicsGetCurrentContext()!)
         let cellImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()

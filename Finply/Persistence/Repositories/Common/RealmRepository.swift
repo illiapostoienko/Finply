@@ -8,7 +8,7 @@
 import Foundation
 import RealmSwift
 
-//swiftlint:disable force_try
+// swiftlint:disable force_try
 class RealmRepository<Model: Object> {
     
     let realm: Realm

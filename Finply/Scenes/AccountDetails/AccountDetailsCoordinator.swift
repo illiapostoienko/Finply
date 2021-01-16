@@ -31,7 +31,7 @@ final class AccountDetailsCoordinator: BaseCoordinator<Void> {
     
     private(set) var viewController = AccountDetailsViewController.instantiate()
     
-    //swiftlint:disable cyclomatic_complexity
+    // swiftlint:disable cyclomatic_complexity
     override func start() -> Observable<Void> {
         
         guard let viewModel = try? dependencyContainer.resolve() as AccountDetailsViewModelType else { return Observable.never() }

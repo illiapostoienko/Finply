@@ -84,7 +84,7 @@ final class PushTransitionAnimator: NSObject, UIViewControllerAnimatedTransition
             UIView.animate(withDuration: Self.duration, animations: {
                 snapshot.frame = CGRect(x: self.baseVc.view.frame.width, y: 0, width: self.baseVc.view.frame.width, height: self.baseVc.view.frame.height)
             }, completion: { _ in
-                //self.baseVc.view.isHidden = false
+                // self.baseVc.view.isHidden = false
                 snapshot.removeFromSuperview()
                 transitionContext.completeTransition(true)
             })

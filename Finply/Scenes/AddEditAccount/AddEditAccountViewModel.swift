@@ -41,7 +41,7 @@ protocol AddEditAccountViewModelType {
     func setup(with state: AddEditAccountSceneState)
 }
 
-//swiftlint:disable force_unwrapping
+// swiftlint:disable force_unwrapping
 final class AddEditAccountViewModel: AddEditAccountViewModelType, AddEditAccountViewModelCoordination, AddEditAccountViewModelInput, AddEditAccountViewModelOutput {
     
     var input: AddEditAccountViewModelInput { return self }
@@ -83,7 +83,7 @@ final class AddEditAccountViewModel: AddEditAccountViewModelType, AddEditAccount
     private let _openColorSelection = PublishSubject<Void>() // with already selected Color?
     private let _openIconSelection = PublishSubject<Void>() // with already selected icon?
     
-    //Childs
+    // Childs
     private let titleInputVm: TitleInputCellViewModelType
     private let ballanceInputCellVm: BallanceInputCellViewModelType
     private let iconSelectionCellVm: IconSelectionCellViewModelType
@@ -118,7 +118,7 @@ final class AddEditAccountViewModel: AddEditAccountViewModelType, AddEditAccount
             .withLatestFrom(_dataSource) { row, dataSource in dataSource[safe: row] }
             .unwrap()
         
-        //Color selection
+        // Color selection
         selectedItemStream
             .map{ item -> ColorSelectionCellViewModelType? in
                 if case .colorSelect(let vm) = item { return vm }
@@ -129,7 +129,7 @@ final class AddEditAccountViewModel: AddEditAccountViewModelType, AddEditAccount
             .bind(to: _openColorSelection)
             .disposed(by: bag)
         
-        //Icon Selection
+        // Icon Selection
         selectedItemStream
             .map{ item -> IconSelectionCellViewModelType? in
                 if case .iconSelect(let vm) = item { return vm }
@@ -261,7 +261,6 @@ final class AddEditAccountViewModel: AddEditAccountViewModelType, AddEditAccount
 
 enum AddEditAccountTableViewItem: IdentifiableType, Equatable {
     
-    //add/edit Account or Group
     case titleInput(viewModel: TitleInputCellViewModelType)
     case ballanceInput(viewModel: BallanceInputCellViewModelType)
     case iconSelect(viewModel: IconSelectionCellViewModelType)
@@ -345,7 +344,7 @@ extension AddEditAccountSceneState: Equatable {
         return nil
     }
     
-    //icon, color
+    // icon, color
     
     var title: String {
         switch self {

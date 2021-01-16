@@ -13,7 +13,7 @@ struct OperationSectionDto {
     let accountId: String
     var sectionDate: Date
     
-    //operations
+    // operations
     
     let operationSectionModel: OperationSectionModel
     

@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 
 protocol UserStateServiceType {
-    //func getCurrentOpenedAccount() -> Single<AccountDto>
+    // func getCurrentOpenedAccount() -> Single<AccountDto>
 }
 
 final class UserStateService: UserStateServiceType {

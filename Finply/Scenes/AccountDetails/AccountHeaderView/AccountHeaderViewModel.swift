@@ -9,23 +9,23 @@ import RxSwift
 import RxCocoa
 
 protocol AccountHeaderViewModelType {
-    //Inputs
+    // Inputs
     var profileTap: PublishSubject<Void> { get }
     var accountTap: PublishSubject<Void> { get }
     var editAccountTap: PublishSubject<Void> { get }
     
-    //Outputs
+    // Outputs
     var ballanceDriver: Driver<String> { get }
 }
 
 final class AccountHeaderViewModel: AccountHeaderViewModelType {
     
-    //Inputs
+    // Inputs
     let profileTap = PublishSubject<Void>()
     let accountTap = PublishSubject<Void>()
     let editAccountTap = PublishSubject<Void>()
     
-    //Outputs
+    // Outputs
     var ballanceDriver: Driver<String>
     
     private let currentBallance = BehaviorSubject<Double>(value: 0.0)

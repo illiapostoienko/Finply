@@ -14,7 +14,7 @@ struct AccountDto: OrderableType, Equatable {
     var currency: Currency
     var order: Int
     
-    //color, icon, colorSet
+    // color, icon, colorSet
     
     let accountModel: AccountModel
     

@@ -153,11 +153,14 @@
 		EAE2174D259128D000095EB5 /* CurrencyListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE21749259128D000095EB5 /* CurrencyListCoordinator.swift */; };
 		EAE2174E259128D000095EB5 /* CurrencyListViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EAE2174A259128D000095EB5 /* CurrencyListViewController.storyboard */; };
 		EAE2174F259128D000095EB5 /* CurrencyListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE2174B259128D000095EB5 /* CurrencyListViewController.swift */; };
-		EAE21750259128D000095EB5 /* CurrencyListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE2174C259128D000095EB5 /* CurrencyListViewModel.swift */; };
 		EAEC11E125AB680300C92C80 /* AccountsSelectionContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEC11E025AB680300C92C80 /* AccountsSelectionContainerView.swift */; };
 		EAEC11E525AB681000C92C80 /* AccountSelectionContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEC11E425AB681000C92C80 /* AccountSelectionContainerView.swift */; };
 		EAEC11E825AB681B00C92C80 /* AccountSelectionContainerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAEC11E725AB681B00C92C80 /* AccountSelectionContainerView.xib */; };
 		EAEC11ED25AB8E6700C92C80 /* OperationDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEC11EC25AB8E6700C92C80 /* OperationDto.swift */; };
+		FB87DC3A25B35A9B001E823D /* CurrencyListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB87DC3925B35A9B001E823D /* CurrencyListCell.xib */; };
+		FB87DC3E25B35AB3001E823D /* CurrencyListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB87DC3D25B35AB3001E823D /* CurrencyListCell.swift */; };
+		FB87DC4225B35D4B001E823D /* CurrencyListSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB87DC4125B35D4B001E823D /* CurrencyListSectionHeader.xib */; };
+		FB87DC4525B35D6E001E823D /* CurrencyListSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB87DC4425B35D6E001E823D /* CurrencyListSectionHeader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -300,11 +303,14 @@
 		EAE21749259128D000095EB5 /* CurrencyListCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyListCoordinator.swift; sourceTree = "<group>"; };
 		EAE2174A259128D000095EB5 /* CurrencyListViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CurrencyListViewController.storyboard; sourceTree = "<group>"; };
 		EAE2174B259128D000095EB5 /* CurrencyListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyListViewController.swift; sourceTree = "<group>"; };
-		EAE2174C259128D000095EB5 /* CurrencyListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyListViewModel.swift; sourceTree = "<group>"; };
 		EAEC11E025AB680300C92C80 /* AccountsSelectionContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsSelectionContainerView.swift; sourceTree = "<group>"; };
 		EAEC11E425AB681000C92C80 /* AccountSelectionContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSelectionContainerView.swift; sourceTree = "<group>"; };
 		EAEC11E725AB681B00C92C80 /* AccountSelectionContainerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountSelectionContainerView.xib; sourceTree = "<group>"; };
 		EAEC11EC25AB8E6700C92C80 /* OperationDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationDto.swift; sourceTree = "<group>"; };
+		FB87DC3925B35A9B001E823D /* CurrencyListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CurrencyListCell.xib; sourceTree = "<group>"; };
+		FB87DC3D25B35AB3001E823D /* CurrencyListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyListCell.swift; sourceTree = "<group>"; };
+		FB87DC4125B35D4B001E823D /* CurrencyListSectionHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CurrencyListSectionHeader.xib; sourceTree = "<group>"; };
+		FB87DC4425B35D6E001E823D /* CurrencyListSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyListSectionHeader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -346,7 +352,6 @@
 				EA02380A2585EAF500A284C4 /* OperationSectionModel.swift */,
 				EA02380E2585ED3300A284C4 /* OperationModel.swift */,
 				EA0238112585F01200A284C4 /* CategoryModel.swift */,
-				EA81D1F52595212B00333680 /* Currency.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -444,6 +449,7 @@
 		EA81D1FC259521FB00333680 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				EA81D1F52595212B00333680 /* Currency.swift */,
 				EA81D1FD2595221400333680 /* AccountDto.swift */,
 				EA81D2012595223B00333680 /* AccountGroupDto.swift */,
 				EA81D2042595226800333680 /* OperationSectionDto.swift */,
@@ -829,9 +835,10 @@
 		EAE21748259128D000095EB5 /* CurrencyList */ = {
 			isa = PBXGroup;
 			children = (
+				FB87DC4025B35D2E001E823D /* CurrencyListSectionHeader */,
+				FB87DC3C25B35A9E001E823D /* CurrencyListCell */,
 				EAE2174A259128D000095EB5 /* CurrencyListViewController.storyboard */,
 				EAE2174B259128D000095EB5 /* CurrencyListViewController.swift */,
-				EAE2174C259128D000095EB5 /* CurrencyListViewModel.swift */,
 				EAE21749259128D000095EB5 /* CurrencyListCoordinator.swift */,
 			);
 			path = CurrencyList;
@@ -845,6 +852,24 @@
 				EAEC11E025AB680300C92C80 /* AccountsSelectionContainerView.swift */,
 			);
 			path = AccountsSelectionContainerView;
+			sourceTree = "<group>";
+		};
+		FB87DC3C25B35A9E001E823D /* CurrencyListCell */ = {
+			isa = PBXGroup;
+			children = (
+				FB87DC3925B35A9B001E823D /* CurrencyListCell.xib */,
+				FB87DC3D25B35AB3001E823D /* CurrencyListCell.swift */,
+			);
+			path = CurrencyListCell;
+			sourceTree = "<group>";
+		};
+		FB87DC4025B35D2E001E823D /* CurrencyListSectionHeader */ = {
+			isa = PBXGroup;
+			children = (
+				FB87DC4125B35D4B001E823D /* CurrencyListSectionHeader.xib */,
+				FB87DC4425B35D6E001E823D /* CurrencyListSectionHeader.swift */,
+			);
+			path = CurrencyListSectionHeader;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -935,6 +960,7 @@
 				EAE2171E2591175D00095EB5 /* IconSelectionCell.xib in Resources */,
 				EAD68B0E255B012C0083B30D /* ProfileDetailsViewController.storyboard in Resources */,
 				EA7F616D252B2D13008CA432 /* .swiftlint.yml in Resources */,
+				FB87DC3A25B35A9B001E823D /* CurrencyListCell.xib in Resources */,
 				EAD68AEB2559D5110083B30D /* HighCategoryContainerView.xib in Resources */,
 				EAE2173E259122F700095EB5 /* AccountsSelectionCell.xib in Resources */,
 				EAD68AFF255B00870083B30D /* ReportDetailsViewController.storyboard in Resources */,
@@ -944,6 +970,7 @@
 				EAEC11E825AB681B00C92C80 /* AccountSelectionContainerView.xib in Resources */,
 				EAD68A3E2554F8810083B30D /* AccountDetailsViewController.storyboard in Resources */,
 				EA930C3C2523D54F00E12805 /* Assets.xcassets in Resources */,
+				FB87DC4225B35D4B001E823D /* CurrencyListSectionHeader.xib in Resources */,
 				EA1D9E712524B07100E2027F /* AddEditOperationViewController.storyboard in Resources */,
 				EA9F662E2554E44000441ED0 /* PlanningListViewController.storyboard in Resources */,
 				EA0238162585FB9F00A284C4 /* AccountInGroupContainerView.xib in Resources */,
@@ -1009,6 +1036,7 @@
 				EAD68A492554F9C80083B30D /* BaseCoordinator.swift in Sources */,
 				EA02382625876D3800A284C4 /* UITableView+Reorder.swift in Sources */,
 				EA81D2022595223B00333680 /* AccountGroupDto.swift in Sources */,
+				FB87DC3E25B35AB3001E823D /* CurrencyListCell.swift in Sources */,
 				EA81D1EE259518E400333680 /* AccountModel.swift in Sources */,
 				EAEC11E525AB681000C92C80 /* AccountSelectionContainerView.swift in Sources */,
 				EAD68AEE2559D52D0083B30D /* HighCategoryContainerView.swift in Sources */,
@@ -1070,7 +1098,6 @@
 				EA02382725876D3800A284C4 /* ReorderController+SnapshotView.swift in Sources */,
 				EA9BCA9E25434421003DE283 /* AccountsListViewController.swift in Sources */,
 				EA930CCC2524854600E12805 /* NibBased.swift in Sources */,
-				EAE21750259128D000095EB5 /* CurrencyListViewModel.swift in Sources */,
 				EAD68B23255EA9490083B30D /* UITableView+Extensions.swift in Sources */,
 				EA9F053E2593716E00B81A8E /* ColorSetsListCoordinator.swift in Sources */,
 				EA02382925876D3800A284C4 /* ReorderController+GestureRecognizer.swift in Sources */,
@@ -1081,6 +1108,7 @@
 				EA9F051825936F4100B81A8E /* IconsListViewModel.swift in Sources */,
 				EAE2173A259122E200095EB5 /* AccountsSelectionCell.swift in Sources */,
 				EA48F367256681B5007FE1BA /* UIView+Extensions.swift in Sources */,
+				FB87DC4525B35D6E001E823D /* CurrencyListSectionHeader.swift in Sources */,
 				EAD68ADB25595AB80083B30D /* PieChartView+Rx.swift in Sources */,
 				EA930D032524943C00E12805 /* FinplyDI.swift in Sources */,
 				EAE2170B2590D12700095EB5 /* AddEditAccountViewController.swift in Sources */,

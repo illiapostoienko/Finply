@@ -26,6 +26,7 @@ protocol AccountsListViewModelInput {
 
 protocol AccountsListViewModelOutput {
     var dataSource: Observable<[AccountsListTableItem]> { get }
+    var tabSelected: Observable<AccountsListTab> { get }
 }
 
 protocol AccountsListViewModelCoordination {
@@ -52,6 +53,7 @@ final class AccountsListViewModel: AccountsListViewModelType, AccountsListViewMo
     
     // Output
     var dataSource: Observable<[AccountsListTableItem]> { _dataSource.asObservable() }
+    var tabSelected: Observable<AccountsListTab> { _currentTab.asObservable() }
     
     private let _dataSource = BehaviorRelay<[AccountsListTableItem]>(value: [])
     

@@ -15,25 +15,47 @@ final class AddEditAccountViewController: UIViewController, BindableType {
     @IBOutlet private var closeButton: UIButton!
     @IBOutlet private var checkButton: UIButton!
     @IBOutlet private var titleLabel: UILabel!
-    @IBOutlet private var selectorArrowView: UIView!
+    @IBOutlet private var selectorArrowBaseView: UIView!
+    @IBOutlet private var selectorArrowImageView: UIImageView!
     @IBOutlet private var selectorButton: UIButton!
     @IBOutlet private var tableView: UITableView!
+    
+    @IBOutlet private var shadowView: UIView!
+    @IBOutlet private var addAccountTabButton: UIButton!
+    @IBOutlet private var addAccountGroupTabButton: UIButton!
+    @IBOutlet private var actionsContainerTopConstraint: NSLayoutConstraint!
     
     var viewModel: AddEditAccountViewModelType!
     
     private var dataSource: RxTableViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AddEditAccountTableViewItem>>!
     
+    private var actionSelectionState: ActionActionSelectionState = .collapsed {
+        didSet {
+            self.view.layoutIfNeeded()
+            actionsContainerTopConstraint.constant = actionSelectionState.actionsContainerTopConstant
+            shadowView.isUserInteractionEnabled = actionSelectionState.shadowViewIsUserInteractionEnabled
+            
+            UIView.animate(withDuration: 0.3) { [unowned self] in
+                self.shadowView.alpha = self.actionSelectionState.shadowViewAlpha
+                self.selectorArrowImageView.image = self.actionSelectionState.arrowImage
+                self.view.layoutIfNeeded()
+            }
+        }
+    }
     private let bag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.shadowContainerTapped(_:)))
+        shadowView.addGestureRecognizer(tap)
     }
     
     func bindViewModel() {
         viewModel.output.sceneState
             .subscribe(onNext: { [weak self] state in
-                self?.selectorArrowView.isHidden = !state.isAddAction
+                self?.selectorArrowBaseView.isHidden = !state.isAddAction
                 self?.selectorButton.isEnabled = state.isAddAction
                 self?.titleLabel.text = state.title
             })
@@ -61,21 +83,22 @@ final class AddEditAccountViewController: UIViewController, BindableType {
             .disposed(by: bag)
     }
     
-    @IBAction func selectorButtonPressed(_ sender: Any) {
-        let options = AddEditAccountSceneState.addOptions
-        
-        let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        
-        AddEditAccountSceneState.addOptions.forEach{ option in
-            let action = UIAlertAction(title: option.title, style: .default) { [weak self] _ in
-                self?.viewModel.setup(with: option)
-            }
-            sheet.addAction(action)
-        }
-        
-        sheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        
-        present(sheet, animated: true, completion: nil)
+    @IBAction private func selectorButtonPressed(_ sender: Any) {
+        actionSelectionState.toggle()
+    }
+    
+    @objc private func shadowContainerTapped(_ sender: UITapGestureRecognizer? = nil) {
+        actionSelectionState = .collapsed
+    }
+    
+    @IBAction private func addAccountButtonPressed(_ sender: Any) {
+        viewModel.setup(with: .addAccount)
+        actionSelectionState = .collapsed
+    }
+    
+    @IBAction private func addAccountGroupButtonPressed(_ sender: Any) {
+        viewModel.setup(with: .addAccountGroup)
+        actionSelectionState = .collapsed
     }
     
     func setupTableView() {
@@ -123,5 +146,45 @@ final class AddEditAccountViewController: UIViewController, BindableType {
         tableView.estimatedRowHeight = UITableView.automaticDimension
         tableView.rowHeight = UITableView.automaticDimension
         tableView.tableFooterView = UIView()
+    }
+    
+    enum ActionActionSelectionState {
+        case collapsed
+        case expanded
+        
+        mutating func toggle() {
+            switch self {
+            case .collapsed: self = .expanded
+            case .expanded: self = .collapsed
+            }
+        }
+        
+        var actionsContainerTopConstant: CGFloat {
+            switch self {
+            case .collapsed: return -103
+            case .expanded: return 0
+            }
+        }
+        
+        var shadowViewAlpha: CGFloat {
+            switch self {
+            case .collapsed: return 0
+            case .expanded: return 0.5
+            }
+        }
+        
+        var shadowViewIsUserInteractionEnabled: Bool {
+            switch self {
+            case .collapsed: return false
+            case .expanded: return true
+            }
+        }
+        
+        var arrowImage: UIImage? {
+            switch self {
+            case .collapsed: return UIImage(named: "arrow-down")
+            case .expanded: return UIImage(named: "arrow-up")
+            }
+        }
     }
 }

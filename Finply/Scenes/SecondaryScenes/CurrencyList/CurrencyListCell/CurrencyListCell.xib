@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CurrencyListCell" rowHeight="46" id="uyY-ht-cXK" customClass="CurrencyListCell" customModule="Finply" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="46"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uyY-ht-cXK" id="bj5-RA-qtV">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="46"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zYY-cg-84q">
+                        <rect key="frame" x="20" y="14" width="31" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="US Dollar" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="shR-9p-XOj">
+                        <rect key="frame" x="65" y="15" width="57" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="check_20_blue" translatesAutoresizingMaskIntoConstraints="NO" id="j6X-Az-ysq">
+                        <rect key="frame" x="374" y="13" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="20" id="RY8-DM-RWf"/>
+                            <constraint firstAttribute="height" constant="20" id="cIF-kF-9gL"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="zYY-cg-84q" firstAttribute="leading" secondItem="bj5-RA-qtV" secondAttribute="leading" constant="20" id="3o6-yi-jgG"/>
+                    <constraint firstItem="j6X-Az-ysq" firstAttribute="centerY" secondItem="bj5-RA-qtV" secondAttribute="centerY" id="I10-0g-ALn"/>
+                    <constraint firstItem="zYY-cg-84q" firstAttribute="centerY" secondItem="bj5-RA-qtV" secondAttribute="centerY" id="bDA-WV-gbD"/>
+                    <constraint firstAttribute="trailing" secondItem="j6X-Az-ysq" secondAttribute="trailing" constant="20" id="d3m-3E-pUV"/>
+                    <constraint firstItem="j6X-Az-ysq" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="shR-9p-XOj" secondAttribute="trailing" constant="20" id="gtO-v6-75z"/>
+                    <constraint firstItem="shR-9p-XOj" firstAttribute="leading" secondItem="bj5-RA-qtV" secondAttribute="leading" constant="65" id="h64-38-DYU"/>
+                    <constraint firstItem="shR-9p-XOj" firstAttribute="centerY" secondItem="bj5-RA-qtV" secondAttribute="centerY" id="oqO-Jm-mau"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="checkImageView" destination="j6X-Az-ysq" id="s4q-hI-cIY"/>
+                <outlet property="currencyCodeLabel" destination="zYY-cg-84q" id="uS9-NF-ydz"/>
+                <outlet property="currencyNameLabel" destination="shR-9p-XOj" id="Kn1-Yh-NNy"/>
+            </connections>
+            <point key="canvasLocation" x="-342.02898550724638" y="91.071428571428569"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="check_20_blue" width="20" height="20"/>
+    </resources>
+</document>

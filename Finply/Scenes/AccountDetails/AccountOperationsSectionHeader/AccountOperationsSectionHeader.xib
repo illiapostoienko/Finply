@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,7 +17,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hid-zc-FwN">
-                        <rect key="frame" x="20" y="0.0" width="374" height="32"/>
+                        <rect key="frame" x="20" y="0.0" width="378" height="32"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Today, October 13" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xhy-xa-tbY">
@@ -37,7 +37,7 @@
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="xhy-xa-tbY" secondAttribute="bottom" priority="999" id="1Lc-ez-U9I"/>
                     <constraint firstItem="Hid-zc-FwN" firstAttribute="leading" secondItem="owC-B8-PSM" secondAttribute="leading" constant="20" id="26D-tr-BaV"/>
                     <constraint firstAttribute="bottom" secondItem="Hid-zc-FwN" secondAttribute="bottom" id="QrE-wr-Swr"/>
-                    <constraint firstAttribute="trailing" secondItem="Hid-zc-FwN" secondAttribute="trailing" constant="20" id="UDQ-b3-9LV"/>
+                    <constraint firstAttribute="trailing" secondItem="Hid-zc-FwN" secondAttribute="trailing" constant="16" id="UDQ-b3-9LV"/>
                     <constraint firstItem="xhy-xa-tbY" firstAttribute="leading" secondItem="owC-B8-PSM" secondAttribute="leadingMargin" id="XfG-07-5jn"/>
                     <constraint firstItem="Hid-zc-FwN" firstAttribute="top" secondItem="owC-B8-PSM" secondAttribute="top" id="wss-Dp-6hI"/>
                 </constraints>

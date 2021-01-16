@@ -14,15 +14,16 @@ import SwipeCellKit
 final class AccountsListViewController: UIViewController, BindableType {
     
     @IBOutlet private var backButton: UIButton!
-    @IBOutlet private var accountsLabel: UILabel!
     @IBOutlet private var plusButton: UIButton!
     
+    @IBOutlet private var listTypeLabel: UILabel!
+    @IBOutlet private var selectionArrowImageView: UIImageView!
+    @IBOutlet private var listTypeSelectionButton: UIButton!
+    
+    @IBOutlet private var shadowContainer: UIView!
+    @IBOutlet private var tabsContainerTopConstraint: NSLayoutConstraint!
     @IBOutlet private var accountsTabButton: UIButton!
-    @IBOutlet private var groupsTabButton: UIButton!
-    @IBOutlet private var tabButtonsStack: UIStackView!
-    @IBOutlet private var tabButtonsStackLeadingConstraint: NSLayoutConstraint!
-    @IBOutlet private var sliderLeadingConstraint: NSLayoutConstraint!
-    @IBOutlet private var sliderTrailingConstraint: NSLayoutConstraint!
+    @IBOutlet private var accountGroupsTabButton: UIButton!
     
     @IBOutlet private var tableView: UITableView!
     
@@ -30,12 +31,27 @@ final class AccountsListViewController: UIViewController, BindableType {
     
     var viewModel: AccountsListViewModelType!
     
+    private var listSelectionState: ListSelectionState = .collapsed {
+        didSet {
+            tabsContainerTopConstraint.constant = listSelectionState.tabsContainerTopConstant
+            shadowContainer.isUserInteractionEnabled = listSelectionState.shadowContainerIsUserInteractionEnabled
+            
+            UIView.animate(withDuration: 0.3) { [unowned self] in
+                self.shadowContainer.alpha = self.listSelectionState.shadowContainerAlpha
+                self.selectionArrowImageView.image = self.listSelectionState.arrowImage
+                self.view.layoutIfNeeded()
+            }
+        }
+    }
+    
     private let bag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
-        updateTabAppearance(by: .accounts)
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.shadowContainerTapped(_:)))
+        shadowContainer.addGestureRecognizer(tap)
     }
     
     func bindViewModel() {
@@ -52,24 +68,22 @@ final class AccountsListViewController: UIViewController, BindableType {
             })
             .disposed(by: bag)
         
+        viewModel.output.tabSelected
+            .map{
+                switch $0 {
+                case .accounts: return "Accounts"
+                case .groups: return "Account Groups"
+                }
+            }
+            .bind(to: listTypeLabel.rx.text)
+            .disposed(by: bag)
+        
         backButton.rx.tap
             .bind(to: viewModel.input.backButtonTap)
             .disposed(by: bag)
         
         plusButton.rx.tap
-            .do(onNext: { [weak self] in
-                self?.tableView.setEditing(false, animated: true)
-            })
             .bind(to: viewModel.input.addButtonTap)
-            .disposed(by: bag)
-        
-        Observable.merge(accountsTabButton.rx.tap.map{ .accounts },
-                         groupsTabButton.rx.tap.map{ .groups })
-            .do(onNext: { [unowned self] tab in
-                self.updateTabAppearance(by: tab)
-                self.tableView.setEditing(false, animated: true)
-            })
-            .bind(to: viewModel.input.tabButtonTap)
             .disposed(by: bag)
 
         tableView.rx.itemSelected
@@ -87,6 +101,26 @@ final class AccountsListViewController: UIViewController, BindableType {
             .ignoreContent()
             .bind(to: viewModel.input.reload)
             .disposed(by: bag)
+        
+        accountsTabButton.rx.tap
+            .do(onNext: {[unowned self] in self.listSelectionState = .collapsed })
+            .map{ _ in .accounts }
+            .bind(to: viewModel.input.tabButtonTap)
+            .disposed(by: bag)
+        
+        accountGroupsTabButton.rx.tap
+            .do(onNext: {[unowned self] in self.listSelectionState = .collapsed })
+            .map{ _ in .groups }
+            .bind(to: viewModel.input.tabButtonTap)
+            .disposed(by: bag)
+    }
+    
+    @IBAction func listTypeSelectionPressed(_ sender: UIButton) {
+        listSelectionState.toggle()
+    }
+    
+    @objc private func shadowContainerTapped(_ sender: UITapGestureRecognizer? = nil) {
+        listSelectionState = .collapsed
     }
     
     private func setupTableView() {
@@ -122,45 +156,48 @@ final class AccountsListViewController: UIViewController, BindableType {
         tableView.reorder.shadowRadius = 0
     }
     
-    private func updateTabAppearance(by tab: AccountsListTab) {
-        let buttonToOperate: UIButton
-        
-        switch tab {
-        case .accounts: buttonToOperate = accountsTabButton
-        case .groups: buttonToOperate = groupsTabButton
-        }
-        
-        // Slider
-        let width = view.frame.width
-        let buttonFrame = buttonToOperate.frame
-        let labelFrame = buttonToOperate.titleLabel?.frame
-        
-        let leftValue = tabButtonsStackLeadingConstraint.constant + buttonFrame.minX
-        let rightValue = width - buttonFrame.maxX - tabButtonsStackLeadingConstraint.constant
-        
-        buttonToOperate.titleLabel.map{
-            leftValue + $0.frame.minX
-            rightValue + ($0.frame.maxX - $0.frame.width - $0.frame.minX)
-        }
-        
-        sliderLeadingConstraint.constant = leftValue
-        sliderTrailingConstraint.constant = rightValue
-        
-        self.view.layoutIfNeeded()
-        
-        // Button Color
-        switch tab {
-        case .accounts:
-            accountsTabButton.setTitleColor(#colorLiteral(red: 0.3019607843, green: 0.4, blue: 0.8745098039, alpha: 1), for: [])
-            groupsTabButton.setTitleColor(#colorLiteral(red: 0.6823529412, green: 0.7176470588, blue: 0.7568627451, alpha: 1), for: [])
-        case .groups:
-            accountsTabButton.setTitleColor(#colorLiteral(red: 0.6823529412, green: 0.7176470588, blue: 0.7568627451, alpha: 1), for: [])
-            groupsTabButton.setTitleColor(#colorLiteral(red: 0.3019607843, green: 0.4, blue: 0.8745098039, alpha: 1), for: [])
-        }
-    }
-    
     private func setPlaceholder(_ state: Bool) {
         // set placeholder for background of tableView
+    }
+    
+    enum ListSelectionState {
+        case collapsed
+        case expanded
+        
+        mutating func toggle() {
+            switch self {
+            case .collapsed: self = .expanded
+            case .expanded: self = .collapsed
+            }
+        }
+        
+        var tabsContainerTopConstant: CGFloat {
+            switch self {
+            case .collapsed: return -102
+            case .expanded: return 0
+            }
+        }
+        
+        var shadowContainerAlpha: CGFloat {
+            switch self {
+            case .collapsed: return 0
+            case .expanded: return 0.5
+            }
+        }
+        
+        var shadowContainerIsUserInteractionEnabled: Bool {
+            switch self {
+            case .collapsed: return false
+            case .expanded: return true
+            }
+        }
+        
+        var arrowImage: UIImage? {
+            switch self {
+            case .collapsed: return UIImage(named: "arrow-down")
+            case .expanded: return UIImage(named: "arrow-up")
+            }
+        }
     }
 }
 

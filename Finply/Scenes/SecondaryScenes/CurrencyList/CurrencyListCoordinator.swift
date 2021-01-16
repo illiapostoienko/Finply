@@ -25,10 +25,7 @@ final class CurrencyListCoordinator: BaseCoordinator<CurrencyListCoordinationRes
     }
     
     override func start() -> Observable<CurrencyListCoordinationResult> {
-        
-        guard let viewModel = try? dependencyContainer.resolve() as CurrencyListViewModelType else { return Observable.never() }
         var vc = CurrencyListViewController.instantiate()
-        vc.bind(to: viewModel)
         
         presentingViewController.present(vc, animated: true)
         

@@ -34,7 +34,7 @@ final class BallanceInputCellViewModel: BallanceInputCellViewModelType {
     
     // Output
     var selectedCurrency: Observable<Currency> { _selectedCurrency.asObservable() }
-    var ballanceInCents: Observable<Int?>
+    var ballanceInCents: Observable<Int?> { _ballanceInCents.asObservable() }
     
     // BiBinded to Cell
     let ballanceString: BehaviorRelay<String> = BehaviorRelay<String>(value: "")
@@ -42,15 +42,30 @@ final class BallanceInputCellViewModel: BallanceInputCellViewModelType {
     private let _inputStringValue = PublishSubject<String>()
     private let _currencyListResult = PublishSubject<CurrencyListCoordinationResult>()
     
+    private let numberFormatter: NumberFormatter = {
+        let numberFormatter = NumberFormatter()
+        
+        numberFormatter.minimumFractionDigits = 2
+        numberFormatter.maximumFractionDigits = 2
+        numberFormatter.minimumIntegerDigits = 1
+        
+        return numberFormatter
+    }()
+    
+    private let _ballanceInCents = BehaviorRelay<Int?>(value: nil)
     private let _selectedCurrency = BehaviorRelay<Currency>(value: .dollar)
     private let bag = DisposeBag()
     
     init() {
-        ballanceInCents = ballanceString
-            .map{ stringValue in Double(stringValue)
-                .flatMap{ round($0*100) }
-                .flatMap{ Int($0) }
+        ballanceString
+            .map{ [numberFormatter] stringValue in
+                numberFormatter.number(from: stringValue)
+                    .flatMap{ Double(exactly: $0) }
+                    .flatMap{ round($0*100) }
+                    .flatMap{ Int($0) }
             }
+            .bind(to: _ballanceInCents)
+            .disposed(by: bag)
         
         _currencyListResult
             .map{ result -> Currency? in
@@ -65,8 +80,7 @@ final class BallanceInputCellViewModel: BallanceInputCellViewModelType {
     }
     
     func setCurrentBallance(_ ballanceInCents: Int) {
-        let doubleValue = Double(ballanceInCents)/Double(100)
-        ballanceString.accept(String(doubleValue))
+        numberFormatter.string(from: Double(ballanceInCents)/Double(100)).map{ ballanceString.accept($0) }
     }
     
     func setCurrentCurrency(_ currency: Currency) {

@@ -27,6 +27,8 @@ protocol AccountsListViewModelInput {
 protocol AccountsListViewModelOutput {
     var dataSource: Observable<[AccountsListTableItem]> { get }
     var tabSelected: Observable<AccountsListTab> { get }
+    
+    func currentTab() -> AccountsListTab
 }
 
 protocol AccountsListViewModelCoordination {
@@ -293,6 +295,10 @@ final class AccountsListViewModel: AccountsListViewModelType, AccountsListViewMo
             .flatMap{ [unowned self] in self.accountsService.getAllAccountGroups() }
             .bind(to: loadedAccountGroups)
             .disposed(by: bag)
+    }
+    
+    func currentTab() -> AccountsListTab {
+        _currentTab.value
     }
 }
 

@@ -212,9 +212,12 @@ extension AccountsListViewController: TableViewReorderDelegate {
 extension AccountsListViewController: SwipeTableViewCellDelegate {
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
         guard orientation == .right else { return nil }
-
         let deleteAction = SwipeAction(style: .destructive, title: nil) { [unowned self] _, indexPath in
-            let alert = UIAlertController(title: "Delete Account", message: "Are you sure to delete account? This action cannot be recovered.", preferredStyle: .alert)
+            
+            let alert = UIAlertController(title: viewModel.output.currentTab().deletionAlertTitle(),
+                                          message: viewModel.output.currentTab().deletionAlertMessage(),
+                                          preferredStyle: .alert)
+            
             let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
             let delete = UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
                 self.viewModel.input.rowDeleteTap.onNext(indexPath.row)
@@ -248,5 +251,21 @@ extension AccountsListViewController: SwipeTableViewCellDelegate {
         options.transitionStyle = .drag
         options.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.0)
         return options
+    }
+}
+
+extension AccountsListTab {
+    func deletionAlertTitle() -> String {
+        switch self {
+        case .accounts: return "Delete Account"
+        case .groups: return "Delete Account Group"
+        }
+    }
+    
+    func deletionAlertMessage() -> String {
+        switch self {
+        case .accounts: return "Are you sure to delete account? This action cannot be recovered."
+        case .groups: return "Are you sure to delete account group? This action cannot be recovered."
+        }
     }
 }

@@ -157,16 +157,22 @@ final class AddEditAccountViewModel: AddEditAccountViewModelType, AddEditAccount
             .bind(to: _completeCoordinationResult)
             .disposed(by: bag)
         
-        let latestDataSet = Observable
-            .combineLatest(titleInputVm.currentName, ballanceInputCellVm.ballanceInCents, ballanceInputCellVm.selectedCurrency, accountsSelectionCellVm.selectedAccounts)
-            .map{ (name: $0.0, value: $0.1, currency: $0.2, selectedAccounts: $0.3) }
+        let latestAccountDataSet = Observable
+            .combineLatest(titleInputVm.currentName, ballanceInputCellVm.ballanceInCents, ballanceInputCellVm.selectedCurrency)
+            .map{ (name: $0.0, value: $0.1, currency: $0.2) }
+
+        let latestAccountGroupDataSet = Observable
+            .combineLatest(titleInputVm.currentName, accountsSelectionCellVm.selectedAccounts)
+            .map{ (name: $0.0, selectedAccounts: $0.1) }
         
-        isCheckButtonEnabled = latestDataSet.withLatestFrom(_sceneState) { set, state in
+        isCheckButtonEnabled = _sceneState.flatMap { state -> Observable<Bool> in
             if state.isAccountGroupAction {
-                return !set.name.isEmpty && !set.selectedAccounts.isEmpty
+                return latestAccountGroupDataSet.map{ set in !set.name.isEmpty && !set.selectedAccounts.isEmpty }
             } else {
-                guard let inputValueInCents = set.value else { return false }
-                return !set.name.isEmpty && inputValueInCents != 0
+                return latestAccountDataSet.map{ set in
+                    guard let inputValueInCents = set.value else { return false }
+                    return !set.name.isEmpty && inputValueInCents != 0
+                }
             }
         }
         
@@ -174,7 +180,7 @@ final class AddEditAccountViewModel: AddEditAccountViewModelType, AddEditAccount
         _checkButtonTap
             .withLatestFrom(_sceneState)
             .filter{ $0.isAccountAction }
-            .withLatestFrom(latestDataSet) { (state: $0, data: $1) }
+            .withLatestFrom(latestAccountDataSet) { (state: $0, data: $1) }
             .filter{ $0.data.value != nil }
             .flatMap{ [accountsService] set -> Single<AddEditAccountCoordinationResult> in
                 if var existingAccount = set.state.editAccountValue {
@@ -202,7 +208,7 @@ final class AddEditAccountViewModel: AddEditAccountViewModelType, AddEditAccount
         _checkButtonTap
             .withLatestFrom(_sceneState)
             .filter{ $0.isAccountGroupAction }
-            .withLatestFrom(latestDataSet) { (state: $0, data: $1) }
+            .withLatestFrom(latestAccountGroupDataSet) { (state: $0, data: $1) }
             .flatMap{ [accountsService] set -> Single<AddEditAccountCoordinationResult> in
                 if var existingAccountGroup = set.state.editAccountGroupValue {
                     
@@ -236,8 +242,10 @@ final class AddEditAccountViewModel: AddEditAccountViewModelType, AddEditAccount
                 }
             
                 itemsSet.append(.clear)
+                
                 itemsSet.append(.iconSelect(viewModel: iconSelectionCellVm))
                 itemsSet.append(.colorSelect(viewModel: colorSelectionCellVm))
+                
                 if state.isAccountGroupAction {
                     accountsSelectionCellVm.setupSelectedAccounts(state.existingSelectedAccounts ?? [])
                     itemsSet.append(.accountsSelect(viewModel: accountsSelectionCellVm))
@@ -337,12 +345,12 @@ extension AddEditAccountSceneState: Equatable {
     }
     
     var existingBallance: Int? {
-        if case .editAccount(let existingAcocunt) = self { return existingAcocunt.baseValueInCents }
+        if case .editAccount(let existingAccount) = self { return existingAccount.baseValueInCents }
         return nil
     }
     
     var existingCurrency: Currency? {
-        if case .editAccount(let existingAcocunt) = self { return existingAcocunt.currency }
+        if case .editAccount(let existingAccount) = self { return existingAccount.currency }
         return nil
     }
     

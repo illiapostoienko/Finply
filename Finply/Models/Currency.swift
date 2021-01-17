@@ -268,7 +268,7 @@ enum Currency: String, CaseIterable {
         case .pataca: return "Macanese Pataca"
         case .pesoUruguayo: return "Uruguayan Peso"
         case .philippinePiso: return "Philippine Peso"
-        case .poundSterling: return "Pound sterling"
+        case .poundSterling: return "Pound Sterling"
         case .pula: return "Botswana Pula"
         case .qatariRial: return "Qatari Riyal"
         case .quetzal: return "Guatemalan Quetzal"

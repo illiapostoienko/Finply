@@ -16,21 +16,25 @@ enum CurrencyListCoordinationResult {
 
 final class CurrencyListCoordinator: BaseCoordinator<CurrencyListCoordinationResult> {
     
+    let selectedCurrency: Currency
     let presentingViewController: UIViewController
     let dependencyContainer: DependencyContainer
+    private var viewController: CurrencyListViewController!
     
-    init(presentingViewController: UIViewController, dependencyContainer: DependencyContainer) {
+    init(selectedCurrency: Currency, presentingViewController: UIViewController, dependencyContainer: DependencyContainer) {
+        self.selectedCurrency = selectedCurrency
         self.presentingViewController = presentingViewController
         self.dependencyContainer = dependencyContainer
     }
     
     override func start() -> Observable<CurrencyListCoordinationResult> {
-        var vc = CurrencyListViewController.instantiate()
+        viewController = CurrencyListViewController.instantiate()
+        viewController.setSelected(currency: selectedCurrency)
         
-        presentingViewController.present(vc, animated: true)
+        presentingViewController.present(viewController, animated: true)
         
-        // TODO: All returnings from VM converted to coordination result
-        
-        return Observable.never()
+        return viewController.completeCoordinationResult
+            .take(1)
+            .do(onNext: { [weak self] _ in self?.viewController.dismiss(animated: true) })
     }
 }

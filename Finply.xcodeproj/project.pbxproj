@@ -159,8 +159,9 @@
 		EAEC11ED25AB8E6700C92C80 /* OperationDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEC11EC25AB8E6700C92C80 /* OperationDto.swift */; };
 		FB87DC3A25B35A9B001E823D /* CurrencyListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB87DC3925B35A9B001E823D /* CurrencyListCell.xib */; };
 		FB87DC3E25B35AB3001E823D /* CurrencyListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB87DC3D25B35AB3001E823D /* CurrencyListCell.swift */; };
-		FB87DC4225B35D4B001E823D /* CurrencyListSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB87DC4125B35D4B001E823D /* CurrencyListSectionHeader.xib */; };
-		FB87DC4525B35D6E001E823D /* CurrencyListSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB87DC4425B35D6E001E823D /* CurrencyListSectionHeader.swift */; };
+		FB87DC4225B35D4B001E823D /* CurrencyListSeparatorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB87DC4125B35D4B001E823D /* CurrencyListSeparatorCell.xib */; };
+		FB87DC4F25B49B0D001E823D /* CurrencyListSeparatorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB87DC4E25B49B0D001E823D /* CurrencyListSeparatorCell.swift */; };
+		FB87DC5225B49C6E001E823D /* Throttler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB87DC5125B49C6D001E823D /* Throttler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -309,8 +310,9 @@
 		EAEC11EC25AB8E6700C92C80 /* OperationDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationDto.swift; sourceTree = "<group>"; };
 		FB87DC3925B35A9B001E823D /* CurrencyListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CurrencyListCell.xib; sourceTree = "<group>"; };
 		FB87DC3D25B35AB3001E823D /* CurrencyListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyListCell.swift; sourceTree = "<group>"; };
-		FB87DC4125B35D4B001E823D /* CurrencyListSectionHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CurrencyListSectionHeader.xib; sourceTree = "<group>"; };
-		FB87DC4425B35D6E001E823D /* CurrencyListSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyListSectionHeader.swift; sourceTree = "<group>"; };
+		FB87DC4125B35D4B001E823D /* CurrencyListSeparatorCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CurrencyListSeparatorCell.xib; sourceTree = "<group>"; };
+		FB87DC4E25B49B0D001E823D /* CurrencyListSeparatorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyListSeparatorCell.swift; sourceTree = "<group>"; };
+		FB87DC5125B49C6D001E823D /* Throttler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Throttler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -552,6 +554,7 @@
 				EA930CDF2524864800E12805 /* Extensions */,
 				EA930CD52524859E00E12805 /* BindableType.swift */,
 				EA930CDB252485C500E12805 /* NibLoadable.swift */,
+				FB87DC5125B49C6D001E823D /* Throttler.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -835,7 +838,7 @@
 		EAE21748259128D000095EB5 /* CurrencyList */ = {
 			isa = PBXGroup;
 			children = (
-				FB87DC4025B35D2E001E823D /* CurrencyListSectionHeader */,
+				FB87DC4025B35D2E001E823D /* CurrencyListSeparatorCell */,
 				FB87DC3C25B35A9E001E823D /* CurrencyListCell */,
 				EAE2174A259128D000095EB5 /* CurrencyListViewController.storyboard */,
 				EAE2174B259128D000095EB5 /* CurrencyListViewController.swift */,
@@ -863,13 +866,13 @@
 			path = CurrencyListCell;
 			sourceTree = "<group>";
 		};
-		FB87DC4025B35D2E001E823D /* CurrencyListSectionHeader */ = {
+		FB87DC4025B35D2E001E823D /* CurrencyListSeparatorCell */ = {
 			isa = PBXGroup;
 			children = (
-				FB87DC4125B35D4B001E823D /* CurrencyListSectionHeader.xib */,
-				FB87DC4425B35D6E001E823D /* CurrencyListSectionHeader.swift */,
+				FB87DC4125B35D4B001E823D /* CurrencyListSeparatorCell.xib */,
+				FB87DC4E25B49B0D001E823D /* CurrencyListSeparatorCell.swift */,
 			);
-			path = CurrencyListSectionHeader;
+			path = CurrencyListSeparatorCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -970,7 +973,7 @@
 				EAEC11E825AB681B00C92C80 /* AccountSelectionContainerView.xib in Resources */,
 				EAD68A3E2554F8810083B30D /* AccountDetailsViewController.storyboard in Resources */,
 				EA930C3C2523D54F00E12805 /* Assets.xcassets in Resources */,
-				FB87DC4225B35D4B001E823D /* CurrencyListSectionHeader.xib in Resources */,
+				FB87DC4225B35D4B001E823D /* CurrencyListSeparatorCell.xib in Resources */,
 				EA1D9E712524B07100E2027F /* AddEditOperationViewController.storyboard in Resources */,
 				EA9F662E2554E44000441ED0 /* PlanningListViewController.storyboard in Resources */,
 				EA0238162585FB9F00A284C4 /* AccountInGroupContainerView.xib in Resources */,
@@ -1016,6 +1019,7 @@
 			files = (
 				EA17154A2593F2CE00F97C39 /* OrderService.swift in Sources */,
 				EA02382825876D3800A284C4 /* ReorderController.swift in Sources */,
+				FB87DC5225B49C6E001E823D /* Throttler.swift in Sources */,
 				EAD68ADF25595AE00083B30D /* PieChartView.swift in Sources */,
 				EA0237D1258548D100A284C4 /* RealmRepository.swift in Sources */,
 				EAD68A482554F9C80083B30D /* AppCoordinator.swift in Sources */,
@@ -1059,6 +1063,7 @@
 				EAD68AD7255953A30083B30D /* Rx+Extensions.swift in Sources */,
 				EAD68A7125558AD10083B30D /* AccountOperationsSectionHeader.swift in Sources */,
 				EA930CC82524851000E12805 /* StoryboardBased.swift in Sources */,
+				FB87DC4F25B49B0D001E823D /* CurrencyListSeparatorCell.swift in Sources */,
 				EA1D9E692524A80A00E2027F /* AddEditOperationCoordinator.swift in Sources */,
 				EA1715472593F2AB00F97C39 /* AccountsService.swift in Sources */,
 				EAD68A6A255582EF0083B30D /* AccountMonthDetailsViewModel.swift in Sources */,
@@ -1108,7 +1113,6 @@
 				EA9F051825936F4100B81A8E /* IconsListViewModel.swift in Sources */,
 				EAE2173A259122E200095EB5 /* AccountsSelectionCell.swift in Sources */,
 				EA48F367256681B5007FE1BA /* UIView+Extensions.swift in Sources */,
-				FB87DC4525B35D6E001E823D /* CurrencyListSectionHeader.swift in Sources */,
 				EAD68ADB25595AB80083B30D /* PieChartView+Rx.swift in Sources */,
 				EA930D032524943C00E12805 /* FinplyDI.swift in Sources */,
 				EAE2170B2590D12700095EB5 /* AddEditAccountViewController.swift in Sources */,

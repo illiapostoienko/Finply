@@ -47,7 +47,7 @@ final class AddEditAccountCoordinator: BaseCoordinator<AddEditAccountCoordinatio
         viewModel.setup(with: state)
         
         viewModel.coordination.openCurrencyList
-            .flatMap{ [unowned self] in self.coordinateToCurrencyList() }
+            .flatMap{ [unowned self] in self.coordinateToCurrencyList(with: $0) }
             .bind(to: viewModel.input.currencyListResult)
             .disposed(by: bag)
         
@@ -71,8 +71,9 @@ final class AddEditAccountCoordinator: BaseCoordinator<AddEditAccountCoordinatio
             .do(onNext: { [weak self] _ in self?.viewController.dismiss(animated: true) })
     }
     
-    private func coordinateToCurrencyList() -> Observable<CurrencyListCoordinationResult> {
-        let coordinator = CurrencyListCoordinator(presentingViewController: viewController,
+    private func coordinateToCurrencyList(with selectedCurrency: Currency) -> Observable<CurrencyListCoordinationResult> {
+        let coordinator = CurrencyListCoordinator(selectedCurrency: selectedCurrency,
+                                                  presentingViewController: viewController,
                                                   dependencyContainer: dependencyContainer)
         return coordinate(to: coordinator)
     }

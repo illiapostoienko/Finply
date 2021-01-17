@@ -28,7 +28,7 @@ protocol AddEditAccountViewModelOutput {
 protocol AddEditAccountViewModelCoordination {
     var completeCoordinationResult: Observable<AddEditAccountCoordinationResult> { get }
     
-    var openCurrencyList: Observable<Void> { get }
+    var openCurrencyList: Observable<Currency> { get }
     var openColorSelection: Observable<Void> { get }
     var openIconSelection: Observable<Void> { get }
 }
@@ -74,12 +74,12 @@ final class AddEditAccountViewModel: AddEditAccountViewModelType, AddEditAccount
     
     // Coordination
     var completeCoordinationResult: Observable<AddEditAccountCoordinationResult> { _completeCoordinationResult }
-    var openCurrencyList: Observable<Void> { _openCurrencyList }
+    var openCurrencyList: Observable<Currency> { _openCurrencyList }
     var openColorSelection: Observable<Void> { _openColorSelection }
     var openIconSelection: Observable<Void> { _openIconSelection }
     
     private let _completeCoordinationResult = PublishSubject<AddEditAccountCoordinationResult>()
-    private let _openCurrencyList = PublishSubject<Void>() // with already selected currency?
+    private let _openCurrencyList = PublishSubject<Currency>()
     private let _openColorSelection = PublishSubject<Void>() // with already selected Color?
     private let _openIconSelection = PublishSubject<Void>() // with already selected icon?
     
@@ -111,6 +111,7 @@ final class AddEditAccountViewModel: AddEditAccountViewModelType, AddEditAccount
         self.accountsSelectionCellVm = accountsSelectionCellVm
         
         ballanceInputCellVm.currencyTapped
+            .withLatestFrom(ballanceInputCellVm.selectedCurrency)
             .bind(to: _openCurrencyList)
             .disposed(by: bag)
         
@@ -230,6 +231,7 @@ final class AddEditAccountViewModel: AddEditAccountViewModelType, AddEditAccount
                 
                 if state.isAccountAction {
                     state.existingBallance.map{ ballanceInputCellVm.setCurrentBallance($0) }
+                    state.existingCurrency.map{ ballanceInputCellVm.setCurrentCurrency($0)}
                     itemsSet.append(.ballanceInput(viewModel: ballanceInputCellVm))
                 }
             
@@ -339,6 +341,11 @@ extension AddEditAccountSceneState: Equatable {
         return nil
     }
     
+    var existingCurrency: Currency? {
+        if case .editAccount(let existingAcocunt) = self { return existingAcocunt.currency }
+        return nil
+    }
+    
     var existingSelectedAccounts: [AccountDto]? {
         if case .editAccountGroup(let existingAccountGroup) = self { return existingAccountGroup.accounts }
         return nil
@@ -353,9 +360,5 @@ extension AddEditAccountSceneState: Equatable {
         case .editAccount: return "Edit Account"
         case .editAccountGroup:  return "Edit Accounts Group"
         }
-    }
-    
-    static var addOptions: [AddEditAccountSceneState] {
-        return [.addAccount, .addAccountGroup]
     }
 }

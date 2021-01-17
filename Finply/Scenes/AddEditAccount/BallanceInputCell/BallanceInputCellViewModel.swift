@@ -23,6 +23,7 @@ protocol BallanceInputCellViewModelType {
     var ballanceString: BehaviorRelay<String> { get }
     
     func setCurrentBallance(_ ballanceInCents: Int)
+    func setCurrentCurrency(_ currency: Currency)
 }
 
 final class BallanceInputCellViewModel: BallanceInputCellViewModelType {
@@ -66,5 +67,9 @@ final class BallanceInputCellViewModel: BallanceInputCellViewModelType {
     func setCurrentBallance(_ ballanceInCents: Int) {
         let doubleValue = Double(ballanceInCents)/Double(100)
         ballanceString.accept(String(doubleValue))
+    }
+    
+    func setCurrentCurrency(_ currency: Currency) {
+        _selectedCurrency.accept(currency)
     }
 }

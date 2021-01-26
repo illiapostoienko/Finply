@@ -127,6 +127,7 @@ extension AccountDetailsViewController: UITableViewDelegate {
         let headerView = tableView.dequeueReusableHeaderFooterView() as AccountOperationsSectionHeader
         guard let section = viewModel.output.currentOperationSections.value[safe: section] else { return nil }
         headerView.setupDate(sectionDateFormatter.string(from: section.date))
+      
         return headerView
     }
     
